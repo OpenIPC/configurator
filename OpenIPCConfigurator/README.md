@@ -4,16 +4,16 @@ Download all the files from this GitHub folder in this specific folder.
 
 Do not rename the folder.
 
-Run the exe file.
+Run the "OpenIPC Configurator.exe" file.
 
-Set the IP of the camera.
+Enter the IP of the camera.
 
-Click Fetch.
+Click Fetch to receive the setting files from the camera.
 
-Then click Read.
+Then click Read to read the current settings.
 
 Edit the settings.
 
 Then click Save.
 
-Then click Upload.
+Then click Upload to send the settings to the camera.
