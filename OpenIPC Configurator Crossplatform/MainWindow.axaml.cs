@@ -31,7 +31,20 @@ namespace OpenIPC_Configurator_Crossplatform
 
         private void BUpload_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
         {
-            throw new System.NotImplementedException();
+            if(!File.Exists(AppDomain.CurrentDomain.BaseDirectory + "\\send.bat"))
+            {
+                using var sw = new StreamWriter(AppDomain.CurrentDomain.BaseDirectory + "\\send.bat");
+                sw.WriteLine("pscp -scp -unsafe -pw 12345 /OpenIPCConfigurator/majestic.yaml root@%1:/etc/ \r\npscp -scp -unsafe -pw 12345 /OpenIPCConfigurator/wfb.conf root@%1:/etc/ ");
+                sw.Close();
+            }
+
+            var process = new ProcessStartInfo();
+            process.UseShellExecute = false;
+            process.FileName = AppDomain.CurrentDomain.BaseDirectory + "\\send.bat";
+            process.Arguments = string.Format("{0}", tbIpAddress.Text); // add here to checking correctly written ip for future
+            process.RedirectStandardOutput = true;
+            Process.Start(process);
+
         }
 
         private void BRead_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
