@@ -1,0 +1,23 @@
+name: Build
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Build
+        run: |
+          dotnet build --configuration Release
+          Compress-Archive bin\Release\*\*.dll,bin\Release\*\*.exe,bin\Release\*\*.json OpenIPC-Configurator.zip
+
+      - name: Upload
+        uses: softprops/action-gh-release@master
+        with:
+          tag_name: latest
+          files: OpenIPC-Configurator.zip
