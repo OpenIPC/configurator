@@ -2,23 +2,31 @@
 
 Public Class Form1
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
-        With New Process()
-            .StartInfo.UseShellExecute = False
-            .StartInfo.FileName = "C:\OpenIPCConfigurator\get.bat"
-            .StartInfo.Arguments = String.Format("{0}", txtIP.Text)
-            .StartInfo.RedirectStandardOutput = True
-            .Start()
-        End With
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = "C:\OpenIPCConfigurator\get.bat"
+                .StartInfo.Arguments = String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = True
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
     End Sub
 
     Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
-        With New Process()
-            .StartInfo.UseShellExecute = False
-            .StartInfo.FileName = "C:\OpenIPCConfigurator\send.bat"
-            .StartInfo.Arguments = String.Format("{0}", txtIP.Text)
-            .StartInfo.RedirectStandardOutput = True
-            .Start()
-        End With
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = "C:\OpenIPCConfigurator\send.bat"
+                .StartInfo.Arguments = String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = True
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
     End Sub
 
     Public Function ReadLine(lineNumber As Integer, lines As List(Of String)) As String
@@ -128,4 +136,215 @@ Public Class Form1
         txtLuminance.Text = ReadLine(11, CamallLines)
         txtSensor.Text = ReadLine(60, CamallLines)
     End Sub
+
+    Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.Add("5180 MHz [36]")
+        ComboBox1.Items.Add("5200 MHz [40]")
+        ComboBox1.Items.Add("5220 MHz [44]")
+        ComboBox1.Items.Add("5240 MHz [48]")
+        ComboBox1.Items.Add("5260 MHz [52]")
+        ComboBox1.Items.Add("5280 MHz [56]")
+        ComboBox1.Items.Add("5300 MHz [60]")
+        ComboBox1.Items.Add("5320 MHz [64]")
+        ComboBox1.Items.Add("5500 MHz [100]")
+        ComboBox1.Items.Add("5520 MHz [104]")
+        ComboBox1.Items.Add("5540 MHz [108]")
+        ComboBox1.Items.Add("5560 MHz [112]")
+        ComboBox1.Items.Add("5580 MHz [116]")
+        ComboBox1.Items.Add("5600 MHz [120]")
+        ComboBox1.Items.Add("5620 MHz [124]")
+        ComboBox1.Items.Add("5640 MHz [128]")
+        ComboBox1.Items.Add("5660 MHz [132]")
+        ComboBox1.Items.Add("5680 MHz [136]")
+        ComboBox1.Items.Add("5700 MHz [140]")
+        ComboBox1.Items.Add("5720 MHz [144]")
+        ComboBox1.Items.Add("5745 MHz [149]")
+        ComboBox1.Items.Add("5765 MHz [153]")
+        ComboBox1.Items.Add("5785 MHz [157]")
+        ComboBox1.Items.Add("5805 MHz [161]")
+        ComboBox1.Items.Add("5825 MHz [165]")
+        ComboBox1.Items.Add("5845 MHz [169]")
+        ComboBox1.Items.Add("5865 MHz [173]")
+        ComboBox1.Items.Add("5885 MHz [177]")
+        ComboBox1.Text = "Select 5.8GHz Frequency"
+
+        ComboBox2.Items.Clear()
+        ComboBox2.Items.Add("20")
+        ComboBox2.Items.Add("25")
+        ComboBox2.Items.Add("30")
+        ComboBox2.Items.Add("35")
+        ComboBox2.Items.Add("40")
+        ComboBox2.Items.Add("45")
+        ComboBox2.Items.Add("50")
+        ComboBox2.Items.Add("55")
+        ComboBox2.Items.Add("58")
+        ComboBox2.Text = "Select 5.8GHz TX Power"
+
+        ComboBox3.Items.Clear()
+        ComboBox3.Items.Add("2412 MHz [1]")
+        ComboBox3.Items.Add("2417 MHz [2]")
+        ComboBox3.Items.Add("2422 MHz [3]")
+        ComboBox3.Items.Add("2427 MHz [4]")
+        ComboBox3.Items.Add("2432 MHz [5]")
+        ComboBox3.Items.Add("2437 MHz [6]")
+        ComboBox3.Items.Add("2442 MHz [7]")
+        ComboBox3.Items.Add("2447 MHz [8]")
+        ComboBox3.Items.Add("2452 MHz [9]")
+        ComboBox3.Items.Add("2457 MHz [10]")
+        ComboBox3.Items.Add("2462 MHz [11]")
+        ComboBox3.Items.Add("2467 MHz [12]")
+        ComboBox3.Items.Add("2472 MHz [13]")
+        ComboBox3.Items.Add("2484 MHz [14]")
+        ComboBox3.Text = "Select 2.4GHz Frequency"
+
+        ComboBox4.Items.Clear()
+        ComboBox4.Items.Add("20")
+        ComboBox4.Items.Add("25")
+        ComboBox4.Items.Add("30")
+        ComboBox4.Items.Add("35")
+        ComboBox4.Items.Add("40")
+        ComboBox4.Items.Add("45")
+        ComboBox4.Items.Add("50")
+        ComboBox4.Items.Add("55")
+        ComboBox4.Items.Add("58")
+        ComboBox4.Text = "Select 2.4GHz TX Power"
+
+        ComboBox5.Items.Clear()
+        ComboBox5.Items.Add("0")
+        ComboBox5.Items.Add("1")
+        ComboBox5.Items.Add("2")
+        ComboBox5.Items.Add("3")
+        ComboBox5.Items.Add("4")
+        ComboBox5.Items.Add("5")
+        ComboBox5.Items.Add("6")
+        ComboBox5.Items.Add("7")
+        ComboBox5.Items.Add("8")
+        ComboBox5.Items.Add("9")
+        ComboBox5.Text = "Select MCS INDEX"
+
+        ComboBox6.Items.Clear()
+        ComboBox6.Items.Add("0")
+        ComboBox6.Items.Add("1")
+        ComboBox6.Text = "Select STBC"
+
+        ComboBox7.Items.Clear()
+        ComboBox7.Items.Add("0")
+        ComboBox7.Items.Add("1")
+        ComboBox7.Text = "Select LDPC"
+
+        ComboBox8.Items.Clear()
+        ComboBox8.Items.Add("1")
+        ComboBox8.Items.Add("2")
+        ComboBox8.Items.Add("3")
+        ComboBox8.Items.Add("4")
+        ComboBox8.Items.Add("5")
+        ComboBox8.Items.Add("6")
+        ComboBox8.Items.Add("7")
+        ComboBox8.Items.Add("8")
+        ComboBox8.Items.Add("9")
+        ComboBox8.Items.Add("10")
+        ComboBox8.Items.Add("11")
+        ComboBox8.Items.Add("12")
+        ComboBox8.Text = "Select FEC K"
+
+        ComboBox9.Items.Clear()
+        ComboBox9.Items.Add("1")
+        ComboBox9.Items.Add("2")
+        ComboBox9.Items.Add("3")
+        ComboBox9.Items.Add("4")
+        ComboBox9.Items.Add("5")
+        ComboBox9.Items.Add("6")
+        ComboBox9.Items.Add("7")
+        ComboBox9.Items.Add("8")
+        ComboBox9.Items.Add("9")
+        ComboBox9.Items.Add("10")
+        ComboBox9.Items.Add("11")
+        ComboBox9.Items.Add("12")
+        ComboBox9.Text = "Select FEC N"
+    End Sub
+
+    Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
+        Dim sInput = ComboBox1.SelectedItem.ToString
+        Dim last4Letter = sInput.Substring(sInput.Length - 4).Replace("]", "").Replace("[", "")
+        txtFrequency.Text = "channel=" & last4Letter
+        txtFreq24.Text = "frequency="
+    End Sub
+
+    Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
+        txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
+        Dim sInput = ComboBox3.SelectedItem.ToString
+        Dim last3Letter = sInput.Substring(sInput.Length - 3).Replace("]", "").Replace("[", "")
+        txtFrequency.Text = "channel="
+        txtFreq24.Text = "frequency=" & last3Letter
+    End Sub
+
+    Private Sub ComboBox4_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox4.SelectedIndexChanged
+        txtPower24.Text = "txpower=" & ComboBox4.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
+        txtMCS.Text = "msc_index=" & ComboBox5.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedIndexChanged
+        txtSTBC.Text = "stbc=" & ComboBox6.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
+        txtLDPC.Text = "ldpc=" & ComboBox7.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox8.SelectedIndexChanged
+        txtFECK.Text = "fec_k=" & ComboBox8.SelectedItem.ToString
+    End Sub
+
+    Private Sub ComboBox9_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox9.SelectedIndexChanged
+        txtFECN.Text = "fec_n=" & ComboBox9.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbResolution_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolution.SelectedIndexChanged
+        txtResolution.Text = "  size: " & cmbResolution.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbFPS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFPS.SelectedIndexChanged
+        txtFPS.Text = "  fps: " & cmbFPS.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbCodec_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCodec.SelectedIndexChanged
+        txtEncode.Text = "  codec: " & cmbCodec.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbBitrate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBitrate.SelectedIndexChanged
+        txtBitrate.Text = "  bitrate: " & cmbBitrate.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbExposure_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbExposure.SelectedIndexChanged
+        txtExposure.Text = "  exposure: " & cmbExposure.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbContrast_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbContrast.SelectedIndexChanged
+        txtContrast.Text = "  contrast: " & cmbContrast.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbHue_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbHue.SelectedIndexChanged
+        txtHue.Text = "  hue: " & cmbHue.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbSaturation_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSaturation.SelectedIndexChanged
+        txtSaturation.Text = "  saturation: " & cmbSaturation.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbLuminance_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLuminance.SelectedIndexChanged
+        txtLuminance.Text = "  luminance: " & cmbLuminance.SelectedItem.ToString
+    End Sub
+
+    Function IsValidIP(ByVal ipAddress As String) As Boolean
+        Return System.Text.RegularExpressions.Regex.IsMatch(ipAddress,
+    "^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$")
+    End Function
 End Class

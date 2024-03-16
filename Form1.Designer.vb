@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
+        components = New ComponentModel.Container()
         btnGet = New Button()
         txtIP = New TextBox()
         btnSend = New Button()
@@ -46,10 +47,30 @@ Partial Class Form1
         txtPower24 = New TextBox()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        ComboBox9 = New ComboBox()
+        ComboBox8 = New ComboBox()
+        ComboBox7 = New ComboBox()
+        ComboBox6 = New ComboBox()
+        ComboBox5 = New ComboBox()
+        ComboBox4 = New ComboBox()
+        ComboBox3 = New ComboBox()
+        ComboBox2 = New ComboBox()
+        ComboBox1 = New ComboBox()
         txtSaveFreq = New Button()
         TabPage2 = New TabPage()
+        cmbLuminance = New ComboBox()
+        cmbSaturation = New ComboBox()
+        cmbHue = New ComboBox()
+        cmbContrast = New ComboBox()
+        cmbExposure = New ComboBox()
+        cmbBitrate = New ComboBox()
+        cmbCodec = New ComboBox()
+        cmbFPS = New ComboBox()
+        cmbResolution = New ComboBox()
         txtSaveCam = New Button()
         btnRead = New Button()
+        Label1 = New Label()
+        btnToolTip = New ToolTip(components)
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -61,156 +82,178 @@ Partial Class Form1
         btnGet.Name = "btnGet"
         btnGet.Size = New Size(60, 30)
         btnGet.TabIndex = 0
-        btnGet.Text = "Fetch"
+        btnGet.Text = "1. Fetch"
+        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera")
         btnGet.UseVisualStyleBackColor = True
         ' 
         ' txtIP
         ' 
-        txtIP.Location = New Point(12, 379)
+        txtIP.Location = New Point(179, 381)
         txtIP.Name = "txtIP"
         txtIP.Size = New Size(124, 23)
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.4"
+        btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
         ' 
         ' btnSend
         ' 
         btnSend.Location = New Point(142, 408)
         btnSend.Name = "btnSend"
-        btnSend.Size = New Size(58, 30)
+        btnSend.Size = New Size(72, 30)
         btnSend.TabIndex = 2
-        btnSend.Text = "Upload"
+        btnSend.Text = "4. Upload"
+        btnToolTip.SetToolTip(btnSend, "Send the local files with the new " & vbCrLf & "settings to the OpenIPC camera")
         btnSend.UseVisualStyleBackColor = True
         ' 
         ' txtFrequency
         ' 
-        txtFrequency.Location = New Point(21, 21)
+        txtFrequency.Location = New Point(248, 20)
         txtFrequency.Name = "txtFrequency"
+        txtFrequency.ReadOnly = True
         txtFrequency.Size = New Size(191, 23)
         txtFrequency.TabIndex = 3
         ' 
         ' txtResolution
         ' 
-        txtResolution.Location = New Point(21, 15)
+        txtResolution.Location = New Point(248, 20)
         txtResolution.Name = "txtResolution"
-        txtResolution.Size = New Size(161, 23)
+        txtResolution.ReadOnly = True
+        txtResolution.Size = New Size(191, 23)
         txtResolution.TabIndex = 4
         ' 
         ' txtFPS
         ' 
-        txtFPS.Location = New Point(21, 44)
+        txtFPS.Location = New Point(248, 49)
         txtFPS.Name = "txtFPS"
-        txtFPS.Size = New Size(161, 23)
+        txtFPS.ReadOnly = True
+        txtFPS.Size = New Size(191, 23)
         txtFPS.TabIndex = 5
         ' 
         ' txtEncode
         ' 
-        txtEncode.Location = New Point(21, 73)
+        txtEncode.Location = New Point(248, 78)
         txtEncode.Name = "txtEncode"
-        txtEncode.Size = New Size(161, 23)
+        txtEncode.ReadOnly = True
+        txtEncode.Size = New Size(191, 23)
         txtEncode.TabIndex = 6
         ' 
         ' txtBitrate
         ' 
-        txtBitrate.Location = New Point(21, 102)
+        txtBitrate.Location = New Point(248, 107)
         txtBitrate.Name = "txtBitrate"
-        txtBitrate.Size = New Size(161, 23)
+        txtBitrate.ReadOnly = True
+        txtBitrate.Size = New Size(191, 23)
         txtBitrate.TabIndex = 7
         ' 
         ' txtExposure
         ' 
-        txtExposure.Location = New Point(21, 131)
+        txtExposure.Location = New Point(248, 136)
         txtExposure.Name = "txtExposure"
-        txtExposure.Size = New Size(161, 23)
+        txtExposure.ReadOnly = True
+        txtExposure.Size = New Size(191, 23)
         txtExposure.TabIndex = 8
         ' 
         ' txtContrast
         ' 
-        txtContrast.Location = New Point(21, 160)
+        txtContrast.Location = New Point(248, 165)
         txtContrast.Name = "txtContrast"
-        txtContrast.Size = New Size(161, 23)
+        txtContrast.ReadOnly = True
+        txtContrast.Size = New Size(191, 23)
         txtContrast.TabIndex = 9
         ' 
         ' txtHue
         ' 
-        txtHue.Location = New Point(21, 189)
+        txtHue.Location = New Point(248, 194)
         txtHue.Name = "txtHue"
-        txtHue.Size = New Size(161, 23)
+        txtHue.ReadOnly = True
+        txtHue.Size = New Size(191, 23)
         txtHue.TabIndex = 10
         ' 
         ' txtSaturation
         ' 
-        txtSaturation.Location = New Point(21, 218)
+        txtSaturation.Location = New Point(248, 223)
         txtSaturation.Name = "txtSaturation"
-        txtSaturation.Size = New Size(161, 23)
+        txtSaturation.ReadOnly = True
+        txtSaturation.Size = New Size(191, 23)
         txtSaturation.TabIndex = 11
         ' 
         ' txtLuminance
         ' 
-        txtLuminance.Location = New Point(21, 247)
+        txtLuminance.Location = New Point(248, 252)
         txtLuminance.Name = "txtLuminance"
-        txtLuminance.Size = New Size(161, 23)
+        txtLuminance.ReadOnly = True
+        txtLuminance.Size = New Size(191, 23)
         txtLuminance.TabIndex = 12
         ' 
         ' txtPower
         ' 
-        txtPower.Location = New Point(21, 50)
+        txtPower.Location = New Point(248, 49)
         txtPower.Name = "txtPower"
+        txtPower.ReadOnly = True
         txtPower.Size = New Size(191, 23)
         txtPower.TabIndex = 13
         ' 
         ' txtSensor
         ' 
-        txtSensor.Location = New Point(21, 276)
+        txtSensor.Location = New Point(19, 281)
         txtSensor.Name = "txtSensor"
-        txtSensor.Size = New Size(266, 23)
+        txtSensor.ReadOnly = True
+        txtSensor.Size = New Size(420, 23)
         txtSensor.TabIndex = 14
         ' 
         ' txtFreq24
         ' 
-        txtFreq24.Location = New Point(21, 79)
+        txtFreq24.Location = New Point(248, 78)
         txtFreq24.Name = "txtFreq24"
+        txtFreq24.ReadOnly = True
         txtFreq24.Size = New Size(191, 23)
         txtFreq24.TabIndex = 16
         ' 
         ' txtMCS
         ' 
-        txtMCS.Location = New Point(21, 137)
+        txtMCS.Location = New Point(248, 136)
         txtMCS.Name = "txtMCS"
+        txtMCS.ReadOnly = True
         txtMCS.Size = New Size(191, 23)
         txtMCS.TabIndex = 15
         ' 
         ' txtLDPC
         ' 
-        txtLDPC.Location = New Point(21, 195)
+        txtLDPC.Location = New Point(248, 194)
         txtLDPC.Name = "txtLDPC"
+        txtLDPC.ReadOnly = True
         txtLDPC.Size = New Size(191, 23)
         txtLDPC.TabIndex = 18
         ' 
         ' txtSTBC
         ' 
-        txtSTBC.Location = New Point(21, 166)
+        txtSTBC.Location = New Point(248, 165)
         txtSTBC.Name = "txtSTBC"
+        txtSTBC.ReadOnly = True
         txtSTBC.Size = New Size(191, 23)
         txtSTBC.TabIndex = 17
         ' 
         ' txtFECN
         ' 
-        txtFECN.Location = New Point(21, 253)
+        txtFECN.Location = New Point(248, 252)
         txtFECN.Name = "txtFECN"
+        txtFECN.ReadOnly = True
         txtFECN.Size = New Size(191, 23)
         txtFECN.TabIndex = 20
         ' 
         ' txtFECK
         ' 
-        txtFECK.Location = New Point(21, 224)
+        txtFECK.Location = New Point(248, 223)
         txtFECK.Name = "txtFECK"
+        txtFECK.ReadOnly = True
         txtFECK.Size = New Size(191, 23)
         txtFECK.TabIndex = 19
         ' 
         ' txtPower24
         ' 
-        txtPower24.Location = New Point(21, 108)
+        txtPower24.Location = New Point(248, 107)
         txtPower24.Name = "txtPower24"
+        txtPower24.ReadOnly = True
         txtPower24.Size = New Size(191, 23)
         txtPower24.TabIndex = 21
         ' 
@@ -221,12 +264,21 @@ Partial Class Form1
         TabControl1.Location = New Point(12, 12)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(348, 367)
+        TabControl1.Size = New Size(470, 367)
         TabControl1.TabIndex = 22
         ' 
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.WhiteSmoke
+        TabPage1.Controls.Add(ComboBox9)
+        TabPage1.Controls.Add(ComboBox8)
+        TabPage1.Controls.Add(ComboBox7)
+        TabPage1.Controls.Add(ComboBox6)
+        TabPage1.Controls.Add(ComboBox5)
+        TabPage1.Controls.Add(ComboBox4)
+        TabPage1.Controls.Add(ComboBox3)
+        TabPage1.Controls.Add(ComboBox2)
+        TabPage1.Controls.Add(ComboBox1)
         TabPage1.Controls.Add(txtSaveFreq)
         TabPage1.Controls.Add(txtFrequency)
         TabPage1.Controls.Add(txtPower24)
@@ -240,22 +292,104 @@ Partial Class Form1
         TabPage1.Location = New Point(4, 24)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(340, 339)
+        TabPage1.Size = New Size(462, 339)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
+        ' ComboBox9
+        ' 
+        ComboBox9.FormattingEnabled = True
+        ComboBox9.Location = New Point(19, 252)
+        ComboBox9.Name = "ComboBox9"
+        ComboBox9.Size = New Size(214, 23)
+        ComboBox9.TabIndex = 34
+        ' 
+        ' ComboBox8
+        ' 
+        ComboBox8.FormattingEnabled = True
+        ComboBox8.Location = New Point(19, 223)
+        ComboBox8.Name = "ComboBox8"
+        ComboBox8.Size = New Size(214, 23)
+        ComboBox8.TabIndex = 33
+        ' 
+        ' ComboBox7
+        ' 
+        ComboBox7.FormattingEnabled = True
+        ComboBox7.Location = New Point(19, 194)
+        ComboBox7.Name = "ComboBox7"
+        ComboBox7.Size = New Size(214, 23)
+        ComboBox7.TabIndex = 32
+        ' 
+        ' ComboBox6
+        ' 
+        ComboBox6.FormattingEnabled = True
+        ComboBox6.Location = New Point(19, 165)
+        ComboBox6.Name = "ComboBox6"
+        ComboBox6.Size = New Size(214, 23)
+        ComboBox6.TabIndex = 31
+        ' 
+        ' ComboBox5
+        ' 
+        ComboBox5.FormattingEnabled = True
+        ComboBox5.Location = New Point(19, 136)
+        ComboBox5.Name = "ComboBox5"
+        ComboBox5.Size = New Size(214, 23)
+        ComboBox5.TabIndex = 30
+        ' 
+        ' ComboBox4
+        ' 
+        ComboBox4.FormattingEnabled = True
+        ComboBox4.Location = New Point(19, 106)
+        ComboBox4.Name = "ComboBox4"
+        ComboBox4.Size = New Size(214, 23)
+        ComboBox4.TabIndex = 29
+        ' 
+        ' ComboBox3
+        ' 
+        ComboBox3.FormattingEnabled = True
+        ComboBox3.Location = New Point(19, 77)
+        ComboBox3.Name = "ComboBox3"
+        ComboBox3.Size = New Size(214, 23)
+        ComboBox3.TabIndex = 28
+        ' 
+        ' ComboBox2
+        ' 
+        ComboBox2.FormattingEnabled = True
+        ComboBox2.Location = New Point(19, 48)
+        ComboBox2.Name = "ComboBox2"
+        ComboBox2.Size = New Size(214, 23)
+        ComboBox2.TabIndex = 27
+        ' 
+        ' ComboBox1
+        ' 
+        ComboBox1.FormattingEnabled = True
+        ComboBox1.Location = New Point(19, 20)
+        ComboBox1.Name = "ComboBox1"
+        ComboBox1.Size = New Size(214, 23)
+        ComboBox1.TabIndex = 26
+        ' 
         ' txtSaveFreq
         ' 
-        txtSaveFreq.Location = New Point(140, 303)
+        txtSaveFreq.Location = New Point(140, 310)
         txtSaveFreq.Name = "txtSaveFreq"
-        txtSaveFreq.Size = New Size(58, 30)
+        txtSaveFreq.Size = New Size(58, 23)
         txtSaveFreq.TabIndex = 25
-        txtSaveFreq.Text = "Save"
+        txtSaveFreq.Text = "3. Save"
+        btnToolTip.SetToolTip(txtSaveFreq, "Save the WFB settings to the" & vbCrLf & "local wfb.conf file")
         txtSaveFreq.UseVisualStyleBackColor = True
         ' 
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.WhiteSmoke
+        TabPage2.Controls.Add(cmbLuminance)
+        TabPage2.Controls.Add(cmbSaturation)
+        TabPage2.Controls.Add(cmbHue)
+        TabPage2.Controls.Add(cmbContrast)
+        TabPage2.Controls.Add(cmbExposure)
+        TabPage2.Controls.Add(cmbBitrate)
+        TabPage2.Controls.Add(cmbCodec)
+        TabPage2.Controls.Add(cmbFPS)
+        TabPage2.Controls.Add(cmbResolution)
         TabPage2.Controls.Add(txtSaveCam)
         TabPage2.Controls.Add(txtResolution)
         TabPage2.Controls.Add(txtSensor)
@@ -270,17 +404,90 @@ Partial Class Form1
         TabPage2.Location = New Point(4, 24)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(340, 339)
+        TabPage2.Size = New Size(462, 339)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
+        ' cmbLuminance
+        ' 
+        cmbLuminance.FormattingEnabled = True
+        cmbLuminance.Location = New Point(19, 252)
+        cmbLuminance.Name = "cmbLuminance"
+        cmbLuminance.Size = New Size(214, 23)
+        cmbLuminance.TabIndex = 43
+        ' 
+        ' cmbSaturation
+        ' 
+        cmbSaturation.FormattingEnabled = True
+        cmbSaturation.Location = New Point(19, 223)
+        cmbSaturation.Name = "cmbSaturation"
+        cmbSaturation.Size = New Size(214, 23)
+        cmbSaturation.TabIndex = 42
+        ' 
+        ' cmbHue
+        ' 
+        cmbHue.FormattingEnabled = True
+        cmbHue.Location = New Point(19, 194)
+        cmbHue.Name = "cmbHue"
+        cmbHue.Size = New Size(214, 23)
+        cmbHue.TabIndex = 41
+        ' 
+        ' cmbContrast
+        ' 
+        cmbContrast.FormattingEnabled = True
+        cmbContrast.Location = New Point(19, 165)
+        cmbContrast.Name = "cmbContrast"
+        cmbContrast.Size = New Size(214, 23)
+        cmbContrast.TabIndex = 40
+        ' 
+        ' cmbExposure
+        ' 
+        cmbExposure.FormattingEnabled = True
+        cmbExposure.Location = New Point(19, 136)
+        cmbExposure.Name = "cmbExposure"
+        cmbExposure.Size = New Size(214, 23)
+        cmbExposure.TabIndex = 39
+        ' 
+        ' cmbBitrate
+        ' 
+        cmbBitrate.FormattingEnabled = True
+        cmbBitrate.Location = New Point(19, 106)
+        cmbBitrate.Name = "cmbBitrate"
+        cmbBitrate.Size = New Size(214, 23)
+        cmbBitrate.TabIndex = 38
+        ' 
+        ' cmbCodec
+        ' 
+        cmbCodec.FormattingEnabled = True
+        cmbCodec.Location = New Point(19, 77)
+        cmbCodec.Name = "cmbCodec"
+        cmbCodec.Size = New Size(214, 23)
+        cmbCodec.TabIndex = 37
+        ' 
+        ' cmbFPS
+        ' 
+        cmbFPS.FormattingEnabled = True
+        cmbFPS.Location = New Point(19, 48)
+        cmbFPS.Name = "cmbFPS"
+        cmbFPS.Size = New Size(214, 23)
+        cmbFPS.TabIndex = 36
+        ' 
+        ' cmbResolution
+        ' 
+        cmbResolution.FormattingEnabled = True
+        cmbResolution.Location = New Point(19, 20)
+        cmbResolution.Name = "cmbResolution"
+        cmbResolution.Size = New Size(214, 23)
+        cmbResolution.TabIndex = 35
+        ' 
         ' txtSaveCam
         ' 
-        txtSaveCam.Location = New Point(140, 303)
+        txtSaveCam.Location = New Point(140, 310)
         txtSaveCam.Name = "txtSaveCam"
-        txtSaveCam.Size = New Size(58, 30)
+        txtSaveCam.Size = New Size(58, 23)
         txtSaveCam.TabIndex = 26
-        txtSaveCam.Text = "Save"
+        txtSaveCam.Text = "3. Save"
+        btnToolTip.SetToolTip(txtSaveCam, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
         txtSaveCam.UseVisualStyleBackColor = True
         ' 
         ' btnRead
@@ -289,14 +496,25 @@ Partial Class Form1
         btnRead.Name = "btnRead"
         btnRead.Size = New Size(60, 30)
         btnRead.TabIndex = 23
-        btnRead.Text = "Read"
+        btnRead.Text = "2. Read"
+        btnToolTip.SetToolTip(btnRead, "Read the settings from the local files" & vbCrLf & "that was previously received from the camera")
         btnRead.UseVisualStyleBackColor = True
+        ' 
+        ' Label1
+        ' 
+        Label1.AutoSize = True
+        Label1.Location = New Point(14, 384)
+        Label1.Name = "Label1"
+        Label1.Size = New Size(159, 15)
+        Label1.TabIndex = 24
+        Label1.Text = "OpenIPC Camera IP Address:"
         ' 
         ' Form1
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(377, 450)
+        ClientSize = New Size(495, 450)
+        Controls.Add(Label1)
         Controls.Add(btnRead)
         Controls.Add(TabControl1)
         Controls.Add(btnSend)
@@ -344,5 +562,25 @@ Partial Class Form1
     Friend WithEvents txtSaveFreq As Button
     Friend WithEvents txtSaveCam As Button
     Friend WithEvents btnRead As Button
+    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents ComboBox2 As ComboBox
+    Friend WithEvents ComboBox4 As ComboBox
+    Friend WithEvents ComboBox3 As ComboBox
+    Friend WithEvents ComboBox9 As ComboBox
+    Friend WithEvents ComboBox8 As ComboBox
+    Friend WithEvents ComboBox7 As ComboBox
+    Friend WithEvents ComboBox6 As ComboBox
+    Friend WithEvents ComboBox5 As ComboBox
+    Friend WithEvents cmbLuminance As ComboBox
+    Friend WithEvents cmbSaturation As ComboBox
+    Friend WithEvents cmbHue As ComboBox
+    Friend WithEvents cmbContrast As ComboBox
+    Friend WithEvents cmbExposure As ComboBox
+    Friend WithEvents cmbBitrate As ComboBox
+    Friend WithEvents cmbCodec As ComboBox
+    Friend WithEvents cmbFPS As ComboBox
+    Friend WithEvents cmbResolution As ComboBox
+    Friend WithEvents Label1 As Label
+    Friend WithEvents btnToolTip As ToolTip
 
 End Class
