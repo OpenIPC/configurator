@@ -263,6 +263,117 @@ Public Class Form1
         ComboBox9.Items.Add("11")
         ComboBox9.Items.Add("12")
         ComboBox9.Text = "Select FEC N"
+
+        cmbResolution.Items.Clear()
+        cmbResolution.Items.Add("1280x720")
+        cmbResolution.Items.Add("1920x1080")
+        cmbResolution.Items.Add("3200x1800")
+        cmbResolution.Items.Add("3840x2160")
+        cmbResolution.Text = "Select Resolution"
+
+        cmbFPS.Items.Clear()
+        cmbFPS.Items.Add("20")
+        cmbFPS.Items.Add("30")
+        cmbFPS.Items.Add("50")
+        cmbFPS.Items.Add("60")
+        cmbFPS.Items.Add("90")
+        cmbFPS.Items.Add("100")
+        cmbFPS.Items.Add("110")
+        cmbFPS.Items.Add("120")
+        cmbFPS.Text = "Select FPS"
+
+        cmbCodec.Items.Clear()
+        cmbCodec.Items.Add("h264")
+        cmbCodec.Items.Add("h265")
+        cmbCodec.Text = "Select Codec"
+
+        cmbBitrate.Items.Clear()
+        cmbBitrate.Items.Add("1024")
+        cmbBitrate.Items.Add("2048")
+        cmbBitrate.Items.Add("3072")
+        cmbBitrate.Items.Add("4096")
+        cmbBitrate.Items.Add("5120")
+        cmbBitrate.Items.Add("6144")
+        cmbBitrate.Items.Add("7168")
+        cmbBitrate.Items.Add("8192")
+        cmbBitrate.Items.Add("9216")
+        cmbBitrate.Items.Add("10240")
+        cmbBitrate.Items.Add("11264")
+        cmbBitrate.Items.Add("12288")
+        cmbBitrate.Items.Add("13312")
+        cmbBitrate.Text = "Select Bitrate"
+
+        cmbExposure.Items.Clear()
+        cmbExposure.Items.Add("1")
+        cmbExposure.Items.Add("5")
+        cmbExposure.Items.Add("10")
+        cmbExposure.Items.Add("20")
+        cmbExposure.Items.Add("30")
+        cmbExposure.Items.Add("40")
+        cmbExposure.Items.Add("50")
+        cmbExposure.Items.Add("60")
+        cmbExposure.Text = "Select Exposure"
+
+        cmbContrast.Items.Clear()
+        cmbContrast.Items.Add("1")
+        cmbContrast.Items.Add("5")
+        cmbContrast.Items.Add("10")
+        cmbContrast.Items.Add("20")
+        cmbContrast.Items.Add("30")
+        cmbContrast.Items.Add("40")
+        cmbContrast.Items.Add("50")
+        cmbContrast.Items.Add("60")
+        cmbContrast.Items.Add("70")
+        cmbContrast.Items.Add("80")
+        cmbContrast.Items.Add("90")
+        cmbContrast.Items.Add("100")
+        cmbContrast.Text = "Select Contrast"
+
+        cmbHue.Items.Clear()
+        cmbHue.Items.Add("1")
+        cmbHue.Items.Add("5")
+        cmbHue.Items.Add("10")
+        cmbHue.Items.Add("20")
+        cmbHue.Items.Add("30")
+        cmbHue.Items.Add("40")
+        cmbHue.Items.Add("50")
+        cmbHue.Items.Add("60")
+        cmbHue.Items.Add("70")
+        cmbHue.Items.Add("80")
+        cmbHue.Items.Add("90")
+        cmbHue.Items.Add("100")
+        cmbHue.Text = "Select Hue"
+
+        cmbSaturation.Items.Clear()
+        cmbSaturation.Items.Add("1")
+        cmbSaturation.Items.Add("5")
+        cmbSaturation.Items.Add("10")
+        cmbSaturation.Items.Add("20")
+        cmbSaturation.Items.Add("30")
+        cmbSaturation.Items.Add("40")
+        cmbSaturation.Items.Add("50")
+        cmbSaturation.Items.Add("60")
+        cmbSaturation.Items.Add("70")
+        cmbSaturation.Items.Add("80")
+        cmbSaturation.Items.Add("90")
+        cmbSaturation.Items.Add("100")
+        cmbSaturation.Text = "Select Saturation"
+
+
+        cmbLuminance.Items.Clear()
+        cmbLuminance.Items.Add("1")
+        cmbLuminance.Items.Add("5")
+        cmbLuminance.Items.Add("10")
+        cmbLuminance.Items.Add("20")
+        cmbLuminance.Items.Add("30")
+        cmbLuminance.Items.Add("40")
+        cmbLuminance.Items.Add("50")
+        cmbLuminance.Items.Add("60")
+        cmbLuminance.Items.Add("70")
+        cmbLuminance.Items.Add("80")
+        cmbLuminance.Items.Add("90")
+        cmbLuminance.Items.Add("100")
+        cmbLuminance.Text = "Select Luminance"
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
