@@ -690,9 +690,9 @@ Partial Class Configurator
         Label2.AutoSize = True
         Label2.Location = New Point(28, 234)
         Label2.Name = "Label2"
-        Label2.Size = New Size(402, 15)
+        Label2.Size = New Size(407, 15)
         Label2.TabIndex = 54
-        Label2.Text = "Be careful what you are changing in the field below. It could break the VRX."
+        Label2.Text = "Be careful what you are changing in the fields below. It could break the VRX."
         Label2.TextAlign = ContentAlignment.TopCenter
         ' 
         ' txtSaveVRX
