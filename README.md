@@ -5,12 +5,6 @@ Please download and install PuTTy before running the Configurator
 
 ---
 
-Create a folder in C:/ and name it "OpenIPCConfigurator".
-
-Download all the files from this GitHub folder in this specific folder.
-
-Do not rename the folder.
-
 Run the "OpenIPC Configurator.exe" file.
 
 Enter the IP of the camera.
