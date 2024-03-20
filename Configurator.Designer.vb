@@ -68,13 +68,32 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         txtSaveCam = New Button()
+        TabPage3 = New TabPage()
+        txtSaveTLM = New Button()
+        cmbMCSTLM = New ComboBox()
+        cmbRouter = New ComboBox()
+        cmbBaud = New ComboBox()
+        cmbSerial = New ComboBox()
+        txtMCSTLM = New TextBox()
+        txtRouter = New TextBox()
+        txtBaud = New TextBox()
+        txtSerial = New TextBox()
         btnRead = New Button()
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
         btnReboot = New Button()
+        btnUART2OFF = New Button()
+        btnUART2 = New Button()
+        TabPage4 = New TabPage()
+        btnGenerateKeys = New Button()
+        btnSendKeys = New Button()
+        btnReceiveKeys = New Button()
+        btnUpdate = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
+        TabPage3.SuspendLayout()
+        TabPage4.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -262,10 +281,13 @@ Partial Class Configurator
         ' 
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
+        TabControl1.Controls.Add(TabPage3)
+        TabControl1.Controls.Add(TabPage4)
         TabControl1.Location = New Point(12, 12)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
         TabControl1.Size = New Size(470, 367)
+        TabControl1.SizeMode = TabSizeMode.Fixed
         TabControl1.TabIndex = 22
         ' 
         ' TabPage1
@@ -491,6 +513,102 @@ Partial Class Configurator
         btnToolTip.SetToolTip(txtSaveCam, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
         txtSaveCam.UseVisualStyleBackColor = True
         ' 
+        ' TabPage3
+        ' 
+        TabPage3.BackColor = Color.WhiteSmoke
+        TabPage3.Controls.Add(btnUART2OFF)
+        TabPage3.Controls.Add(btnUART2)
+        TabPage3.Controls.Add(txtSaveTLM)
+        TabPage3.Controls.Add(cmbMCSTLM)
+        TabPage3.Controls.Add(cmbRouter)
+        TabPage3.Controls.Add(cmbBaud)
+        TabPage3.Controls.Add(cmbSerial)
+        TabPage3.Controls.Add(txtMCSTLM)
+        TabPage3.Controls.Add(txtRouter)
+        TabPage3.Controls.Add(txtBaud)
+        TabPage3.Controls.Add(txtSerial)
+        TabPage3.Location = New Point(4, 24)
+        TabPage3.Name = "TabPage3"
+        TabPage3.Padding = New Padding(3)
+        TabPage3.RightToLeft = RightToLeft.No
+        TabPage3.Size = New Size(462, 339)
+        TabPage3.TabIndex = 2
+        TabPage3.Text = "Telemetry"
+        ' 
+        ' txtSaveTLM
+        ' 
+        txtSaveTLM.Location = New Point(140, 310)
+        txtSaveTLM.Name = "txtSaveTLM"
+        txtSaveTLM.Size = New Size(58, 23)
+        txtSaveTLM.TabIndex = 40
+        txtSaveTLM.Text = "3. Save"
+        btnToolTip.SetToolTip(txtSaveTLM, "Save the Telemetry settings to the" & vbCrLf & "local file telemetry.conf file" & vbCrLf)
+        txtSaveTLM.UseVisualStyleBackColor = True
+        ' 
+        ' cmbMCSTLM
+        ' 
+        cmbMCSTLM.FormattingEnabled = True
+        cmbMCSTLM.Location = New Point(19, 107)
+        cmbMCSTLM.Name = "cmbMCSTLM"
+        cmbMCSTLM.Size = New Size(214, 23)
+        cmbMCSTLM.TabIndex = 39
+        ' 
+        ' cmbRouter
+        ' 
+        cmbRouter.FormattingEnabled = True
+        cmbRouter.Location = New Point(19, 78)
+        cmbRouter.Name = "cmbRouter"
+        cmbRouter.Size = New Size(214, 23)
+        cmbRouter.TabIndex = 38
+        ' 
+        ' cmbBaud
+        ' 
+        cmbBaud.FormattingEnabled = True
+        cmbBaud.Location = New Point(19, 49)
+        cmbBaud.Name = "cmbBaud"
+        cmbBaud.Size = New Size(214, 23)
+        cmbBaud.TabIndex = 37
+        ' 
+        ' cmbSerial
+        ' 
+        cmbSerial.FormattingEnabled = True
+        cmbSerial.Location = New Point(19, 20)
+        cmbSerial.Name = "cmbSerial"
+        cmbSerial.Size = New Size(214, 23)
+        cmbSerial.TabIndex = 36
+        ' 
+        ' txtMCSTLM
+        ' 
+        txtMCSTLM.Location = New Point(248, 107)
+        txtMCSTLM.Name = "txtMCSTLM"
+        txtMCSTLM.ReadOnly = True
+        txtMCSTLM.Size = New Size(191, 23)
+        txtMCSTLM.TabIndex = 8
+        ' 
+        ' txtRouter
+        ' 
+        txtRouter.Location = New Point(248, 78)
+        txtRouter.Name = "txtRouter"
+        txtRouter.ReadOnly = True
+        txtRouter.Size = New Size(191, 23)
+        txtRouter.TabIndex = 7
+        ' 
+        ' txtBaud
+        ' 
+        txtBaud.Location = New Point(248, 49)
+        txtBaud.Name = "txtBaud"
+        txtBaud.ReadOnly = True
+        txtBaud.Size = New Size(191, 23)
+        txtBaud.TabIndex = 6
+        ' 
+        ' txtSerial
+        ' 
+        txtSerial.Location = New Point(248, 20)
+        txtSerial.Name = "txtSerial"
+        txtSerial.ReadOnly = True
+        txtSerial.Size = New Size(191, 23)
+        txtSerial.TabIndex = 5
+        ' 
         ' btnRead
         ' 
         btnRead.Location = New Point(76, 408)
@@ -514,17 +632,91 @@ Partial Class Configurator
         ' 
         btnReboot.Location = New Point(220, 408)
         btnReboot.Name = "btnReboot"
-        btnReboot.Size = New Size(72, 30)
+        btnReboot.Size = New Size(83, 30)
         btnReboot.TabIndex = 25
         btnReboot.Text = "5. Reboot"
         btnToolTip.SetToolTip(btnReboot, "Reboot the camera")
         btnReboot.UseVisualStyleBackColor = True
         ' 
+        ' btnUART2OFF
+        ' 
+        btnUART2OFF.Location = New Point(322, 301)
+        btnUART2OFF.Name = "btnUART2OFF"
+        btnUART2OFF.Size = New Size(117, 30)
+        btnUART2OFF.TabIndex = 42
+        btnUART2OFF.Text = "Disable UART2"
+        btnToolTip.SetToolTip(btnUART2OFF, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Telemetry Tab")
+        btnUART2OFF.UseVisualStyleBackColor = True
+        ' 
+        ' btnUART2
+        ' 
+        btnUART2.Location = New Point(322, 265)
+        btnUART2.Name = "btnUART2"
+        btnUART2.Size = New Size(117, 30)
+        btnUART2.TabIndex = 41
+        btnUART2.Text = "Enable UART2"
+        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Telemetry Tab")
+        btnUART2.UseVisualStyleBackColor = True
+        ' 
+        ' TabPage4
+        ' 
+        TabPage4.BackColor = Color.WhiteSmoke
+        TabPage4.Controls.Add(btnGenerateKeys)
+        TabPage4.Controls.Add(btnSendKeys)
+        TabPage4.Controls.Add(btnReceiveKeys)
+        TabPage4.Controls.Add(btnUpdate)
+        TabPage4.Location = New Point(4, 24)
+        TabPage4.Name = "TabPage4"
+        TabPage4.Padding = New Padding(3)
+        TabPage4.Size = New Size(462, 339)
+        TabPage4.TabIndex = 3
+        TabPage4.Text = "Setup"
+        ' 
+        ' btnGenerateKeys
+        ' 
+        btnGenerateKeys.Location = New Point(17, 51)
+        btnGenerateKeys.Name = "btnGenerateKeys"
+        btnGenerateKeys.Size = New Size(117, 30)
+        btnGenerateKeys.TabIndex = 33
+        btnGenerateKeys.Text = "Generate keys"
+        btnToolTip.SetToolTip(btnGenerateKeys, "Generate gs.key and drone.key" & vbCrLf & "to the Ground Station")
+        btnGenerateKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnSendKeys
+        ' 
+        btnSendKeys.Location = New Point(17, 124)
+        btnSendKeys.Name = "btnSendKeys"
+        btnSendKeys.Size = New Size(117, 30)
+        btnSendKeys.TabIndex = 32
+        btnSendKeys.Text = "Send drone.key"
+        btnToolTip.SetToolTip(btnSendKeys, "Send drone.key to the designated IP")
+        btnSendKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnReceiveKeys
+        ' 
+        btnReceiveKeys.Location = New Point(17, 87)
+        btnReceiveKeys.Name = "btnReceiveKeys"
+        btnReceiveKeys.Size = New Size(117, 30)
+        btnReceiveKeys.TabIndex = 31
+        btnReceiveKeys.Text = "Receive drone.key"
+        btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
+        btnReceiveKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.Location = New Point(17, 15)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(117, 30)
+        btnUpdate.TabIndex = 30
+        btnUpdate.Text = "Firmware Update"
+        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers")
+        btnUpdate.UseVisualStyleBackColor = True
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(495, 450)
+        ClientSize = New Size(492, 450)
         Controls.Add(btnReboot)
         Controls.Add(Label1)
         Controls.Add(btnRead)
@@ -542,6 +734,9 @@ Partial Class Configurator
         TabPage1.PerformLayout()
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
+        TabPage3.ResumeLayout(False)
+        TabPage3.PerformLayout()
+        TabPage4.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -595,5 +790,22 @@ Partial Class Configurator
     Friend WithEvents Label1 As Label
     Friend WithEvents btnToolTip As ToolTip
     Friend WithEvents btnReboot As Button
+    Friend WithEvents TabPage3 As TabPage
+    Friend WithEvents cmbMCSTLM As ComboBox
+    Friend WithEvents cmbRouter As ComboBox
+    Friend WithEvents cmbBaud As ComboBox
+    Friend WithEvents cmbSerial As ComboBox
+    Friend WithEvents txtMCSTLM As TextBox
+    Friend WithEvents txtRouter As TextBox
+    Friend WithEvents txtBaud As TextBox
+    Friend WithEvents txtSerial As TextBox
+    Friend WithEvents txtSaveTLM As Button
+    Friend WithEvents btnUART2OFF As Button
+    Friend WithEvents btnUART2 As Button
+    Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents btnGenerateKeys As Button
+    Friend WithEvents btnSendKeys As Button
+    Friend WithEvents btnReceiveKeys As Button
+    Friend WithEvents btnUpdate As Button
 
 End Class

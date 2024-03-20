@@ -86,12 +86,12 @@ Public Class Configurator
 
     Private Sub txtSaveCam_Click(sender As Object, e As EventArgs) Handles txtSaveCam.Click
         Dim majestic = "majestic.yaml"
-        If Not System.IO.File.Exists(majestic) Then
+        If Not IO.File.Exists(majestic) Then
             MsgBox("File " + majestic + " not found!")
             Return
         End If
 
-        Dim CamfilePath As String = majestic
+        Dim CamfilePath = majestic
         Dim lines = IO.File.ReadAllLines(CamfilePath)
         If lines(7).StartsWith("  contrast: ") Then
             lines(7) = txtContrast.Text
@@ -139,10 +139,18 @@ Public Class Configurator
             Return
         End If
 
+        Dim telemetry = "telemetry.conf"
+        If Not System.IO.File.Exists(telemetry) Then
+            MsgBox("File " + telemetry + " not found!")
+            Return
+        End If
+
         Dim WFBreader As New IO.StreamReader(wfbconf)
         Dim Camreader As New IO.StreamReader(majestic)
+        Dim TLMreader As New IO.StreamReader(telemetry)
         Dim WFBallLines = New List(Of String)
         Dim CamallLines = New List(Of String)
+        Dim TLMallLines = New List(Of String)
         Do While Not WFBreader.EndOfStream
             WFBallLines.Add(WFBreader.ReadLine)
         Loop
@@ -171,6 +179,15 @@ Public Class Configurator
         txtSaturation.Text = ReadLine(10, CamallLines)
         txtLuminance.Text = ReadLine(11, CamallLines)
         txtSensor.Text = ReadLine(60, CamallLines)
+
+        Do While Not TLMreader.EndOfStream
+            TLMallLines.Add(TLMreader.ReadLine)
+        Loop
+        TLMreader.Close()
+        txtSerial.Text = ReadLine(4, TLMallLines)
+        txtBaud.Text = ReadLine(5, TLMallLines)
+        txtRouter.Text = ReadLine(8, TLMallLines)
+        txtMCSTLM.Text = ReadLine(14, TLMallLines)
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -395,7 +412,6 @@ Public Class Configurator
         cmbSaturation.Items.Add("100")
         cmbSaturation.Text = "Select Saturation"
 
-
         cmbLuminance.Items.Clear()
         cmbLuminance.Items.Add("1")
         cmbLuminance.Items.Add("5")
@@ -410,6 +426,38 @@ Public Class Configurator
         cmbLuminance.Items.Add("90")
         cmbLuminance.Items.Add("100")
         cmbLuminance.Text = "Select Luminance"
+
+        cmbSerial.Items.Clear()
+        cmbSerial.Items.Add("/dev/ttyS0")
+        cmbSerial.Items.Add("/dev/ttyS2")
+        cmbSerial.Text = "Select Serial Port"
+
+        cmbBaud.Items.Clear()
+        cmbBaud.Items.Add("4800")
+        cmbBaud.Items.Add("9600")
+        cmbBaud.Items.Add("19200")
+        cmbBaud.Items.Add("38400")
+        cmbBaud.Items.Add("57600")
+        cmbBaud.Items.Add("112500")
+        cmbBaud.Text = "Select Baud Rate"
+
+        cmbRouter.Items.Clear()
+        cmbRouter.Items.Add("0")
+        cmbRouter.Items.Add("1")
+        cmbRouter.Text = "Select MAVFWD(0)/MAVLINK(1)"
+
+        cmbMCSTLM.Items.Clear()
+        cmbMCSTLM.Items.Add("0")
+        cmbMCSTLM.Items.Add("1")
+        cmbMCSTLM.Items.Add("2")
+        cmbMCSTLM.Items.Add("3")
+        cmbMCSTLM.Items.Add("4")
+        cmbMCSTLM.Items.Add("5")
+        cmbMCSTLM.Items.Add("6")
+        cmbMCSTLM.Items.Add("7")
+        cmbMCSTLM.Items.Add("8")
+        cmbMCSTLM.Items.Add("9")
+        cmbMCSTLM.Text = "Select MCS INDEX"
     End Sub
 
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
@@ -497,7 +545,7 @@ Public Class Configurator
 
     Private Sub btnReboot_Click(sender As Object, e As EventArgs) Handles btnReboot.Click
         Dim extern = "extern.bat"
-        If Not System.IO.File.Exists(extern) Then
+        If Not IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -507,6 +555,166 @@ Public Class Configurator
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "rb " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "sysup " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnReceiveKeys_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "keysdl " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnSendKeys_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "keysul " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnGenerateKeys_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "keysgen " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnUART2_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "UART2 " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub cmbSerial_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSerial.SelectedIndexChanged
+        txtSerial.Text = "serial=" & cmbSerial.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbBaud_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBaud.SelectedIndexChanged
+        txtBaud.Text = "baud=" & cmbBaud.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbRouter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRouter.SelectedIndexChanged
+        txtRouter.Text = "router=" & cmbRouter.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbMCSTLM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMCSTLM.SelectedIndexChanged
+        txtMCSTLM.Text = "mcs_index=" & cmbMCSTLM.SelectedItem.ToString
+    End Sub
+
+    Private Sub txtSaveTLM_Click(sender As Object, e As EventArgs) Handles txtSaveTLM.Click
+        Dim telemetry = "telemetry.conf"
+        If Not System.IO.File.Exists(telemetry) Then
+            MsgBox("File " + telemetry + " not found!")
+            Return
+        End If
+
+        Dim TLMfilePath As String = telemetry
+        Dim lines = IO.File.ReadAllLines(TLMfilePath)
+        If lines(3).StartsWith("serial=") Then
+            lines(3) = txtSerial.Text
+        End If
+        If lines(4).StartsWith("baud=") Then
+            lines(4) = txtBaud.Text
+        End If
+        If lines(7).StartsWith("router=") Then
+            lines(7) = txtRouter.Text
+        End If
+        If lines(13).StartsWith("mcs_index=") Then
+            lines(13) = txtMCSTLM.Text
+        End If
+        IO.File.WriteAllLines(TLMfilePath, lines)
+    End Sub
+
+    Private Sub btnUART2OFF_Click(sender As Object, e As EventArgs)
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "UART0 " + String.Format("{0}", txtIP.Text)
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
