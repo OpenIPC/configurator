@@ -435,7 +435,7 @@ Public Class Configurator
     End Sub
 
     Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
-        txtMCS.Text = "msc_index=" & ComboBox5.SelectedItem.ToString
+        txtMCS.Text = "mcs_index=" & ComboBox5.SelectedItem.ToString
     End Sub
 
     Private Sub ComboBox6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedIndexChanged
