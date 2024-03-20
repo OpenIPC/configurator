@@ -514,6 +514,7 @@ Public Class Configurator
 
         cmbSerial.Items.Clear()
         cmbSerial.Items.Add("/dev/ttyS0")
+        cmbSerial.Items.Add("/dev/ttyS1")
         cmbSerial.Items.Add("/dev/ttyS2")
         cmbSerial.Text = "Select Serial Port"
 

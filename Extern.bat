@@ -14,6 +14,19 @@ if "%1" == "ul" (
 	plink -ssh root@%2 -pw %pw% dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/majestic.yaml
 )
 
+if "%1" == "dlvrx" (
+	echo y | pscp -scp -pw %pw% root@%2:/etc/vdec.conf .
+	echo y | pscp -scp -pw %pw% root@%2:/etc/wfb.conf .
+	echo y | pscp -scp -pw %pw% root@%2:/etc/telemetry.conf .
+)
+
+if "%1" == "ulvrx" (
+	echo y | pscp -scp -pw %pw% vdec.conf root@%2:/etc
+	echo y | pscp -scp -pw %pw% wfb.conf root@%2:/etc
+	echo y | pscp -scp -pw %pw% telemetry.conf root@%2:/etc
+	plink -ssh root@%2 -pw %pw% dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/vdec.conf
+)
+
 if "%1" == "rb" (
 	plink -ssh root@%2 -pw %pw% reboot
 )

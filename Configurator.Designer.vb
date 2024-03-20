@@ -128,7 +128,7 @@ Partial Class Configurator
         txtIP.Name = "txtIP"
         txtIP.Size = New Size(105, 23)
         txtIP.TabIndex = 1
-        txtIP.Text = "192.168.0.4"
+        txtIP.Text = "192.168.0.1"
         btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
         ' 
         ' btnSend
