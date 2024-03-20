@@ -69,6 +69,8 @@ Partial Class Configurator
         cmbResolution = New ComboBox()
         txtSaveCam = New Button()
         TabPage3 = New TabPage()
+        btnUART2OFF = New Button()
+        btnUART2 = New Button()
         txtSaveTLM = New Button()
         cmbMCSTLM = New ComboBox()
         cmbRouter = New ComboBox()
@@ -78,22 +80,36 @@ Partial Class Configurator
         txtRouter = New TextBox()
         txtBaud = New TextBox()
         txtSerial = New TextBox()
-        btnRead = New Button()
-        Label1 = New Label()
-        btnToolTip = New ToolTip(components)
-        btnReboot = New Button()
-        btnUART2OFF = New Button()
-        btnUART2 = New Button()
         TabPage4 = New TabPage()
+        txtFormat = New TextBox()
+        cmbFormat = New ComboBox()
+        Label2 = New Label()
+        txtSaveVRX = New Button()
+        cmbOSD = New ComboBox()
+        cmbCodecVRX = New ComboBox()
+        cmbResolutionVRX = New ComboBox()
+        txtResolutionVRX = New TextBox()
+        txtMavlinkVRX = New TextBox()
+        txtCodecVRX = New TextBox()
+        txtOSD = New TextBox()
+        txtPortVRX = New TextBox()
+        txtExtras = New TextBox()
+        TabPage5 = New TabPage()
         btnGenerateKeys = New Button()
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         btnUpdate = New Button()
+        btnRead = New Button()
+        Label1 = New Label()
+        btnToolTip = New ToolTip(components)
+        btnReboot = New Button()
+        isVRX = New CheckBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         TabPage3.SuspendLayout()
         TabPage4.SuspendLayout()
+        TabPage5.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -108,9 +124,9 @@ Partial Class Configurator
         ' 
         ' txtIP
         ' 
-        txtIP.Location = New Point(179, 381)
+        txtIP.Location = New Point(198, 381)
         txtIP.Name = "txtIP"
-        txtIP.Size = New Size(124, 23)
+        txtIP.Size = New Size(105, 23)
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.4"
         btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
@@ -283,10 +299,11 @@ Partial Class Configurator
         TabControl1.Controls.Add(TabPage2)
         TabControl1.Controls.Add(TabPage3)
         TabControl1.Controls.Add(TabPage4)
+        TabControl1.Controls.Add(TabPage5)
         TabControl1.Location = New Point(12, 12)
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(470, 367)
+        TabControl1.Size = New Size(490, 367)
         TabControl1.SizeMode = TabSizeMode.Fixed
         TabControl1.TabIndex = 22
         ' 
@@ -315,7 +332,7 @@ Partial Class Configurator
         TabPage1.Location = New Point(4, 24)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(462, 339)
+        TabPage1.Size = New Size(482, 339)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
@@ -427,7 +444,7 @@ Partial Class Configurator
         TabPage2.Location = New Point(4, 24)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(462, 339)
+        TabPage2.Size = New Size(482, 339)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
@@ -531,9 +548,29 @@ Partial Class Configurator
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.RightToLeft = RightToLeft.No
-        TabPage3.Size = New Size(462, 339)
+        TabPage3.Size = New Size(482, 339)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
+        ' 
+        ' btnUART2OFF
+        ' 
+        btnUART2OFF.Location = New Point(322, 301)
+        btnUART2OFF.Name = "btnUART2OFF"
+        btnUART2OFF.Size = New Size(117, 30)
+        btnUART2OFF.TabIndex = 42
+        btnUART2OFF.Text = "Disable UART2"
+        btnToolTip.SetToolTip(btnUART2OFF, "Disable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Serial Selector")
+        btnUART2OFF.UseVisualStyleBackColor = True
+        ' 
+        ' btnUART2
+        ' 
+        btnUART2.Location = New Point(322, 265)
+        btnUART2.Name = "btnUART2"
+        btnUART2.Size = New Size(117, 30)
+        btnUART2.TabIndex = 41
+        btnUART2.Text = "Enable UART2"
+        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Serial Selector")
+        btnUART2.UseVisualStyleBackColor = True
         ' 
         ' txtSaveTLM
         ' 
@@ -609,6 +646,188 @@ Partial Class Configurator
         txtSerial.Size = New Size(191, 23)
         txtSerial.TabIndex = 5
         ' 
+        ' TabPage4
+        ' 
+        TabPage4.BackColor = Color.WhiteSmoke
+        TabPage4.Controls.Add(txtFormat)
+        TabPage4.Controls.Add(cmbFormat)
+        TabPage4.Controls.Add(Label2)
+        TabPage4.Controls.Add(txtSaveVRX)
+        TabPage4.Controls.Add(cmbOSD)
+        TabPage4.Controls.Add(cmbCodecVRX)
+        TabPage4.Controls.Add(cmbResolutionVRX)
+        TabPage4.Controls.Add(txtResolutionVRX)
+        TabPage4.Controls.Add(txtMavlinkVRX)
+        TabPage4.Controls.Add(txtCodecVRX)
+        TabPage4.Controls.Add(txtOSD)
+        TabPage4.Controls.Add(txtPortVRX)
+        TabPage4.Controls.Add(txtExtras)
+        TabPage4.Location = New Point(4, 24)
+        TabPage4.Name = "TabPage4"
+        TabPage4.Padding = New Padding(3)
+        TabPage4.Size = New Size(482, 339)
+        TabPage4.TabIndex = 3
+        TabPage4.Text = "VRX"
+        ' 
+        ' txtFormat
+        ' 
+        txtFormat.Location = New Point(248, 107)
+        txtFormat.Name = "txtFormat"
+        txtFormat.ReadOnly = True
+        txtFormat.Size = New Size(191, 23)
+        txtFormat.TabIndex = 56
+        ' 
+        ' cmbFormat
+        ' 
+        cmbFormat.FormattingEnabled = True
+        cmbFormat.Location = New Point(19, 107)
+        cmbFormat.Name = "cmbFormat"
+        cmbFormat.Size = New Size(214, 23)
+        cmbFormat.TabIndex = 55
+        ' 
+        ' Label2
+        ' 
+        Label2.AutoSize = True
+        Label2.Location = New Point(28, 234)
+        Label2.Name = "Label2"
+        Label2.Size = New Size(402, 15)
+        Label2.TabIndex = 54
+        Label2.Text = "Be careful what you are changing in the field below. It could break the VRX."
+        Label2.TextAlign = ContentAlignment.TopCenter
+        ' 
+        ' txtSaveVRX
+        ' 
+        txtSaveVRX.Location = New Point(140, 310)
+        txtSaveVRX.Name = "txtSaveVRX"
+        txtSaveVRX.Size = New Size(58, 23)
+        txtSaveVRX.TabIndex = 53
+        txtSaveVRX.Text = "3. Save"
+        btnToolTip.SetToolTip(txtSaveVRX, "Save the WFB settings to the" & vbCrLf & "local wfb.conf file")
+        txtSaveVRX.UseVisualStyleBackColor = True
+        ' 
+        ' cmbOSD
+        ' 
+        cmbOSD.FormattingEnabled = True
+        cmbOSD.Location = New Point(19, 78)
+        cmbOSD.Name = "cmbOSD"
+        cmbOSD.Size = New Size(214, 23)
+        cmbOSD.TabIndex = 48
+        ' 
+        ' cmbCodecVRX
+        ' 
+        cmbCodecVRX.FormattingEnabled = True
+        cmbCodecVRX.Location = New Point(19, 48)
+        cmbCodecVRX.Name = "cmbCodecVRX"
+        cmbCodecVRX.Size = New Size(214, 23)
+        cmbCodecVRX.TabIndex = 45
+        ' 
+        ' cmbResolutionVRX
+        ' 
+        cmbResolutionVRX.FormattingEnabled = True
+        cmbResolutionVRX.Location = New Point(19, 20)
+        cmbResolutionVRX.Name = "cmbResolutionVRX"
+        cmbResolutionVRX.Size = New Size(214, 23)
+        cmbResolutionVRX.TabIndex = 44
+        ' 
+        ' txtResolutionVRX
+        ' 
+        txtResolutionVRX.Location = New Point(248, 20)
+        txtResolutionVRX.Name = "txtResolutionVRX"
+        txtResolutionVRX.ReadOnly = True
+        txtResolutionVRX.Size = New Size(191, 23)
+        txtResolutionVRX.TabIndex = 35
+        ' 
+        ' txtMavlinkVRX
+        ' 
+        txtMavlinkVRX.Location = New Point(248, 252)
+        txtMavlinkVRX.Name = "txtMavlinkVRX"
+        txtMavlinkVRX.Size = New Size(191, 23)
+        txtMavlinkVRX.TabIndex = 43
+        ' 
+        ' txtCodecVRX
+        ' 
+        txtCodecVRX.Location = New Point(248, 49)
+        txtCodecVRX.Name = "txtCodecVRX"
+        txtCodecVRX.ReadOnly = True
+        txtCodecVRX.Size = New Size(191, 23)
+        txtCodecVRX.TabIndex = 36
+        ' 
+        ' txtOSD
+        ' 
+        txtOSD.Location = New Point(248, 78)
+        txtOSD.Name = "txtOSD"
+        txtOSD.ReadOnly = True
+        txtOSD.Size = New Size(191, 23)
+        txtOSD.TabIndex = 37
+        ' 
+        ' txtPortVRX
+        ' 
+        txtPortVRX.Location = New Point(19, 252)
+        txtPortVRX.Name = "txtPortVRX"
+        txtPortVRX.Size = New Size(191, 23)
+        txtPortVRX.TabIndex = 38
+        ' 
+        ' txtExtras
+        ' 
+        txtExtras.Location = New Point(19, 281)
+        txtExtras.Name = "txtExtras"
+        txtExtras.Size = New Size(420, 23)
+        txtExtras.TabIndex = 39
+        ' 
+        ' TabPage5
+        ' 
+        TabPage5.BackColor = Color.WhiteSmoke
+        TabPage5.Controls.Add(btnGenerateKeys)
+        TabPage5.Controls.Add(btnSendKeys)
+        TabPage5.Controls.Add(btnReceiveKeys)
+        TabPage5.Controls.Add(btnUpdate)
+        TabPage5.Location = New Point(4, 24)
+        TabPage5.Name = "TabPage5"
+        TabPage5.Padding = New Padding(3)
+        TabPage5.Size = New Size(482, 339)
+        TabPage5.TabIndex = 4
+        TabPage5.Text = "Setup"
+        ' 
+        ' btnGenerateKeys
+        ' 
+        btnGenerateKeys.Location = New Point(15, 53)
+        btnGenerateKeys.Name = "btnGenerateKeys"
+        btnGenerateKeys.Size = New Size(117, 30)
+        btnGenerateKeys.TabIndex = 37
+        btnGenerateKeys.Text = "Generate keys"
+        btnToolTip.SetToolTip(btnGenerateKeys, "Generate gs.key and drone.key" & vbCrLf & "to the Ground Station and" & vbCrLf & "copy gs.key to /etc/")
+        btnGenerateKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnSendKeys
+        ' 
+        btnSendKeys.Location = New Point(15, 126)
+        btnSendKeys.Name = "btnSendKeys"
+        btnSendKeys.Size = New Size(117, 30)
+        btnSendKeys.TabIndex = 36
+        btnSendKeys.Text = "Send drone.key"
+        btnToolTip.SetToolTip(btnSendKeys, "Send drone.key to the designated IP")
+        btnSendKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnReceiveKeys
+        ' 
+        btnReceiveKeys.Location = New Point(15, 89)
+        btnReceiveKeys.Name = "btnReceiveKeys"
+        btnReceiveKeys.Size = New Size(117, 30)
+        btnReceiveKeys.TabIndex = 35
+        btnReceiveKeys.Text = "Receive drone.key"
+        btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
+        btnReceiveKeys.UseVisualStyleBackColor = True
+        ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.Location = New Point(15, 17)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(117, 30)
+        btnUpdate.TabIndex = 34
+        btnUpdate.Text = "Firmware Update"
+        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers")
+        btnUpdate.UseVisualStyleBackColor = True
+        ' 
         ' btnRead
         ' 
         btnRead.Location = New Point(76, 408)
@@ -622,11 +841,11 @@ Partial Class Configurator
         ' Label1
         ' 
         Label1.AutoSize = True
-        Label1.Location = New Point(14, 384)
+        Label1.Location = New Point(9, 384)
         Label1.Name = "Label1"
-        Label1.Size = New Size(159, 15)
+        Label1.Size = New Size(183, 15)
         Label1.TabIndex = 24
-        Label1.Text = "OpenIPC Camera IP Address:"
+        Label1.Text = "OpenIPC camera/VRX IP Address:"
         ' 
         ' btnReboot
         ' 
@@ -638,85 +857,22 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnReboot, "Reboot the camera")
         btnReboot.UseVisualStyleBackColor = True
         ' 
-        ' btnUART2OFF
+        ' isVRX
         ' 
-        btnUART2OFF.Location = New Point(322, 301)
-        btnUART2OFF.Name = "btnUART2OFF"
-        btnUART2OFF.Size = New Size(117, 30)
-        btnUART2OFF.TabIndex = 42
-        btnUART2OFF.Text = "Disable UART2"
-        btnToolTip.SetToolTip(btnUART2OFF, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Telemetry Tab")
-        btnUART2OFF.UseVisualStyleBackColor = True
-        ' 
-        ' btnUART2
-        ' 
-        btnUART2.Location = New Point(322, 265)
-        btnUART2.Name = "btnUART2"
-        btnUART2.Size = New Size(117, 30)
-        btnUART2.TabIndex = 41
-        btnUART2.Text = "Enable UART2"
-        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Telemetry Tab")
-        btnUART2.UseVisualStyleBackColor = True
-        ' 
-        ' TabPage4
-        ' 
-        TabPage4.BackColor = Color.WhiteSmoke
-        TabPage4.Controls.Add(btnGenerateKeys)
-        TabPage4.Controls.Add(btnSendKeys)
-        TabPage4.Controls.Add(btnReceiveKeys)
-        TabPage4.Controls.Add(btnUpdate)
-        TabPage4.Location = New Point(4, 24)
-        TabPage4.Name = "TabPage4"
-        TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(462, 339)
-        TabPage4.TabIndex = 3
-        TabPage4.Text = "Setup"
-        ' 
-        ' btnGenerateKeys
-        ' 
-        btnGenerateKeys.Location = New Point(17, 51)
-        btnGenerateKeys.Name = "btnGenerateKeys"
-        btnGenerateKeys.Size = New Size(117, 30)
-        btnGenerateKeys.TabIndex = 33
-        btnGenerateKeys.Text = "Generate keys"
-        btnToolTip.SetToolTip(btnGenerateKeys, "Generate gs.key and drone.key" & vbCrLf & "to the Ground Station")
-        btnGenerateKeys.UseVisualStyleBackColor = True
-        ' 
-        ' btnSendKeys
-        ' 
-        btnSendKeys.Location = New Point(17, 124)
-        btnSendKeys.Name = "btnSendKeys"
-        btnSendKeys.Size = New Size(117, 30)
-        btnSendKeys.TabIndex = 32
-        btnSendKeys.Text = "Send drone.key"
-        btnToolTip.SetToolTip(btnSendKeys, "Send drone.key to the designated IP")
-        btnSendKeys.UseVisualStyleBackColor = True
-        ' 
-        ' btnReceiveKeys
-        ' 
-        btnReceiveKeys.Location = New Point(17, 87)
-        btnReceiveKeys.Name = "btnReceiveKeys"
-        btnReceiveKeys.Size = New Size(117, 30)
-        btnReceiveKeys.TabIndex = 31
-        btnReceiveKeys.Text = "Receive drone.key"
-        btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
-        btnReceiveKeys.UseVisualStyleBackColor = True
-        ' 
-        ' btnUpdate
-        ' 
-        btnUpdate.Location = New Point(17, 15)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(117, 30)
-        btnUpdate.TabIndex = 30
-        btnUpdate.Text = "Firmware Update"
-        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers")
-        btnUpdate.UseVisualStyleBackColor = True
+        isVRX.AutoSize = True
+        isVRX.Location = New Point(310, 383)
+        isVRX.Name = "isVRX"
+        isVRX.Size = New Size(58, 19)
+        isVRX.TabIndex = 26
+        isVRX.Text = "Is VRX"
+        isVRX.UseVisualStyleBackColor = True
         ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
-        ClientSize = New Size(492, 450)
+        ClientSize = New Size(512, 450)
+        Controls.Add(isVRX)
         Controls.Add(btnReboot)
         Controls.Add(Label1)
         Controls.Add(btnRead)
@@ -737,6 +893,8 @@ Partial Class Configurator
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
         TabPage4.ResumeLayout(False)
+        TabPage4.PerformLayout()
+        TabPage5.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -803,9 +961,24 @@ Partial Class Configurator
     Friend WithEvents btnUART2OFF As Button
     Friend WithEvents btnUART2 As Button
     Friend WithEvents TabPage4 As TabPage
+    Friend WithEvents TabPage5 As TabPage
     Friend WithEvents btnGenerateKeys As Button
     Friend WithEvents btnSendKeys As Button
     Friend WithEvents btnReceiveKeys As Button
     Friend WithEvents btnUpdate As Button
+    Friend WithEvents txtSaveVRX As Button
+    Friend WithEvents cmbOSD As ComboBox
+    Friend WithEvents cmbCodecVRX As ComboBox
+    Friend WithEvents cmbResolutionVRX As ComboBox
+    Friend WithEvents txtResolutionVRX As TextBox
+    Friend WithEvents txtMavlinkVRX As TextBox
+    Friend WithEvents txtCodecVRX As TextBox
+    Friend WithEvents txtOSD As TextBox
+    Friend WithEvents txtPortVRX As TextBox
+    Friend WithEvents txtExtras As TextBox
+    Friend WithEvents isVRX As CheckBox
+    Friend WithEvents Label2 As Label
+    Friend WithEvents txtFormat As TextBox
+    Friend WithEvents cmbFormat As ComboBox
 
 End Class
