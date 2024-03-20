@@ -1,11 +1,6 @@
 @echo off
 set pw=12345
 
-if not exist pscp.exe (
-	echo pscp.exe not found!
-	goto end
-)
-
 if "%1" == "dl" (
 	echo y | pscp -scp -pw %pw% root@%2:/etc/majestic.yaml .
 	echo y | pscp -scp -pw %pw% root@%2:/etc/wfb.conf .
