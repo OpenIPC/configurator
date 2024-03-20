@@ -12,6 +12,10 @@ if "%1" == "ul" (
 	plink -ssh root@%2 -pw %pw% dos2unix /etc/wfb.conf /etc/majestic.yaml
 )
 
+if "%1" == "rb" (
+	plink -ssh root@%2 -pw %pw% reboot
+)
+
 :end
 echo.
 pause

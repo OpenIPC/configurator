@@ -132,7 +132,7 @@ Public Class Configurator
             MsgBox("File " + wfbconf + " not found!")
             Return
         End If
-	
+
         Dim majestic = "majestic.yaml"
         If Not System.IO.File.Exists(majestic) Then
             MsgBox("File " + majestic + " not found!")
@@ -494,4 +494,24 @@ Public Class Configurator
         Return System.Text.RegularExpressions.Regex.IsMatch(ipAddress,
     "^(25[0-5]|2[0-4]\d|[0-1]?\d?\d)(\.(25[0-5]|2[0-4]\d|[0-1]?\d?\d)){3}$")
     End Function
+
+    Private Sub btnReboot_Click(sender As Object, e As EventArgs) Handles btnReboot.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "rb " + String.Format("{0}", txtIP.Text)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
 End Class

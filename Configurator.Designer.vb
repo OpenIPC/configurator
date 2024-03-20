@@ -71,6 +71,7 @@ Partial Class Configurator
         btnRead = New Button()
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
+        btnReboot = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -509,11 +510,22 @@ Partial Class Configurator
         Label1.TabIndex = 24
         Label1.Text = "OpenIPC Camera IP Address:"
         ' 
-        ' Form1
+        ' btnReboot
         ' 
-        AutoScaleDimensions = New SizeF(7.0F, 15.0F)
+        btnReboot.Location = New Point(220, 408)
+        btnReboot.Name = "btnReboot"
+        btnReboot.Size = New Size(72, 30)
+        btnReboot.TabIndex = 25
+        btnReboot.Text = "5. Reboot"
+        btnToolTip.SetToolTip(btnReboot, "Reboot the camera")
+        btnReboot.UseVisualStyleBackColor = True
+        ' 
+        ' Configurator
+        ' 
+        AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(495, 450)
+        Controls.Add(btnReboot)
         Controls.Add(Label1)
         Controls.Add(btnRead)
         Controls.Add(TabControl1)
@@ -522,7 +534,7 @@ Partial Class Configurator
         Controls.Add(btnGet)
         FormBorderStyle = FormBorderStyle.FixedSingle
         MaximizeBox = False
-        Name = "Form1"
+        Name = "Configurator"
         StartPosition = FormStartPosition.CenterScreen
         Text = "OpenIPC Configurator"
         TabControl1.ResumeLayout(False)
@@ -582,5 +594,6 @@ Partial Class Configurator
     Friend WithEvents cmbResolution As ComboBox
     Friend WithEvents Label1 As Label
     Friend WithEvents btnToolTip As ToolTip
+    Friend WithEvents btnReboot As Button
 
 End Class
