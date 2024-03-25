@@ -864,7 +864,7 @@ Partial Class Configurator
         isVRX.Name = "isVRX"
         isVRX.Size = New Size(58, 19)
         isVRX.TabIndex = 26
-        isVRX.Text = "Is VRX"
+        isVRX.Text = "is VRX"
         isVRX.UseVisualStyleBackColor = True
         ' 
         ' Configurator
