@@ -47,6 +47,7 @@ Partial Class Configurator
         txtPower24 = New TextBox()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        btnRestartWFB = New Button()
         ComboBox9 = New ComboBox()
         ComboBox8 = New ComboBox()
         ComboBox7 = New ComboBox()
@@ -58,6 +59,7 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         txtSaveFreq = New Button()
         TabPage2 = New TabPage()
+        btnRestartMajestic = New Button()
         cmbLuminance = New ComboBox()
         cmbSaturation = New ComboBox()
         cmbHue = New ComboBox()
@@ -310,6 +312,7 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.WhiteSmoke
+        TabPage1.Controls.Add(btnRestartWFB)
         TabPage1.Controls.Add(ComboBox9)
         TabPage1.Controls.Add(ComboBox8)
         TabPage1.Controls.Add(ComboBox7)
@@ -335,6 +338,16 @@ Partial Class Configurator
         TabPage1.Size = New Size(482, 339)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
+        ' 
+        ' btnRestartWFB
+        ' 
+        btnRestartWFB.Location = New Point(204, 310)
+        btnRestartWFB.Name = "btnRestartWFB"
+        btnRestartWFB.Size = New Size(111, 23)
+        btnRestartWFB.TabIndex = 45
+        btnRestartWFB.Text = "Restart WFB"
+        btnToolTip.SetToolTip(btnRestartWFB, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
+        btnRestartWFB.UseVisualStyleBackColor = True
         ' 
         ' ComboBox9
         ' 
@@ -421,6 +434,7 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.WhiteSmoke
+        TabPage2.Controls.Add(btnRestartMajestic)
         TabPage2.Controls.Add(cmbLuminance)
         TabPage2.Controls.Add(cmbSaturation)
         TabPage2.Controls.Add(cmbHue)
@@ -447,6 +461,16 @@ Partial Class Configurator
         TabPage2.Size = New Size(482, 339)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' btnRestartMajestic
+        ' 
+        btnRestartMajestic.Location = New Point(204, 310)
+        btnRestartMajestic.Name = "btnRestartMajestic"
+        btnRestartMajestic.Size = New Size(111, 23)
+        btnRestartMajestic.TabIndex = 44
+        btnRestartMajestic.Text = "Restart Majestic"
+        btnToolTip.SetToolTip(btnRestartMajestic, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
+        btnRestartMajestic.UseVisualStyleBackColor = True
         ' 
         ' cmbLuminance
         ' 
@@ -980,5 +1004,7 @@ Partial Class Configurator
     Friend WithEvents Label2 As Label
     Friend WithEvents txtFormat As TextBox
     Friend WithEvents cmbFormat As ComboBox
+    Friend WithEvents btnRestartWFB As Button
+    Friend WithEvents btnRestartMajestic As Button
 
 End Class

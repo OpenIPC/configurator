@@ -58,6 +58,18 @@ if "%1" == "UART0" (
 	plink -ssh root@%2 -pw %pw% sed -i '/stty -F \/dev\/ttyS2 115200 raw -echo -onlcr/d' /etc/init.d/S95majestic
 )
 
+if "%1" == "rswfb" (
+	plink -ssh root@%2 -pw %pw% wifibroadcast stop
+	plink -ssh root@%2 -pw %pw% wifibroadcast stop
+	plink -ssh root@%2 -pw %pw% wifibroadcast start
+)
+
+
+if "%1" == "rsmaj" (
+	plink -ssh root@%2 -pw %pw% killall majestic
+	plink -ssh root@%2 -pw %pw% majestic
+)
+
 :end
 echo.
 pause
