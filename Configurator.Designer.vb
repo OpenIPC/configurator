@@ -105,7 +105,11 @@ Partial Class Configurator
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
         btnReboot = New Button()
-        isVRX = New CheckBox()
+        txtPassword = New TextBox()
+        rBtnCam = New RadioButton()
+        rBtnNVR = New RadioButton()
+        rBtnRadxaZero3w = New RadioButton()
+        Label3 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -126,9 +130,9 @@ Partial Class Configurator
         ' 
         ' txtIP
         ' 
-        txtIP.Location = New Point(198, 381)
+        txtIP.Location = New Point(76, 381)
         txtIP.Name = "txtIP"
-        txtIP.Size = New Size(105, 23)
+        txtIP.Size = New Size(77, 23)
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.1"
         btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
@@ -867,9 +871,9 @@ Partial Class Configurator
         Label1.AutoSize = True
         Label1.Location = New Point(9, 384)
         Label1.Name = "Label1"
-        Label1.Size = New Size(183, 15)
+        Label1.Size = New Size(65, 15)
         Label1.TabIndex = 24
-        Label1.Text = "OpenIPC camera/VRX IP Address:"
+        Label1.Text = "IP Address:"
         ' 
         ' btnReboot
         ' 
@@ -881,22 +885,66 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnReboot, "Reboot the camera")
         btnReboot.UseVisualStyleBackColor = True
         ' 
-        ' isVRX
+        ' txtPassword
         ' 
-        isVRX.AutoSize = True
-        isVRX.Location = New Point(310, 383)
-        isVRX.Name = "isVRX"
-        isVRX.Size = New Size(58, 19)
-        isVRX.TabIndex = 26
-        isVRX.Text = "is VRX"
-        isVRX.UseVisualStyleBackColor = True
+        txtPassword.Location = New Point(220, 381)
+        txtPassword.Name = "txtPassword"
+        txtPassword.Size = New Size(83, 23)
+        txtPassword.TabIndex = 31
+        txtPassword.Text = "12345"
+        btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
+        ' 
+        ' rBtnCam
+        ' 
+        rBtnCam.AutoSize = True
+        rBtnCam.Checked = True
+        rBtnCam.Location = New Point(339, 382)
+        rBtnCam.Name = "rBtnCam"
+        rBtnCam.Size = New Size(116, 19)
+        rBtnCam.TabIndex = 27
+        rBtnCam.TabStop = True
+        rBtnCam.Text = "OpenIPC Camera"
+        rBtnCam.UseVisualStyleBackColor = True
+        ' 
+        ' rBtnNVR
+        ' 
+        rBtnNVR.AutoSize = True
+        rBtnNVR.Location = New Point(339, 402)
+        rBtnNVR.Name = "rBtnNVR"
+        rBtnNVR.Size = New Size(87, 19)
+        rBtnNVR.TabIndex = 28
+        rBtnNVR.Text = "NVR Hi3536"
+        rBtnNVR.UseVisualStyleBackColor = True
+        ' 
+        ' rBtnRadxaZero3w
+        ' 
+        rBtnRadxaZero3w.AutoSize = True
+        rBtnRadxaZero3w.Location = New Point(339, 422)
+        rBtnRadxaZero3w.Name = "rBtnRadxaZero3w"
+        rBtnRadxaZero3w.Size = New Size(156, 19)
+        rBtnRadxaZero3w.TabIndex = 29
+        rBtnRadxaZero3w.Text = "Radxa Zero 3w (WFB-ng)"
+        rBtnRadxaZero3w.UseVisualStyleBackColor = True
+        ' 
+        ' Label3
+        ' 
+        Label3.AutoSize = True
+        Label3.Location = New Point(159, 384)
+        Label3.Name = "Label3"
+        Label3.Size = New Size(60, 15)
+        Label3.TabIndex = 30
+        Label3.Text = "Password:"
         ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         ClientSize = New Size(512, 450)
-        Controls.Add(isVRX)
+        Controls.Add(txtPassword)
+        Controls.Add(Label3)
+        Controls.Add(rBtnRadxaZero3w)
+        Controls.Add(rBtnNVR)
+        Controls.Add(rBtnCam)
         Controls.Add(btnReboot)
         Controls.Add(Label1)
         Controls.Add(btnRead)
@@ -1000,11 +1048,15 @@ Partial Class Configurator
     Friend WithEvents txtOSD As TextBox
     Friend WithEvents txtPortVRX As TextBox
     Friend WithEvents txtExtras As TextBox
-    Friend WithEvents isVRX As CheckBox
     Friend WithEvents Label2 As Label
     Friend WithEvents txtFormat As TextBox
     Friend WithEvents cmbFormat As ComboBox
     Friend WithEvents btnRestartWFB As Button
     Friend WithEvents btnRestartMajestic As Button
+    Friend WithEvents rBtnCam As RadioButton
+    Friend WithEvents rBtnNVR As RadioButton
+    Friend WithEvents rBtnRadxaZero3w As RadioButton
+    Friend WithEvents Label3 As Label
+    Friend WithEvents txtPassword As TextBox
 
 End Class

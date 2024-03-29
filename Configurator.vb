@@ -9,23 +9,19 @@ Public Class Configurator
         End If
 
         If IsValidIP(txtIP.Text) Then
-            If isVRX.Checked Then
-                With New Process()
-                    .StartInfo.UseShellExecute = False
-                    .StartInfo.FileName = extern
-                    .StartInfo.Arguments = "dlvrx " + String.Format("{0}", txtIP.Text)
-                    .StartInfo.RedirectStandardOutput = False
-                    .Start()
-                End With
-            Else
-                With New Process()
-                    .StartInfo.UseShellExecute = False
-                    .StartInfo.FileName = extern
-                    .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text)
-                    .StartInfo.RedirectStandardOutput = False
-                    .Start()
-                End With
-            End If
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBtnNVR.Checked Then
+                    .StartInfo.Arguments = "dlvrx " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                ElseIf rBtnRadxaZero3w.Checked Then
+                    .StartInfo.Arguments = "dlwfbng " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
         Else
             MsgBox("Please enter a valid IP address")
         End If
@@ -39,23 +35,19 @@ Public Class Configurator
         End If
 
         If IsValidIP(txtIP.Text) Then
-            If isVRX.Checked Then
-                With New Process()
-                    .StartInfo.UseShellExecute = False
-                    .StartInfo.FileName = extern
-                    .StartInfo.Arguments = "ulvrx " + String.Format("{0}", txtIP.Text)
-                    .StartInfo.RedirectStandardOutput = False
-                    .Start()
-                End With
-            Else
-                With New Process()
-                    .StartInfo.UseShellExecute = False
-                    .StartInfo.FileName = extern
-                    .StartInfo.Arguments = "ul " + String.Format("{0}", txtIP.Text)
-                    .StartInfo.RedirectStandardOutput = False
-                    .Start()
-                End With
-            End If
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBtnNVR.Checked Then
+                    .StartInfo.Arguments = "ulvrx " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                ElseIf rBtnRadxaZero3w.Checked Then
+                    .StartInfo.Arguments = "ulwfbng " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "ul " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
         Else
             MsgBox("Please enter a valid IP address")
         End If
@@ -66,93 +58,125 @@ Public Class Configurator
     End Function
 
     Private Sub txtSaveFreq_Click(sender As Object, e As EventArgs) Handles txtSaveFreq.Click
-        Dim wfbconf = "wfb.conf"
-        If Not IO.File.Exists(wfbconf) Then
-            MsgBox("File " + wfbconf + " not found!")
-            Return
+        If txtFrequency.Text <> "" Then
+            Dim wfbconf = "wfb.conf"
+            If Not IO.File.Exists(wfbconf) Then
+                MsgBox("File " + wfbconf + " not found!")
+                Return
+            End If
+
+            Dim WFBfilePath = wfbconf
+            Dim lines = IO.File.ReadAllLines(WFBfilePath)
+
+            If rBtnRadxaZero3w.Checked Then
+                Dim wfbng = "wifibroadcast.cfg"
+                If Not IO.File.Exists(wfbng) Then
+                    MsgBox("File " + wfbng + " not found!")
+                    Return
+                End If
+
+                Dim wfbngfilePath = wfbng
+                Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
+
+                If WFBlines(1).StartsWith("wifi_channel = ") Then
+                    WFBlines(1) = txtFrequency.Text
+                End If
+                If WFBlines(7).StartsWith("peer = 'connect://") Then
+                    WFBlines(7) = txtMCS.Text
+                End If
+                If WFBlines(11).StartsWith("peer = 'connect://") Then
+                    WFBlines(11) = txtSTBC.Text
+                End If
+                IO.File.WriteAllLines(wfbngfilePath, WFBlines)
+                If lines(5).StartsWith("rtw_tx_pwr_idx_override=") Then
+                    lines(5) = txtPower.Text
+                End If
+            Else
+                If lines(6).StartsWith("channel=") Then
+                    lines(6) = txtFrequency.Text
+                End If
+                If lines(9).StartsWith("driver_txpower_override=") Then
+                    lines(9) = txtPower.Text
+                End If
+                If lines(7).StartsWith("frequency=") Then
+                    lines(7) = txtFreq24.Text
+                End If
+                If lines(8).StartsWith("txpower=") Then
+                    lines(8) = txtPower24.Text
+                End If
+                If rBtnNVR.Checked Then
+                    If lines(13).StartsWith("udp_addr=") Then
+                        lines(13) = txtMCS.Text
+                    End If
+                    If lines(14).StartsWith("udp_port=") Then
+                        lines(14) = txtSTBC.Text
+                    End If
+                Else
+                    If lines(11).StartsWith("stbc=") Then
+                        lines(11) = txtSTBC.Text
+                    End If
+                    If lines(12).StartsWith("ldpc=") Then
+                        lines(12) = txtLDPC.Text
+                    End If
+                    If lines(13).StartsWith("mcs_index=") Then
+                        lines(13) = txtMCS.Text
+                    End If
+                    If lines(19).StartsWith("fec_k=") Then
+                        lines(19) = txtFECK.Text
+                    End If
+                    If lines(20).StartsWith("fec_n=") Then
+                        lines(20) = txtFECN.Text
+                    End If
+                End If
+            End If
+            IO.File.WriteAllLines(WFBfilePath, lines)
         End If
 
-        Dim WFBfilePath = wfbconf
-        Dim lines = IO.File.ReadAllLines(WFBfilePath)
-        If lines(6).StartsWith("channel=") Then
-            lines(6) = txtFrequency.Text
-        End If
-        If lines(9).StartsWith("driver_txpower_override=") Then
-            lines(9) = txtPower.Text
-        End If
-        If lines(7).StartsWith("frequency=") Then
-            lines(7) = txtFreq24.Text
-        End If
-        If lines(8).StartsWith("txpower=") Then
-            lines(8) = txtPower24.Text
-        End If
-        If isVRX.Checked Then
-            If lines(13).StartsWith("udp_addr=") Then
-                lines(13) = txtMCS.Text
-            End If
-            If lines(14).StartsWith("udp_port=") Then
-                lines(14) = txtSTBC.Text
-            End If
-        Else
-            If lines(11).StartsWith("stbc=") Then
-                lines(11) = txtSTBC.Text
-            End If
-            If lines(12).StartsWith("ldpc=") Then
-                lines(12) = txtLDPC.Text
-            End If
-            If lines(13).StartsWith("mcs_index=") Then
-                lines(13) = txtMCS.Text
-            End If
-            If lines(19).StartsWith("fec_k=") Then
-                lines(19) = txtFECK.Text
-            End If
-            If lines(20).StartsWith("fec_n=") Then
-                lines(20) = txtFECN.Text
-            End If
-        End If
-        IO.File.WriteAllLines(WFBfilePath, lines)
     End Sub
 
     Private Sub txtSaveCam_Click(sender As Object, e As EventArgs) Handles txtSaveCam.Click
-        Dim majestic = "majestic.yaml"
-        If Not IO.File.Exists(majestic) Then
-            MsgBox("File " + majestic + " not found!")
-            Return
+        If txtResolution.Text <> "" Then
+            Dim majestic = "majestic.yaml"
+            If Not IO.File.Exists(majestic) Then
+                MsgBox("File " + majestic + " not found!")
+                Return
+            End If
+
+            Dim CamfilePath = majestic
+            Dim lines = IO.File.ReadAllLines(CamfilePath)
+            If lines(7).StartsWith("  contrast: ") Then
+                lines(7) = txtContrast.Text
+            End If
+            If lines(8).StartsWith("  hue: ") Then
+                lines(8) = txtHue.Text
+            End If
+            If lines(9).StartsWith("  saturation:") Then
+                lines(9) = txtSaturation.Text
+            End If
+            If lines(10).StartsWith("  luminance: ") Then
+                lines(10) = txtLuminance.Text
+            End If
+            If lines(23).StartsWith("  bitrate: ") Then
+                lines(23) = txtBitrate.Text
+            End If
+            If lines(24).StartsWith("  codec: ") Then
+                lines(24) = txtEncode.Text
+            End If
+            If lines(27).StartsWith("  size: ") Then
+                lines(27) = txtResolution.Text
+            End If
+            If lines(28).StartsWith("  fps: ") Then
+                lines(28) = txtFPS.Text
+            End If
+            If lines(59).StartsWith("  sensorConfig: ") Then
+                lines(59) = txtSensor.Text
+            End If
+            If lines(60).StartsWith("  exposure: ") Then
+                lines(60) = txtExposure.Text
+            End If
+            IO.File.WriteAllLines(CamfilePath, lines)
         End If
 
-        Dim CamfilePath = majestic
-        Dim lines = IO.File.ReadAllLines(CamfilePath)
-        If lines(7).StartsWith("  contrast: ") Then
-            lines(7) = txtContrast.Text
-        End If
-        If lines(8).StartsWith("  hue: ") Then
-            lines(8) = txtHue.Text
-        End If
-        If lines(9).StartsWith("  saturation:") Then
-            lines(9) = txtSaturation.Text
-        End If
-        If lines(10).StartsWith("  luminance: ") Then
-            lines(10) = txtLuminance.Text
-        End If
-        If lines(23).StartsWith("  bitrate: ") Then
-            lines(23) = txtBitrate.Text
-        End If
-        If lines(24).StartsWith("  codec: ") Then
-            lines(24) = txtEncode.Text
-        End If
-        If lines(27).StartsWith("  size: ") Then
-            lines(27) = txtResolution.Text
-        End If
-        If lines(28).StartsWith("  fps: ") Then
-            lines(28) = txtFPS.Text
-        End If
-        If lines(59).StartsWith("  sensorConfig: ") Then
-            lines(59) = txtSensor.Text
-        End If
-        If lines(60).StartsWith("  exposure: ") Then
-            lines(60) = txtExposure.Text
-        End If
-        IO.File.WriteAllLines(CamfilePath, lines)
     End Sub
 
     Private Sub btnRead_Click(sender As Object, e As EventArgs) Handles btnRead.Click
@@ -161,28 +185,39 @@ Public Class Configurator
             MsgBox("File " + wfbconf + " not found!")
             Return
         End If
-
-        Dim telemetry = "telemetry.conf"
-        If Not System.IO.File.Exists(telemetry) Then
-            MsgBox("File " + telemetry + " not found!")
-            Return
-        End If
-
         Dim WFBreader As New IO.StreamReader(wfbconf)
-        Dim TLMreader As New IO.StreamReader(telemetry)
         Dim WFBallLines = New List(Of String)
-        Dim TLMallLines = New List(Of String)
+
         Do While Not WFBreader.EndOfStream
             WFBallLines.Add(WFBreader.ReadLine)
         Loop
         WFBreader.Close()
-        If isVRX.Checked Then
+
+        Dim wfbng = "wifibroadcast.cfg"
+        If Not System.IO.File.Exists(wfbng) Then
+            MsgBox("File " + wfbng + " not found!")
+            Return
+        End If
+        Dim WFBngreader As New IO.StreamReader(wfbng)
+        Dim WFBngallLines = New List(Of String)
+
+        Do While Not WFBngreader.EndOfStream
+            WFBngallLines.Add(WFBngreader.ReadLine)
+        Loop
+        WFBngreader.Close()
+
+        If rBtnNVR.Checked Then
             txtFrequency.Text = ReadLine(7, WFBallLines)
             txtPower.Text = ReadLine(10, WFBallLines)
             txtFreq24.Text = ReadLine(8, WFBallLines)
             txtPower24.Text = ReadLine(9, WFBallLines)
             txtMCS.Text = ReadLine(14, WFBallLines)
             txtSTBC.Text = ReadLine(15, WFBallLines)
+        ElseIf rBtnRadxaZero3w.Checked Then
+            txtFrequency.Text = ReadLine(2, WFBngallLines)
+            txtPower.Text = ReadLine(6, WFBallLines)
+            txtMCS.Text = ReadLine(8, WFBngallLines)
+            txtSTBC.Text = ReadLine(12, WFBngallLines)
         Else
             txtFrequency.Text = ReadLine(7, WFBallLines)
             txtPower.Text = ReadLine(10, WFBallLines)
@@ -195,58 +230,82 @@ Public Class Configurator
             txtFECN.Text = ReadLine(21, WFBallLines)
         End If
 
-        Do While Not TLMreader.EndOfStream
-            TLMallLines.Add(TLMreader.ReadLine)
-        Loop
-        TLMreader.Close()
-        txtSerial.Text = ReadLine(4, TLMallLines)
-        txtBaud.Text = ReadLine(5, TLMallLines)
-        txtRouter.Text = ReadLine(8, TLMallLines)
-        txtMCSTLM.Text = ReadLine(14, TLMallLines)
-
-        If isVRX.Checked Then
-            Dim vdec = "vdec.conf"
-            If Not System.IO.File.Exists(vdec) Then
-                MsgBox("File " + vdec + " not found!")
+        If rBtnNVR.Checked Or rBtnCam.Checked Then
+            Dim telemetry = "telemetry.conf"
+            If Not System.IO.File.Exists(telemetry) Then
+                MsgBox("File " + telemetry + " not found!")
                 Return
             End If
-            Dim VDECreader As New IO.StreamReader(vdec)
-            Dim VDECallLines = New List(Of String)
+            Dim TLMreader As New IO.StreamReader(telemetry)
+            Dim TLMallLines = New List(Of String)
 
-            Do While Not VDECreader.EndOfStream
-                VDECallLines.Add(VDECreader.ReadLine)
+            Do While Not TLMreader.EndOfStream
+                TLMallLines.Add(TLMreader.ReadLine)
             Loop
-            VDECreader.Close()
-            txtResolutionVRX.Text = ReadLine(22, VDECallLines)
-            txtCodecVRX.Text = ReadLine(7, VDECallLines)
-            txtFormat.Text = ReadLine(11, VDECallLines)
-            txtPortVRX.Text = ReadLine(3, VDECallLines)
-            txtMavlinkVRX.Text = ReadLine(26, VDECallLines)
-            txtOSD.Text = ReadLine(30, VDECallLines)
-            txtExtras.Text = ReadLine(52, VDECallLines)
+            TLMreader.Close()
+            txtSerial.Text = ReadLine(4, TLMallLines)
+            txtBaud.Text = ReadLine(5, TLMallLines)
+            txtRouter.Text = ReadLine(8, TLMallLines)
+            txtMCSTLM.Text = ReadLine(14, TLMallLines)
+            If rBtnNVR.Checked Then
+                Dim vdec = "vdec.conf"
+                If Not System.IO.File.Exists(vdec) Then
+                    MsgBox("File " + vdec + " not found!")
+                    Return
+                End If
+                Dim VDECreader As New IO.StreamReader(vdec)
+                Dim VDECallLines = New List(Of String)
+
+                Do While Not VDECreader.EndOfStream
+                    VDECallLines.Add(VDECreader.ReadLine)
+                Loop
+                VDECreader.Close()
+                txtResolutionVRX.Text = ReadLine(22, VDECallLines)
+                txtCodecVRX.Text = ReadLine(7, VDECallLines)
+                txtFormat.Text = ReadLine(11, VDECallLines)
+                txtPortVRX.Text = ReadLine(3, VDECallLines)
+                txtMavlinkVRX.Text = ReadLine(26, VDECallLines)
+                txtOSD.Text = ReadLine(30, VDECallLines)
+                txtExtras.Text = ReadLine(52, VDECallLines)
+            Else
+                Dim majestic = "majestic.yaml"
+                If Not System.IO.File.Exists(majestic) Then
+                    MsgBox("File " + majestic + " not found!")
+                    Return
+                End If
+                Dim Camreader As New IO.StreamReader(majestic)
+                Dim CamallLines = New List(Of String)
+
+                Do While Not Camreader.EndOfStream
+                    CamallLines.Add(Camreader.ReadLine)
+                Loop
+                Camreader.Close()
+                txtResolution.Text = ReadLine(28, CamallLines)
+                txtFPS.Text = ReadLine(29, CamallLines)
+                txtEncode.Text = ReadLine(25, CamallLines)
+                txtBitrate.Text = ReadLine(24, CamallLines)
+                txtExposure.Text = ReadLine(61, CamallLines)
+                txtContrast.Text = ReadLine(8, CamallLines)
+                txtHue.Text = ReadLine(9, CamallLines)
+                txtSaturation.Text = ReadLine(10, CamallLines)
+                txtLuminance.Text = ReadLine(11, CamallLines)
+                txtSensor.Text = ReadLine(60, CamallLines)
+            End If
         Else
-            Dim majestic = "majestic.yaml"
-            If Not System.IO.File.Exists(majestic) Then
-                MsgBox("File " + majestic + " not found!")
+            Dim setdisplay = "setdisplay.sh"
+            If Not System.IO.File.Exists(setdisplay) Then
+                MsgBox("File " + setdisplay + " not found!")
                 Return
             End If
-            Dim Camreader As New IO.StreamReader(majestic)
-            Dim CamallLines = New List(Of String)
+            Dim DisplayReader As New IO.StreamReader(setdisplay)
+            Dim DisplayReaderallLines = New List(Of String)
 
-            Do While Not Camreader.EndOfStream
-                CamallLines.Add(Camreader.ReadLine)
+            Do While Not DisplayReader.EndOfStream
+                DisplayReaderallLines.Add(DisplayReader.ReadLine)
             Loop
-            Camreader.Close()
-            txtResolution.Text = ReadLine(28, CamallLines)
-            txtFPS.Text = ReadLine(29, CamallLines)
-            txtEncode.Text = ReadLine(25, CamallLines)
-            txtBitrate.Text = ReadLine(24, CamallLines)
-            txtExposure.Text = ReadLine(61, CamallLines)
-            txtContrast.Text = ReadLine(8, CamallLines)
-            txtHue.Text = ReadLine(9, CamallLines)
-            txtSaturation.Text = ReadLine(10, CamallLines)
-            txtLuminance.Text = ReadLine(11, CamallLines)
-            txtSensor.Text = ReadLine(60, CamallLines)
+            DisplayReader.Close()
+            txtResolutionVRX.Text = ReadLine(6, DisplayReaderallLines)
+            txtCodecVRX.Text = ReadLine(7, DisplayReaderallLines)
         End If
     End Sub
 
@@ -387,12 +446,12 @@ Public Class Configurator
         cmbOSD.Items.Clear()
         cmbOSD.Items.Add("simple")
         cmbOSD.Items.Add("none")
-        cmbOSD.Text = "Select Resolution"
+        cmbOSD.Text = "Select OSD"
 
         cmbFormat.Items.Clear()
         cmbFormat.Items.Add("frame")
         cmbFormat.Items.Add("stream")
-        cmbFormat.Text = "Select Resolution"
+        cmbFormat.Text = "Select Format"
 
         cmbResolutionVRX.Items.Clear()
         cmbResolutionVRX.Items.Add("720p60")
@@ -551,12 +610,20 @@ Public Class Configurator
     Private Sub ComboBox1_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox1.SelectedIndexChanged
         Dim sInput = ComboBox1.SelectedItem.ToString
         Dim last4Letter = sInput.Substring(sInput.Length - 4).Replace("]", "").Replace("[", "")
-        txtFrequency.Text = "channel=" & last4Letter
-        txtFreq24.Text = "frequency="
+        If rBtnRadxaZero3w.Checked Then
+            txtFrequency.Text = "wifi_channel = " & last4Letter
+        Else
+            txtFrequency.Text = "channel=" & last4Letter
+            txtFreq24.Text = "frequency="
+        End If
     End Sub
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
-        txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
+        If rBtnRadxaZero3w.Checked Then
+            txtPower.Text = "rtw_tx_pwr_idx_override=" & ComboBox2.SelectedItem.ToString
+        Else
+            txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub ComboBox3_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox3.SelectedIndexChanged
@@ -642,7 +709,11 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "rb " + String.Format("{0}", txtIP.Text)
+                If rBtnRadxaZero3w.Checked Then
+                    .StartInfo.Arguments = "rbwfbng " + String.Format("{0}", txtIP.Text)
+                Else
+                    .StartInfo.Arguments = "rb " + String.Format("{0}", txtIP.Text)
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -688,27 +759,29 @@ Public Class Configurator
     End Sub
 
     Private Sub txtSaveTLM_Click(sender As Object, e As EventArgs) Handles txtSaveTLM.Click
-        Dim telemetry = "telemetry.conf"
-        If Not System.IO.File.Exists(telemetry) Then
-            MsgBox("File " + telemetry + " not found!")
-            Return
-        End If
+        If txtSerial.Text <> "" Then
+            Dim telemetry = "telemetry.conf"
+            If Not System.IO.File.Exists(telemetry) Then
+                MsgBox("File " + telemetry + " not found!")
+                Return
+            End If
 
-        Dim TLMfilePath As String = telemetry
-        Dim lines = IO.File.ReadAllLines(TLMfilePath)
-        If lines(3).StartsWith("serial=") Then
-            lines(3) = txtSerial.Text
+            Dim TLMfilePath As String = telemetry
+            Dim lines = IO.File.ReadAllLines(TLMfilePath)
+            If lines(3).StartsWith("serial=") Then
+                lines(3) = txtSerial.Text
+            End If
+            If lines(4).StartsWith("baud=") Then
+                lines(4) = txtBaud.Text
+            End If
+            If lines(7).StartsWith("router=") Then
+                lines(7) = txtRouter.Text
+            End If
+            If lines(13).StartsWith("mcs_index=") Then
+                lines(13) = txtMCSTLM.Text
+            End If
+            IO.File.WriteAllLines(TLMfilePath, lines)
         End If
-        If lines(4).StartsWith("baud=") Then
-            lines(4) = txtBaud.Text
-        End If
-        If lines(7).StartsWith("router=") Then
-            lines(7) = txtRouter.Text
-        End If
-        If lines(13).StartsWith("mcs_index=") Then
-            lines(13) = txtMCSTLM.Text
-        End If
-        IO.File.WriteAllLines(TLMfilePath, lines)
     End Sub
 
     Private Sub btnUART2OFF_Click(sender As Object, e As EventArgs)
@@ -731,71 +804,73 @@ Public Class Configurator
         End If
     End Sub
 
-    Private Sub isVRX_CheckedChanged(sender As Object, e As EventArgs) Handles isVRX.CheckedChanged
-        If isVRX.Checked Then
-            ComboBox5.Visible = False
-            ComboBox6.Visible = False
-            ComboBox7.Visible = False
-            ComboBox8.Visible = False
-            ComboBox9.Visible = False
-            txtLDPC.Visible = False
-            txtFECK.Visible = False
-            txtFECN.Visible = False
-            txtMCS.ReadOnly = False
-            txtSTBC.ReadOnly = False
-        Else
-            ComboBox5.Visible = True
-            ComboBox6.Visible = True
-            ComboBox7.Visible = True
-            ComboBox8.Visible = True
-            ComboBox9.Visible = True
-            txtLDPC.Visible = True
-            txtFECK.Visible = True
-            txtFECN.Visible = True
-            txtMCS.ReadOnly = True
-            txtSTBC.ReadOnly = True
-        End If
-    End Sub
-
     Private Sub txtSaveVRX_Click(sender As Object, e As EventArgs) Handles txtSaveVRX.Click
-        Dim vdec = "vdec.conf"
-        If Not System.IO.File.Exists(vdec) Then
-            MsgBox("File " + vdec + " not found!")
-            Return
-        End If
+        If txtResolutionVRX.Text <> "" Then
+            If rBtnRadxaZero3w.Checked Then
+                Dim setdisplay = "setdisplay.sh"
+                If Not System.IO.File.Exists(setdisplay) Then
+                    MsgBox("File " + setdisplay + " not found!")
+                    Return
+                End If
 
-        Dim VDECfilePath As String = vdec
-        Dim lines = IO.File.ReadAllLines(VDECfilePath)
-        If lines(21).StartsWith("mode=") Then
-            lines(21) = txtResolutionVRX.Text
+                Dim setdisplayfilePath As String = setdisplay
+                Dim lines = IO.File.ReadAllLines(setdisplayfilePath)
+                If lines(5).StartsWith("MODE=") Then
+                    lines(5) = txtResolutionVRX.Text
+                End If
+                If lines(6).StartsWith("RATE=") Then
+                    lines(6) = txtCodecVRX.Text
+                End If
+                IO.File.WriteAllLines(setdisplayfilePath, lines)
+            Else
+                Dim vdec = "vdec.conf"
+                If Not System.IO.File.Exists(vdec) Then
+                    MsgBox("File " + vdec + " not found!")
+                    Return
+                End If
+
+                Dim VDECfilePath As String = vdec
+                Dim lines = IO.File.ReadAllLines(VDECfilePath)
+                If lines(21).StartsWith("mode=") Then
+                    lines(21) = txtResolutionVRX.Text
+                End If
+                If lines(6).StartsWith("codec=") Then
+                    lines(6) = txtCodecVRX.Text
+                End If
+                If lines(10).StartsWith("format=") Then
+                    lines(10) = txtFormat.Text
+                End If
+                If lines(2).StartsWith("port=") Then
+                    lines(2) = txtPortVRX.Text
+                End If
+                If lines(25).StartsWith("mavlink_port=") Then
+                    lines(25) = txtMavlinkVRX.Text
+                End If
+                If lines(29).StartsWith("osd=") Then
+                    lines(29) = txtOSD.Text
+                End If
+                If lines(51).StartsWith("extra=") Then
+                    lines(51) = txtExtras.Text
+                End If
+                IO.File.WriteAllLines(VDECfilePath, lines)
+            End If
         End If
-        If lines(6).StartsWith("codec=") Then
-            lines(6) = txtCodecVRX.Text
-        End If
-        If lines(10).StartsWith("format=") Then
-            lines(10) = txtFormat.Text
-        End If
-        If lines(2).StartsWith("port=") Then
-            lines(2) = txtPortVRX.Text
-        End If
-        If lines(25).StartsWith("mavlink_port=") Then
-            lines(25) = txtMavlinkVRX.Text
-        End If
-        If lines(29).StartsWith("osd=") Then
-            lines(29) = txtOSD.Text
-        End If
-        If lines(51).StartsWith("extra=") Then
-            lines(51) = txtExtras.Text
-        End If
-        IO.File.WriteAllLines(VDECfilePath, lines)
     End Sub
 
     Private Sub cmbResolutionVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolutionVRX.SelectedIndexChanged
-        txtResolutionVRX.Text = "mode=" & cmbResolutionVRX.SelectedItem.ToString
+        If rBtnRadxaZero3w.Checked Then
+            txtResolutionVRX.Text = "MODE=" & cmbResolutionVRX.SelectedItem.ToString
+        Else
+            txtResolutionVRX.Text = "mode=" & cmbResolutionVRX.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub cmbCodecVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCodecVRX.SelectedIndexChanged
-        txtCodecVRX.Text = "codec=" & cmbCodecVRX.SelectedItem.ToString
+        If rBtnRadxaZero3w.Checked Then
+            txtCodecVRX.Text = "RATE=" & cmbCodecVRX.SelectedItem.ToString
+        Else
+            txtCodecVRX.Text = "codec=" & cmbCodecVRX.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub cmbOSD_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbOSD.SelectedIndexChanged
@@ -924,5 +999,239 @@ Public Class Configurator
         Else
             MsgBox("Please enter a valid IP address")
         End If
+    End Sub
+
+    Private Sub rBtnNVR_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnNVR.CheckedChanged
+        btnRestartWFB.Visible = True
+        btnRestartMajestic.Visible = False
+        txtSaveCam.Visible = False
+        txtSaveTLM.Visible = True
+        ComboBox3.Visible = True
+        ComboBox4.Visible = True
+        ComboBox5.Visible = False
+        ComboBox6.Visible = False
+        ComboBox7.Visible = False
+        ComboBox8.Visible = False
+        ComboBox9.Visible = False
+        cmbOSD.Visible = True
+        cmbFormat.Visible = True
+        txtLDPC.Visible = False
+        txtFECK.Visible = False
+        txtFECN.Visible = False
+        txtOSD.Visible = True
+        txtFormat.Visible = True
+        txtFreq24.Visible = True
+        txtPower24.Visible = True
+        txtPortVRX.Visible = True
+        txtMavlinkVRX.Visible = True
+        txtExtras.Visible = True
+        Label2.Visible = True
+        txtMCS.ReadOnly = False
+        txtSTBC.ReadOnly = False
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.Add("5180 MHz [36]")
+        ComboBox1.Items.Add("5200 MHz [40]")
+        ComboBox1.Items.Add("5220 MHz [44]")
+        ComboBox1.Items.Add("5240 MHz [48]")
+        ComboBox1.Items.Add("5260 MHz [52]")
+        ComboBox1.Items.Add("5280 MHz [56]")
+        ComboBox1.Items.Add("5300 MHz [60]")
+        ComboBox1.Items.Add("5320 MHz [64]")
+        ComboBox1.Items.Add("5500 MHz [100]")
+        ComboBox1.Items.Add("5520 MHz [104]")
+        ComboBox1.Items.Add("5540 MHz [108]")
+        ComboBox1.Items.Add("5560 MHz [112]")
+        ComboBox1.Items.Add("5580 MHz [116]")
+        ComboBox1.Items.Add("5600 MHz [120]")
+        ComboBox1.Items.Add("5620 MHz [124]")
+        ComboBox1.Items.Add("5640 MHz [128]")
+        ComboBox1.Items.Add("5660 MHz [132]")
+        ComboBox1.Items.Add("5680 MHz [136]")
+        ComboBox1.Items.Add("5700 MHz [140]")
+        ComboBox1.Items.Add("5720 MHz [144]")
+        ComboBox1.Items.Add("5745 MHz [149]")
+        ComboBox1.Items.Add("5765 MHz [153]")
+        ComboBox1.Items.Add("5785 MHz [157]")
+        ComboBox1.Items.Add("5805 MHz [161]")
+        ComboBox1.Items.Add("5825 MHz [165]")
+        ComboBox1.Items.Add("5845 MHz [169]")
+        ComboBox1.Items.Add("5865 MHz [173]")
+        ComboBox1.Items.Add("5885 MHz [177]")
+        ComboBox1.Text = "Select 5.8GHz Frequency"
+        cmbResolutionVRX.Items.Clear()
+        cmbResolutionVRX.Items.Add("720p60")
+        cmbResolutionVRX.Items.Add("1080p60")
+        cmbResolutionVRX.Items.Add("1024x768x60")
+        cmbResolutionVRX.Items.Add("1366x768x60")
+        cmbResolutionVRX.Items.Add("1280x1024x60")
+        cmbResolutionVRX.Items.Add("1600x1200x60")
+        cmbResolutionVRX.Items.Add("2560x1440x30")
+        cmbResolutionVRX.Text = "Select Resolution"
+        cmbCodecVRX.Items.Clear()
+        cmbCodecVRX.Items.Add("h264")
+        cmbCodecVRX.Items.Add("h265")
+        cmbCodecVRX.Text = "Select Codec"
+        txtPassword.Text = "12345"
+    End Sub
+
+    Private Sub rBtnCam_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnCam.CheckedChanged
+        btnRestartWFB.Visible = True
+        btnRestartMajestic.Visible = True
+        txtSaveCam.Visible = True
+        txtSaveTLM.Visible = True
+        ComboBox3.Visible = True
+        ComboBox4.Visible = True
+        ComboBox5.Visible = True
+        ComboBox6.Visible = True
+        ComboBox7.Visible = True
+        ComboBox8.Visible = True
+        ComboBox9.Visible = True
+        cmbOSD.Visible = True
+        cmbFormat.Visible = True
+        txtLDPC.Visible = True
+        txtFECK.Visible = True
+        txtFECN.Visible = True
+        txtOSD.Visible = True
+        txtFormat.Visible = True
+        txtFreq24.Visible = True
+        txtPower24.Visible = True
+        txtPortVRX.Visible = True
+        txtMavlinkVRX.Visible = True
+        txtExtras.Visible = True
+        Label2.Visible = True
+        txtMCS.ReadOnly = True
+        txtSTBC.ReadOnly = True
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.Add("5180 MHz [36]")
+        ComboBox1.Items.Add("5200 MHz [40]")
+        ComboBox1.Items.Add("5220 MHz [44]")
+        ComboBox1.Items.Add("5240 MHz [48]")
+        ComboBox1.Items.Add("5260 MHz [52]")
+        ComboBox1.Items.Add("5280 MHz [56]")
+        ComboBox1.Items.Add("5300 MHz [60]")
+        ComboBox1.Items.Add("5320 MHz [64]")
+        ComboBox1.Items.Add("5500 MHz [100]")
+        ComboBox1.Items.Add("5520 MHz [104]")
+        ComboBox1.Items.Add("5540 MHz [108]")
+        ComboBox1.Items.Add("5560 MHz [112]")
+        ComboBox1.Items.Add("5580 MHz [116]")
+        ComboBox1.Items.Add("5600 MHz [120]")
+        ComboBox1.Items.Add("5620 MHz [124]")
+        ComboBox1.Items.Add("5640 MHz [128]")
+        ComboBox1.Items.Add("5660 MHz [132]")
+        ComboBox1.Items.Add("5680 MHz [136]")
+        ComboBox1.Items.Add("5700 MHz [140]")
+        ComboBox1.Items.Add("5720 MHz [144]")
+        ComboBox1.Items.Add("5745 MHz [149]")
+        ComboBox1.Items.Add("5765 MHz [153]")
+        ComboBox1.Items.Add("5785 MHz [157]")
+        ComboBox1.Items.Add("5805 MHz [161]")
+        ComboBox1.Items.Add("5825 MHz [165]")
+        ComboBox1.Items.Add("5845 MHz [169]")
+        ComboBox1.Items.Add("5865 MHz [173]")
+        ComboBox1.Items.Add("5885 MHz [177]")
+        ComboBox1.Text = "Select 5.8GHz Frequency"
+        cmbResolutionVRX.Items.Clear()
+        cmbResolutionVRX.Items.Add("720p60")
+        cmbResolutionVRX.Items.Add("1080p60")
+        cmbResolutionVRX.Items.Add("1024x768x60")
+        cmbResolutionVRX.Items.Add("1366x768x60")
+        cmbResolutionVRX.Items.Add("1280x1024x60")
+        cmbResolutionVRX.Items.Add("1600x1200x60")
+        cmbResolutionVRX.Items.Add("2560x1440x30")
+        cmbResolutionVRX.Text = "Select Resolution"
+        cmbCodecVRX.Items.Clear()
+        cmbCodecVRX.Items.Add("h264")
+        cmbCodecVRX.Items.Add("h265")
+        cmbCodecVRX.Text = "Select Codec"
+        txtPassword.Text = "12345"
+    End Sub
+
+    Private Sub rBtnRadxaZero3w_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnRadxaZero3w.CheckedChanged
+        btnRestartWFB.Visible = False
+        btnRestartMajestic.Visible = False
+        txtSaveCam.Visible = False
+        txtSaveTLM.Visible = False
+        ComboBox3.Visible = False
+        ComboBox4.Visible = False
+        ComboBox5.Visible = False
+        ComboBox6.Visible = False
+        ComboBox7.Visible = False
+        ComboBox8.Visible = False
+        ComboBox9.Visible = False
+        cmbOSD.Visible = False
+        cmbFormat.Visible = False
+        txtLDPC.Visible = False
+        txtFECK.Visible = False
+        txtFECN.Visible = False
+        txtOSD.Visible = False
+        txtFormat.Visible = False
+        txtFreq24.Visible = False
+        txtPower24.Visible = False
+        txtPortVRX.Visible = False
+        txtMavlinkVRX.Visible = False
+        txtExtras.Visible = False
+        Label2.Visible = False
+        txtMCS.ReadOnly = False
+        txtSTBC.ReadOnly = False
+        ComboBox1.Items.Clear()
+        ComboBox1.Items.Add("2412 MHz [1]")
+        ComboBox1.Items.Add("2417 MHz [2]")
+        ComboBox1.Items.Add("2422 MHz [3]")
+        ComboBox1.Items.Add("2427 MHz [4]")
+        ComboBox1.Items.Add("2432 MHz [5]")
+        ComboBox1.Items.Add("2437 MHz [6]")
+        ComboBox1.Items.Add("2442 MHz [7]")
+        ComboBox1.Items.Add("2447 MHz [8]")
+        ComboBox1.Items.Add("2452 MHz [9]")
+        ComboBox1.Items.Add("2457 MHz [10]")
+        ComboBox1.Items.Add("2462 MHz [11]")
+        ComboBox1.Items.Add("2467 MHz [12]")
+        ComboBox1.Items.Add("2472 MHz [13]")
+        ComboBox1.Items.Add("2484 MHz [14]")
+        ComboBox1.Items.Add("5180 MHz [36]")
+        ComboBox1.Items.Add("5200 MHz [40]")
+        ComboBox1.Items.Add("5220 MHz [44]")
+        ComboBox1.Items.Add("5240 MHz [48]")
+        ComboBox1.Items.Add("5260 MHz [52]")
+        ComboBox1.Items.Add("5280 MHz [56]")
+        ComboBox1.Items.Add("5300 MHz [60]")
+        ComboBox1.Items.Add("5320 MHz [64]")
+        ComboBox1.Items.Add("5500 MHz [100]")
+        ComboBox1.Items.Add("5520 MHz [104]")
+        ComboBox1.Items.Add("5540 MHz [108]")
+        ComboBox1.Items.Add("5560 MHz [112]")
+        ComboBox1.Items.Add("5580 MHz [116]")
+        ComboBox1.Items.Add("5600 MHz [120]")
+        ComboBox1.Items.Add("5620 MHz [124]")
+        ComboBox1.Items.Add("5640 MHz [128]")
+        ComboBox1.Items.Add("5660 MHz [132]")
+        ComboBox1.Items.Add("5680 MHz [136]")
+        ComboBox1.Items.Add("5700 MHz [140]")
+        ComboBox1.Items.Add("5720 MHz [144]")
+        ComboBox1.Items.Add("5745 MHz [149]")
+        ComboBox1.Items.Add("5765 MHz [153]")
+        ComboBox1.Items.Add("5785 MHz [157]")
+        ComboBox1.Items.Add("5805 MHz [161]")
+        ComboBox1.Items.Add("5825 MHz [165]")
+        ComboBox1.Items.Add("5845 MHz [169]")
+        ComboBox1.Items.Add("5865 MHz [173]")
+        ComboBox1.Items.Add("5885 MHz [177]")
+        ComboBox1.Text = "Select 5.8GHz Frequency"
+        cmbResolutionVRX.Items.Clear()
+        cmbResolutionVRX.Items.Add("1280x720")
+        cmbResolutionVRX.Items.Add("1920x1080")
+        cmbResolutionVRX.Text = "Select Resolution"
+        cmbCodecVRX.Items.Clear()
+        cmbCodecVRX.Items.Add("20")
+        cmbCodecVRX.Items.Add("30")
+        cmbCodecVRX.Items.Add("50")
+        cmbCodecVRX.Items.Add("60")
+        cmbCodecVRX.Items.Add("90")
+        cmbCodecVRX.Items.Add("100")
+        cmbCodecVRX.Items.Add("110")
+        cmbCodecVRX.Items.Add("120")
+        cmbCodecVRX.Text = "Select FPS"
+        txtPassword.Text = "root"
     End Sub
 End Class
