@@ -19,4 +19,4 @@ Then click Save.
 
 Then click Upload to send the settings to the camera/NVR/Radxa Zero 3w.
 
-https://github.com/OpenIPC/configurator/blob/master/configurator.png
+![alt text](https://github.com/OpenIPC/configurator/blob/master/configurator.png)
