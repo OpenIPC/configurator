@@ -67,7 +67,7 @@ Public Class Configurator
                 MsgBox("File " + wfbconf + " not found!")
                 Return
             End If
-            Dim x, y As Integer
+            Dim x As Integer
             Dim WFBfilePath = wfbconf
             Dim lines = IO.File.ReadAllLines(WFBfilePath)
             For x = 0 To lines.Count() - 1
@@ -80,18 +80,15 @@ Public Class Configurator
 
                     Dim wfbngfilePath = wfbng
                     Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
-
-                    For y = 0 To WFBlines.Count() - 1
-                        If WFBlines(y).StartsWith("wifi_channel = ") Then
-                            WFBlines(y) = txtFrequency.Text
-                        End If
-                        If WFBlines(y).StartsWith("peer = 'connect://") Then
-                            WFBlines(y) = txtMCS.Text
-                        End If
-                        If WFBlines(y).StartsWith("peer = 'connect://") Then
-                            WFBlines(y) = txtSTBC.Text
-                        End If
-                    Next
+                    If WFBlines(1).StartsWith("wifi_channel = ") Then
+                        WFBlines(1) = txtFrequency.Text
+                    End If
+                    If WFBlines(7).StartsWith("peer = 'connect://") Then
+                        WFBlines(7) = txtMCS.Text
+                    End If
+                    If WFBlines(11).StartsWith("peer = 'connect://") Then
+                        WFBlines(11) = txtSTBC.Text
+                    End If
                     IO.File.WriteAllLines(wfbngfilePath, WFBlines)
                     If lines(x).StartsWith("rtw_tx_pwr_idx_override=") Then
                         lines(x) = txtPower.Text
