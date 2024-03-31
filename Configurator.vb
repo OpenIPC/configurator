@@ -57,7 +57,10 @@ Public Class Configurator
     End Sub
 
     Public Function ReadLine(lineNumber As Integer, lines As List(Of String)) As String
+        On Error GoTo err1
         Return lines(lineNumber - 1)
+        Exit Function
+err1:
     End Function
 
     Private Sub txtSaveFreq_Click(sender As Object, e As EventArgs) Handles txtSaveFreq.Click
@@ -284,16 +287,18 @@ Public Class Configurator
                     CamallLines.Add(Camreader.ReadLine)
                 Loop
                 Camreader.Close()
-                txtResolution.Text = ReadLine(28, CamallLines)
-                txtFPS.Text = ReadLine(29, CamallLines)
-                txtEncode.Text = ReadLine(25, CamallLines)
-                txtBitrate.Text = ReadLine(24, CamallLines)
-                txtExposure.Text = ReadLine(61, CamallLines)
-                txtContrast.Text = ReadLine(8, CamallLines)
-                txtHue.Text = ReadLine(9, CamallLines)
-                txtSaturation.Text = ReadLine(10, CamallLines)
-                txtLuminance.Text = ReadLine(11, CamallLines)
-                txtSensor.Text = ReadLine(60, CamallLines)
+                For x = 0 To CamallLines.Count() - 1
+                    If CamallLines(x).StartsWith("  size:") And txtResolution.Text = "" Then txtResolution.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  fps:") And txtFPS.Text = "" Then txtFPS.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  codec:") Then txtEncode.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  bitrate:") Then txtBitrate.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  exposure:") Then txtExposure.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  contrast:") Then txtContrast.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  hue:") Then txtHue.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  saturation:") Then txtSaturation.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  luminance:") Then txtLuminance.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  sensorConfig:") Then txtSensor.Text = ReadLine(x + 1, CamallLines)
+                Next
             End If
         Else
             Dim setdisplay = "setdisplay.sh"
