@@ -43,10 +43,6 @@ if "%1" == "rb" (
 	plink -ssh root@%2 -pw %3 reboot
 )
 
-if "%1" == "rbwfbng" (
-	plink -ssh root@%2 -pw %3 sudo reboot
-)
-
 if "%1" == "sysup" (
 	plink -ssh root@%2 -pw %3 sysupgrade -k -r -n
 )

@@ -23,6 +23,7 @@ Partial Class Configurator
     <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Configurator))
         btnGet = New Button()
         txtIP = New TextBox()
         btnSend = New Button()
@@ -97,6 +98,7 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        Label4 = New Label()
         btnGenerateKeys = New Button()
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
@@ -129,7 +131,7 @@ Partial Class Configurator
         btnGet.Size = New Size(60, 30)
         btnGet.TabIndex = 0
         btnGet.Text = "1. Fetch"
-        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera")
+        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera/VRX")
         btnGet.UseVisualStyleBackColor = False
         ' 
         ' txtIP
@@ -138,9 +140,9 @@ Partial Class Configurator
         txtIP.BorderStyle = BorderStyle.FixedSingle
         txtIP.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtIP.ForeColor = Color.White
-        txtIP.Location = New Point(82, 383)
+        txtIP.Location = New Point(77, 383)
         txtIP.Name = "txtIP"
-        txtIP.Size = New Size(77, 21)
+        txtIP.Size = New Size(99, 21)
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.1"
         btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
@@ -156,7 +158,7 @@ Partial Class Configurator
         btnSend.Size = New Size(72, 30)
         btnSend.TabIndex = 2
         btnSend.Text = "4. Upload"
-        btnToolTip.SetToolTip(btnSend, "Send the local files with the new " & vbCrLf & "settings to the OpenIPC camera")
+        btnToolTip.SetToolTip(btnSend, "Send the local files with the new " & vbCrLf & "settings to the OpenIPC camera/VRX")
         btnSend.UseVisualStyleBackColor = False
         ' 
         ' txtFrequency
@@ -408,10 +410,10 @@ Partial Class Configurator
         TabPage1.Controls.Add(txtFreq24)
         TabPage1.Controls.Add(txtLDPC)
         TabPage1.Controls.Add(txtSTBC)
-        TabPage1.Location = New Point(4, 23)
+        TabPage1.Location = New Point(4, 25)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(482, 340)
+        TabPage1.Size = New Size(482, 338)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
@@ -425,7 +427,7 @@ Partial Class Configurator
         btnRestartWFB.Size = New Size(111, 23)
         btnRestartWFB.TabIndex = 45
         btnRestartWFB.Text = "Restart WFB"
-        btnToolTip.SetToolTip(btnRestartWFB, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
+        btnToolTip.SetToolTip(btnRestartWFB, "Restart the WFB on the OpenIPC camera" & vbCrLf)
         btnRestartWFB.UseVisualStyleBackColor = False
         ' 
         ' ComboBox9
@@ -564,10 +566,10 @@ Partial Class Configurator
         TabPage2.Controls.Add(txtHue)
         TabPage2.Controls.Add(txtExposure)
         TabPage2.Controls.Add(txtContrast)
-        TabPage2.Location = New Point(4, 23)
+        TabPage2.Location = New Point(4, 25)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(482, 340)
+        TabPage2.Size = New Size(482, 338)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
@@ -580,7 +582,7 @@ Partial Class Configurator
         btnRestartMajestic.Size = New Size(111, 23)
         btnRestartMajestic.TabIndex = 44
         btnRestartMajestic.Text = "Restart Majestic"
-        btnToolTip.SetToolTip(btnRestartMajestic, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
+        btnToolTip.SetToolTip(btnRestartMajestic, "Restarts the Majestic on the OpenIPC camera" & vbCrLf)
         btnRestartMajestic.UseVisualStyleBackColor = False
         ' 
         ' cmbLuminance
@@ -708,11 +710,11 @@ Partial Class Configurator
         TabPage3.Controls.Add(txtRouter)
         TabPage3.Controls.Add(txtBaud)
         TabPage3.Controls.Add(txtSerial)
-        TabPage3.Location = New Point(4, 23)
+        TabPage3.Location = New Point(4, 25)
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.RightToLeft = RightToLeft.No
-        TabPage3.Size = New Size(482, 340)
+        TabPage3.Size = New Size(482, 338)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
@@ -725,7 +727,7 @@ Partial Class Configurator
         btnUART2OFF.Size = New Size(117, 30)
         btnUART2OFF.TabIndex = 42
         btnUART2OFF.Text = "Disable UART2"
-        btnToolTip.SetToolTip(btnUART2OFF, "Disable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Serial Selector")
+        btnToolTip.SetToolTip(btnUART2OFF, "Disable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
         btnUART2OFF.UseVisualStyleBackColor = False
         ' 
         ' btnUART2
@@ -737,7 +739,7 @@ Partial Class Configurator
         btnUART2.Size = New Size(117, 30)
         btnUART2.TabIndex = 41
         btnUART2.Text = "Enable UART2"
-        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the" & vbCrLf & "Serial Selector")
+        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
         btnUART2.UseVisualStyleBackColor = False
         ' 
         ' txtSaveTLM
@@ -856,10 +858,10 @@ Partial Class Configurator
         TabPage4.Controls.Add(txtOSD)
         TabPage4.Controls.Add(txtPortVRX)
         TabPage4.Controls.Add(txtExtras)
-        TabPage4.Location = New Point(4, 23)
+        TabPage4.Location = New Point(4, 25)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(482, 340)
+        TabPage4.Size = New Size(482, 338)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
         ' 
@@ -906,7 +908,7 @@ Partial Class Configurator
         txtSaveVRX.Size = New Size(58, 23)
         txtSaveVRX.TabIndex = 53
         txtSaveVRX.Text = "3. Save"
-        btnToolTip.SetToolTip(txtSaveVRX, "Save the WFB settings to the" & vbCrLf & "local wfb.conf file")
+        btnToolTip.SetToolTip(txtSaveVRX, "Save the VRX settings" & vbCrLf & "to the local files setdisplay.sh" & vbCrLf & "and vdec.conf")
         txtSaveVRX.UseVisualStyleBackColor = False
         ' 
         ' cmbOSD
@@ -1008,22 +1010,33 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(Label4)
         TabPage5.Controls.Add(btnGenerateKeys)
         TabPage5.Controls.Add(btnSendKeys)
         TabPage5.Controls.Add(btnReceiveKeys)
         TabPage5.Controls.Add(btnUpdate)
-        TabPage5.Location = New Point(4, 23)
+        TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(482, 340)
+        TabPage5.Size = New Size(482, 338)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
+        ' 
+        ' Label4
+        ' 
+        Label4.AutoSize = True
+        Label4.ForeColor = Color.White
+        Label4.Location = New Point(115, 194)
+        Label4.Name = "Label4"
+        Label4.Size = New Size(244, 126)
+        Label4.TabIndex = 38
+        Label4.Text = resources.GetString("Label4.Text")
         ' 
         ' btnGenerateKeys
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(15, 53)
+        btnGenerateKeys.Location = New Point(238, 109)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(117, 30)
         btnGenerateKeys.TabIndex = 37
@@ -1035,7 +1048,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(15, 126)
+        btnSendKeys.Location = New Point(115, 145)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(117, 30)
         btnSendKeys.TabIndex = 36
@@ -1047,7 +1060,7 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(15, 89)
+        btnReceiveKeys.Location = New Point(238, 145)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(117, 30)
         btnReceiveKeys.TabIndex = 35
@@ -1059,7 +1072,7 @@ Partial Class Configurator
         ' 
         btnUpdate.BackColor = Color.Gold
         btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(15, 17)
+        btnUpdate.Location = New Point(115, 109)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(117, 30)
         btnUpdate.TabIndex = 34
@@ -1078,7 +1091,7 @@ Partial Class Configurator
         btnRead.Size = New Size(60, 30)
         btnRead.TabIndex = 23
         btnRead.Text = "2. Read"
-        btnToolTip.SetToolTip(btnRead, "Read the settings from the local files" & vbCrLf & "that was previously received from the camera")
+        btnToolTip.SetToolTip(btnRead, "Read the settings from the local files" & vbCrLf & "that was previously received from the camera/VRX")
         btnRead.UseVisualStyleBackColor = False
         ' 
         ' Label1
@@ -1103,7 +1116,7 @@ Partial Class Configurator
         btnReboot.Size = New Size(83, 30)
         btnReboot.TabIndex = 25
         btnReboot.Text = "5. Reboot"
-        btnToolTip.SetToolTip(btnReboot, "Reboot the camera")
+        btnToolTip.SetToolTip(btnReboot, "Reboot the camera/VRX")
         btnReboot.UseVisualStyleBackColor = False
         ' 
         ' txtPassword
@@ -1112,9 +1125,9 @@ Partial Class Configurator
         txtPassword.BorderStyle = BorderStyle.FixedSingle
         txtPassword.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtPassword.ForeColor = Color.White
-        txtPassword.Location = New Point(225, 383)
+        txtPassword.Location = New Point(238, 383)
         txtPassword.Name = "txtPassword"
-        txtPassword.Size = New Size(78, 21)
+        txtPassword.Size = New Size(65, 21)
         txtPassword.TabIndex = 31
         txtPassword.Text = "12345"
         btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
@@ -1159,7 +1172,7 @@ Partial Class Configurator
         Label3.AutoSize = True
         Label3.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label3.ForeColor = Color.White
-        Label3.Location = New Point(159, 386)
+        Label3.Location = New Point(175, 386)
         Label3.Name = "Label3"
         Label3.Size = New Size(68, 15)
         Label3.TabIndex = 30
@@ -1181,6 +1194,7 @@ Partial Class Configurator
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(512, 450)
         Controls.Add(txtPassword)
+        Controls.Add(txtIP)
         Controls.Add(Label3)
         Controls.Add(rBtnRadxaZero3w)
         Controls.Add(rBtnNVR)
@@ -1190,7 +1204,6 @@ Partial Class Configurator
         Controls.Add(btnRead)
         Controls.Add(TabControl1)
         Controls.Add(btnSend)
-        Controls.Add(txtIP)
         Controls.Add(btnGet)
         Controls.Add(MenuStrip1)
         FormBorderStyle = FormBorderStyle.FixedSingle
@@ -1209,6 +1222,7 @@ Partial Class Configurator
         TabPage4.ResumeLayout(False)
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
+        TabPage5.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -1301,5 +1315,6 @@ Partial Class Configurator
     Friend WithEvents Label3 As Label
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
+    Friend WithEvents Label4 As Label
 
 End Class
