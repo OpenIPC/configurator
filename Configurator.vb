@@ -6,7 +6,7 @@ Imports System.Reflection
 Public Class Configurator
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
         Dim extern = "extern.bat"
-        If Not System.IO.File.Exists(extern) Then
+        If Not IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -274,6 +274,47 @@ err1:
                 txtMavlinkVRX.Text = ReadLine(26, VDECallLines)
                 txtOSD.Text = ReadLine(30, VDECallLines)
                 txtExtras.Text = ReadLine(52, VDECallLines)
+                Dim line As String = ReadLine(53, VDECallLines)
+                Dim value2 As String = line.Replace("""", "")
+                Dim separators() As String = {"-osd_ele", "x", "y"}
+                Dim result() As String
+                result = value2.Split(separators, StringSplitOptions.RemoveEmptyEntries)
+                ele1.Left = result(2) / 2.5
+                ele1.Top = result(4) / 2.5
+                ele2.Left = result(6) / 2.5
+                ele2.Top = result(8) / 2.5
+                ele3.Left = result(10) / 2.5
+                ele3.Top = result(12) / 2.5
+                ele4.Left = result(14) / 2.5
+                ele4.Top = result(16) / 2.5
+                ele5.Left = result(18) / 2.5
+                ele5.Top = result(20) / 2.5
+                ele6.Left = result(22) / 2.5
+                ele6.Top = result(24) / 2.5
+                ele7.Left = result(26) / 2.5
+                ele7.Top = result(28) / 2.5
+                ele8.Left = result(30) / 2.5
+                ele8.Top = result(32) / 2.5
+                ele9.Left = result(34) / 2.5
+                ele9.Top = result(36) / 2.5
+                ele10.Left = result(38) / 2.5
+                ele10.Top = result(40) / 2.5
+                ele11.Left = result(42) / 2.5
+                ele11.Top = result(44) / 2.5
+                ele12.Left = result(46) / 2.5
+                ele12.Top = result(48) / 2.5
+                ele13.Left = result(50) / 2.5
+                ele13.Top = result(52) / 2.5
+                ele14.Left = result(54) / 2.5
+                ele14.Top = result(56) / 2.5
+                ele15.Left = result(58) / 2.5
+                ele15.Top = result(60) / 2.5
+                ele16.Left = result(62) / 2.5
+                ele16.Top = result(64) / 2.5
+                ele17.Left = result(66) / 2.5
+                ele17.Top = result(68) / 2.5
+                ele18.Left = 128 + (result(70) / 2.5)
+                ele18.Top = 124 + (result(72) / 2.5)
             Else
                 Dim majestic = "majestic.yaml"
                 If Not System.IO.File.Exists(majestic) Then
@@ -802,14 +843,14 @@ err1:
         If txtResolutionVRX.Text <> "" Then
             If rBtnRadxaZero3w.Checked Then
                 Dim setdisplay = "setdisplay.sh"
-                If Not System.IO.File.Exists(setdisplay) Then
+                If Not IO.File.Exists(setdisplay) Then
                     MsgBox("File " + setdisplay + " not found!")
                     Return
                 End If
                 Dim x, y As Integer
-                Dim setdisplayfilePath As String = setdisplay
+                Dim setdisplayfilePath = setdisplay
                 Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
-                For x = 0 To setdisplaylines.Count() - 1
+                For x = 0 To setdisplaylines.Count - 1
                     If setdisplaylines(x).StartsWith("MODE=") Then
                         setdisplaylines(x) = txtResolutionVRX.Text
                     End If
@@ -820,14 +861,14 @@ err1:
                 IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
             Else
                 Dim vdec = "vdec.conf"
-                If Not System.IO.File.Exists(vdec) Then
+                If Not IO.File.Exists(vdec) Then
                     MsgBox("File " + vdec + " not found!")
                     Return
                 End If
 
-                Dim VDECfilePath As String = vdec
+                Dim VDECfilePath = vdec
                 Dim lines = IO.File.ReadAllLines(VDECfilePath)
-                For y = 0 To lines.Count() - 1
+                For y = 0 To lines.Count - 1
                     If lines(y).StartsWith("mode=") Then
                         lines(y) = txtResolutionVRX.Text
                     End If
@@ -1539,6 +1580,129 @@ err1:
         Else
             MsgBox("Please enter a valid IP address")
         End If
+    End Sub
+
+    Private Sub btnLEFT_Click(sender As Object, e As EventArgs) Handles btnLEFT.Click
+        If RadioButton1.Checked Then ele1.Left = ele1.Left - 2
+        If RadioButton2.Checked Then ele2.Left = ele2.Left - 2
+        If RadioButton3.Checked Then ele3.Left = ele3.Left - 2
+        If RadioButton4.Checked Then ele4.Left = ele4.Left - 2
+        If RadioButton5.Checked Then ele5.Left = ele5.Left - 2
+        If RadioButton6.Checked Then ele6.Left = ele6.Left - 2
+        If RadioButton7.Checked Then ele7.Left = ele7.Left - 2
+        If RadioButton8.Checked Then ele8.Left = ele8.Left - 2
+        If RadioButton9.Checked Then ele9.Left = ele9.Left - 2
+        If RadioButton10.Checked Then ele10.Left = ele10.Left - 2
+        If RadioButton11.Checked Then ele11.Left = ele11.Left - 2
+        If RadioButton12.Checked Then ele12.Left = ele12.Left - 2
+        If RadioButton13.Checked Then ele13.Left = ele13.Left - 2
+        If RadioButton14.Checked Then ele14.Left = ele14.Left - 2
+        If RadioButton15.Checked Then ele15.Left = ele15.Left - 2
+        If RadioButton16.Checked Then ele16.Left = ele16.Left - 2
+        If RadioButton17.Checked Then ele17.Left = ele17.Left - 2
+    End Sub
+
+    Private Sub btnRIGHT_Click(sender As Object, e As EventArgs) Handles btnRIGHT.Click
+        If RadioButton1.Checked Then ele1.Left = ele1.Left + 2
+        If RadioButton2.Checked Then ele2.Left = ele2.Left + 2
+        If RadioButton3.Checked Then ele3.Left = ele3.Left + 2
+        If RadioButton4.Checked Then ele4.Left = ele4.Left + 2
+        If RadioButton5.Checked Then ele5.Left = ele5.Left + 2
+        If RadioButton6.Checked Then ele6.Left = ele6.Left + 2
+        If RadioButton7.Checked Then ele7.Left = ele7.Left + 2
+        If RadioButton8.Checked Then ele8.Left = ele8.Left + 2
+        If RadioButton9.Checked Then ele9.Left = ele9.Left + 2
+        If RadioButton10.Checked Then ele10.Left = ele10.Left + 2
+        If RadioButton11.Checked Then ele11.Left = ele11.Left + 2
+        If RadioButton12.Checked Then ele12.Left = ele12.Left + 2
+        If RadioButton13.Checked Then ele13.Left = ele13.Left + 2
+        If RadioButton14.Checked Then ele14.Left = ele14.Left + 2
+        If RadioButton15.Checked Then ele15.Left = ele15.Left + 2
+        If RadioButton16.Checked Then ele16.Left = ele16.Left + 2
+        If RadioButton17.Checked Then ele17.Left = ele17.Left + 2
+    End Sub
+
+    Private Sub btnUP_Click(sender As Object, e As EventArgs) Handles btnUP.Click
+        If RadioButton1.Checked Then ele1.Top = ele1.Top - 2
+        If RadioButton2.Checked Then ele2.Top = ele2.Top - 2
+        If RadioButton3.Checked Then ele3.Top = ele3.Top - 2
+        If RadioButton4.Checked Then ele4.Top = ele4.Top - 2
+        If RadioButton5.Checked Then ele5.Top = ele5.Top - 2
+        If RadioButton6.Checked Then ele6.Top = ele6.Top - 2
+        If RadioButton7.Checked Then ele7.Top = ele7.Top - 2
+        If RadioButton8.Checked Then ele8.Top = ele8.Top - 2
+        If RadioButton9.Checked Then ele9.Top = ele9.Top - 2
+        If RadioButton10.Checked Then ele10.Top = ele10.Top - 2
+        If RadioButton11.Checked Then ele11.Top = ele11.Top - 2
+        If RadioButton12.Checked Then ele12.Top = ele12.Top - 2
+        If RadioButton13.Checked Then ele13.Top = ele13.Top - 2
+        If RadioButton14.Checked Then ele14.Top = ele14.Top - 2
+        If RadioButton15.Checked Then ele15.Top = ele15.Top - 2
+        If RadioButton16.Checked Then ele16.Top = ele16.Top - 2
+        If RadioButton17.Checked Then ele17.Top = ele17.Top - 2
+        If RadioButton18.Checked Then
+            ele18.Left = ele18.Left - 2
+            ele18.Top = ele18.Top - 2
+        End If
+    End Sub
+
+    Private Sub btnDOWN_Click(sender As Object, e As EventArgs) Handles btnDOWN.Click
+        If RadioButton1.Checked Then ele1.Top = ele1.Top + 2
+        If RadioButton2.Checked Then ele2.Top = ele2.Top + 2
+        If RadioButton3.Checked Then ele3.Top = ele3.Top + 2
+        If RadioButton4.Checked Then ele4.Top = ele4.Top + 2
+        If RadioButton5.Checked Then ele5.Top = ele5.Top + 2
+        If RadioButton6.Checked Then ele6.Top = ele6.Top + 2
+        If RadioButton7.Checked Then ele7.Top = ele7.Top + 2
+        If RadioButton8.Checked Then ele8.Top = ele8.Top + 2
+        If RadioButton9.Checked Then ele9.Top = ele9.Top + 2
+        If RadioButton10.Checked Then ele10.Top = ele10.Top + 2
+        If RadioButton11.Checked Then ele11.Top = ele11.Top + 2
+        If RadioButton12.Checked Then ele12.Top = ele12.Top + 2
+        If RadioButton13.Checked Then ele13.Top = ele13.Top + 2
+        If RadioButton14.Checked Then ele14.Top = ele14.Top + 2
+        If RadioButton15.Checked Then ele15.Top = ele15.Top + 2
+        If RadioButton16.Checked Then ele16.Top = ele16.Top + 2
+        If RadioButton17.Checked Then ele17.Top = ele17.Top + 2
+        If RadioButton18.Checked Then
+            ele18.Left = ele18.Left + 2
+            ele18.Top = ele18.Top + 2
+        End If
+    End Sub
+
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim vdec = "vdec.conf"
+        If Not IO.File.Exists(vdec) Then
+            MsgBox("File " + vdec + " not found!")
+            Return
+        End If
+
+        Dim VDECfilePath = vdec
+        Dim lines = IO.File.ReadAllLines(VDECfilePath)
+        For y = 0 To lines.Count - 1
+            If lines(y).StartsWith("osd_elements=") Then
+                lines(y) = "osd_elements=""-osd_ele1x " + CStr(ele1.Left * 2.5) + " -osd_ele1y " + CStr(ele1.Top * 2.5) +
+                                         " -osd_ele2x " + CStr(ele2.Left * 2.5) + " -osd_ele2y " + CStr(ele2.Top * 2.5) +
+                                         " -osd_ele3x " + CStr(ele3.Left * 2.5) + " -osd_ele3y " + CStr(ele3.Top * 2.5) +
+                                         " -osd_ele4x " + CStr(ele4.Left * 2.5) + " -osd_ele4y " + CStr(ele4.Top * 2.5) +
+                                         " -osd_ele5x " + CStr(ele5.Left * 2.5) + " -osd_ele5y " + CStr(ele5.Top * 2.5) +
+                                         " -osd_ele6x " + CStr(ele6.Left * 2.5) + " -osd_ele6y " + CStr(ele6.Top * 2.5) +
+                                         " -osd_ele7x " + CStr(ele7.Left * 2.5) + " -osd_ele7y " + CStr(ele7.Top * 2.5) +
+                                         " -osd_ele8x " + CStr(ele8.Left * 2.5) + " -osd_ele8y " + CStr(ele8.Top * 2.5) +
+                                         " -osd_ele9x " + CStr(ele9.Left * 2.5) + " -osd_ele9y " + CStr(ele9.Top * 2.5) +
+                                         " -osd_ele10x " + CStr(ele10.Left * 2.5) + " -osd_ele10y " + CStr(ele10.Top * 2.5) +
+                                         " -osd_ele11x " + CStr(ele11.Left * 2.5) + " -osd_ele11y " + CStr(ele11.Top * 2.5) +
+                                         " -osd_ele12x " + CStr(ele12.Left * 2.5) + " -osd_ele12y " + CStr(ele12.Top * 2.5) +
+                                         " -osd_ele13x " + CStr(ele13.Left * 2.5) + " -osd_ele13y " + CStr(ele13.Top * 2.5) +
+                                         " -osd_ele14x " + CStr(ele14.Left * 2.5) + " -osd_ele14y " + CStr(ele14.Top * 2.5) +
+                                         " -osd_ele15x " + CStr(ele15.Left * 2.5) + " -osd_ele15y " + CStr(ele15.Top * 2.5) +
+                                         " -osd_ele16x " + CStr(ele16.Left * 2.5) + " -osd_ele16y " + CStr(ele16.Top * 2.5) +
+                                         " -osd_ele17x " + CStr(ele17.Left * 2.5) + " -osd_ele17y " + CStr(ele17.Top * 2.5) +
+                                         " -osd_ele18x " + CStr((ele18.Left - 128) * 2.5) + " -osd_ele18y " + CStr((ele18.Top - 124) * 2.5) + """"
+            End If
+        Next
+        IO.File.WriteAllLines(VDECfilePath, lines)
+        MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
     End Sub
 
 #End Region

@@ -103,6 +103,49 @@ Partial Class Configurator
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         btnUpdate = New Button()
+        TabPage6 = New TabPage()
+        Button1 = New Button()
+        ele18 = New Label()
+        ele17 = New Label()
+        ele14 = New Label()
+        ele16 = New Label()
+        ele15 = New Label()
+        ele13 = New Label()
+        ele12 = New Label()
+        ele11 = New Label()
+        ele10 = New Label()
+        ele9 = New Label()
+        ele8 = New Label()
+        ele7 = New Label()
+        ele6 = New Label()
+        ele5 = New Label()
+        ele4 = New Label()
+        ele3 = New Label()
+        ele2 = New Label()
+        ele1 = New Label()
+        btnRIGHT = New Button()
+        btnLEFT = New Button()
+        btnDOWN = New Button()
+        btnUP = New Button()
+        PictureBox1 = New PictureBox()
+        RadioButton18 = New RadioButton()
+        RadioButton17 = New RadioButton()
+        RadioButton16 = New RadioButton()
+        RadioButton15 = New RadioButton()
+        RadioButton14 = New RadioButton()
+        RadioButton13 = New RadioButton()
+        RadioButton12 = New RadioButton()
+        RadioButton11 = New RadioButton()
+        RadioButton10 = New RadioButton()
+        RadioButton9 = New RadioButton()
+        RadioButton8 = New RadioButton()
+        RadioButton7 = New RadioButton()
+        RadioButton6 = New RadioButton()
+        RadioButton5 = New RadioButton()
+        RadioButton4 = New RadioButton()
+        RadioButton3 = New RadioButton()
+        RadioButton2 = New RadioButton()
+        RadioButton1 = New RadioButton()
         btnRead = New Button()
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
@@ -119,6 +162,8 @@ Partial Class Configurator
         TabPage3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
+        TabPage6.SuspendLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnGet
@@ -377,13 +422,14 @@ Partial Class Configurator
         TabControl1.Controls.Add(TabPage3)
         TabControl1.Controls.Add(TabPage4)
         TabControl1.Controls.Add(TabPage5)
+        TabControl1.Controls.Add(TabPage6)
         TabControl1.DrawMode = TabDrawMode.OwnerDrawFixed
         TabControl1.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         TabControl1.Location = New Point(12, 12)
         TabControl1.Multiline = True
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(490, 367)
+        TabControl1.Size = New Size(637, 370)
         TabControl1.SizeMode = TabSizeMode.Fixed
         TabControl1.TabIndex = 22
         ' 
@@ -413,7 +459,7 @@ Partial Class Configurator
         TabPage1.Location = New Point(4, 25)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(482, 338)
+        TabPage1.Size = New Size(629, 341)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
@@ -569,7 +615,7 @@ Partial Class Configurator
         TabPage2.Location = New Point(4, 25)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(482, 338)
+        TabPage2.Size = New Size(629, 341)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
@@ -714,7 +760,7 @@ Partial Class Configurator
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.RightToLeft = RightToLeft.No
-        TabPage3.Size = New Size(482, 338)
+        TabPage3.Size = New Size(629, 341)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
@@ -861,7 +907,7 @@ Partial Class Configurator
         TabPage4.Location = New Point(4, 25)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(482, 338)
+        TabPage4.Size = New Size(629, 341)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
         ' 
@@ -1018,7 +1064,7 @@ Partial Class Configurator
         TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(482, 338)
+        TabPage5.Size = New Size(629, 341)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
@@ -1080,6 +1126,531 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers")
         btnUpdate.UseVisualStyleBackColor = False
         ' 
+        ' TabPage6
+        ' 
+        TabPage6.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage6.Controls.Add(Button1)
+        TabPage6.Controls.Add(ele18)
+        TabPage6.Controls.Add(ele17)
+        TabPage6.Controls.Add(ele14)
+        TabPage6.Controls.Add(ele16)
+        TabPage6.Controls.Add(ele15)
+        TabPage6.Controls.Add(ele13)
+        TabPage6.Controls.Add(ele12)
+        TabPage6.Controls.Add(ele11)
+        TabPage6.Controls.Add(ele10)
+        TabPage6.Controls.Add(ele9)
+        TabPage6.Controls.Add(ele8)
+        TabPage6.Controls.Add(ele7)
+        TabPage6.Controls.Add(ele6)
+        TabPage6.Controls.Add(ele5)
+        TabPage6.Controls.Add(ele4)
+        TabPage6.Controls.Add(ele3)
+        TabPage6.Controls.Add(ele2)
+        TabPage6.Controls.Add(ele1)
+        TabPage6.Controls.Add(btnRIGHT)
+        TabPage6.Controls.Add(btnLEFT)
+        TabPage6.Controls.Add(btnDOWN)
+        TabPage6.Controls.Add(btnUP)
+        TabPage6.Controls.Add(PictureBox1)
+        TabPage6.Controls.Add(RadioButton18)
+        TabPage6.Controls.Add(RadioButton17)
+        TabPage6.Controls.Add(RadioButton16)
+        TabPage6.Controls.Add(RadioButton15)
+        TabPage6.Controls.Add(RadioButton14)
+        TabPage6.Controls.Add(RadioButton13)
+        TabPage6.Controls.Add(RadioButton12)
+        TabPage6.Controls.Add(RadioButton11)
+        TabPage6.Controls.Add(RadioButton10)
+        TabPage6.Controls.Add(RadioButton9)
+        TabPage6.Controls.Add(RadioButton8)
+        TabPage6.Controls.Add(RadioButton7)
+        TabPage6.Controls.Add(RadioButton6)
+        TabPage6.Controls.Add(RadioButton5)
+        TabPage6.Controls.Add(RadioButton4)
+        TabPage6.Controls.Add(RadioButton3)
+        TabPage6.Controls.Add(RadioButton2)
+        TabPage6.Controls.Add(RadioButton1)
+        TabPage6.Location = New Point(4, 25)
+        TabPage6.Name = "TabPage6"
+        TabPage6.Padding = New Padding(3)
+        TabPage6.Size = New Size(629, 341)
+        TabPage6.TabIndex = 5
+        TabPage6.Text = "OSD"
+        ' 
+        ' Button1
+        ' 
+        Button1.BackColor = Color.Gold
+        Button1.FlatStyle = FlatStyle.Popup
+        Button1.ForeColor = Color.Black
+        Button1.Location = New Point(222, 313)
+        Button1.Name = "Button1"
+        Button1.Size = New Size(58, 23)
+        Button1.TabIndex = 68
+        Button1.Text = "3. Save"
+        btnToolTip.SetToolTip(Button1, "Save the VRX settings" & vbCrLf & "to the local files setdisplay.sh" & vbCrLf & "and vdec.conf")
+        Button1.UseVisualStyleBackColor = False
+        ' 
+        ' ele18
+        ' 
+        ele18.AutoSize = True
+        ele18.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele18.ForeColor = Color.White
+        ele18.Location = New Point(139, 128)
+        ele18.Name = "ele18"
+        ele18.Size = New Size(207, 15)
+        ele18.TabIndex = 67
+        ele18.Text = "--------------------------------------------------"
+        ' 
+        ' ele17
+        ' 
+        ele17.AutoSize = True
+        ele17.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele17.ForeColor = Color.White
+        ele17.Location = New Point(459, 203)
+        ele17.Name = "ele17"
+        ele17.Size = New Size(34, 15)
+        ele17.TabIndex = 66
+        ele17.Text = "TIME"
+        ' 
+        ' ele14
+        ' 
+        ele14.AutoSize = True
+        ele14.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele14.ForeColor = Color.White
+        ele14.Location = New Point(437, 6)
+        ele14.Name = "ele14"
+        ele14.Size = New Size(56, 15)
+        ele14.TabIndex = 65
+        ele14.Text = "OpenIPC"
+        ' 
+        ' ele16
+        ' 
+        ele16.AutoSize = True
+        ele16.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele16.ForeColor = Color.White
+        ele16.Location = New Point(102, 3)
+        ele16.Name = "ele16"
+        ele16.Size = New Size(33, 15)
+        ele16.TabIndex = 64
+        ele16.Text = "Rate"
+        ' 
+        ' ele15
+        ' 
+        ele15.AutoSize = True
+        ele15.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele15.ForeColor = Color.White
+        ele15.Location = New Point(232, 5)
+        ele15.Name = "ele15"
+        ele15.Size = New Size(73, 15)
+        ele15.TabIndex = 63
+        ele15.Text = "RX Packets"
+        ' 
+        ' ele13
+        ' 
+        ele13.AutoSize = True
+        ele13.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele13.ForeColor = Color.White
+        ele13.Location = New Point(253, 263)
+        ele13.Name = "ele13"
+        ele13.Size = New Size(34, 15)
+        ele13.TabIndex = 62
+        ele13.Text = "RSSI"
+        ' 
+        ' ele12
+        ' 
+        ele12.AutoSize = True
+        ele12.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele12.ForeColor = Color.White
+        ele12.Location = New Point(112, 263)
+        ele12.Name = "ele12"
+        ele12.Size = New Size(33, 15)
+        ele12.TabIndex = 61
+        ele12.Text = "DIST"
+        ' 
+        ' ele11
+        ' 
+        ele11.AutoSize = True
+        ele11.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele11.ForeColor = Color.White
+        ele11.Location = New Point(426, 248)
+        ele11.Name = "ele11"
+        ele11.Size = New Size(31, 15)
+        ele11.TabIndex = 60
+        ele11.Text = "LON"
+        ' 
+        ' ele10
+        ' 
+        ele10.AutoSize = True
+        ele10.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele10.ForeColor = Color.White
+        ele10.Location = New Point(426, 233)
+        ele10.Name = "ele10"
+        ele10.Size = New Size(28, 15)
+        ele10.TabIndex = 59
+        ele10.Text = "LAT"
+        ' 
+        ' ele9
+        ' 
+        ele9.AutoSize = True
+        ele9.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele9.ForeColor = Color.White
+        ele9.Location = New Point(462, 218)
+        ele9.Name = "ele9"
+        ele9.Size = New Size(31, 15)
+        ele9.TabIndex = 58
+        ele9.Text = "HDG"
+        ' 
+        ' ele8
+        ' 
+        ele8.AutoSize = True
+        ele8.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele8.ForeColor = Color.White
+        ele8.Location = New Point(459, 263)
+        ele8.Name = "ele8"
+        ele8.Size = New Size(37, 15)
+        ele8.TabIndex = 57
+        ele8.Text = "SATS"
+        ' 
+        ' ele7
+        ' 
+        ele7.AutoSize = True
+        ele7.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele7.ForeColor = Color.White
+        ele7.Location = New Point(6, 218)
+        ele7.Name = "ele7"
+        ele7.Size = New Size(30, 15)
+        ele7.TabIndex = 56
+        ele7.Text = "THR"
+        ' 
+        ' ele6
+        ' 
+        ele6.AutoSize = True
+        ele6.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele6.ForeColor = Color.White
+        ele6.Location = New Point(6, 233)
+        ele6.Name = "ele6"
+        ele6.Size = New Size(31, 15)
+        ele6.TabIndex = 55
+        ele6.Text = "CUR"
+        ' 
+        ' ele5
+        ' 
+        ele5.AutoSize = True
+        ele5.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele5.ForeColor = Color.White
+        ele5.Location = New Point(6, 248)
+        ele5.Name = "ele5"
+        ele5.Size = New Size(40, 15)
+        ele5.TabIndex = 54
+        ele5.Text = "CONS"
+        ' 
+        ' ele4
+        ' 
+        ele4.AutoSize = True
+        ele4.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele4.ForeColor = Color.White
+        ele4.Location = New Point(6, 263)
+        ele4.Name = "ele4"
+        ele4.Size = New Size(29, 15)
+        ele4.TabIndex = 53
+        ele4.Text = "BAT"
+        ' 
+        ' ele3
+        ' 
+        ele3.AutoSize = True
+        ele3.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele3.ForeColor = Color.White
+        ele3.Location = New Point(356, 149)
+        ele3.Name = "ele3"
+        ele3.Size = New Size(39, 15)
+        ele3.TabIndex = 52
+        ele3.Text = "VSPD"
+        ' 
+        ' ele2
+        ' 
+        ele2.AutoSize = True
+        ele2.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele2.ForeColor = Color.White
+        ele2.Location = New Point(102, 128)
+        ele2.Name = "ele2"
+        ele2.Size = New Size(31, 15)
+        ele2.TabIndex = 51
+        ele2.Text = "SPD"
+        ' 
+        ' ele1
+        ' 
+        ele1.AutoSize = True
+        ele1.Font = New Font("Arial", 9F, FontStyle.Bold)
+        ele1.ForeColor = Color.White
+        ele1.Location = New Point(356, 128)
+        ele1.Name = "ele1"
+        ele1.Size = New Size(28, 15)
+        ele1.TabIndex = 33
+        ele1.Text = "ALT"
+        ' 
+        ' btnRIGHT
+        ' 
+        btnRIGHT.BackColor = Color.Gold
+        btnRIGHT.FlatStyle = FlatStyle.Popup
+        btnRIGHT.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnRIGHT.Location = New Point(129, 316)
+        btnRIGHT.Name = "btnRIGHT"
+        btnRIGHT.Size = New Size(52, 22)
+        btnRIGHT.TabIndex = 50
+        btnRIGHT.Text = "RIGHT"
+        btnToolTip.SetToolTip(btnRIGHT, "Move the selected OSD element Right")
+        btnRIGHT.UseVisualStyleBackColor = False
+        ' 
+        ' btnLEFT
+        ' 
+        btnLEFT.BackColor = Color.Gold
+        btnLEFT.FlatStyle = FlatStyle.Popup
+        btnLEFT.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnLEFT.Location = New Point(13, 316)
+        btnLEFT.Name = "btnLEFT"
+        btnLEFT.Size = New Size(52, 22)
+        btnLEFT.TabIndex = 49
+        btnLEFT.Text = "LEFT"
+        btnToolTip.SetToolTip(btnLEFT, "Move the selected OSD element Left")
+        btnLEFT.UseVisualStyleBackColor = False
+        ' 
+        ' btnDOWN
+        ' 
+        btnDOWN.BackColor = Color.Gold
+        btnDOWN.FlatStyle = FlatStyle.Popup
+        btnDOWN.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDOWN.Location = New Point(71, 316)
+        btnDOWN.Name = "btnDOWN"
+        btnDOWN.Size = New Size(52, 22)
+        btnDOWN.TabIndex = 48
+        btnDOWN.Text = "DOWN"
+        btnToolTip.SetToolTip(btnDOWN, "Move the selected OSD element Down")
+        btnDOWN.UseVisualStyleBackColor = False
+        ' 
+        ' btnUP
+        ' 
+        btnUP.BackColor = Color.Gold
+        btnUP.FlatStyle = FlatStyle.Popup
+        btnUP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnUP.Location = New Point(71, 290)
+        btnUP.Name = "btnUP"
+        btnUP.Size = New Size(52, 22)
+        btnUP.TabIndex = 47
+        btnUP.Text = "UP"
+        btnToolTip.SetToolTip(btnUP, "Move the selected OSD element Up")
+        btnUP.UseVisualStyleBackColor = False
+        ' 
+        ' PictureBox1
+        ' 
+        PictureBox1.Image = CType(resources.GetObject("PictureBox1.Image"), Image)
+        PictureBox1.Location = New Point(0, 0)
+        PictureBox1.Name = "PictureBox1"
+        PictureBox1.Size = New Size(512, 288)
+        PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
+        PictureBox1.TabIndex = 46
+        PictureBox1.TabStop = False
+        ' 
+        ' RadioButton18
+        ' 
+        RadioButton18.AutoSize = True
+        RadioButton18.ForeColor = Color.White
+        RadioButton18.Location = New Point(416, 314)
+        RadioButton18.Name = "RadioButton18"
+        RadioButton18.Size = New Size(67, 18)
+        RadioButton18.TabIndex = 45
+        RadioButton18.Text = "Horizon"
+        RadioButton18.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton17
+        ' 
+        RadioButton17.AutoSize = True
+        RadioButton17.ForeColor = Color.White
+        RadioButton17.Location = New Point(416, 294)
+        RadioButton17.Name = "RadioButton17"
+        RadioButton17.Size = New Size(86, 18)
+        RadioButton17.TabIndex = 44
+        RadioButton17.Text = "Flight Time"
+        RadioButton17.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton16
+        ' 
+        RadioButton16.AutoSize = True
+        RadioButton16.ForeColor = Color.White
+        RadioButton16.Location = New Point(323, 314)
+        RadioButton16.Name = "RadioButton16"
+        RadioButton16.Size = New Size(61, 18)
+        RadioButton16.TabIndex = 43
+        RadioButton16.Text = "Bitrate"
+        RadioButton16.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton15
+        ' 
+        RadioButton15.AutoSize = True
+        RadioButton15.ForeColor = Color.White
+        RadioButton15.Location = New Point(323, 294)
+        RadioButton15.Name = "RadioButton15"
+        RadioButton15.Size = New Size(86, 18)
+        RadioButton15.TabIndex = 42
+        RadioButton15.Text = "RX Packets"
+        RadioButton15.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton14
+        ' 
+        RadioButton14.AutoSize = True
+        RadioButton14.ForeColor = Color.White
+        RadioButton14.Location = New Point(518, 313)
+        RadioButton14.Name = "RadioButton14"
+        RadioButton14.Size = New Size(103, 18)
+        RadioButton14.TabIndex = 41
+        RadioButton14.Text = "OpenIPC Logo"
+        RadioButton14.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton13
+        ' 
+        RadioButton13.AutoSize = True
+        RadioButton13.ForeColor = Color.White
+        RadioButton13.Location = New Point(518, 293)
+        RadioButton13.Name = "RadioButton13"
+        RadioButton13.Size = New Size(49, 18)
+        RadioButton13.TabIndex = 40
+        RadioButton13.Text = "RSSI"
+        RadioButton13.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton12
+        ' 
+        RadioButton12.AutoSize = True
+        RadioButton12.ForeColor = Color.White
+        RadioButton12.Location = New Point(518, 269)
+        RadioButton12.Name = "RadioButton12"
+        RadioButton12.Size = New Size(107, 18)
+        RadioButton12.TabIndex = 39
+        RadioButton12.Text = "Home Distance"
+        RadioButton12.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton11
+        ' 
+        RadioButton11.AutoSize = True
+        RadioButton11.ForeColor = Color.White
+        RadioButton11.Location = New Point(518, 245)
+        RadioButton11.Name = "RadioButton11"
+        RadioButton11.Size = New Size(81, 18)
+        RadioButton11.TabIndex = 38
+        RadioButton11.Text = "Longitude"
+        RadioButton11.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton10
+        ' 
+        RadioButton10.AutoSize = True
+        RadioButton10.ForeColor = Color.White
+        RadioButton10.Location = New Point(518, 221)
+        RadioButton10.Name = "RadioButton10"
+        RadioButton10.Size = New Size(70, 18)
+        RadioButton10.TabIndex = 37
+        RadioButton10.Text = "Latitude"
+        RadioButton10.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton9
+        ' 
+        RadioButton9.AutoSize = True
+        RadioButton9.ForeColor = Color.White
+        RadioButton9.Location = New Point(518, 197)
+        RadioButton9.Name = "RadioButton9"
+        RadioButton9.Size = New Size(69, 18)
+        RadioButton9.TabIndex = 36
+        RadioButton9.Text = "Heading"
+        RadioButton9.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton8
+        ' 
+        RadioButton8.AutoSize = True
+        RadioButton8.ForeColor = Color.White
+        RadioButton8.Location = New Point(518, 173)
+        RadioButton8.Name = "RadioButton8"
+        RadioButton8.Size = New Size(76, 18)
+        RadioButton8.TabIndex = 35
+        RadioButton8.Text = "Satellites"
+        RadioButton8.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton7
+        ' 
+        RadioButton7.AutoSize = True
+        RadioButton7.ForeColor = Color.White
+        RadioButton7.Location = New Point(518, 149)
+        RadioButton7.Name = "RadioButton7"
+        RadioButton7.Size = New Size(69, 18)
+        RadioButton7.TabIndex = 34
+        RadioButton7.Text = "Throttle"
+        RadioButton7.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton6
+        ' 
+        RadioButton6.AutoSize = True
+        RadioButton6.ForeColor = Color.White
+        RadioButton6.Location = New Point(518, 125)
+        RadioButton6.Name = "RadioButton6"
+        RadioButton6.Size = New Size(107, 18)
+        RadioButton6.TabIndex = 33
+        RadioButton6.Text = "Amps. Current"
+        RadioButton6.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton5
+        ' 
+        RadioButton5.AutoSize = True
+        RadioButton5.ForeColor = Color.White
+        RadioButton5.Location = New Point(518, 101)
+        RadioButton5.Name = "RadioButton5"
+        RadioButton5.Size = New Size(109, 18)
+        RadioButton5.TabIndex = 32
+        RadioButton5.Text = "Bat. Consumed"
+        RadioButton5.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton4
+        ' 
+        RadioButton4.AutoSize = True
+        RadioButton4.ForeColor = Color.White
+        RadioButton4.Location = New Point(518, 77)
+        RadioButton4.Name = "RadioButton4"
+        RadioButton4.Size = New Size(64, 18)
+        RadioButton4.TabIndex = 31
+        RadioButton4.Text = "Battery"
+        RadioButton4.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton3
+        ' 
+        RadioButton3.AutoSize = True
+        RadioButton3.ForeColor = Color.White
+        RadioButton3.Location = New Point(518, 53)
+        RadioButton3.Name = "RadioButton3"
+        RadioButton3.Size = New Size(70, 18)
+        RadioButton3.TabIndex = 30
+        RadioButton3.Text = "V.Speed"
+        RadioButton3.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.ForeColor = Color.White
+        RadioButton2.Location = New Point(518, 29)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(60, 18)
+        RadioButton2.TabIndex = 29
+        RadioButton2.Text = "Speed"
+        RadioButton2.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.Checked = True
+        RadioButton1.ForeColor = Color.White
+        RadioButton1.Location = New Point(518, 6)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(68, 18)
+        RadioButton1.TabIndex = 28
+        RadioButton1.TabStop = True
+        RadioButton1.Text = "Altitude"
+        RadioButton1.UseVisualStyleBackColor = True
+        ' 
         ' btnRead
         ' 
         btnRead.BackColor = Color.Gold
@@ -1137,7 +1708,7 @@ Partial Class Configurator
         rBtnCam.AutoSize = True
         rBtnCam.Checked = True
         rBtnCam.ForeColor = Color.White
-        rBtnCam.Location = New Point(339, 382)
+        rBtnCam.Location = New Point(488, 383)
         rBtnCam.Name = "rBtnCam"
         rBtnCam.Size = New Size(116, 19)
         rBtnCam.TabIndex = 27
@@ -1149,7 +1720,7 @@ Partial Class Configurator
         ' 
         rBtnNVR.AutoSize = True
         rBtnNVR.ForeColor = Color.White
-        rBtnNVR.Location = New Point(339, 402)
+        rBtnNVR.Location = New Point(488, 403)
         rBtnNVR.Name = "rBtnNVR"
         rBtnNVR.Size = New Size(87, 19)
         rBtnNVR.TabIndex = 28
@@ -1160,7 +1731,7 @@ Partial Class Configurator
         ' 
         rBtnRadxaZero3w.AutoSize = True
         rBtnRadxaZero3w.ForeColor = Color.White
-        rBtnRadxaZero3w.Location = New Point(339, 422)
+        rBtnRadxaZero3w.Location = New Point(488, 423)
         rBtnRadxaZero3w.Name = "rBtnRadxaZero3w"
         rBtnRadxaZero3w.Size = New Size(156, 19)
         rBtnRadxaZero3w.TabIndex = 29
@@ -1192,7 +1763,7 @@ Partial Class Configurator
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
-        ClientSize = New Size(512, 450)
+        ClientSize = New Size(658, 445)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
         Controls.Add(Label3)
@@ -1223,6 +1794,9 @@ Partial Class Configurator
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
         TabPage5.PerformLayout()
+        TabPage6.ResumeLayout(False)
+        TabPage6.PerformLayout()
+        CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -1316,5 +1890,48 @@ Partial Class Configurator
     Friend WithEvents txtPassword As TextBox
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents Label4 As Label
+    Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents RadioButton18 As RadioButton
+    Friend WithEvents RadioButton17 As RadioButton
+    Friend WithEvents RadioButton16 As RadioButton
+    Friend WithEvents RadioButton15 As RadioButton
+    Friend WithEvents RadioButton14 As RadioButton
+    Friend WithEvents RadioButton13 As RadioButton
+    Friend WithEvents RadioButton12 As RadioButton
+    Friend WithEvents RadioButton11 As RadioButton
+    Friend WithEvents RadioButton10 As RadioButton
+    Friend WithEvents RadioButton9 As RadioButton
+    Friend WithEvents RadioButton8 As RadioButton
+    Friend WithEvents RadioButton7 As RadioButton
+    Friend WithEvents RadioButton6 As RadioButton
+    Friend WithEvents RadioButton5 As RadioButton
+    Friend WithEvents RadioButton4 As RadioButton
+    Friend WithEvents RadioButton3 As RadioButton
+    Friend WithEvents RadioButton2 As RadioButton
+    Friend WithEvents RadioButton1 As RadioButton
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnUP As Button
+    Friend WithEvents btnRIGHT As Button
+    Friend WithEvents btnLEFT As Button
+    Friend WithEvents btnDOWN As Button
+    Friend WithEvents ele2 As Label
+    Friend WithEvents ele1 As Label
+    Friend WithEvents ele7 As Label
+    Friend WithEvents ele6 As Label
+    Friend WithEvents ele5 As Label
+    Friend WithEvents ele4 As Label
+    Friend WithEvents ele3 As Label
+    Friend WithEvents ele11 As Label
+    Friend WithEvents ele10 As Label
+    Friend WithEvents ele9 As Label
+    Friend WithEvents ele8 As Label
+    Friend WithEvents ele13 As Label
+    Friend WithEvents ele12 As Label
+    Friend WithEvents ele18 As Label
+    Friend WithEvents ele17 As Label
+    Friend WithEvents ele14 As Label
+    Friend WithEvents ele16 As Label
+    Friend WithEvents ele15 As Label
+    Friend WithEvents Button1 As Button
 
 End Class
