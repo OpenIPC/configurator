@@ -98,6 +98,7 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        Label5 = New Label()
         lblScan = New Label()
         btnScan = New Button()
         txtScan = New TextBox()
@@ -160,7 +161,6 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        Label5 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1077,6 +1077,17 @@ Partial Class Configurator
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.White
+        Label5.Location = New Point(21, 23)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(291, 56)
+        Label5.TabIndex = 42
+        Label5.Text = "1. Type the IP subnet to scan (eg. 192.168.0.)" & vbCrLf & "2. Press [SCAN]" & vbCrLf & "3. Wait for the [Scan completed] message to appear" & vbCrLf & "Do not touch anything until finished"
+        ' 
         ' lblScan
         ' 
         lblScan.AutoSize = True
@@ -1105,7 +1116,6 @@ Partial Class Configurator
         ' 
         txtScan.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         txtScan.BorderStyle = BorderStyle.FixedSingle
-        txtScan.Enabled = False
         txtScan.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtScan.ForeColor = Color.White
         txtScan.Location = New Point(330, 23)
@@ -1807,17 +1817,6 @@ Partial Class Configurator
         ' 
         ' BackgroundWorker1
         ' 
-        ' 
-        ' Label5
-        ' 
-        Label5.AutoSize = True
-        Label5.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        Label5.ForeColor = Color.White
-        Label5.Location = New Point(21, 23)
-        Label5.Name = "Label5"
-        Label5.Size = New Size(291, 56)
-        Label5.TabIndex = 42
-        Label5.Text = "1. Type the IP subnet to scan (eg. 192.168.0.)" & vbCrLf & "2. Press [SCAN]" & vbCrLf & "3. Wait for the [Scan completed] message to appear" & vbCrLf & "Do not touch anything until finished"
         ' 
         ' Configurator
         ' 
