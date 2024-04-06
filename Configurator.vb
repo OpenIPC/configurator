@@ -283,42 +283,42 @@ err1:
                 Dim separators() As String = {"-osd_ele", "x", "y"}
                 Dim result() As String
                 result = value2.Split(separators, StringSplitOptions.RemoveEmptyEntries)
-                ele1.Left = result(2) / 2.5
-                ele1.Top = result(4) / 2.5
-                ele2.Left = result(6) / 2.5
-                ele2.Top = result(8) / 2.5
-                ele3.Left = result(10) / 2.5
-                ele3.Top = result(12) / 2.5
-                ele4.Left = result(14) / 2.5
-                ele4.Top = result(16) / 2.5
-                ele5.Left = result(18) / 2.5
-                ele5.Top = result(20) / 2.5
-                ele6.Left = result(22) / 2.5
-                ele6.Top = result(24) / 2.5
-                ele7.Left = result(26) / 2.5
-                ele7.Top = result(28) / 2.5
-                ele8.Left = result(30) / 2.5
-                ele8.Top = result(32) / 2.5
-                ele9.Left = result(34) / 2.5
-                ele9.Top = result(36) / 2.5
-                ele10.Left = result(38) / 2.5
-                ele10.Top = result(40) / 2.5
-                ele11.Left = result(42) / 2.5
-                ele11.Top = result(44) / 2.5
-                ele12.Left = result(46) / 2.5
-                ele12.Top = result(48) / 2.5
-                ele13.Left = result(50) / 2.5
-                ele13.Top = result(52) / 2.5
-                ele14.Left = result(54) / 2.5
-                ele14.Top = result(56) / 2.5
-                ele15.Left = result(58) / 2.5
-                ele15.Top = result(60) / 2.5
-                ele16.Left = result(62) / 2.5
-                ele16.Top = result(64) / 2.5
-                ele17.Left = result(66) / 2.5
-                ele17.Top = result(68) / 2.5
-                ele18.Left = 128 + (result(70) / 2.5)
-                ele18.Top = 124 + (result(72) / 2.5)
+                RadioButton1.Left = result(2) / 2.5
+                RadioButton1.Top = result(4) / 2.5
+                RadioButton2.Left = result(6) / 2.5
+                RadioButton2.Top = result(8) / 2.5
+                RadioButton3.Left = result(10) / 2.5
+                RadioButton3.Top = result(12) / 2.5
+                RadioButton4.Left = result(14) / 2.5
+                RadioButton4.Top = result(16) / 2.5
+                RadioButton5.Left = result(18) / 2.5
+                RadioButton5.Top = result(20) / 2.5
+                RadioButton6.Left = result(22) / 2.5
+                RadioButton6.Top = result(24) / 2.5
+                RadioButton7.Left = result(26) / 2.5
+                RadioButton7.Top = result(28) / 2.5
+                RadioButton8.Left = result(30) / 2.5
+                RadioButton8.Top = result(32) / 2.5
+                RadioButton9.Left = result(34) / 2.5
+                RadioButton9.Top = result(36) / 2.5
+                RadioButton10.Left = result(38) / 2.5
+                RadioButton10.Top = result(40) / 2.5
+                RadioButton11.Left = result(42) / 2.5
+                RadioButton11.Top = result(44) / 2.5
+                RadioButton12.Left = result(46) / 2.5
+                RadioButton12.Top = result(48) / 2.5
+                RadioButton13.Left = result(50) / 2.5
+                RadioButton13.Top = result(52) / 2.5
+                RadioButton14.Left = result(54) / 2.5
+                RadioButton14.Top = result(56) / 2.5
+                RadioButton15.Left = result(58) / 2.5
+                RadioButton15.Top = result(60) / 2.5
+                RadioButton16.Left = result(62) / 2.5
+                RadioButton16.Top = result(64) / 2.5
+                RadioButton17.Left = result(66) / 2.5
+                RadioButton17.Top = result(68) / 2.5
+                RadioButton18.Left = 128 + (result(70) / 2.5)
+                RadioButton18.Top = 124 + (result(72) / 2.5)
             Else
                 Dim majestic = "majestic.yaml"
                 If Not System.IO.File.Exists(majestic) Then
@@ -1587,90 +1587,90 @@ err1:
     End Sub
 
     Private Sub btnLEFT_Click(sender As Object, e As EventArgs) Handles btnLEFT.Click
-        If RadioButton1.Checked Then ele1.Left = ele1.Left - 2
-        If RadioButton2.Checked Then ele2.Left = ele2.Left - 2
-        If RadioButton3.Checked Then ele3.Left = ele3.Left - 2
-        If RadioButton4.Checked Then ele4.Left = ele4.Left - 2
-        If RadioButton5.Checked Then ele5.Left = ele5.Left - 2
-        If RadioButton6.Checked Then ele6.Left = ele6.Left - 2
-        If RadioButton7.Checked Then ele7.Left = ele7.Left - 2
-        If RadioButton8.Checked Then ele8.Left = ele8.Left - 2
-        If RadioButton9.Checked Then ele9.Left = ele9.Left - 2
-        If RadioButton10.Checked Then ele10.Left = ele10.Left - 2
-        If RadioButton11.Checked Then ele11.Left = ele11.Left - 2
-        If RadioButton12.Checked Then ele12.Left = ele12.Left - 2
-        If RadioButton13.Checked Then ele13.Left = ele13.Left - 2
-        If RadioButton14.Checked Then ele14.Left = ele14.Left - 2
-        If RadioButton15.Checked Then ele15.Left = ele15.Left - 2
-        If RadioButton16.Checked Then ele16.Left = ele16.Left - 2
-        If RadioButton17.Checked Then ele17.Left = ele17.Left - 2
+        If RadioButton1.Checked Then RadioButton1.Left = RadioButton1.Left - 2
+        If RadioButton2.Checked Then RadioButton2.Left = RadioButton2.Left - 2
+        If RadioButton3.Checked Then RadioButton3.Left = RadioButton3.Left - 2
+        If RadioButton4.Checked Then RadioButton4.Left = RadioButton4.Left - 2
+        If RadioButton5.Checked Then RadioButton5.Left = RadioButton5.Left - 2
+        If RadioButton6.Checked Then RadioButton6.Left = RadioButton6.Left - 2
+        If RadioButton7.Checked Then RadioButton7.Left = RadioButton7.Left - 2
+        If RadioButton8.Checked Then RadioButton8.Left = RadioButton8.Left - 2
+        If RadioButton9.Checked Then RadioButton9.Left = RadioButton9.Left - 2
+        If RadioButton10.Checked Then RadioButton10.Left = RadioButton10.Left - 2
+        If RadioButton11.Checked Then RadioButton11.Left = RadioButton11.Left - 2
+        If RadioButton12.Checked Then RadioButton12.Left = RadioButton12.Left - 2
+        If RadioButton13.Checked Then RadioButton13.Left = RadioButton13.Left - 2
+        If RadioButton14.Checked Then RadioButton14.Left = RadioButton14.Left - 2
+        If RadioButton15.Checked Then RadioButton15.Left = RadioButton15.Left - 2
+        If RadioButton16.Checked Then RadioButton16.Left = RadioButton16.Left - 2
+        If RadioButton17.Checked Then RadioButton17.Left = RadioButton17.Left - 2
     End Sub
 
     Private Sub btnRIGHT_Click(sender As Object, e As EventArgs) Handles btnRIGHT.Click
-        If RadioButton1.Checked Then ele1.Left = ele1.Left + 2
-        If RadioButton2.Checked Then ele2.Left = ele2.Left + 2
-        If RadioButton3.Checked Then ele3.Left = ele3.Left + 2
-        If RadioButton4.Checked Then ele4.Left = ele4.Left + 2
-        If RadioButton5.Checked Then ele5.Left = ele5.Left + 2
-        If RadioButton6.Checked Then ele6.Left = ele6.Left + 2
-        If RadioButton7.Checked Then ele7.Left = ele7.Left + 2
-        If RadioButton8.Checked Then ele8.Left = ele8.Left + 2
-        If RadioButton9.Checked Then ele9.Left = ele9.Left + 2
-        If RadioButton10.Checked Then ele10.Left = ele10.Left + 2
-        If RadioButton11.Checked Then ele11.Left = ele11.Left + 2
-        If RadioButton12.Checked Then ele12.Left = ele12.Left + 2
-        If RadioButton13.Checked Then ele13.Left = ele13.Left + 2
-        If RadioButton14.Checked Then ele14.Left = ele14.Left + 2
-        If RadioButton15.Checked Then ele15.Left = ele15.Left + 2
-        If RadioButton16.Checked Then ele16.Left = ele16.Left + 2
-        If RadioButton17.Checked Then ele17.Left = ele17.Left + 2
+        If RadioButton1.Checked Then RadioButton1.Left = RadioButton1.Left + 2
+        If RadioButton2.Checked Then RadioButton2.Left = RadioButton2.Left + 2
+        If RadioButton3.Checked Then RadioButton3.Left = RadioButton3.Left + 2
+        If RadioButton4.Checked Then RadioButton4.Left = RadioButton4.Left + 2
+        If RadioButton5.Checked Then RadioButton5.Left = RadioButton5.Left + 2
+        If RadioButton6.Checked Then RadioButton6.Left = RadioButton6.Left + 2
+        If RadioButton7.Checked Then RadioButton7.Left = RadioButton7.Left + 2
+        If RadioButton8.Checked Then RadioButton8.Left = RadioButton8.Left + 2
+        If RadioButton9.Checked Then RadioButton9.Left = RadioButton9.Left + 2
+        If RadioButton10.Checked Then RadioButton10.Left = RadioButton10.Left + 2
+        If RadioButton11.Checked Then RadioButton11.Left = RadioButton11.Left + 2
+        If RadioButton12.Checked Then RadioButton12.Left = RadioButton12.Left + 2
+        If RadioButton13.Checked Then RadioButton13.Left = RadioButton13.Left + 2
+        If RadioButton14.Checked Then RadioButton14.Left = RadioButton14.Left + 2
+        If RadioButton15.Checked Then RadioButton15.Left = RadioButton15.Left + 2
+        If RadioButton16.Checked Then RadioButton16.Left = RadioButton16.Left + 2
+        If RadioButton17.Checked Then RadioButton17.Left = RadioButton17.Left + 2
     End Sub
 
     Private Sub btnUP_Click(sender As Object, e As EventArgs) Handles btnUP.Click
-        If RadioButton1.Checked Then ele1.Top = ele1.Top - 2
-        If RadioButton2.Checked Then ele2.Top = ele2.Top - 2
-        If RadioButton3.Checked Then ele3.Top = ele3.Top - 2
-        If RadioButton4.Checked Then ele4.Top = ele4.Top - 2
-        If RadioButton5.Checked Then ele5.Top = ele5.Top - 2
-        If RadioButton6.Checked Then ele6.Top = ele6.Top - 2
-        If RadioButton7.Checked Then ele7.Top = ele7.Top - 2
-        If RadioButton8.Checked Then ele8.Top = ele8.Top - 2
-        If RadioButton9.Checked Then ele9.Top = ele9.Top - 2
-        If RadioButton10.Checked Then ele10.Top = ele10.Top - 2
-        If RadioButton11.Checked Then ele11.Top = ele11.Top - 2
-        If RadioButton12.Checked Then ele12.Top = ele12.Top - 2
-        If RadioButton13.Checked Then ele13.Top = ele13.Top - 2
-        If RadioButton14.Checked Then ele14.Top = ele14.Top - 2
-        If RadioButton15.Checked Then ele15.Top = ele15.Top - 2
-        If RadioButton16.Checked Then ele16.Top = ele16.Top - 2
-        If RadioButton17.Checked Then ele17.Top = ele17.Top - 2
+        If RadioButton1.Checked Then RadioButton1.Top = RadioButton1.Top - 2
+        If RadioButton2.Checked Then RadioButton2.Top = RadioButton2.Top - 2
+        If RadioButton3.Checked Then RadioButton3.Top = RadioButton3.Top - 2
+        If RadioButton4.Checked Then RadioButton4.Top = RadioButton4.Top - 2
+        If RadioButton5.Checked Then RadioButton5.Top = RadioButton5.Top - 2
+        If RadioButton6.Checked Then RadioButton6.Top = RadioButton6.Top - 2
+        If RadioButton7.Checked Then RadioButton7.Top = RadioButton7.Top - 2
+        If RadioButton8.Checked Then RadioButton8.Top = RadioButton8.Top - 2
+        If RadioButton9.Checked Then RadioButton9.Top = RadioButton9.Top - 2
+        If RadioButton10.Checked Then RadioButton10.Top = RadioButton10.Top - 2
+        If RadioButton11.Checked Then RadioButton11.Top = RadioButton11.Top - 2
+        If RadioButton12.Checked Then RadioButton12.Top = RadioButton12.Top - 2
+        If RadioButton13.Checked Then RadioButton13.Top = RadioButton13.Top - 2
+        If RadioButton14.Checked Then RadioButton14.Top = RadioButton14.Top - 2
+        If RadioButton15.Checked Then RadioButton15.Top = RadioButton15.Top - 2
+        If RadioButton16.Checked Then RadioButton16.Top = RadioButton16.Top - 2
+        If RadioButton17.Checked Then RadioButton17.Top = RadioButton17.Top - 2
         If RadioButton18.Checked Then
-            ele18.Left = ele18.Left - 2
-            ele18.Top = ele18.Top - 2
+            RadioButton18.Left = RadioButton18.Left - 2
+            RadioButton18.Top = RadioButton18.Top - 2
         End If
     End Sub
 
     Private Sub btnDOWN_Click(sender As Object, e As EventArgs) Handles btnDOWN.Click
-        If RadioButton1.Checked Then ele1.Top = ele1.Top + 2
-        If RadioButton2.Checked Then ele2.Top = ele2.Top + 2
-        If RadioButton3.Checked Then ele3.Top = ele3.Top + 2
-        If RadioButton4.Checked Then ele4.Top = ele4.Top + 2
-        If RadioButton5.Checked Then ele5.Top = ele5.Top + 2
-        If RadioButton6.Checked Then ele6.Top = ele6.Top + 2
-        If RadioButton7.Checked Then ele7.Top = ele7.Top + 2
-        If RadioButton8.Checked Then ele8.Top = ele8.Top + 2
-        If RadioButton9.Checked Then ele9.Top = ele9.Top + 2
-        If RadioButton10.Checked Then ele10.Top = ele10.Top + 2
-        If RadioButton11.Checked Then ele11.Top = ele11.Top + 2
-        If RadioButton12.Checked Then ele12.Top = ele12.Top + 2
-        If RadioButton13.Checked Then ele13.Top = ele13.Top + 2
-        If RadioButton14.Checked Then ele14.Top = ele14.Top + 2
-        If RadioButton15.Checked Then ele15.Top = ele15.Top + 2
-        If RadioButton16.Checked Then ele16.Top = ele16.Top + 2
-        If RadioButton17.Checked Then ele17.Top = ele17.Top + 2
+        If RadioButton1.Checked Then RadioButton1.Top = RadioButton1.Top + 2
+        If RadioButton2.Checked Then RadioButton2.Top = RadioButton2.Top + 2
+        If RadioButton3.Checked Then RadioButton3.Top = RadioButton3.Top + 2
+        If RadioButton4.Checked Then RadioButton4.Top = RadioButton4.Top + 2
+        If RadioButton5.Checked Then RadioButton5.Top = RadioButton5.Top + 2
+        If RadioButton6.Checked Then RadioButton6.Top = RadioButton6.Top + 2
+        If RadioButton7.Checked Then RadioButton7.Top = RadioButton7.Top + 2
+        If RadioButton8.Checked Then RadioButton8.Top = RadioButton8.Top + 2
+        If RadioButton9.Checked Then RadioButton9.Top = RadioButton9.Top + 2
+        If RadioButton10.Checked Then RadioButton10.Top = RadioButton10.Top + 2
+        If RadioButton11.Checked Then RadioButton11.Top = RadioButton11.Top + 2
+        If RadioButton12.Checked Then RadioButton12.Top = RadioButton12.Top + 2
+        If RadioButton13.Checked Then RadioButton13.Top = RadioButton13.Top + 2
+        If RadioButton14.Checked Then RadioButton14.Top = RadioButton14.Top + 2
+        If RadioButton15.Checked Then RadioButton15.Top = RadioButton15.Top + 2
+        If RadioButton16.Checked Then RadioButton16.Top = RadioButton16.Top + 2
+        If RadioButton17.Checked Then RadioButton17.Top = RadioButton17.Top + 2
         If RadioButton18.Checked Then
-            ele18.Left = ele18.Left + 2
-            ele18.Top = ele18.Top + 2
+            RadioButton18.Left = RadioButton18.Left + 2
+            RadioButton18.Top = RadioButton18.Top + 2
         End If
     End Sub
 
@@ -1681,28 +1681,47 @@ err1:
             Return
         End If
 
+        If CheckBox1.Checked = False Then RadioButton1.Left = 0
+        If CheckBox2.Checked = False Then RadioButton2.Left = 0
+        If CheckBox3.Checked = False Then RadioButton3.Left = 0
+        If CheckBox4.Checked = False Then RadioButton4.Left = 0
+        If CheckBox5.Checked = False Then RadioButton5.Left = 0
+        If CheckBox6.Checked = False Then RadioButton6.Left = 0
+        If CheckBox7.Checked = False Then RadioButton7.Left = 0
+        If CheckBox8.Checked = False Then RadioButton8.Left = 0
+        If CheckBox9.Checked = False Then RadioButton9.Left = 0
+        If CheckBox10.Checked = False Then RadioButton10.Left = 0
+        If CheckBox11.Checked = False Then RadioButton11.Left = 0
+        If CheckBox12.Checked = False Then RadioButton12.Left = 0
+        If CheckBox13.Checked = False Then RadioButton13.Left = 0
+        If CheckBox14.Checked = False Then RadioButton14.Left = 0
+        If CheckBox15.Checked = False Then RadioButton15.Left = 0
+        If CheckBox16.Checked = False Then RadioButton16.Left = 0
+        If CheckBox17.Checked = False Then RadioButton17.Left = 0
+        If CheckBox18.Checked = False Then RadioButton18.Left = 0
+
         Dim VDECfilePath = vdec
         Dim lines = IO.File.ReadAllLines(VDECfilePath)
         For y = 0 To lines.Count - 1
             If lines(y).StartsWith("osd_elements=") Then
-                lines(y) = "osd_elements=""-osd_ele1x " + CStr(ele1.Left * 2.5) + " -osd_ele1y " + CStr(ele1.Top * 2.5) +
-                                         " -osd_ele2x " + CStr(ele2.Left * 2.5) + " -osd_ele2y " + CStr(ele2.Top * 2.5) +
-                                         " -osd_ele3x " + CStr(ele3.Left * 2.5) + " -osd_ele3y " + CStr(ele3.Top * 2.5) +
-                                         " -osd_ele4x " + CStr(ele4.Left * 2.5) + " -osd_ele4y " + CStr(ele4.Top * 2.5) +
-                                         " -osd_ele5x " + CStr(ele5.Left * 2.5) + " -osd_ele5y " + CStr(ele5.Top * 2.5) +
-                                         " -osd_ele6x " + CStr(ele6.Left * 2.5) + " -osd_ele6y " + CStr(ele6.Top * 2.5) +
-                                         " -osd_ele7x " + CStr(ele7.Left * 2.5) + " -osd_ele7y " + CStr(ele7.Top * 2.5) +
-                                         " -osd_ele8x " + CStr(ele8.Left * 2.5) + " -osd_ele8y " + CStr(ele8.Top * 2.5) +
-                                         " -osd_ele9x " + CStr(ele9.Left * 2.5) + " -osd_ele9y " + CStr(ele9.Top * 2.5) +
-                                         " -osd_ele10x " + CStr(ele10.Left * 2.5) + " -osd_ele10y " + CStr(ele10.Top * 2.5) +
-                                         " -osd_ele11x " + CStr(ele11.Left * 2.5) + " -osd_ele11y " + CStr(ele11.Top * 2.5) +
-                                         " -osd_ele12x " + CStr(ele12.Left * 2.5) + " -osd_ele12y " + CStr(ele12.Top * 2.5) +
-                                         " -osd_ele13x " + CStr(ele13.Left * 2.5) + " -osd_ele13y " + CStr(ele13.Top * 2.5) +
-                                         " -osd_ele14x " + CStr(ele14.Left * 2.5) + " -osd_ele14y " + CStr(ele14.Top * 2.5) +
-                                         " -osd_ele15x " + CStr(ele15.Left * 2.5) + " -osd_ele15y " + CStr(ele15.Top * 2.5) +
-                                         " -osd_ele16x " + CStr(ele16.Left * 2.5) + " -osd_ele16y " + CStr(ele16.Top * 2.5) +
-                                         " -osd_ele17x " + CStr(ele17.Left * 2.5) + " -osd_ele17y " + CStr(ele17.Top * 2.5) +
-                                         " -osd_ele18x " + CStr((ele18.Left - 128) * 2.5) + " -osd_ele18y " + CStr((ele18.Top - 124) * 2.5) + """"
+                lines(y) = "osd_elements=""-osd_ele1x " + CStr(RadioButton1.Left * 2.5) + " -osd_ele1y " + CStr(RadioButton1.Top * 2.5) +
+                                         " -osd_ele2x " + CStr(RadioButton2.Left * 2.5) + " -osd_ele2y " + CStr(RadioButton2.Top * 2.5) +
+                                         " -osd_ele3x " + CStr(RadioButton3.Left * 2.5) + " -osd_ele3y " + CStr(RadioButton3.Top * 2.5) +
+                                         " -osd_ele4x " + CStr(RadioButton4.Left * 2.5) + " -osd_ele4y " + CStr(RadioButton4.Top * 2.5) +
+                                         " -osd_ele5x " + CStr(RadioButton5.Left * 2.5) + " -osd_ele5y " + CStr(RadioButton5.Top * 2.5) +
+                                         " -osd_ele6x " + CStr(RadioButton6.Left * 2.5) + " -osd_ele6y " + CStr(RadioButton6.Top * 2.5) +
+                                         " -osd_ele7x " + CStr(RadioButton7.Left * 2.5) + " -osd_ele7y " + CStr(RadioButton7.Top * 2.5) +
+                                         " -osd_ele8x " + CStr(RadioButton8.Left * 2.5) + " -osd_ele8y " + CStr(RadioButton8.Top * 2.5) +
+                                         " -osd_ele9x " + CStr(RadioButton9.Left * 2.5) + " -osd_ele9y " + CStr(RadioButton9.Top * 2.5) +
+                                         " -osd_ele10x " + CStr(RadioButton10.Left * 2.5) + " -osd_ele10y " + CStr(RadioButton10.Top * 2.5) +
+                                         " -osd_ele11x " + CStr(RadioButton11.Left * 2.5) + " -osd_ele11y " + CStr(RadioButton11.Top * 2.5) +
+                                         " -osd_ele12x " + CStr(RadioButton12.Left * 2.5) + " -osd_ele12y " + CStr(RadioButton12.Top * 2.5) +
+                                         " -osd_ele13x " + CStr(RadioButton13.Left * 2.5) + " -osd_ele13y " + CStr(RadioButton13.Top * 2.5) +
+                                         " -osd_ele14x " + CStr(RadioButton14.Left * 2.5) + " -osd_ele14y " + CStr(RadioButton14.Top * 2.5) +
+                                         " -osd_ele15x " + CStr(RadioButton15.Left * 2.5) + " -osd_ele15y " + CStr(RadioButton15.Top * 2.5) +
+                                         " -osd_ele16x " + CStr(RadioButton16.Left * 2.5) + " -osd_ele16y " + CStr(RadioButton16.Top * 2.5) +
+                                         " -osd_ele17x " + CStr(RadioButton17.Left * 2.5) + " -osd_ele17y " + CStr(RadioButton17.Top * 2.5) +
+                                         " -osd_ele18x " + CStr((RadioButton18.Left - 128) * 2.5) + " -osd_ele18y " + CStr((RadioButton18.Top - 124) * 2.5) + """"
             End If
         Next
         IO.File.WriteAllLines(VDECfilePath, lines)
@@ -1729,6 +1748,150 @@ err1:
                                                       End Sub, Action))
                              End Sub)
         MessageBox.Show("Scan completed")
+    End Sub
+
+    Private Sub CheckBox1_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox1.CheckedChanged
+        If CheckBox1.Checked = False Then
+            RadioButton1.Visible = False
+        Else
+            RadioButton1.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox2_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox2.CheckedChanged
+        If CheckBox2.Checked = False Then
+            RadioButton2.Visible = False
+        Else
+            RadioButton2.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox3_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox3.CheckedChanged
+        If CheckBox3.Checked = False Then
+            RadioButton3.Visible = False
+        Else
+            RadioButton3.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox4_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox4.CheckedChanged
+        If CheckBox4.Checked = False Then
+            RadioButton4.Visible = False
+        Else
+            RadioButton4.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox5_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox5.CheckedChanged
+        If CheckBox5.Checked = False Then
+            RadioButton5.Visible = False
+        Else
+            RadioButton5.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox6_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox6.CheckedChanged
+        If CheckBox6.Checked = False Then
+            RadioButton6.Visible = False
+        Else
+            RadioButton6.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox7_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox7.CheckedChanged
+        If CheckBox7.Checked = False Then
+            RadioButton7.Visible = False
+        Else
+            RadioButton7.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox8_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox8.CheckedChanged
+        If CheckBox8.Checked = False Then
+            RadioButton8.Visible = False
+        Else
+            RadioButton8.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox9_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox9.CheckedChanged
+        If CheckBox9.Checked = False Then
+            RadioButton9.Visible = False
+        Else
+            RadioButton9.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox10_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox10.CheckedChanged
+        If CheckBox10.Checked = False Then
+            RadioButton10.Visible = False
+        Else
+            RadioButton10.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox11_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox11.CheckedChanged
+        If CheckBox11.Checked = False Then
+            RadioButton11.Visible = False
+        Else
+            RadioButton11.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox12_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox12.CheckedChanged
+        If CheckBox12.Checked = False Then
+            RadioButton12.Visible = False
+        Else
+            RadioButton12.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox13_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox13.CheckedChanged
+        If CheckBox13.Checked = False Then
+            RadioButton13.Visible = False
+        Else
+            RadioButton13.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox14_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox14.CheckedChanged
+        If CheckBox14.Checked = False Then
+            RadioButton14.Visible = False
+        Else
+            RadioButton14.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox15_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox15.CheckedChanged
+        If CheckBox15.Checked = False Then
+            RadioButton15.Visible = False
+        Else
+            RadioButton15.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox16_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox16.CheckedChanged
+        If CheckBox16.Checked = False Then
+            RadioButton16.Visible = False
+        Else
+            RadioButton16.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox17_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox17.CheckedChanged
+        If CheckBox17.Checked = False Then
+            RadioButton17.Visible = False
+        Else
+            RadioButton17.Visible = True
+        End If
+    End Sub
+
+    Private Sub CheckBox18_CheckedChanged(sender As Object, e As EventArgs) Handles CheckBox18.CheckedChanged
+        If CheckBox18.Checked = False Then
+            RadioButton18.Visible = False
+        Else
+            RadioButton18.Visible = True
+        End If
     End Sub
 
 #End Region

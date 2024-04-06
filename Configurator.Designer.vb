@@ -108,30 +108,24 @@ Partial Class Configurator
         btnReceiveKeys = New Button()
         btnUpdate = New Button()
         TabPage6 = New TabPage()
-        Button1 = New Button()
-        ele18 = New Label()
-        ele17 = New Label()
-        ele14 = New Label()
-        ele16 = New Label()
-        ele15 = New Label()
-        ele13 = New Label()
-        ele12 = New Label()
-        ele11 = New Label()
-        ele10 = New Label()
-        ele9 = New Label()
-        ele8 = New Label()
-        ele7 = New Label()
-        ele6 = New Label()
-        ele5 = New Label()
-        ele4 = New Label()
-        ele3 = New Label()
-        ele2 = New Label()
-        ele1 = New Label()
-        btnRIGHT = New Button()
-        btnLEFT = New Button()
-        btnDOWN = New Button()
-        btnUP = New Button()
-        PictureBox1 = New PictureBox()
+        CheckBox18 = New CheckBox()
+        CheckBox17 = New CheckBox()
+        CheckBox16 = New CheckBox()
+        CheckBox15 = New CheckBox()
+        CheckBox14 = New CheckBox()
+        CheckBox13 = New CheckBox()
+        CheckBox12 = New CheckBox()
+        CheckBox11 = New CheckBox()
+        CheckBox10 = New CheckBox()
+        CheckBox9 = New CheckBox()
+        CheckBox8 = New CheckBox()
+        CheckBox7 = New CheckBox()
+        CheckBox6 = New CheckBox()
+        CheckBox5 = New CheckBox()
+        CheckBox3 = New CheckBox()
+        CheckBox4 = New CheckBox()
+        CheckBox2 = New CheckBox()
+        CheckBox1 = New CheckBox()
         RadioButton18 = New RadioButton()
         RadioButton17 = New RadioButton()
         RadioButton16 = New RadioButton()
@@ -150,6 +144,12 @@ Partial Class Configurator
         RadioButton3 = New RadioButton()
         RadioButton2 = New RadioButton()
         RadioButton1 = New RadioButton()
+        Button1 = New Button()
+        btnRIGHT = New Button()
+        btnLEFT = New Button()
+        btnDOWN = New Button()
+        btnUP = New Button()
+        PictureBox1 = New PictureBox()
         btnRead = New Button()
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
@@ -1186,30 +1186,24 @@ Partial Class Configurator
         ' TabPage6
         ' 
         TabPage6.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        TabPage6.Controls.Add(Button1)
-        TabPage6.Controls.Add(ele18)
-        TabPage6.Controls.Add(ele17)
-        TabPage6.Controls.Add(ele14)
-        TabPage6.Controls.Add(ele16)
-        TabPage6.Controls.Add(ele15)
-        TabPage6.Controls.Add(ele13)
-        TabPage6.Controls.Add(ele12)
-        TabPage6.Controls.Add(ele11)
-        TabPage6.Controls.Add(ele10)
-        TabPage6.Controls.Add(ele9)
-        TabPage6.Controls.Add(ele8)
-        TabPage6.Controls.Add(ele7)
-        TabPage6.Controls.Add(ele6)
-        TabPage6.Controls.Add(ele5)
-        TabPage6.Controls.Add(ele4)
-        TabPage6.Controls.Add(ele3)
-        TabPage6.Controls.Add(ele2)
-        TabPage6.Controls.Add(ele1)
-        TabPage6.Controls.Add(btnRIGHT)
-        TabPage6.Controls.Add(btnLEFT)
-        TabPage6.Controls.Add(btnDOWN)
-        TabPage6.Controls.Add(btnUP)
-        TabPage6.Controls.Add(PictureBox1)
+        TabPage6.Controls.Add(CheckBox18)
+        TabPage6.Controls.Add(CheckBox17)
+        TabPage6.Controls.Add(CheckBox16)
+        TabPage6.Controls.Add(CheckBox15)
+        TabPage6.Controls.Add(CheckBox14)
+        TabPage6.Controls.Add(CheckBox13)
+        TabPage6.Controls.Add(CheckBox12)
+        TabPage6.Controls.Add(CheckBox11)
+        TabPage6.Controls.Add(CheckBox10)
+        TabPage6.Controls.Add(CheckBox9)
+        TabPage6.Controls.Add(CheckBox8)
+        TabPage6.Controls.Add(CheckBox7)
+        TabPage6.Controls.Add(CheckBox6)
+        TabPage6.Controls.Add(CheckBox5)
+        TabPage6.Controls.Add(CheckBox3)
+        TabPage6.Controls.Add(CheckBox4)
+        TabPage6.Controls.Add(CheckBox2)
+        TabPage6.Controls.Add(CheckBox1)
         TabPage6.Controls.Add(RadioButton18)
         TabPage6.Controls.Add(RadioButton17)
         TabPage6.Controls.Add(RadioButton16)
@@ -1228,12 +1222,470 @@ Partial Class Configurator
         TabPage6.Controls.Add(RadioButton3)
         TabPage6.Controls.Add(RadioButton2)
         TabPage6.Controls.Add(RadioButton1)
+        TabPage6.Controls.Add(Button1)
+        TabPage6.Controls.Add(btnRIGHT)
+        TabPage6.Controls.Add(btnLEFT)
+        TabPage6.Controls.Add(btnDOWN)
+        TabPage6.Controls.Add(btnUP)
+        TabPage6.Controls.Add(PictureBox1)
         TabPage6.Location = New Point(4, 25)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
         TabPage6.Size = New Size(629, 341)
         TabPage6.TabIndex = 5
         TabPage6.Text = "OSD"
+        ' 
+        ' CheckBox18
+        ' 
+        CheckBox18.AutoSize = True
+        CheckBox18.Checked = True
+        CheckBox18.CheckState = CheckState.Checked
+        CheckBox18.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox18.Location = New Point(519, 244)
+        CheckBox18.Name = "CheckBox18"
+        CheckBox18.Size = New Size(73, 18)
+        CheckBox18.TabIndex = 104
+        CheckBox18.Text = "HORIZON"
+        CheckBox18.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox17
+        ' 
+        CheckBox17.AutoSize = True
+        CheckBox17.Checked = True
+        CheckBox17.CheckState = CheckState.Checked
+        CheckBox17.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox17.Location = New Point(519, 230)
+        CheckBox17.Name = "CheckBox17"
+        CheckBox17.Size = New Size(52, 18)
+        CheckBox17.TabIndex = 103
+        CheckBox17.Text = "TIME"
+        CheckBox17.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox16
+        ' 
+        CheckBox16.AutoSize = True
+        CheckBox16.Checked = True
+        CheckBox16.CheckState = CheckState.Checked
+        CheckBox16.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox16.Location = New Point(519, 216)
+        CheckBox16.Name = "CheckBox16"
+        CheckBox16.Size = New Size(62, 18)
+        CheckBox16.TabIndex = 102
+        CheckBox16.Text = "Bitrate"
+        CheckBox16.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox15
+        ' 
+        CheckBox15.AutoSize = True
+        CheckBox15.Checked = True
+        CheckBox15.CheckState = CheckState.Checked
+        CheckBox15.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox15.Location = New Point(519, 202)
+        CheckBox15.Name = "CheckBox15"
+        CheckBox15.Size = New Size(87, 18)
+        CheckBox15.TabIndex = 101
+        CheckBox15.Text = "RX Packets"
+        CheckBox15.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox14
+        ' 
+        CheckBox14.AutoSize = True
+        CheckBox14.Checked = True
+        CheckBox14.CheckState = CheckState.Checked
+        CheckBox14.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox14.Location = New Point(519, 188)
+        CheckBox14.Name = "CheckBox14"
+        CheckBox14.Size = New Size(73, 18)
+        CheckBox14.TabIndex = 100
+        CheckBox14.Text = "OpenIPC"
+        CheckBox14.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox13
+        ' 
+        CheckBox13.AutoSize = True
+        CheckBox13.Checked = True
+        CheckBox13.CheckState = CheckState.Checked
+        CheckBox13.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox13.Location = New Point(519, 174)
+        CheckBox13.Name = "CheckBox13"
+        CheckBox13.Size = New Size(50, 18)
+        CheckBox13.TabIndex = 99
+        CheckBox13.Text = "RSSI"
+        CheckBox13.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox12
+        ' 
+        CheckBox12.AutoSize = True
+        CheckBox12.Checked = True
+        CheckBox12.CheckState = CheckState.Checked
+        CheckBox12.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox12.Location = New Point(519, 160)
+        CheckBox12.Name = "CheckBox12"
+        CheckBox12.Size = New Size(50, 18)
+        CheckBox12.TabIndex = 98
+        CheckBox12.Text = "DIST"
+        CheckBox12.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox11
+        ' 
+        CheckBox11.AutoSize = True
+        CheckBox11.Checked = True
+        CheckBox11.CheckState = CheckState.Checked
+        CheckBox11.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox11.Location = New Point(519, 146)
+        CheckBox11.Name = "CheckBox11"
+        CheckBox11.Size = New Size(48, 18)
+        CheckBox11.TabIndex = 97
+        CheckBox11.Text = "LON"
+        CheckBox11.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox10
+        ' 
+        CheckBox10.AutoSize = True
+        CheckBox10.Checked = True
+        CheckBox10.CheckState = CheckState.Checked
+        CheckBox10.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox10.Location = New Point(519, 132)
+        CheckBox10.Name = "CheckBox10"
+        CheckBox10.Size = New Size(47, 18)
+        CheckBox10.TabIndex = 96
+        CheckBox10.Text = "LAT"
+        CheckBox10.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox9
+        ' 
+        CheckBox9.AutoSize = True
+        CheckBox9.Checked = True
+        CheckBox9.CheckState = CheckState.Checked
+        CheckBox9.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox9.Location = New Point(519, 118)
+        CheckBox9.Name = "CheckBox9"
+        CheckBox9.Size = New Size(48, 18)
+        CheckBox9.TabIndex = 95
+        CheckBox9.Text = "HDG"
+        CheckBox9.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox8
+        ' 
+        CheckBox8.AutoSize = True
+        CheckBox8.Checked = True
+        CheckBox8.CheckState = CheckState.Checked
+        CheckBox8.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox8.Location = New Point(519, 104)
+        CheckBox8.Name = "CheckBox8"
+        CheckBox8.Size = New Size(54, 18)
+        CheckBox8.TabIndex = 94
+        CheckBox8.Text = "SATS"
+        CheckBox8.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox7
+        ' 
+        CheckBox7.AutoSize = True
+        CheckBox7.Checked = True
+        CheckBox7.CheckState = CheckState.Checked
+        CheckBox7.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox7.Location = New Point(519, 90)
+        CheckBox7.Name = "CheckBox7"
+        CheckBox7.Size = New Size(47, 18)
+        CheckBox7.TabIndex = 93
+        CheckBox7.Text = "THR"
+        CheckBox7.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox6
+        ' 
+        CheckBox6.AutoSize = True
+        CheckBox6.Checked = True
+        CheckBox6.CheckState = CheckState.Checked
+        CheckBox6.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox6.Location = New Point(519, 76)
+        CheckBox6.Name = "CheckBox6"
+        CheckBox6.Size = New Size(48, 18)
+        CheckBox6.TabIndex = 92
+        CheckBox6.Text = "CUR"
+        CheckBox6.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox5
+        ' 
+        CheckBox5.AutoSize = True
+        CheckBox5.Checked = True
+        CheckBox5.CheckState = CheckState.Checked
+        CheckBox5.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox5.Location = New Point(519, 62)
+        CheckBox5.Name = "CheckBox5"
+        CheckBox5.Size = New Size(56, 18)
+        CheckBox5.TabIndex = 91
+        CheckBox5.Text = "CONS"
+        CheckBox5.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox3
+        ' 
+        CheckBox3.AutoSize = True
+        CheckBox3.Checked = True
+        CheckBox3.CheckState = CheckState.Checked
+        CheckBox3.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox3.Location = New Point(519, 34)
+        CheckBox3.Name = "CheckBox3"
+        CheckBox3.Size = New Size(55, 18)
+        CheckBox3.TabIndex = 90
+        CheckBox3.Text = "VSPD"
+        CheckBox3.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox4
+        ' 
+        CheckBox4.AutoSize = True
+        CheckBox4.Checked = True
+        CheckBox4.CheckState = CheckState.Checked
+        CheckBox4.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox4.Location = New Point(519, 48)
+        CheckBox4.Name = "CheckBox4"
+        CheckBox4.Size = New Size(47, 18)
+        CheckBox4.TabIndex = 89
+        CheckBox4.Text = "BAT"
+        CheckBox4.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox2
+        ' 
+        CheckBox2.AutoSize = True
+        CheckBox2.Checked = True
+        CheckBox2.CheckState = CheckState.Checked
+        CheckBox2.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox2.Location = New Point(519, 20)
+        CheckBox2.Name = "CheckBox2"
+        CheckBox2.Size = New Size(47, 18)
+        CheckBox2.TabIndex = 88
+        CheckBox2.Text = "SPD"
+        CheckBox2.UseVisualStyleBackColor = True
+        ' 
+        ' CheckBox1
+        ' 
+        CheckBox1.AutoSize = True
+        CheckBox1.Checked = True
+        CheckBox1.CheckState = CheckState.Checked
+        CheckBox1.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        CheckBox1.Location = New Point(519, 6)
+        CheckBox1.Name = "CheckBox1"
+        CheckBox1.Size = New Size(47, 18)
+        CheckBox1.TabIndex = 87
+        CheckBox1.Text = "ALT"
+        CheckBox1.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton18
+        ' 
+        RadioButton18.AutoSize = True
+        RadioButton18.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton18.ForeColor = Color.White
+        RadioButton18.Location = New Point(132, 117)
+        RadioButton18.Name = "RadioButton18"
+        RadioButton18.Size = New Size(208, 19)
+        RadioButton18.TabIndex = 86
+        RadioButton18.Text = "-----------------------HORIZON -----------------------"
+        RadioButton18.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton17
+        ' 
+        RadioButton17.AutoSize = True
+        RadioButton17.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton17.ForeColor = Color.White
+        RadioButton17.Location = New Point(450, 186)
+        RadioButton17.Name = "RadioButton17"
+        RadioButton17.Size = New Size(47, 19)
+        RadioButton17.TabIndex = 85
+        RadioButton17.Text = "TIME"
+        RadioButton17.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton16
+        ' 
+        RadioButton16.AutoSize = True
+        RadioButton16.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton16.ForeColor = Color.White
+        RadioButton16.Location = New Point(112, 5)
+        RadioButton16.Name = "RadioButton16"
+        RadioButton16.Size = New Size(50, 19)
+        RadioButton16.TabIndex = 84
+        RadioButton16.Text = "Bitrate"
+        RadioButton16.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton15
+        ' 
+        RadioButton15.AutoSize = True
+        RadioButton15.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton15.ForeColor = Color.White
+        RadioButton15.Location = New Point(236, 7)
+        RadioButton15.Name = "RadioButton15"
+        RadioButton15.Size = New Size(74, 19)
+        RadioButton15.TabIndex = 83
+        RadioButton15.Text = "RX Packets"
+        RadioButton15.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton14
+        ' 
+        RadioButton14.AutoSize = True
+        RadioButton14.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton14.ForeColor = Color.White
+        RadioButton14.Location = New Point(393, 2)
+        RadioButton14.Name = "RadioButton14"
+        RadioButton14.Size = New Size(62, 19)
+        RadioButton14.TabIndex = 82
+        RadioButton14.Text = "OpenIPC"
+        RadioButton14.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton13
+        ' 
+        RadioButton13.AutoSize = True
+        RadioButton13.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton13.ForeColor = Color.White
+        RadioButton13.Location = New Point(238, 260)
+        RadioButton13.Name = "RadioButton13"
+        RadioButton13.Size = New Size(46, 19)
+        RadioButton13.TabIndex = 81
+        RadioButton13.Text = "RSSI"
+        RadioButton13.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton12
+        ' 
+        RadioButton12.AutoSize = True
+        RadioButton12.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton12.ForeColor = Color.White
+        RadioButton12.Location = New Point(102, 260)
+        RadioButton12.Name = "RadioButton12"
+        RadioButton12.Size = New Size(45, 19)
+        RadioButton12.TabIndex = 80
+        RadioButton12.Text = "DIST"
+        RadioButton12.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton11
+        ' 
+        RadioButton11.AutoSize = True
+        RadioButton11.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton11.ForeColor = Color.White
+        RadioButton11.Location = New Point(406, 242)
+        RadioButton11.Name = "RadioButton11"
+        RadioButton11.Size = New Size(44, 19)
+        RadioButton11.TabIndex = 79
+        RadioButton11.Text = "LON"
+        RadioButton11.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton10
+        ' 
+        RadioButton10.AutoSize = True
+        RadioButton10.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton10.ForeColor = Color.White
+        RadioButton10.Location = New Point(407, 218)
+        RadioButton10.Name = "RadioButton10"
+        RadioButton10.Size = New Size(42, 19)
+        RadioButton10.TabIndex = 78
+        RadioButton10.Text = "LAT"
+        RadioButton10.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton9
+        ' 
+        RadioButton9.AutoSize = True
+        RadioButton9.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton9.ForeColor = Color.White
+        RadioButton9.Location = New Point(450, 205)
+        RadioButton9.Name = "RadioButton9"
+        RadioButton9.Size = New Size(44, 19)
+        RadioButton9.TabIndex = 77
+        RadioButton9.Text = "HDG"
+        RadioButton9.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton8
+        ' 
+        RadioButton8.AutoSize = True
+        RadioButton8.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton8.ForeColor = Color.White
+        RadioButton8.Location = New Point(450, 260)
+        RadioButton8.Name = "RadioButton8"
+        RadioButton8.Size = New Size(49, 19)
+        RadioButton8.TabIndex = 76
+        RadioButton8.Text = "SATS"
+        RadioButton8.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton7
+        ' 
+        RadioButton7.AutoSize = True
+        RadioButton7.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton7.ForeColor = Color.White
+        RadioButton7.Location = New Point(10, 205)
+        RadioButton7.Name = "RadioButton7"
+        RadioButton7.Size = New Size(44, 19)
+        RadioButton7.TabIndex = 75
+        RadioButton7.Text = "THR"
+        RadioButton7.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton6
+        ' 
+        RadioButton6.AutoSize = True
+        RadioButton6.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton6.ForeColor = Color.White
+        RadioButton6.Location = New Point(9, 224)
+        RadioButton6.Name = "RadioButton6"
+        RadioButton6.Size = New Size(46, 19)
+        RadioButton6.TabIndex = 74
+        RadioButton6.Text = "CUR"
+        RadioButton6.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton5
+        ' 
+        RadioButton5.AutoSize = True
+        RadioButton5.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton5.ForeColor = Color.White
+        RadioButton5.Location = New Point(9, 242)
+        RadioButton5.Name = "RadioButton5"
+        RadioButton5.Size = New Size(52, 19)
+        RadioButton5.TabIndex = 73
+        RadioButton5.Text = "CONS"
+        RadioButton5.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton4
+        ' 
+        RadioButton4.AutoSize = True
+        RadioButton4.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton4.ForeColor = Color.White
+        RadioButton4.Location = New Point(11, 260)
+        RadioButton4.Name = "RadioButton4"
+        RadioButton4.Size = New Size(43, 19)
+        RadioButton4.TabIndex = 72
+        RadioButton4.Text = "BAT"
+        RadioButton4.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton3
+        ' 
+        RadioButton3.AutoSize = True
+        RadioButton3.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton3.ForeColor = Color.White
+        RadioButton3.Location = New Point(358, 140)
+        RadioButton3.Name = "RadioButton3"
+        RadioButton3.Size = New Size(49, 19)
+        RadioButton3.TabIndex = 71
+        RadioButton3.Text = "VSPD"
+        RadioButton3.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton2
+        ' 
+        RadioButton2.AutoSize = True
+        RadioButton2.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton2.ForeColor = Color.White
+        RadioButton2.Location = New Point(80, 117)
+        RadioButton2.Name = "RadioButton2"
+        RadioButton2.Size = New Size(43, 19)
+        RadioButton2.TabIndex = 70
+        RadioButton2.Text = "SPD"
+        RadioButton2.UseVisualStyleBackColor = True
+        ' 
+        ' RadioButton1
+        ' 
+        RadioButton1.AutoSize = True
+        RadioButton1.Checked = True
+        RadioButton1.Font = New Font("Arial Narrow", 8.25F)
+        RadioButton1.ForeColor = Color.White
+        RadioButton1.Location = New Point(358, 116)
+        RadioButton1.Name = "RadioButton1"
+        RadioButton1.Size = New Size(42, 19)
+        RadioButton1.TabIndex = 69
+        RadioButton1.TabStop = True
+        RadioButton1.Text = "ALT"
+        RadioButton1.UseVisualStyleBackColor = True
         ' 
         ' Button1
         ' 
@@ -1247,204 +1699,6 @@ Partial Class Configurator
         Button1.Text = "3. Save"
         btnToolTip.SetToolTip(Button1, "Save the VRX settings" & vbCrLf & "to the local files setdisplay.sh" & vbCrLf & "and vdec.conf")
         Button1.UseVisualStyleBackColor = False
-        ' 
-        ' ele18
-        ' 
-        ele18.AutoSize = True
-        ele18.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele18.ForeColor = Color.White
-        ele18.Location = New Point(139, 128)
-        ele18.Name = "ele18"
-        ele18.Size = New Size(207, 15)
-        ele18.TabIndex = 67
-        ele18.Text = "--------------------------------------------------"
-        ' 
-        ' ele17
-        ' 
-        ele17.AutoSize = True
-        ele17.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele17.ForeColor = Color.White
-        ele17.Location = New Point(459, 203)
-        ele17.Name = "ele17"
-        ele17.Size = New Size(34, 15)
-        ele17.TabIndex = 66
-        ele17.Text = "TIME"
-        ' 
-        ' ele14
-        ' 
-        ele14.AutoSize = True
-        ele14.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele14.ForeColor = Color.White
-        ele14.Location = New Point(437, 6)
-        ele14.Name = "ele14"
-        ele14.Size = New Size(56, 15)
-        ele14.TabIndex = 65
-        ele14.Text = "OpenIPC"
-        ' 
-        ' ele16
-        ' 
-        ele16.AutoSize = True
-        ele16.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele16.ForeColor = Color.White
-        ele16.Location = New Point(102, 3)
-        ele16.Name = "ele16"
-        ele16.Size = New Size(33, 15)
-        ele16.TabIndex = 64
-        ele16.Text = "Rate"
-        ' 
-        ' ele15
-        ' 
-        ele15.AutoSize = True
-        ele15.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele15.ForeColor = Color.White
-        ele15.Location = New Point(232, 5)
-        ele15.Name = "ele15"
-        ele15.Size = New Size(73, 15)
-        ele15.TabIndex = 63
-        ele15.Text = "RX Packets"
-        ' 
-        ' ele13
-        ' 
-        ele13.AutoSize = True
-        ele13.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele13.ForeColor = Color.White
-        ele13.Location = New Point(253, 263)
-        ele13.Name = "ele13"
-        ele13.Size = New Size(34, 15)
-        ele13.TabIndex = 62
-        ele13.Text = "RSSI"
-        ' 
-        ' ele12
-        ' 
-        ele12.AutoSize = True
-        ele12.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele12.ForeColor = Color.White
-        ele12.Location = New Point(112, 263)
-        ele12.Name = "ele12"
-        ele12.Size = New Size(33, 15)
-        ele12.TabIndex = 61
-        ele12.Text = "DIST"
-        ' 
-        ' ele11
-        ' 
-        ele11.AutoSize = True
-        ele11.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele11.ForeColor = Color.White
-        ele11.Location = New Point(426, 248)
-        ele11.Name = "ele11"
-        ele11.Size = New Size(31, 15)
-        ele11.TabIndex = 60
-        ele11.Text = "LON"
-        ' 
-        ' ele10
-        ' 
-        ele10.AutoSize = True
-        ele10.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele10.ForeColor = Color.White
-        ele10.Location = New Point(426, 233)
-        ele10.Name = "ele10"
-        ele10.Size = New Size(28, 15)
-        ele10.TabIndex = 59
-        ele10.Text = "LAT"
-        ' 
-        ' ele9
-        ' 
-        ele9.AutoSize = True
-        ele9.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele9.ForeColor = Color.White
-        ele9.Location = New Point(462, 218)
-        ele9.Name = "ele9"
-        ele9.Size = New Size(31, 15)
-        ele9.TabIndex = 58
-        ele9.Text = "HDG"
-        ' 
-        ' ele8
-        ' 
-        ele8.AutoSize = True
-        ele8.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele8.ForeColor = Color.White
-        ele8.Location = New Point(459, 263)
-        ele8.Name = "ele8"
-        ele8.Size = New Size(37, 15)
-        ele8.TabIndex = 57
-        ele8.Text = "SATS"
-        ' 
-        ' ele7
-        ' 
-        ele7.AutoSize = True
-        ele7.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele7.ForeColor = Color.White
-        ele7.Location = New Point(6, 218)
-        ele7.Name = "ele7"
-        ele7.Size = New Size(30, 15)
-        ele7.TabIndex = 56
-        ele7.Text = "THR"
-        ' 
-        ' ele6
-        ' 
-        ele6.AutoSize = True
-        ele6.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele6.ForeColor = Color.White
-        ele6.Location = New Point(6, 233)
-        ele6.Name = "ele6"
-        ele6.Size = New Size(31, 15)
-        ele6.TabIndex = 55
-        ele6.Text = "CUR"
-        ' 
-        ' ele5
-        ' 
-        ele5.AutoSize = True
-        ele5.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele5.ForeColor = Color.White
-        ele5.Location = New Point(6, 248)
-        ele5.Name = "ele5"
-        ele5.Size = New Size(40, 15)
-        ele5.TabIndex = 54
-        ele5.Text = "CONS"
-        ' 
-        ' ele4
-        ' 
-        ele4.AutoSize = True
-        ele4.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele4.ForeColor = Color.White
-        ele4.Location = New Point(6, 263)
-        ele4.Name = "ele4"
-        ele4.Size = New Size(29, 15)
-        ele4.TabIndex = 53
-        ele4.Text = "BAT"
-        ' 
-        ' ele3
-        ' 
-        ele3.AutoSize = True
-        ele3.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele3.ForeColor = Color.White
-        ele3.Location = New Point(356, 149)
-        ele3.Name = "ele3"
-        ele3.Size = New Size(39, 15)
-        ele3.TabIndex = 52
-        ele3.Text = "VSPD"
-        ' 
-        ' ele2
-        ' 
-        ele2.AutoSize = True
-        ele2.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele2.ForeColor = Color.White
-        ele2.Location = New Point(102, 128)
-        ele2.Name = "ele2"
-        ele2.Size = New Size(31, 15)
-        ele2.TabIndex = 51
-        ele2.Text = "SPD"
-        ' 
-        ' ele1
-        ' 
-        ele1.AutoSize = True
-        ele1.Font = New Font("Arial", 9F, FontStyle.Bold)
-        ele1.ForeColor = Color.White
-        ele1.Location = New Point(356, 128)
-        ele1.Name = "ele1"
-        ele1.Size = New Size(28, 15)
-        ele1.TabIndex = 33
-        ele1.Text = "ALT"
         ' 
         ' btnRIGHT
         ' 
@@ -1507,206 +1761,6 @@ Partial Class Configurator
         PictureBox1.SizeMode = PictureBoxSizeMode.StretchImage
         PictureBox1.TabIndex = 46
         PictureBox1.TabStop = False
-        ' 
-        ' RadioButton18
-        ' 
-        RadioButton18.AutoSize = True
-        RadioButton18.ForeColor = Color.White
-        RadioButton18.Location = New Point(416, 314)
-        RadioButton18.Name = "RadioButton18"
-        RadioButton18.Size = New Size(67, 18)
-        RadioButton18.TabIndex = 45
-        RadioButton18.Text = "Horizon"
-        RadioButton18.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton17
-        ' 
-        RadioButton17.AutoSize = True
-        RadioButton17.ForeColor = Color.White
-        RadioButton17.Location = New Point(416, 294)
-        RadioButton17.Name = "RadioButton17"
-        RadioButton17.Size = New Size(86, 18)
-        RadioButton17.TabIndex = 44
-        RadioButton17.Text = "Flight Time"
-        RadioButton17.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton16
-        ' 
-        RadioButton16.AutoSize = True
-        RadioButton16.ForeColor = Color.White
-        RadioButton16.Location = New Point(323, 314)
-        RadioButton16.Name = "RadioButton16"
-        RadioButton16.Size = New Size(61, 18)
-        RadioButton16.TabIndex = 43
-        RadioButton16.Text = "Bitrate"
-        RadioButton16.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton15
-        ' 
-        RadioButton15.AutoSize = True
-        RadioButton15.ForeColor = Color.White
-        RadioButton15.Location = New Point(323, 294)
-        RadioButton15.Name = "RadioButton15"
-        RadioButton15.Size = New Size(86, 18)
-        RadioButton15.TabIndex = 42
-        RadioButton15.Text = "RX Packets"
-        RadioButton15.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton14
-        ' 
-        RadioButton14.AutoSize = True
-        RadioButton14.ForeColor = Color.White
-        RadioButton14.Location = New Point(518, 313)
-        RadioButton14.Name = "RadioButton14"
-        RadioButton14.Size = New Size(103, 18)
-        RadioButton14.TabIndex = 41
-        RadioButton14.Text = "OpenIPC Logo"
-        RadioButton14.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton13
-        ' 
-        RadioButton13.AutoSize = True
-        RadioButton13.ForeColor = Color.White
-        RadioButton13.Location = New Point(518, 293)
-        RadioButton13.Name = "RadioButton13"
-        RadioButton13.Size = New Size(49, 18)
-        RadioButton13.TabIndex = 40
-        RadioButton13.Text = "RSSI"
-        RadioButton13.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton12
-        ' 
-        RadioButton12.AutoSize = True
-        RadioButton12.ForeColor = Color.White
-        RadioButton12.Location = New Point(518, 269)
-        RadioButton12.Name = "RadioButton12"
-        RadioButton12.Size = New Size(107, 18)
-        RadioButton12.TabIndex = 39
-        RadioButton12.Text = "Home Distance"
-        RadioButton12.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton11
-        ' 
-        RadioButton11.AutoSize = True
-        RadioButton11.ForeColor = Color.White
-        RadioButton11.Location = New Point(518, 245)
-        RadioButton11.Name = "RadioButton11"
-        RadioButton11.Size = New Size(81, 18)
-        RadioButton11.TabIndex = 38
-        RadioButton11.Text = "Longitude"
-        RadioButton11.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton10
-        ' 
-        RadioButton10.AutoSize = True
-        RadioButton10.ForeColor = Color.White
-        RadioButton10.Location = New Point(518, 221)
-        RadioButton10.Name = "RadioButton10"
-        RadioButton10.Size = New Size(70, 18)
-        RadioButton10.TabIndex = 37
-        RadioButton10.Text = "Latitude"
-        RadioButton10.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton9
-        ' 
-        RadioButton9.AutoSize = True
-        RadioButton9.ForeColor = Color.White
-        RadioButton9.Location = New Point(518, 197)
-        RadioButton9.Name = "RadioButton9"
-        RadioButton9.Size = New Size(69, 18)
-        RadioButton9.TabIndex = 36
-        RadioButton9.Text = "Heading"
-        RadioButton9.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton8
-        ' 
-        RadioButton8.AutoSize = True
-        RadioButton8.ForeColor = Color.White
-        RadioButton8.Location = New Point(518, 173)
-        RadioButton8.Name = "RadioButton8"
-        RadioButton8.Size = New Size(76, 18)
-        RadioButton8.TabIndex = 35
-        RadioButton8.Text = "Satellites"
-        RadioButton8.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton7
-        ' 
-        RadioButton7.AutoSize = True
-        RadioButton7.ForeColor = Color.White
-        RadioButton7.Location = New Point(518, 149)
-        RadioButton7.Name = "RadioButton7"
-        RadioButton7.Size = New Size(69, 18)
-        RadioButton7.TabIndex = 34
-        RadioButton7.Text = "Throttle"
-        RadioButton7.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton6
-        ' 
-        RadioButton6.AutoSize = True
-        RadioButton6.ForeColor = Color.White
-        RadioButton6.Location = New Point(518, 125)
-        RadioButton6.Name = "RadioButton6"
-        RadioButton6.Size = New Size(107, 18)
-        RadioButton6.TabIndex = 33
-        RadioButton6.Text = "Amps. Current"
-        RadioButton6.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton5
-        ' 
-        RadioButton5.AutoSize = True
-        RadioButton5.ForeColor = Color.White
-        RadioButton5.Location = New Point(518, 101)
-        RadioButton5.Name = "RadioButton5"
-        RadioButton5.Size = New Size(109, 18)
-        RadioButton5.TabIndex = 32
-        RadioButton5.Text = "Bat. Consumed"
-        RadioButton5.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton4
-        ' 
-        RadioButton4.AutoSize = True
-        RadioButton4.ForeColor = Color.White
-        RadioButton4.Location = New Point(518, 77)
-        RadioButton4.Name = "RadioButton4"
-        RadioButton4.Size = New Size(64, 18)
-        RadioButton4.TabIndex = 31
-        RadioButton4.Text = "Battery"
-        RadioButton4.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton3
-        ' 
-        RadioButton3.AutoSize = True
-        RadioButton3.ForeColor = Color.White
-        RadioButton3.Location = New Point(518, 53)
-        RadioButton3.Name = "RadioButton3"
-        RadioButton3.Size = New Size(70, 18)
-        RadioButton3.TabIndex = 30
-        RadioButton3.Text = "V.Speed"
-        RadioButton3.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton2
-        ' 
-        RadioButton2.AutoSize = True
-        RadioButton2.ForeColor = Color.White
-        RadioButton2.Location = New Point(518, 29)
-        RadioButton2.Name = "RadioButton2"
-        RadioButton2.Size = New Size(60, 18)
-        RadioButton2.TabIndex = 29
-        RadioButton2.Text = "Speed"
-        RadioButton2.UseVisualStyleBackColor = True
-        ' 
-        ' RadioButton1
-        ' 
-        RadioButton1.AutoSize = True
-        RadioButton1.Checked = True
-        RadioButton1.ForeColor = Color.White
-        RadioButton1.Location = New Point(518, 6)
-        RadioButton1.Name = "RadioButton1"
-        RadioButton1.Size = New Size(68, 18)
-        RadioButton1.TabIndex = 28
-        RadioButton1.TabStop = True
-        RadioButton1.Text = "Altitude"
-        RadioButton1.UseVisualStyleBackColor = True
         ' 
         ' btnRead
         ' 
@@ -1951,6 +2005,17 @@ Partial Class Configurator
     Friend WithEvents MenuStrip1 As MenuStrip
     Friend WithEvents Label4 As Label
     Friend WithEvents TabPage6 As TabPage
+    Friend WithEvents PictureBox1 As PictureBox
+    Friend WithEvents btnUP As Button
+    Friend WithEvents btnRIGHT As Button
+    Friend WithEvents btnLEFT As Button
+    Friend WithEvents btnDOWN As Button
+    Friend WithEvents Button1 As Button
+    Friend WithEvents btnScan As Button
+    Friend WithEvents txtScan As TextBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblScan As Label
+    Friend WithEvents Label5 As Label
     Friend WithEvents RadioButton18 As RadioButton
     Friend WithEvents RadioButton17 As RadioButton
     Friend WithEvents RadioButton16 As RadioButton
@@ -1969,34 +2034,23 @@ Partial Class Configurator
     Friend WithEvents RadioButton3 As RadioButton
     Friend WithEvents RadioButton2 As RadioButton
     Friend WithEvents RadioButton1 As RadioButton
-    Friend WithEvents PictureBox1 As PictureBox
-    Friend WithEvents btnUP As Button
-    Friend WithEvents btnRIGHT As Button
-    Friend WithEvents btnLEFT As Button
-    Friend WithEvents btnDOWN As Button
-    Friend WithEvents ele2 As Label
-    Friend WithEvents ele1 As Label
-    Friend WithEvents ele7 As Label
-    Friend WithEvents ele6 As Label
-    Friend WithEvents ele5 As Label
-    Friend WithEvents ele4 As Label
-    Friend WithEvents ele3 As Label
-    Friend WithEvents ele11 As Label
-    Friend WithEvents ele10 As Label
-    Friend WithEvents ele9 As Label
-    Friend WithEvents ele8 As Label
-    Friend WithEvents ele13 As Label
-    Friend WithEvents ele12 As Label
-    Friend WithEvents ele18 As Label
-    Friend WithEvents ele17 As Label
-    Friend WithEvents ele14 As Label
-    Friend WithEvents ele16 As Label
-    Friend WithEvents ele15 As Label
-    Friend WithEvents Button1 As Button
-    Friend WithEvents btnScan As Button
-    Friend WithEvents txtScan As TextBox
-    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
-    Friend WithEvents lblScan As Label
-    Friend WithEvents Label5 As Label
+    Friend WithEvents CheckBox13 As CheckBox
+    Friend WithEvents CheckBox12 As CheckBox
+    Friend WithEvents CheckBox11 As CheckBox
+    Friend WithEvents CheckBox10 As CheckBox
+    Friend WithEvents CheckBox9 As CheckBox
+    Friend WithEvents CheckBox8 As CheckBox
+    Friend WithEvents CheckBox7 As CheckBox
+    Friend WithEvents CheckBox6 As CheckBox
+    Friend WithEvents CheckBox5 As CheckBox
+    Friend WithEvents CheckBox3 As CheckBox
+    Friend WithEvents CheckBox4 As CheckBox
+    Friend WithEvents CheckBox2 As CheckBox
+    Friend WithEvents CheckBox1 As CheckBox
+    Friend WithEvents CheckBox18 As CheckBox
+    Friend WithEvents CheckBox17 As CheckBox
+    Friend WithEvents CheckBox16 As CheckBox
+    Friend WithEvents CheckBox15 As CheckBox
+    Friend WithEvents CheckBox14 As CheckBox
 
 End Class
