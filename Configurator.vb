@@ -2,6 +2,10 @@ Imports System.ComponentModel
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
 Imports System.Reflection
+Imports System.Net
+Imports System.Net.NetworkInformation
+Imports System.Net.Sockets
+Imports System.Threading
 
 Public Class Configurator
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
@@ -1703,6 +1707,28 @@ err1:
         Next
         IO.File.WriteAllLines(VDECfilePath, lines)
         MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
+    End Sub
+
+    Private Sub btnScan_Click(sender As Object, e As EventArgs) Handles btnScan.Click
+        BackgroundWorker1.RunWorkerAsync()
+    End Sub
+
+    Private Sub BackgroundWorker1_DoWork(sender As Object, e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker1.DoWork
+        Dim ping As Ping
+        Dim pingReply As PingReply
+
+        Thread.Sleep(500)
+
+        Parallel.For(0, 254, Sub(i, loopState)
+                                 ping = New Ping()
+                                 pingReply = ping.Send(txtScan.Text + i.ToString())
+                                 Me.BeginInvoke(CType(Sub()
+                                                          If pingReply.Status = IPStatus.Success Then
+                                                              lblScan.Text = lblScan.Text + vbCrLf + txtScan.Text + i.ToString()
+                                                          End If
+                                                      End Sub, Action))
+                             End Sub)
+        MessageBox.Show("Scan completed")
     End Sub
 
 #End Region

@@ -98,6 +98,9 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        lblScan = New Label()
+        btnScan = New Button()
+        txtScan = New TextBox()
         Label4 = New Label()
         btnGenerateKeys = New Button()
         btnSendKeys = New Button()
@@ -156,6 +159,8 @@ Partial Class Configurator
         rBtnRadxaZero3w = New RadioButton()
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
+        BackgroundWorker1 = New ComponentModel.BackgroundWorker()
+        Label5 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1056,6 +1061,10 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(Label5)
+        TabPage5.Controls.Add(lblScan)
+        TabPage5.Controls.Add(btnScan)
+        TabPage5.Controls.Add(txtScan)
         TabPage5.Controls.Add(Label4)
         TabPage5.Controls.Add(btnGenerateKeys)
         TabPage5.Controls.Add(btnSendKeys)
@@ -1068,11 +1077,49 @@ Partial Class Configurator
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
+        ' lblScan
+        ' 
+        lblScan.AutoSize = True
+        lblScan.Font = New Font("Arial", 9F, FontStyle.Bold)
+        lblScan.ForeColor = Color.White
+        lblScan.Location = New Point(330, 64)
+        lblScan.Name = "lblScan"
+        lblScan.Size = New Size(235, 15)
+        lblScan.TabIndex = 41
+        lblScan.Text = "Available IP Addresses on your network:"
+        ' 
+        ' btnScan
+        ' 
+        btnScan.BackColor = Color.Gold
+        btnScan.FlatStyle = FlatStyle.Popup
+        btnScan.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnScan.Location = New Point(472, 23)
+        btnScan.Name = "btnScan"
+        btnScan.Size = New Size(60, 21)
+        btnScan.TabIndex = 40
+        btnScan.Text = "SCAN"
+        btnToolTip.SetToolTip(btnScan, "Scan your local network")
+        btnScan.UseVisualStyleBackColor = False
+        ' 
+        ' txtScan
+        ' 
+        txtScan.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtScan.BorderStyle = BorderStyle.FixedSingle
+        txtScan.Enabled = False
+        txtScan.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtScan.ForeColor = Color.White
+        txtScan.Location = New Point(330, 23)
+        txtScan.Name = "txtScan"
+        txtScan.Size = New Size(136, 21)
+        txtScan.TabIndex = 39
+        txtScan.Text = "192.168.0."
+        btnToolTip.SetToolTip(txtScan, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
+        ' 
         ' Label4
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(115, 194)
+        Label4.Location = New Point(21, 190)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -1082,7 +1129,7 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(238, 109)
+        btnGenerateKeys.Location = New Point(144, 105)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(117, 30)
         btnGenerateKeys.TabIndex = 37
@@ -1094,7 +1141,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(115, 145)
+        btnSendKeys.Location = New Point(21, 141)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(117, 30)
         btnSendKeys.TabIndex = 36
@@ -1106,7 +1153,7 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(238, 145)
+        btnReceiveKeys.Location = New Point(144, 141)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(117, 30)
         btnReceiveKeys.TabIndex = 35
@@ -1118,7 +1165,7 @@ Partial Class Configurator
         ' 
         btnUpdate.BackColor = Color.Gold
         btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(115, 109)
+        btnUpdate.Location = New Point(21, 105)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(117, 30)
         btnUpdate.TabIndex = 34
@@ -1758,12 +1805,26 @@ Partial Class Configurator
         MenuStrip1.Text = "MenuStrip1"
         MenuStrip1.Visible = False
         ' 
+        ' BackgroundWorker1
+        ' 
+        ' 
+        ' Label5
+        ' 
+        Label5.AutoSize = True
+        Label5.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label5.ForeColor = Color.White
+        Label5.Location = New Point(21, 23)
+        Label5.Name = "Label5"
+        Label5.Size = New Size(291, 56)
+        Label5.TabIndex = 42
+        Label5.Text = "1. Type the IP subnet to scan (eg. 192.168.0.)" & vbCrLf & "2. Press [SCAN]" & vbCrLf & "3. Wait for the [Scan completed] message to appear" & vbCrLf & "Do not touch anything until finished"
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
-        ClientSize = New Size(658, 445)
+        ClientSize = New Size(661, 445)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
         Controls.Add(Label3)
@@ -1933,5 +1994,10 @@ Partial Class Configurator
     Friend WithEvents ele16 As Label
     Friend WithEvents ele15 As Label
     Friend WithEvents Button1 As Button
+    Friend WithEvents btnScan As Button
+    Friend WithEvents txtScan As TextBox
+    Friend WithEvents BackgroundWorker1 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents lblScan As Label
+    Friend WithEvents Label5 As Label
 
 End Class
