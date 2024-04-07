@@ -522,10 +522,13 @@ err1:
         cmbFPS.Items.Add("20")
         cmbFPS.Items.Add("30")
         cmbFPS.Items.Add("50")
+        cmbFPS.Items.Add("59")
         cmbFPS.Items.Add("60")
+        cmbFPS.Items.Add("80")
         cmbFPS.Items.Add("90")
         cmbFPS.Items.Add("100")
         cmbFPS.Items.Add("110")
+        cmbFPS.Items.Add("119")
         cmbFPS.Items.Add("120")
         cmbFPS.Text = "Select FPS"
 
