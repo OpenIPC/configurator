@@ -1729,6 +1729,7 @@ err1:
     End Sub
 
     Private Sub btnScan_Click(sender As Object, e As EventArgs) Handles btnScan.Click
+        lblScan.Text = "Available IP Addresses on your network:"
         BackgroundWorker1.RunWorkerAsync()
     End Sub
 
@@ -1891,6 +1892,86 @@ err1:
             RadioButton18.Visible = False
         Else
             RadioButton18.Visible = True
+        End If
+    End Sub
+
+    Private Sub btnSensor_Click(sender As Object, e As EventArgs) Handles btnSensor.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "binup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnDriver_Click(sender As Object, e As EventArgs) Handles btnDriver.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "koup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtDriver.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnBinBackup_Click(sender As Object, e As EventArgs) Handles btnBinBackup.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnDriverBackup_Click(sender As Object, e As EventArgs) Handles btnDriverBackup.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "kodl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 

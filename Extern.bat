@@ -82,6 +82,25 @@ if "%1" == "rsmaj" (
 	plink -ssh root@%2 -pw %3 majestic
 )
 
+if "%1" == "binup" (
+	echo y | pscp -scp -pw %3 %4 root@%2:/etc/sensors/
+)
+
+if "%1" == "koup" (
+	echo y | pscp -scp -pw %3 %4 root@%2:/lib/modules/4.9.84/sigmastar/sensor/
+)
+
+
+if "%1" == "bindl" (
+	echo y | mkdir backup
+	echo y | pscp -scp -pw %3 root@%2:/etc/sensors/imx415_fpv.bin ./backup/
+)
+
+if "%1" == "kodl" (
+	echo y | mkdir backup
+	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/sensor/sensor_imx415_mipi.ko ./backup/
+)
+
 :end
 echo.
 pause

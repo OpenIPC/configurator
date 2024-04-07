@@ -98,6 +98,12 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        btnDriverBackup = New Button()
+        btnBinBackup = New Button()
+        txtDriver = New TextBox()
+        txtBin = New TextBox()
+        btnDriver = New Button()
+        btnSensor = New Button()
         Label5 = New Label()
         lblScan = New Label()
         btnScan = New Button()
@@ -161,6 +167,7 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
+        Label6 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -339,7 +346,6 @@ Partial Class Configurator
         txtSensor.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
         txtSensor.Location = New Point(19, 281)
         txtSensor.Name = "txtSensor"
-        txtSensor.ReadOnly = True
         txtSensor.Size = New Size(420, 20)
         txtSensor.TabIndex = 14
         ' 
@@ -596,6 +602,7 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(Label6)
         TabPage2.Controls.Add(btnRestartMajestic)
         TabPage2.Controls.Add(cmbLuminance)
         TabPage2.Controls.Add(cmbSaturation)
@@ -1061,6 +1068,12 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(btnDriverBackup)
+        TabPage5.Controls.Add(btnBinBackup)
+        TabPage5.Controls.Add(txtDriver)
+        TabPage5.Controls.Add(txtBin)
+        TabPage5.Controls.Add(btnDriver)
+        TabPage5.Controls.Add(btnSensor)
         TabPage5.Controls.Add(Label5)
         TabPage5.Controls.Add(lblScan)
         TabPage5.Controls.Add(btnScan)
@@ -1077,12 +1090,88 @@ Partial Class Configurator
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
+        ' btnDriverBackup
+        ' 
+        btnDriverBackup.BackColor = Color.Gold
+        btnDriverBackup.FlatStyle = FlatStyle.Popup
+        btnDriverBackup.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDriverBackup.Location = New Point(152, 3)
+        btnDriverBackup.Name = "btnDriverBackup"
+        btnDriverBackup.Size = New Size(161, 30)
+        btnDriverBackup.TabIndex = 48
+        btnDriverBackup.Text = "Sensor Driver Backup"
+        btnToolTip.SetToolTip(btnDriverBackup, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera")
+        btnDriverBackup.UseVisualStyleBackColor = False
+        ' 
+        ' btnBinBackup
+        ' 
+        btnBinBackup.BackColor = Color.Gold
+        btnBinBackup.FlatStyle = FlatStyle.Popup
+        btnBinBackup.Location = New Point(21, 3)
+        btnBinBackup.Name = "btnBinBackup"
+        btnBinBackup.Size = New Size(125, 30)
+        btnBinBackup.TabIndex = 47
+        btnBinBackup.Text = "Sensor Bin Backup"
+        btnToolTip.SetToolTip(btnBinBackup, "Transfer the imx415_fpv.bin" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera" & vbCrLf)
+        btnBinBackup.UseVisualStyleBackColor = False
+        ' 
+        ' txtDriver
+        ' 
+        txtDriver.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtDriver.BorderStyle = BorderStyle.FixedSingle
+        txtDriver.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtDriver.ForeColor = Color.White
+        txtDriver.Location = New Point(152, 71)
+        txtDriver.Name = "txtDriver"
+        txtDriver.Size = New Size(161, 21)
+        txtDriver.TabIndex = 46
+        txtDriver.Text = "sensor_imx415_mipi.ko"
+        btnToolTip.SetToolTip(txtDriver, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
+        ' 
+        ' txtBin
+        ' 
+        txtBin.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtBin.BorderStyle = BorderStyle.FixedSingle
+        txtBin.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtBin.ForeColor = Color.White
+        txtBin.Location = New Point(21, 73)
+        txtBin.Name = "txtBin"
+        txtBin.Size = New Size(125, 21)
+        txtBin.TabIndex = 45
+        txtBin.Text = "imx415_fpv.bin"
+        btnToolTip.SetToolTip(txtBin, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
+        ' 
+        ' btnDriver
+        ' 
+        btnDriver.BackColor = Color.Gold
+        btnDriver.FlatStyle = FlatStyle.Popup
+        btnDriver.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDriver.Location = New Point(152, 36)
+        btnDriver.Name = "btnDriver"
+        btnDriver.Size = New Size(161, 30)
+        btnDriver.TabIndex = 44
+        btnDriver.Text = "Sensor Driver Update"
+        btnToolTip.SetToolTip(btnDriver, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera")
+        btnDriver.UseVisualStyleBackColor = False
+        ' 
+        ' btnSensor
+        ' 
+        btnSensor.BackColor = Color.Gold
+        btnSensor.FlatStyle = FlatStyle.Popup
+        btnSensor.Location = New Point(21, 37)
+        btnSensor.Name = "btnSensor"
+        btnSensor.Size = New Size(125, 30)
+        btnSensor.TabIndex = 43
+        btnSensor.Text = "Sensor Bin Update"
+        btnToolTip.SetToolTip(btnSensor, "Transfer the imx415_fpv.bin" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera" & vbCrLf)
+        btnSensor.UseVisualStyleBackColor = False
+        ' 
         ' Label5
         ' 
         Label5.AutoSize = True
         Label5.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.White
-        Label5.Location = New Point(21, 23)
+        Label5.Location = New Point(332, 25)
         Label5.Name = "Label5"
         Label5.Size = New Size(291, 56)
         Label5.TabIndex = 42
@@ -1093,7 +1182,7 @@ Partial Class Configurator
         lblScan.AutoSize = True
         lblScan.Font = New Font("Arial", 9F, FontStyle.Bold)
         lblScan.ForeColor = Color.White
-        lblScan.Location = New Point(330, 64)
+        lblScan.Location = New Point(332, 146)
         lblScan.Name = "lblScan"
         lblScan.Size = New Size(235, 15)
         lblScan.TabIndex = 41
@@ -1104,7 +1193,7 @@ Partial Class Configurator
         btnScan.BackColor = Color.Gold
         btnScan.FlatStyle = FlatStyle.Popup
         btnScan.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnScan.Location = New Point(472, 23)
+        btnScan.Location = New Point(474, 105)
         btnScan.Name = "btnScan"
         btnScan.Size = New Size(60, 21)
         btnScan.TabIndex = 40
@@ -1118,7 +1207,7 @@ Partial Class Configurator
         txtScan.BorderStyle = BorderStyle.FixedSingle
         txtScan.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtScan.ForeColor = Color.White
-        txtScan.Location = New Point(330, 23)
+        txtScan.Location = New Point(332, 105)
         txtScan.Name = "txtScan"
         txtScan.Size = New Size(136, 21)
         txtScan.TabIndex = 39
@@ -1139,7 +1228,7 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(144, 105)
+        btnGenerateKeys.Location = New Point(144, 100)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(117, 30)
         btnGenerateKeys.TabIndex = 37
@@ -1872,6 +1961,17 @@ Partial Class Configurator
         ' BackgroundWorker1
         ' 
         ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label6.ForeColor = Color.White
+        Label6.Location = New Point(445, 282)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(178, 15)
+        Label6.TabIndex = 45
+        Label6.Text = "Be carefull what to enter here."
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2052,5 +2152,12 @@ Partial Class Configurator
     Friend WithEvents CheckBox16 As CheckBox
     Friend WithEvents CheckBox15 As CheckBox
     Friend WithEvents CheckBox14 As CheckBox
+    Friend WithEvents btnDriver As Button
+    Friend WithEvents btnSensor As Button
+    Friend WithEvents txtDriver As TextBox
+    Friend WithEvents txtBin As TextBox
+    Friend WithEvents btnDriverBackup As Button
+    Friend WithEvents btnBinBackup As Button
+    Friend WithEvents Label6 As Label
 
 End Class
