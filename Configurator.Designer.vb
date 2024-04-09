@@ -60,6 +60,7 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         txtSaveFreq = New Button()
         TabPage2 = New TabPage()
+        Label6 = New Label()
         btnRestartMajestic = New Button()
         cmbLuminance = New ComboBox()
         cmbSaturation = New ComboBox()
@@ -167,7 +168,6 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        Label6 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -630,6 +630,17 @@ Partial Class Configurator
         TabPage2.Size = New Size(629, 341)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' Label6
+        ' 
+        Label6.AutoSize = True
+        Label6.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label6.ForeColor = Color.White
+        Label6.Location = New Point(445, 282)
+        Label6.Name = "Label6"
+        Label6.Size = New Size(187, 15)
+        Label6.TabIndex = 45
+        Label6.Text = "Be carefull what you enter here."
         ' 
         ' btnRestartMajestic
         ' 
@@ -1960,17 +1971,6 @@ Partial Class Configurator
         ' 
         ' BackgroundWorker1
         ' 
-        ' 
-        ' Label6
-        ' 
-        Label6.AutoSize = True
-        Label6.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label6.ForeColor = Color.White
-        Label6.Location = New Point(445, 282)
-        Label6.Name = "Label6"
-        Label6.Size = New Size(178, 15)
-        Label6.TabIndex = 45
-        Label6.Text = "Be carefull what to enter here."
         ' 
         ' Configurator
         ' 

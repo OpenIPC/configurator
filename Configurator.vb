@@ -493,7 +493,9 @@ err1:
 
         cmbResolution.Items.Clear()
         cmbResolution.Items.Add("1280x720")
+        cmbResolution.Items.Add("1448x812")
         cmbResolution.Items.Add("1920x1080")
+        cmbResolution.Items.Add("2240x1260")
         cmbResolution.Items.Add("3200x1800")
         cmbResolution.Items.Add("3840x2160")
         cmbResolution.Text = "Select Resolution"
@@ -725,11 +727,21 @@ err1:
             cmbFPS.Text = "120"
             txtExposure.Text = "  exposure: 8"
             cmbExposure.Text = "8"
+        ElseIf cmbResolution.SelectedItem = "1448x812" Then
+            txtFPS.Text = "  fps: 120"
+            cmbFPS.Text = "120"
+            txtExposure.Text = "  exposure: 8"
+            cmbExposure.Text = "8"
         ElseIf cmbResolution.SelectedItem = "1920x1080" Then
             txtFPS.Text = "  fps: 90"
             cmbFPS.Text = "90"
             txtExposure.Text = "  exposure: 11"
             cmbExposure.Text = "11"
+        ElseIf cmbResolution.SelectedItem = "2240x1260" Then
+            txtFPS.Text = "  fps: 60"
+            cmbFPS.Text = "60"
+            txtExposure.Text = "  exposure: 16"
+            cmbExposure.Text = "16"
         ElseIf cmbResolution.SelectedItem = "3200x1800" Then
             txtFPS.Text = "  fps: 30"
             cmbFPS.Text = "30"
