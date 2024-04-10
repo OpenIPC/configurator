@@ -76,7 +76,6 @@ if "%1" == "rswfb" (
 	plink -ssh root@%2 -pw %3 wifibroadcast start
 )
 
-
 if "%1" == "rsmaj" (
 	plink -ssh root@%2 -pw %3 killall majestic
 	plink -ssh root@%2 -pw %3 majestic
@@ -90,6 +89,12 @@ if "%1" == "koup" (
 	echo y | pscp -scp -pw %3 %4 root@%2:/lib/modules/4.9.84/sigmastar/sensor/
 )
 
+if "%1" == "shup" (
+	echo y | pscp -scp -pw %3 *.sh root@%2:/root/
+	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/sbin/
+	plink -ssh root@%2 -pw %3 rm /root/channels.sh
+	plink -ssh root@%2 -pw %3 chmod +x /root/*.sh
+)
 
 if "%1" == "bindl" (
 	echo y | mkdir backup
@@ -99,6 +104,16 @@ if "%1" == "bindl" (
 if "%1" == "kodl" (
 	echo y | mkdir backup
 	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/sensor/sensor_imx415_mipi.ko ./backup/
+)
+
+if "%1" == "shdl" (
+	echo y | pscp -scp -pw %3 root@%2:/usr/sbin/channels.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/816.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1080.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1264.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/3K.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/4K.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/kill.sh .
 )
 
 :end

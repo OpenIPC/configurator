@@ -493,9 +493,9 @@ err1:
 
         cmbResolution.Items.Clear()
         cmbResolution.Items.Add("1280x720")
-        cmbResolution.Items.Add("1448x812")
+        cmbResolution.Items.Add("1456x816")
         cmbResolution.Items.Add("1920x1080")
-        cmbResolution.Items.Add("2240x1260")
+        cmbResolution.Items.Add("2240x1264")
         cmbResolution.Items.Add("3200x1800")
         cmbResolution.Items.Add("3840x2160")
         cmbResolution.Text = "Select Resolution"
@@ -1982,6 +1982,46 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "kodl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "shdl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "shup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

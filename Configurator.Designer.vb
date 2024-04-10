@@ -99,6 +99,9 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        Label7 = New Label()
+        Button3 = New Button()
+        Button2 = New Button()
         btnDriverBackup = New Button()
         btnBinBackup = New Button()
         txtDriver = New TextBox()
@@ -1079,6 +1082,9 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(Label7)
+        TabPage5.Controls.Add(Button3)
+        TabPage5.Controls.Add(Button2)
         TabPage5.Controls.Add(btnDriverBackup)
         TabPage5.Controls.Add(btnBinBackup)
         TabPage5.Controls.Add(txtDriver)
@@ -1101,29 +1107,64 @@ Partial Class Configurator
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
+        ' Label7
+        ' 
+        Label7.AutoSize = True
+        Label7.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.ForeColor = Color.White
+        Label7.Location = New Point(319, 5)
+        Label7.Name = "Label7"
+        Label7.Size = New Size(240, 28)
+        Label7.TabIndex = 51
+        Label7.Text = "<- This is for controlling resolution/bitrate " & vbCrLf & "<- with a TX Controller."
+        ' 
+        ' Button3
+        ' 
+        Button3.BackColor = Color.Gold
+        Button3.FlatStyle = FlatStyle.Popup
+        Button3.Location = New Point(148, 3)
+        Button3.Name = "Button3"
+        Button3.Size = New Size(161, 30)
+        Button3.TabIndex = 50
+        Button3.Text = "Script files Restore"
+        btnToolTip.SetToolTip(Button3, "Transfer all the *.sh files" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe to" & vbCrLf & "/root/ and /usr/sbin/channels.sh" & vbCrLf & "of the OpenIPC camera" & vbCrLf)
+        Button3.UseVisualStyleBackColor = False
+        ' 
+        ' Button2
+        ' 
+        Button2.BackColor = Color.Gold
+        Button2.FlatStyle = FlatStyle.Popup
+        Button2.Location = New Point(17, 3)
+        Button2.Name = "Button2"
+        Button2.Size = New Size(125, 30)
+        Button2.TabIndex = 49
+        Button2.Text = "Script files Backup"
+        btnToolTip.SetToolTip(Button2, "Transfer all the *.sh files from" & vbCrLf & "/root/ and /usr/sbin/channels.sh" & vbCrLf & "of the OpenIPC camera" & vbCrLf & "to the location of the " & vbCrLf & "OpenIPC Configurator.exe" & vbCrLf)
+        Button2.UseVisualStyleBackColor = False
+        ' 
         ' btnDriverBackup
         ' 
         btnDriverBackup.BackColor = Color.Gold
         btnDriverBackup.FlatStyle = FlatStyle.Popup
         btnDriverBackup.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDriverBackup.Location = New Point(152, 3)
+        btnDriverBackup.Location = New Point(148, 36)
         btnDriverBackup.Name = "btnDriverBackup"
         btnDriverBackup.Size = New Size(161, 30)
         btnDriverBackup.TabIndex = 48
         btnDriverBackup.Text = "Sensor Driver Backup"
-        btnToolTip.SetToolTip(btnDriverBackup, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera")
+        btnToolTip.SetToolTip(btnDriverBackup, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the the Sigmastar OpenIPC camera" & vbCrLf & "to the backup folder in the location " & vbCrLf & "of the OpenIPC Configurator.exe file" & vbCrLf)
         btnDriverBackup.UseVisualStyleBackColor = False
         ' 
         ' btnBinBackup
         ' 
         btnBinBackup.BackColor = Color.Gold
         btnBinBackup.FlatStyle = FlatStyle.Popup
-        btnBinBackup.Location = New Point(21, 3)
+        btnBinBackup.Location = New Point(17, 36)
         btnBinBackup.Name = "btnBinBackup"
         btnBinBackup.Size = New Size(125, 30)
         btnBinBackup.TabIndex = 47
         btnBinBackup.Text = "Sensor Bin Backup"
-        btnToolTip.SetToolTip(btnBinBackup, "Transfer the imx415_fpv.bin" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera" & vbCrLf)
+        btnToolTip.SetToolTip(btnBinBackup, "Transfer the imx415_fpv.bin" & vbCrLf & "from the the Sigmastar OpenIPC camera" & vbCrLf & "to the backup folder in the location " & vbCrLf & "of the OpenIPC Configurator.exe file" & vbCrLf)
         btnBinBackup.UseVisualStyleBackColor = False
         ' 
         ' txtDriver
@@ -1132,7 +1173,7 @@ Partial Class Configurator
         txtDriver.BorderStyle = BorderStyle.FixedSingle
         txtDriver.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtDriver.ForeColor = Color.White
-        txtDriver.Location = New Point(152, 71)
+        txtDriver.Location = New Point(148, 104)
         txtDriver.Name = "txtDriver"
         txtDriver.Size = New Size(161, 21)
         txtDriver.TabIndex = 46
@@ -1145,7 +1186,7 @@ Partial Class Configurator
         txtBin.BorderStyle = BorderStyle.FixedSingle
         txtBin.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtBin.ForeColor = Color.White
-        txtBin.Location = New Point(21, 73)
+        txtBin.Location = New Point(17, 106)
         txtBin.Name = "txtBin"
         txtBin.Size = New Size(125, 21)
         txtBin.TabIndex = 45
@@ -1157,7 +1198,7 @@ Partial Class Configurator
         btnDriver.BackColor = Color.Gold
         btnDriver.FlatStyle = FlatStyle.Popup
         btnDriver.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDriver.Location = New Point(152, 36)
+        btnDriver.Location = New Point(148, 69)
         btnDriver.Name = "btnDriver"
         btnDriver.Size = New Size(161, 30)
         btnDriver.TabIndex = 44
@@ -1169,7 +1210,7 @@ Partial Class Configurator
         ' 
         btnSensor.BackColor = Color.Gold
         btnSensor.FlatStyle = FlatStyle.Popup
-        btnSensor.Location = New Point(21, 37)
+        btnSensor.Location = New Point(17, 70)
         btnSensor.Name = "btnSensor"
         btnSensor.Size = New Size(125, 30)
         btnSensor.TabIndex = 43
@@ -1182,7 +1223,7 @@ Partial Class Configurator
         Label5.AutoSize = True
         Label5.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         Label5.ForeColor = Color.White
-        Label5.Location = New Point(332, 25)
+        Label5.Location = New Point(332, 43)
         Label5.Name = "Label5"
         Label5.Size = New Size(291, 56)
         Label5.TabIndex = 42
@@ -1229,7 +1270,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(21, 190)
+        Label4.Location = New Point(21, 202)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -1239,7 +1280,7 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(144, 100)
+        btnGenerateKeys.Location = New Point(148, 133)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(117, 30)
         btnGenerateKeys.TabIndex = 37
@@ -1251,7 +1292,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(21, 141)
+        btnSendKeys.Location = New Point(21, 169)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(117, 30)
         btnSendKeys.TabIndex = 36
@@ -1263,7 +1304,7 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(144, 141)
+        btnReceiveKeys.Location = New Point(148, 169)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(117, 30)
         btnReceiveKeys.TabIndex = 35
@@ -1275,7 +1316,7 @@ Partial Class Configurator
         ' 
         btnUpdate.BackColor = Color.Gold
         btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(21, 105)
+        btnUpdate.Location = New Point(21, 133)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(117, 30)
         btnUpdate.TabIndex = 34
@@ -2159,5 +2200,8 @@ Partial Class Configurator
     Friend WithEvents btnDriverBackup As Button
     Friend WithEvents btnBinBackup As Button
     Friend WithEvents Label6 As Label
+    Friend WithEvents Button2 As Button
+    Friend WithEvents Button3 As Button
+    Friend WithEvents Label7 As Label
 
 End Class
