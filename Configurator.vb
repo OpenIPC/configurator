@@ -727,7 +727,7 @@ err1:
             cmbFPS.Text = "120"
             txtExposure.Text = "  exposure: 8"
             cmbExposure.Text = "8"
-        ElseIf cmbResolution.SelectedItem = "1448x812" Then
+        ElseIf cmbResolution.SelectedItem = "1456x816" Then
             txtFPS.Text = "  fps: 120"
             cmbFPS.Text = "120"
             txtExposure.Text = "  exposure: 8"
@@ -737,7 +737,7 @@ err1:
             cmbFPS.Text = "90"
             txtExposure.Text = "  exposure: 11"
             cmbExposure.Text = "11"
-        ElseIf cmbResolution.SelectedItem = "2240x1260" Then
+        ElseIf cmbResolution.SelectedItem = "2240x1264" Then
             txtFPS.Text = "  fps: 60"
             cmbFPS.Text = "60"
             txtExposure.Text = "  exposure: 16"
