@@ -85,6 +85,9 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        checkCustomRes = New CheckBox()
+        txtResY = New TextBox()
+        txtResX = New TextBox()
         txtFormat = New TextBox()
         cmbFormat = New ComboBox()
         Label2 = New Label()
@@ -171,6 +174,8 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
+        Label8 = New Label()
+        Label9 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -917,6 +922,11 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(Label9)
+        TabPage4.Controls.Add(Label8)
+        TabPage4.Controls.Add(checkCustomRes)
+        TabPage4.Controls.Add(txtResY)
+        TabPage4.Controls.Add(txtResX)
         TabPage4.Controls.Add(txtFormat)
         TabPage4.Controls.Add(cmbFormat)
         TabPage4.Controls.Add(Label2)
@@ -936,6 +946,39 @@ Partial Class Configurator
         TabPage4.Size = New Size(629, 341)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' checkCustomRes
+        ' 
+        checkCustomRes.AutoSize = True
+        checkCustomRes.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        checkCustomRes.Location = New Point(21, 186)
+        checkCustomRes.Name = "checkCustomRes"
+        checkCustomRes.Size = New Size(132, 18)
+        checkCustomRes.TabIndex = 59
+        checkCustomRes.Text = "Custom Resolution"
+        checkCustomRes.UseVisualStyleBackColor = True
+        ' 
+        ' txtResY
+        ' 
+        txtResY.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        txtResY.BorderStyle = BorderStyle.FixedSingle
+        txtResY.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        txtResY.Location = New Point(132, 160)
+        txtResY.Name = "txtResY"
+        txtResY.Size = New Size(61, 20)
+        txtResY.TabIndex = 58
+        txtResY.Text = "600"
+        ' 
+        ' txtResX
+        ' 
+        txtResX.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        txtResX.BorderStyle = BorderStyle.FixedSingle
+        txtResX.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        txtResX.Location = New Point(19, 160)
+        txtResX.Name = "txtResX"
+        txtResX.Size = New Size(64, 20)
+        txtResX.TabIndex = 57
+        txtResX.Text = "800"
         ' 
         ' txtFormat
         ' 
@@ -2013,6 +2056,28 @@ Partial Class Configurator
         ' BackgroundWorker1
         ' 
         ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label8.ForeColor = Color.White
+        Label8.Location = New Point(21, 142)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(62, 15)
+        Label8.TabIndex = 60
+        Label8.Text = "Custom X"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label9.ForeColor = Color.White
+        Label9.Location = New Point(132, 142)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(61, 15)
+        Label9.TabIndex = 61
+        Label9.Text = "Custom Y"
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2203,5 +2268,10 @@ Partial Class Configurator
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
     Friend WithEvents Label7 As Label
+    Friend WithEvents txtResX As TextBox
+    Friend WithEvents checkCustomRes As CheckBox
+    Friend WithEvents txtResY As TextBox
+    Friend WithEvents Label9 As Label
+    Friend WithEvents Label8 As Label
 
 End Class

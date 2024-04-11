@@ -2030,5 +2030,13 @@ err1:
         End If
     End Sub
 
+    Private Sub checkCustomRes_CheckedChanged(sender As Object, e As EventArgs) Handles checkCustomRes.CheckedChanged
+        If checkCustomRes.Checked = True Then
+            txtExtras.Text = "extra=""--bg-r 0 --bg-g 0 --bg-b 50 --ar manual --ar-w " + txtResX.Text + " --ar-h " + txtResX.Text + """"
+        Else
+            txtExtras.Text = "extra=""--bg-r 0 --bg-g 0 --bg-b 50"""
+        End If
+    End Sub
+
 #End Region
 End Class
