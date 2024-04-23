@@ -19,7 +19,9 @@ Public Class Configurator
             System.IO.File.Create(settingsconf).Dispose()
             Dim fileExists As Boolean = File.Exists(settingsconf)
             Using sw As New StreamWriter(File.Open(settingsconf, FileMode.OpenOrCreate))
-                sw.WriteLine("aaa")
+                sw.WriteLine("openipc:192.168.0.1")
+                sw.WriteLine("nvr:192.168.0.1")
+                sw.WriteLine("radxa:192.168.0.1")
             End Using
             MsgBox("File " + settingsconf + " not found and default created!")
         End If
@@ -563,7 +565,11 @@ err1:
         cmbResolution.Items.Add("1280x720")
         cmbResolution.Items.Add("1456x816")
         cmbResolution.Items.Add("1920x1080")
+        cmbResolution.Items.Add("2104x1184")
         cmbResolution.Items.Add("2240x1264")
+        cmbResolution.Items.Add("2312x1304")
+        cmbResolution.Items.Add("2560x1440")
+        cmbResolution.Items.Add("2560x1920")
         cmbResolution.Items.Add("3200x1800")
         cmbResolution.Items.Add("3840x2160")
         cmbResolution.Text = "Select Resolution"
@@ -636,6 +642,7 @@ err1:
         cmbExposure.Items.Add("12")
         cmbExposure.Items.Add("16")
         cmbExposure.Items.Add("33")
+        cmbExposure.Items.Add("50")
         cmbExposure.Text = "Select Exposure"
 
         cmbContrast.Items.Clear()
@@ -802,21 +809,41 @@ err1:
             cmbFPS.Text = "90"
             txtExposure.Text = "  exposure: 11"
             cmbExposure.Text = "11"
+        ElseIf cmbResolution.SelectedItem = "2104x1184" Then
+            txtFPS.Text = "  fps: 100"
+            cmbFPS.Text = "100"
+            txtExposure.Text = "  exposure: 10"
+            cmbExposure.Text = "10"
         ElseIf cmbResolution.SelectedItem = "2240x1264" Then
             txtFPS.Text = "  fps: 60"
             cmbFPS.Text = "60"
             txtExposure.Text = "  exposure: 16"
             cmbExposure.Text = "16"
+        ElseIf cmbResolution.SelectedItem = "2312x1304" Then
+            txtFPS.Text = "  fps: 80"
+            cmbFPS.Text = "80"
+            txtExposure.Text = "  exposure: 12"
+            cmbExposure.Text = "12"
+        ElseIf cmbResolution.SelectedItem = "2560x1440" Then
+            txtFPS.Text = "  fps: 60"
+            cmbFPS.Text = "60"
+            txtExposure.Text = "  exposure: 16"
+            cmbExposure.Text = "16"
+        ElseIf cmbResolution.SelectedItem = "2560x1920" Then
+            txtFPS.Text = "  fps: 30"
+            cmbFPS.Text = "30"
+            txtExposure.Text = "  exposure: 33"
+            cmbExposure.Text = "33"
         ElseIf cmbResolution.SelectedItem = "3200x1800" Then
             txtFPS.Text = "  fps: 30"
             cmbFPS.Text = "30"
-            txtExposure.Text = "  exposure: 20"
-            cmbExposure.Text = "20"
+            txtExposure.Text = "  exposure: 33"
+            cmbExposure.Text = "33"
         ElseIf cmbResolution.SelectedItem = "3840x2160" Then
             txtFPS.Text = "  fps: 20"
             cmbFPS.Text = "20"
-            txtExposure.Text = "  exposure: 20"
-            cmbExposure.Text = "20"
+            txtExposure.Text = "  exposure: 50"
+            cmbExposure.Text = "50"
         End If
     End Sub
 

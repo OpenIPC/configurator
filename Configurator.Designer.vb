@@ -196,7 +196,7 @@ Partial Class Configurator
         btnGet.Size = New Size(60, 30)
         btnGet.TabIndex = 0
         btnGet.Text = "1. Fetch"
-        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera/VRX")
+        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera/VRX" & vbCrLf & "Save the IP address of the selected device")
         btnGet.UseVisualStyleBackColor = False
         ' 
         ' txtIP
