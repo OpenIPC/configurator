@@ -85,6 +85,8 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        Label9 = New Label()
+        Label8 = New Label()
         checkCustomRes = New CheckBox()
         txtResY = New TextBox()
         txtResX = New TextBox()
@@ -174,8 +176,6 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        Label8 = New Label()
-        Label9 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -946,6 +946,28 @@ Partial Class Configurator
         TabPage4.Size = New Size(629, 341)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' Label9
+        ' 
+        Label9.AutoSize = True
+        Label9.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label9.ForeColor = Color.White
+        Label9.Location = New Point(132, 142)
+        Label9.Name = "Label9"
+        Label9.Size = New Size(61, 15)
+        Label9.TabIndex = 61
+        Label9.Text = "Custom Y"
+        ' 
+        ' Label8
+        ' 
+        Label8.AutoSize = True
+        Label8.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label8.ForeColor = Color.White
+        Label8.Location = New Point(21, 142)
+        Label8.Name = "Label8"
+        Label8.Size = New Size(62, 15)
+        Label8.TabIndex = 60
+        Label8.Text = "Custom X"
         ' 
         ' checkCustomRes
         ' 
@@ -2055,28 +2077,6 @@ Partial Class Configurator
         ' 
         ' BackgroundWorker1
         ' 
-        ' 
-        ' Label8
-        ' 
-        Label8.AutoSize = True
-        Label8.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label8.ForeColor = Color.White
-        Label8.Location = New Point(21, 142)
-        Label8.Name = "Label8"
-        Label8.Size = New Size(62, 15)
-        Label8.TabIndex = 60
-        Label8.Text = "Custom X"
-        ' 
-        ' Label9
-        ' 
-        Label9.AutoSize = True
-        Label9.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label9.ForeColor = Color.White
-        Label9.Location = New Point(132, 142)
-        Label9.Name = "Label9"
-        Label9.Size = New Size(61, 15)
-        Label9.TabIndex = 61
-        Label9.Text = "Custom Y"
         ' 
         ' Configurator
         ' 

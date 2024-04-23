@@ -6,9 +6,26 @@ Imports System.Net
 Imports System.Net.NetworkInformation
 Imports System.Net.Sockets
 Imports System.Threading
+Imports System.Formats.Tar
+Imports System.IO
 
 Public Class Configurator
+    Public OpenIPCIP As String
+    Public NVRIP As String
+    Public RadxaIP As String
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
+        Dim settingsconf As String = "settings.conf"
+        If Not IO.File.Exists(settingsconf) Then
+            System.IO.File.Create(settingsconf).Dispose()
+            Dim fileExists As Boolean = File.Exists(settingsconf)
+            Using sw As New StreamWriter(File.Open(settingsconf, FileMode.OpenOrCreate))
+                sw.WriteLine("aaa")
+            End Using
+            MsgBox("File " + settingsconf + " not found and default created!")
+        End If
+
+        Dim x As Integer
+        Dim SettingsfilePath = settingsconf
         Dim extern = "extern.bat"
         If Not IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -19,13 +36,26 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                If rBtnNVR.Checked Then
-                    .StartInfo.Arguments = "dlvrx " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                ElseIf rBtnRadxaZero3w.Checked Then
-                    .StartInfo.Arguments = "dlwfbng " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                Else
-                    .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                End If
+                Dim lines = IO.File.ReadAllLines(SettingsfilePath)
+                For x = 0 To lines.Count() - 1
+                    If rBtnNVR.Checked Then
+                        If lines(x).StartsWith("nvr:") Then
+                            lines(x) = "nvr:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dlvrx " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    ElseIf rBtnRadxaZero3w.Checked Then
+                        If lines(x).StartsWith("radxa:") Then
+                            lines(x) = "radxa:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dlwfbng " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    Else
+                        If lines(x).StartsWith("openipc:") Then
+                            lines(x) = "openipc:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    End If
+                Next
+                IO.File.WriteAllLines(SettingsfilePath, lines)
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -192,6 +222,15 @@ err1:
     End Sub
 
     Private Sub btnRead_Click(sender As Object, e As EventArgs) Handles btnRead.Click
+        txtResolution.Text = ""
+        txtFPS.Text = ""
+        txtEncode.Text = ""
+        txtBitrate.Text = ""
+        txtExposure.Text = ""
+        txtSaturation.Text = ""
+        txtHue.Text = ""
+        txtLuminance.Text = ""
+
         Dim wfbconf = "wfb.conf"
         If Not System.IO.File.Exists(wfbconf) Then
             MsgBox("File " + wfbconf + " not found!")
@@ -365,6 +404,35 @@ err1:
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        Dim IPsettings As String = "settings.conf"
+        If Not IO.File.Exists(IPsettings) Then
+            System.IO.File.Create(IPsettings).Dispose()
+            Dim fileExists As Boolean = File.Exists(IPsettings)
+            Using sw As New StreamWriter(File.Open(IPsettings, FileMode.OpenOrCreate))
+                sw.WriteLine("openipc:192.168.0.1")
+                sw.WriteLine("nvr:192.168.0.1")
+                sw.WriteLine("radxa:192.168.0.1")
+            End Using
+            MsgBox("File " + IPsettings + " not found and default created!")
+        End If
+        Dim IPsettingsReader As New IO.StreamReader(IPsettings)
+        Dim IPsettingsReaderallLines = New List(Of String)
+
+        Do While Not IPsettingsReader.EndOfStream
+            IPsettingsReaderallLines.Add(IPsettingsReader.ReadLine)
+        Loop
+        IPsettingsReader.Close()
+        Dim value1 As String
+        Dim value2 As String
+        Dim value3 As String
+
+        value1 = ReadLine(1, IPsettingsReaderallLines)
+        value2 = ReadLine(2, IPsettingsReaderallLines)
+        value3 = ReadLine(3, IPsettingsReaderallLines)
+        OpenIPCIP = value1.Split(":")(1)
+        NVRIP = value2.Split(":")(1)
+        RadxaIP = value3.Split(":")(1)
+        txtIP.Text = OpenIPCIP
 
         ComboBox1.Items.Clear()
         ComboBox1.Items.Add("5180 MHz [36]")
@@ -561,16 +629,13 @@ err1:
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
-        cmbExposure.Items.Add("1")
-        cmbExposure.Items.Add("5")
+        cmbExposure.Items.Add("6")
         cmbExposure.Items.Add("8")
         cmbExposure.Items.Add("10")
         cmbExposure.Items.Add("11")
-        cmbExposure.Items.Add("20")
-        cmbExposure.Items.Add("30")
-        cmbExposure.Items.Add("40")
-        cmbExposure.Items.Add("50")
-        cmbExposure.Items.Add("60")
+        cmbExposure.Items.Add("12")
+        cmbExposure.Items.Add("16")
+        cmbExposure.Items.Add("33")
         cmbExposure.Text = "Select Exposure"
 
         cmbContrast.Items.Clear()
@@ -1061,6 +1126,7 @@ err1:
     End Sub
 
     Private Sub rBtnNVR_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnNVR.CheckedChanged
+        txtIP.Text = NVRIP
         Dim rb = DirectCast(sender, RadioButton)
 
         If rb.Checked Then
@@ -1070,6 +1136,11 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        Label8.Visible = True
+        Label9.Visible = True
+        txtResX.Visible = True
+        txtResY.Visible = True
+        checkCustomRes.Visible = True
         btnSendKeys.Visible = False
         btnGenerateKeys.Visible = True
         btnUpdate.Visible = False
@@ -1149,6 +1220,7 @@ err1:
     End Sub
 
     Private Sub rBtnCam_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnCam.CheckedChanged
+        txtIP.Text = OpenIPCIP
         Dim rb = DirectCast(sender, RadioButton)
 
         If rb.Checked Then
@@ -1158,6 +1230,11 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        Label8.Visible = True
+        Label9.Visible = True
+        txtResX.Visible = True
+        txtResY.Visible = True
+        checkCustomRes.Visible = True
         btnSendKeys.Visible = True
         btnGenerateKeys.Visible = False
         btnUpdate.Visible = True
@@ -1237,6 +1314,7 @@ err1:
     End Sub
 
     Private Sub rBtnRadxaZero3w_CheckedChanged(sender As Object, e As EventArgs) Handles rBtnRadxaZero3w.CheckedChanged
+        txtIP.Text = RadxaIP
         Dim rb = DirectCast(sender, RadioButton)
 
         If rb.Checked Then
@@ -1246,6 +1324,11 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        Label8.Visible = False
+        Label9.Visible = False
+        txtResX.Visible = False
+        txtResY.Visible = False
+        checkCustomRes.Visible = False
         btnSendKeys.Visible = False
         btnGenerateKeys.Visible = True
         btnUpdate.Visible = False
@@ -1961,7 +2044,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1981,7 +2064,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "kodl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.Arguments = "kodl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtDriver.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

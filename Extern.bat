@@ -93,23 +93,31 @@ if "%1" == "shup" (
 	echo y | pscp -scp -pw %3 *.sh root@%2:/root/
 	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/sbin/
 	plink -ssh root@%2 -pw %3 rm /root/channels.sh
+	plink -ssh root@%2 -pw %3 rm /root/setdisplay.sh
+	plink -ssh root@%2 -pw %3 rm /root/816.sh
+	plink -ssh root@%2 -pw %3 rm /root/1080.sh
+	plink -ssh root@%2 -pw %3 rm /root/1080b.sh
+	plink -ssh root@%2 -pw %3 rm /root/1264.sh
+	plink -ssh root@%2 -pw %3 rm /root/3K.sh
+	plink -ssh root@%2 -pw %3 rm /root/4K.sh
 	plink -ssh root@%2 -pw %3 chmod +x /root/*.sh
 )
 
 if "%1" == "bindl" (
 	echo y | mkdir backup
-	echo y | pscp -scp -pw %3 root@%2:/etc/sensors/imx415_fpv.bin ./backup/
+	echo y | pscp -scp -pw %3 root@%2:/etc/sensors/%4 ./backup/
 )
 
 if "%1" == "kodl" (
 	echo y | mkdir backup
-	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/sensor/sensor_imx415_mipi.ko ./backup/
+	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/sensor/%4 ./backup/
 )
 
 if "%1" == "shdl" (
 	echo y | pscp -scp -pw %3 root@%2:/usr/sbin/channels.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/816.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1080.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1080b.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1264.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/3K.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/4K.sh .
