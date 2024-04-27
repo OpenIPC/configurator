@@ -887,7 +887,7 @@ err1:
 
     Private Sub btnReboot_Click(sender As Object, e As EventArgs) Handles btnReboot.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -2145,6 +2145,26 @@ err1:
             txtExtras.Text = "extra=""--bg-r 0 --bg-g 0 --bg-b 50 --ar manual --ar-w " + txtResX.Text + " --ar-h " + txtResX.Text + """"
         Else
             txtExtras.Text = "extra=""--bg-r 0 --bg-g 0 --bg-b 50"""
+        End If
+    End Sub
+
+    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "temp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 

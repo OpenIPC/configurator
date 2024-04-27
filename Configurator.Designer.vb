@@ -170,6 +170,7 @@ Partial Class Configurator
         btnToolTip = New ToolTip(components)
         btnReboot = New Button()
         txtPassword = New TextBox()
+        Button4 = New Button()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
         rBtnRadxaZero3w = New RadioButton()
@@ -2020,6 +2021,20 @@ Partial Class Configurator
         txtPassword.Text = "12345"
         btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
         ' 
+        ' Button4
+        ' 
+        Button4.BackColor = Color.Gold
+        Button4.FlatStyle = FlatStyle.Popup
+        Button4.Font = New Font("Arial", 8.25F, FontStyle.Bold)
+        Button4.ForeColor = Color.Black
+        Button4.Location = New Point(309, 408)
+        Button4.Name = "Button4"
+        Button4.Size = New Size(88, 30)
+        Button4.TabIndex = 33
+        Button4.Text = "Temperature"
+        btnToolTip.SetToolTip(Button4, "Reboot the camera/VRX")
+        Button4.UseVisualStyleBackColor = False
+        ' 
         ' rBtnCam
         ' 
         rBtnCam.AutoSize = True
@@ -2084,6 +2099,7 @@ Partial Class Configurator
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(661, 445)
+        Controls.Add(Button4)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
         Controls.Add(Label3)
@@ -2273,5 +2289,6 @@ Partial Class Configurator
     Friend WithEvents txtResY As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
+    Friend WithEvents Button4 As Button
 
 End Class
