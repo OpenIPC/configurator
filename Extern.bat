@@ -124,6 +124,10 @@ if "%1" == "shdl" (
 	echo y | pscp -scp -pw %3 root@%2:/root/kill.sh .
 )
 
+if "%1" == "temp" (
+	plink -ssh root@%2 -pw %3 cat /sys/devices/virtual/mstar/msys/TEMP_R
+)
+
 :end
 echo.
 pause
