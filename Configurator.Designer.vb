@@ -73,6 +73,10 @@ Partial Class Configurator
         cmbResolution = New ComboBox()
         txtSaveCam = New Button()
         TabPage3 = New TabPage()
+        cmbRC_Channel = New ComboBox()
+        txtRC_CHANNEL = New TextBox()
+        cmbAggregate = New ComboBox()
+        txtAggregate = New TextBox()
         btnUART2OFF = New Button()
         btnUART2 = New Button()
         txtSaveTLM = New Button()
@@ -777,6 +781,10 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(cmbRC_Channel)
+        TabPage3.Controls.Add(txtRC_CHANNEL)
+        TabPage3.Controls.Add(cmbAggregate)
+        TabPage3.Controls.Add(txtAggregate)
         TabPage3.Controls.Add(btnUART2OFF)
         TabPage3.Controls.Add(btnUART2)
         TabPage3.Controls.Add(txtSaveTLM)
@@ -795,6 +803,50 @@ Partial Class Configurator
         TabPage3.Size = New Size(629, 341)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
+        ' 
+        ' cmbRC_Channel
+        ' 
+        cmbRC_Channel.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbRC_Channel.FlatStyle = FlatStyle.Popup
+        cmbRC_Channel.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        cmbRC_Channel.FormattingEnabled = True
+        cmbRC_Channel.Location = New Point(19, 163)
+        cmbRC_Channel.Name = "cmbRC_Channel"
+        cmbRC_Channel.Size = New Size(214, 22)
+        cmbRC_Channel.TabIndex = 46
+        ' 
+        ' txtRC_CHANNEL
+        ' 
+        txtRC_CHANNEL.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        txtRC_CHANNEL.BorderStyle = BorderStyle.FixedSingle
+        txtRC_CHANNEL.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        txtRC_CHANNEL.Location = New Point(248, 163)
+        txtRC_CHANNEL.Name = "txtRC_CHANNEL"
+        txtRC_CHANNEL.ReadOnly = True
+        txtRC_CHANNEL.Size = New Size(191, 20)
+        txtRC_CHANNEL.TabIndex = 45
+        ' 
+        ' cmbAggregate
+        ' 
+        cmbAggregate.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbAggregate.FlatStyle = FlatStyle.Popup
+        cmbAggregate.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        cmbAggregate.FormattingEnabled = True
+        cmbAggregate.Location = New Point(19, 135)
+        cmbAggregate.Name = "cmbAggregate"
+        cmbAggregate.Size = New Size(214, 22)
+        cmbAggregate.TabIndex = 44
+        ' 
+        ' txtAggregate
+        ' 
+        txtAggregate.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        txtAggregate.BorderStyle = BorderStyle.FixedSingle
+        txtAggregate.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        txtAggregate.Location = New Point(248, 135)
+        txtAggregate.Name = "txtAggregate"
+        txtAggregate.ReadOnly = True
+        txtAggregate.Size = New Size(191, 20)
+        txtAggregate.TabIndex = 43
         ' 
         ' btnUART2OFF
         ' 
@@ -2290,5 +2342,9 @@ Partial Class Configurator
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
     Friend WithEvents Button4 As Button
+    Friend WithEvents cmbAggregate As ComboBox
+    Friend WithEvents txtAggregate As TextBox
+    Friend WithEvents cmbRC_Channel As ComboBox
+    Friend WithEvents txtRC_CHANNEL As TextBox
 
 End Class

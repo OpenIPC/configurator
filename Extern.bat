@@ -86,12 +86,12 @@ if "%1" == "binup" (
 )
 
 if "%1" == "koup" (
-	echo y | pscp -scp -pw %3 %4 root@%2:/lib/modules/4.9.84/sigmastar/sensor/
+	echo y | pscp -scp -pw %3 %4 root@%2:/lib/modules/4.9.84/sigmastar/
 )
 
 if "%1" == "shup" (
 	echo y | pscp -scp -pw %3 *.sh root@%2:/root/
-	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/sbin/
+	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/bin/
 	plink -ssh root@%2 -pw %3 rm /root/channels.sh
 	plink -ssh root@%2 -pw %3 rm /root/setdisplay.sh
 	plink -ssh root@%2 -pw %3 rm /root/816.sh
@@ -110,11 +110,11 @@ if "%1" == "bindl" (
 
 if "%1" == "kodl" (
 	echo y | mkdir backup
-	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/sensor/%4 ./backup/
+	echo y | pscp -scp -pw %3 root@%2:/lib/modules/4.9.84/sigmastar/%4 ./backup/
 )
 
 if "%1" == "shdl" (
-	echo y | pscp -scp -pw %3 root@%2:/usr/sbin/channels.sh .
+	echo y | pscp -scp -pw %3 root@%2:/usr/bin/channels.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/816.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1080.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1080b.sh .

@@ -299,6 +299,8 @@ err1:
             txtBaud.Text = ReadLine(5, TLMallLines)
             txtRouter.Text = ReadLine(8, TLMallLines)
             txtMCSTLM.Text = ReadLine(14, TLMallLines)
+            txtAggregate.Text = ReadLine(26, TLMallLines)
+            txtRC_CHANNEL.Text = ReadLine(29, TLMallLines)
             If rBtnNVR.Checked Then
                 Dim vdec = "vdec.conf"
                 If Not System.IO.File.Exists(vdec) Then
@@ -632,6 +634,9 @@ err1:
         cmbBitrate.Items.Add("11264")
         cmbBitrate.Items.Add("12288")
         cmbBitrate.Items.Add("13312")
+        cmbBitrate.Items.Add("14336")
+        cmbBitrate.Items.Add("15360")
+        cmbBitrate.Items.Add("16384")
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
@@ -737,6 +742,30 @@ err1:
         cmbMCSTLM.Items.Add("8")
         cmbMCSTLM.Items.Add("9")
         cmbMCSTLM.Text = "Select MCS INDEX"
+
+        cmbAggregate.Items.Clear()
+        cmbAggregate.Items.Add("0")
+        cmbAggregate.Items.Add("1")
+        cmbAggregate.Items.Add("2")
+        cmbAggregate.Items.Add("4")
+        cmbAggregate.Items.Add("6")
+        cmbAggregate.Items.Add("8")
+        cmbAggregate.Items.Add("10")
+        cmbAggregate.Items.Add("12")
+        cmbAggregate.Items.Add("14")
+        cmbAggregate.Items.Add("15")
+        cmbAggregate.Text = "Select Aggregate"
+
+        cmbRC_Channel.Items.Clear()
+        cmbRC_Channel.Items.Add("1")
+        cmbRC_Channel.Items.Add("2")
+        cmbRC_Channel.Items.Add("3")
+        cmbRC_Channel.Items.Add("4")
+        cmbRC_Channel.Items.Add("5")
+        cmbRC_Channel.Items.Add("6")
+        cmbRC_Channel.Items.Add("7")
+        cmbRC_Channel.Items.Add("8")
+        cmbRC_Channel.Text = "Select RC Channel"
 
         rBtnCam.BackColor = Color.Gold
         rBtnCam.ForeColor = Color.Black
@@ -943,6 +972,12 @@ err1:
                 End If
                 If lines(x).StartsWith("mcs_index=") Then
                     lines(x) = txtMCSTLM.Text
+                End If
+                If lines(x).StartsWith("aggregate=") Then
+                    lines(x) = txtAggregate.Text
+                End If
+                If lines(x).StartsWith("channels=") Then
+                    lines(x) = txtRC_CHANNEL.Text
                 End If
             Next
             IO.File.WriteAllLines(TLMfilePath, lines)
@@ -2166,6 +2201,14 @@ err1:
         Else
             MsgBox("Please enter a valid IP address")
         End If
+    End Sub
+
+    Private Sub cmbAggregate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAggregate.SelectedIndexChanged
+        txtAggregate.Text = "aggregate=" & cmbAggregate.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbRC_Channel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRC_Channel.SelectedIndexChanged
+        txtRC_CHANNEL.Text = "channels=" & cmbRC_Channel.SelectedItem.ToString
     End Sub
 
 #End Region
