@@ -72,13 +72,12 @@ if "%1" == "UART0" (
 
 if "%1" == "rswfb" (
 	plink -ssh root@%2 -pw %3 wifibroadcast stop
-	plink -ssh root@%2 -pw %3 wifibroadcast stop
+	plink -ssh root@%2 -pw %3 sleep 3
 	plink -ssh root@%2 -pw %3 wifibroadcast start
 )
 
 if "%1" == "rsmaj" (
-	plink -ssh root@%2 -pw %3 killall majestic
-	plink -ssh root@%2 -pw %3 majestic
+	plink -ssh root@%2 -pw %3 /etc/init.d/S95majestic start
 )
 
 if "%1" == "binup" (
@@ -101,6 +100,7 @@ if "%1" == "shup" (
 	plink -ssh root@%2 -pw %3 rm /root/3K.sh
 	plink -ssh root@%2 -pw %3 rm /root/4K.sh
 	plink -ssh root@%2 -pw %3 chmod +x /root/*.sh
+	plink -ssh root@%2 -pw %3 chmod +x /usr/bin/channels.sh
 )
 
 if "%1" == "bindl" (
@@ -121,6 +121,16 @@ if "%1" == "shdl" (
 	echo y | pscp -scp -pw %3 root@%2:/root/1264.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/3K.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/4K.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1184p100.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1304p80.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1440p60.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1920p30.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1080p60.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/720p120.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/720p100.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/720p90.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/720p60.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1080p120.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/kill.sh .
 )
 
