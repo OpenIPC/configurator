@@ -151,7 +151,7 @@ if "%1" == "wfbfw" (
 if "%1" == "offlinefw" (
 	echo y | pscp -scp -pw %3 uImage.%4 root@%2:/tmp
 	echo y | pscp -scp -pw %3 rootfs.squashfs.%4 root@%2:/tmp
-	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4
+	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
 )
 
 :end
