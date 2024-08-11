@@ -108,6 +108,9 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        btnOfflinefw = New Button()
+        btnWFB = New Button()
+        btnRuby = New Button()
         Label7 = New Label()
         Button3 = New Button()
         Button2 = New Button()
@@ -181,6 +184,8 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
+        txtSOC = New TextBox()
+        Label10 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1200,6 +1205,9 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(btnOfflinefw)
+        TabPage5.Controls.Add(btnWFB)
+        TabPage5.Controls.Add(btnRuby)
         TabPage5.Controls.Add(Label7)
         TabPage5.Controls.Add(Button3)
         TabPage5.Controls.Add(Button2)
@@ -1224,6 +1232,42 @@ Partial Class Configurator
         TabPage5.Size = New Size(629, 341)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
+        ' 
+        ' btnOfflinefw
+        ' 
+        btnOfflinefw.BackColor = Color.Gold
+        btnOfflinefw.FlatStyle = FlatStyle.Popup
+        btnOfflinefw.Location = New Point(222, 205)
+        btnOfflinefw.Name = "btnOfflinefw"
+        btnOfflinefw.Size = New Size(98, 30)
+        btnOfflinefw.TabIndex = 54
+        btnOfflinefw.Text = "Offline Update"
+        btnToolTip.SetToolTip(btnOfflinefw, "1. Download and extract the uImage" & vbCrLf & "and squashfs files in the folder of the" & vbCrLf & "OpenIPC Configurator" & vbCrLf & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
+        btnOfflinefw.UseVisualStyleBackColor = False
+        ' 
+        ' btnWFB
+        ' 
+        btnWFB.BackColor = Color.Gold
+        btnWFB.FlatStyle = FlatStyle.Popup
+        btnWFB.Location = New Point(263, 169)
+        btnWFB.Name = "btnWFB"
+        btnWFB.Size = New Size(57, 30)
+        btnWFB.TabIndex = 53
+        btnWFB.Text = "WFB-ng"
+        btnToolTip.SetToolTip(btnWFB, "Switch to WFB-ng firmware")
+        btnWFB.UseVisualStyleBackColor = False
+        ' 
+        ' btnRuby
+        ' 
+        btnRuby.BackColor = Color.Gold
+        btnRuby.FlatStyle = FlatStyle.Popup
+        btnRuby.Location = New Point(263, 133)
+        btnRuby.Name = "btnRuby"
+        btnRuby.Size = New Size(57, 30)
+        btnRuby.TabIndex = 52
+        btnRuby.Text = "Ruby"
+        btnToolTip.SetToolTip(btnRuby, "Switch to OpenIPC Ruby FPV firmware")
+        btnRuby.UseVisualStyleBackColor = False
         ' 
         ' Label7
         ' 
@@ -1388,7 +1432,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(21, 202)
+        Label4.Location = New Point(17, 202)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -1398,7 +1442,7 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(148, 133)
+        btnGenerateKeys.Location = New Point(140, 133)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(117, 30)
         btnGenerateKeys.TabIndex = 37
@@ -1410,7 +1454,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(21, 169)
+        btnSendKeys.Location = New Point(17, 169)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(117, 30)
         btnSendKeys.TabIndex = 36
@@ -1422,7 +1466,7 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(148, 169)
+        btnReceiveKeys.Location = New Point(140, 169)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(117, 30)
         btnReceiveKeys.TabIndex = 35
@@ -1434,7 +1478,7 @@ Partial Class Configurator
         ' 
         btnUpdate.BackColor = Color.Gold
         btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(21, 133)
+        btnUpdate.Location = New Point(17, 133)
         btnUpdate.Name = "btnUpdate"
         btnUpdate.Size = New Size(117, 30)
         btnUpdate.TabIndex = 34
@@ -2071,7 +2115,7 @@ Partial Class Configurator
         txtPassword.Size = New Size(65, 21)
         txtPassword.TabIndex = 31
         txtPassword.Text = "12345"
-        btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
+        btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera Password")
         ' 
         ' Button4
         ' 
@@ -2145,12 +2189,38 @@ Partial Class Configurator
         ' BackgroundWorker1
         ' 
         ' 
+        ' txtSOC
+        ' 
+        txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtSOC.BorderStyle = BorderStyle.FixedSingle
+        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtSOC.ForeColor = Color.White
+        txtSOC.Location = New Point(335, 384)
+        txtSOC.Name = "txtSOC"
+        txtSOC.Size = New Size(65, 21)
+        txtSOC.TabIndex = 35
+        txtSOC.Text = "ssc338q"
+        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC")
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label10.ForeColor = Color.White
+        Label10.Location = New Point(305, 386)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(35, 15)
+        Label10.TabIndex = 34
+        Label10.Text = "SOC:"
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(661, 445)
+        Controls.Add(txtSOC)
+        Controls.Add(Label10)
         Controls.Add(Button4)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
@@ -2346,5 +2416,10 @@ Partial Class Configurator
     Friend WithEvents txtAggregate As TextBox
     Friend WithEvents cmbRC_Channel As ComboBox
     Friend WithEvents txtRC_CHANNEL As TextBox
+    Friend WithEvents btnRuby As Button
+    Friend WithEvents btnWFB As Button
+    Friend WithEvents btnOfflinefw As Button
+    Friend WithEvents txtSOC As TextBox
+    Friend WithEvents Label10 As Label
 
 End Class

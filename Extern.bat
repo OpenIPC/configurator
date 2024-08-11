@@ -44,7 +44,7 @@ if "%1" == "rb" (
 )
 
 if "%1" == "sysup" (
-	plink -ssh root@%2 -pw %3 sysupgrade -k -r -n
+	plink -ssh root@%2 -pw %3 sysupgrade -k -r -n --force_ver
 )
 
 if "%1" == "keysdl" (
@@ -136,6 +136,22 @@ if "%1" == "shdl" (
 
 if "%1" == "temp" (
 	plink -ssh root@%2 -pw %3 cat /sys/devices/virtual/mstar/msys/TEMP_R
+)
+
+if "%1" == "rubyfw" (
+	plink -ssh root@%2 -pw %3 sed -i 's/BUILD_OPTION=fpv/BUILD_OPTION=rubyfpv/' /etc/os-release
+	plink -ssh root@%2 -pw %3 fw_setenv upgrade https://github.com/OpenIPC/firmware/releases/download/latest/openipc.ssc338q-nor-rubyfpv.tgz
+)
+
+if "%1" == "wfbfw" (
+	plink -ssh root@%2 -pw %3 sed -i 's/BUILD_OPTION=rubyfpv/BUILD_OPTION=fpv/' /etc/os-release
+	plink -ssh root@%2 -pw %3 fw_setenv upgrade https://github.com/OpenIPC/firmware/releases/download/latest/ssc338q_fpv_openipc-urllc-aio-nor.tgz
+)
+
+if "%1" == "offlinefw" (
+	echo y | pscp -scp -pw %3 uImage.%4 root@%2:/tmp
+	echo y | pscp -scp -pw %3 rootfs.squashfs.%4 root@%2:/tmp
+	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4
 )
 
 :end

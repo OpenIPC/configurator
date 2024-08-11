@@ -1116,7 +1116,7 @@ err1:
 
     Private Sub btnGenerateKeys_Click(sender As Object, e As EventArgs) Handles btnGenerateKeys.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -2256,6 +2256,66 @@ err1:
 
     Private Sub cmbRC_Channel_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRC_Channel.SelectedIndexChanged
         txtRC_CHANNEL.Text = "channels=" & cmbRC_Channel.SelectedItem.ToString
+    End Sub
+
+    Private Sub btnRuby_Click(sender As Object, e As EventArgs) Handles btnRuby.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "rubyfw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnWFB_Click(sender As Object, e As EventArgs) Handles btnWFB.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "wfbfw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnOfflinefw_Click(sender As Object, e As EventArgs) Handles btnOfflinefw.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtSOC.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
     End Sub
 
 #End Region
