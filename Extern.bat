@@ -77,7 +77,7 @@ if "%1" == "rswfb" (
 )
 
 if "%1" == "rsmaj" (
-	plink -ssh root@%2 -pw %3 /etc/init.d/S95majestic start
+	plink -ssh root@%2 -pw %3 killall -1 majestic
 )
 
 if "%1" == "binup" (
