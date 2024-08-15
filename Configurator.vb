@@ -644,6 +644,7 @@ err1:
         cmbFPS.Items.Clear()
         cmbFPS.Items.Add("20")
         cmbFPS.Items.Add("30")
+        cmbFPS.Items.Add("40")
         cmbFPS.Items.Add("50")
         cmbFPS.Items.Add("60")
         cmbFPS.Items.Add("70")
