@@ -611,8 +611,10 @@ err1:
         cmbResolution.Items.Add("1456x816")
         cmbResolution.Items.Add("1920x1080")
         cmbResolution.Items.Add("2104x1184")
+        cmbResolution.Items.Add("2208x1248")
         cmbResolution.Items.Add("2240x1264")
         cmbResolution.Items.Add("2312x1304")
+        cmbResolution.Items.Add("2512x1416")
         cmbResolution.Items.Add("2560x1440")
         cmbResolution.Items.Add("2560x1920")
         cmbResolution.Items.Add("3200x1800")
@@ -643,13 +645,12 @@ err1:
         cmbFPS.Items.Add("20")
         cmbFPS.Items.Add("30")
         cmbFPS.Items.Add("50")
-        cmbFPS.Items.Add("59")
         cmbFPS.Items.Add("60")
+        cmbFPS.Items.Add("70")
         cmbFPS.Items.Add("80")
         cmbFPS.Items.Add("90")
         cmbFPS.Items.Add("100")
         cmbFPS.Items.Add("110")
-        cmbFPS.Items.Add("119")
         cmbFPS.Items.Add("120")
         cmbFPS.Text = "Select FPS"
 
@@ -687,11 +688,13 @@ err1:
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
+        cmbExposure.Items.Add("5")
         cmbExposure.Items.Add("6")
         cmbExposure.Items.Add("8")
         cmbExposure.Items.Add("10")
         cmbExposure.Items.Add("11")
         cmbExposure.Items.Add("12")
+        cmbExposure.Items.Add("14")
         cmbExposure.Items.Add("16")
         cmbExposure.Items.Add("33")
         cmbExposure.Items.Add("50")
@@ -880,6 +883,11 @@ err1:
             cmbFPS.Text = "120"
             txtExposure.Text = "  exposure: 8"
             cmbExposure.Text = "8"
+        ElseIf cmbResolution.SelectedItem = "2208x1248" Then
+            txtFPS.Text = "  fps: 90"
+            cmbFPS.Text = "90"
+            txtExposure.Text = "  exposure: 11"
+            cmbExposure.Text = "11"
         ElseIf cmbResolution.SelectedItem = "1920x1080" Then
             txtFPS.Text = "  fps: 90"
             cmbFPS.Text = "90"
@@ -895,6 +903,11 @@ err1:
             cmbFPS.Text = "60"
             txtExposure.Text = "  exposure: 16"
             cmbExposure.Text = "16"
+        ElseIf cmbResolution.SelectedItem = "2512x1416" Then
+            txtFPS.Text = "  fps: 70"
+            cmbFPS.Text = "70"
+            txtExposure.Text = "  exposure: 14"
+            cmbExposure.Text = "14"
         ElseIf cmbResolution.SelectedItem = "2312x1304" Then
             txtFPS.Text = "  fps: 80"
             cmbFPS.Text = "80"
