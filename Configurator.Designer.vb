@@ -178,14 +178,15 @@ Partial Class Configurator
         btnReboot = New Button()
         txtPassword = New TextBox()
         Button4 = New Button()
+        txtSOC = New TextBox()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
         rBtnRadxaZero3w = New RadioButton()
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        txtSOC = New TextBox()
         Label10 = New Label()
+        Label11 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1489,6 +1490,7 @@ Partial Class Configurator
         ' TabPage6
         ' 
         TabPage6.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage6.Controls.Add(Label11)
         TabPage6.Controls.Add(CheckBox18)
         TabPage6.Controls.Add(CheckBox17)
         TabPage6.Controls.Add(CheckBox16)
@@ -2131,6 +2133,19 @@ Partial Class Configurator
         btnToolTip.SetToolTip(Button4, "Reboot the camera/VRX")
         Button4.UseVisualStyleBackColor = False
         ' 
+        ' txtSOC
+        ' 
+        txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtSOC.BorderStyle = BorderStyle.FixedSingle
+        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtSOC.ForeColor = Color.White
+        txtSOC.Location = New Point(335, 384)
+        txtSOC.Name = "txtSOC"
+        txtSOC.Size = New Size(65, 21)
+        txtSOC.TabIndex = 35
+        txtSOC.Text = "ssc338q"
+        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC")
+        ' 
         ' rBtnCam
         ' 
         rBtnCam.AutoSize = True
@@ -2189,19 +2204,6 @@ Partial Class Configurator
         ' BackgroundWorker1
         ' 
         ' 
-        ' txtSOC
-        ' 
-        txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        txtSOC.BorderStyle = BorderStyle.FixedSingle
-        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
-        txtSOC.ForeColor = Color.White
-        txtSOC.Location = New Point(335, 384)
-        txtSOC.Name = "txtSOC"
-        txtSOC.Size = New Size(65, 21)
-        txtSOC.TabIndex = 35
-        txtSOC.Text = "ssc338q"
-        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC")
-        ' 
         ' Label10
         ' 
         Label10.AutoSize = True
@@ -2212,6 +2214,17 @@ Partial Class Configurator
         Label10.Size = New Size(35, 15)
         Label10.TabIndex = 34
         Label10.Text = "SOC:"
+        ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label11.ForeColor = Color.White
+        Label11.Location = New Point(472, 321)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(144, 15)
+        Label11.TabIndex = 105
+        Label11.Text = "This OSD is for NVR only"
         ' 
         ' Configurator
         ' 
@@ -2421,5 +2434,6 @@ Partial Class Configurator
     Friend WithEvents btnOfflinefw As Button
     Friend WithEvents txtSOC As TextBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
 
 End Class

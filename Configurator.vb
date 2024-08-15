@@ -1260,6 +1260,8 @@ err1:
         End If
         Label8.Visible = True
         Label9.Visible = True
+        Label10.Visible = False
+        txtSOC.Visible = False
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1354,6 +1356,8 @@ err1:
         End If
         Label8.Visible = True
         Label9.Visible = True
+        Label10.Visible = True
+        txtSOC.Visible = True
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1448,6 +1452,8 @@ err1:
         End If
         Label8.Visible = False
         Label9.Visible = False
+        Label10.Visible = False
+        txtSOC.Visible = False
         txtResX.Visible = False
         txtResY.Visible = False
         checkCustomRes.Visible = False
