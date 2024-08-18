@@ -1279,7 +1279,7 @@ err1:
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
         txtBin.Visible = False
-        txtSensor.Visible = False
+        txtDriver.Visible = False
         txtSaveVRX.Visible = True
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
@@ -1386,7 +1386,7 @@ err1:
         btnDriver.Visible = True
         btnDriverBackup.Visible = True
         txtBin.Visible = True
-        txtSensor.Visible = True
+        txtDriver.Visible = True
         txtSaveVRX.Visible = False
         btnUART2.Visible = True
         btnUART2OFF.Visible = True
@@ -1493,7 +1493,7 @@ err1:
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
         txtBin.Visible = False
-        txtSensor.Visible = False
+        txtDriver.Visible = False
         txtSaveVRX.Visible = True
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
