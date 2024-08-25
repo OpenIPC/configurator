@@ -2371,5 +2371,80 @@ err1:
         End If
     End Sub
 
+    Private Sub btnMSP_Click(sender As Object, e As EventArgs) Handles btnMSP.Click
+        Dim extern = "extern.bat"
+        Dim msp_file = "msposd"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not System.IO.File.Exists(msp_file) Then
+            MsgBox("File " + msp_file + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "msp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMavlink_Click(sender As Object, e As EventArgs) Handles btnMavlink.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "mav " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnFonts_Click(sender As Object, e As EventArgs) Handles btnFonts.Click
+        Dim extern = "extern.bat"
+        Dim font_file1 = "font.png"
+        Dim font_file2 = "font_hd.png"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not System.IO.File.Exists(font_file1) Then
+            MsgBox("File " + font_file1 + " not found!")
+            Return
+        End If
+        If Not System.IO.File.Exists(font_file2) Then
+            MsgBox("File " + font_file2 + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "fonts " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
 #End Region
 End Class

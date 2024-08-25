@@ -154,6 +154,24 @@ if "%1" == "offlinefw" (
 	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
 )
 
+if "%1" == "msp" (
+	plink -ssh root@%2 -pw %3 sed -i '/mavfwd --channels/c\msposd --master "$serial" --baudrate "$baud" --channels "$channels" --out 127.0.0.1:$port_tx -osd -r 20 --ahi 0 -v "&"' /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 sed -i '/--out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx/c\ ' /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /usr/bin/telemetry
+        echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
+        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
+)
+
+if "%1" == "mav" (
+	plink -ssh root@%2 -pw %3 sed -i '/msposd --master/c\mavfwd --channels "$channels" --master "$serial" --baudrate "$baud" -p 100 -t -a "$aggregate" --out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx ">" /dev/null "&"' /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 sed -i '/killall -q msposd/c\killall -q mavfwd' /usr/bin/telemetry
+)
+
+if "%1" == "fonts" (
+        echo y | pscp -scp -pw %3 font.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 font_hd.png root@%2:/usr/bin/
+)
+
 :end
 echo.
 pause

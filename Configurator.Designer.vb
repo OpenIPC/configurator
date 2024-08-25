@@ -60,6 +60,8 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         txtSaveFreq = New Button()
         TabPage2 = New TabPage()
+        btnMavlink = New Button()
+        btnMSP = New Button()
         Label6 = New Label()
         btnRestartMajestic = New Button()
         cmbLuminance = New ComboBox()
@@ -130,6 +132,7 @@ Partial Class Configurator
         btnReceiveKeys = New Button()
         btnUpdate = New Button()
         TabPage6 = New TabPage()
+        Label11 = New Label()
         CheckBox18 = New CheckBox()
         CheckBox17 = New CheckBox()
         CheckBox16 = New CheckBox()
@@ -186,7 +189,7 @@ Partial Class Configurator
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Label10 = New Label()
-        Label11 = New Label()
+        btnFonts = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -621,6 +624,9 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(btnFonts)
+        TabPage2.Controls.Add(btnMavlink)
+        TabPage2.Controls.Add(btnMSP)
         TabPage2.Controls.Add(Label6)
         TabPage2.Controls.Add(btnRestartMajestic)
         TabPage2.Controls.Add(cmbLuminance)
@@ -649,6 +655,32 @@ Partial Class Configurator
         TabPage2.Size = New Size(629, 341)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' btnMavlink
+        ' 
+        btnMavlink.BackColor = Color.Gold
+        btnMavlink.FlatStyle = FlatStyle.Popup
+        btnMavlink.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMavlink.Location = New Point(454, 92)
+        btnMavlink.Name = "btnMavlink"
+        btnMavlink.Size = New Size(116, 30)
+        btnMavlink.TabIndex = 47
+        btnMavlink.Text = "Mavlink"
+        btnToolTip.SetToolTip(btnMavlink, "Enables the Mavlink telemetry" & vbCrLf & "of OpenIPC")
+        btnMavlink.UseVisualStyleBackColor = False
+        ' 
+        ' btnMSP
+        ' 
+        btnMSP.BackColor = Color.Gold
+        btnMSP.FlatStyle = FlatStyle.Popup
+        btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMSP.Location = New Point(454, 20)
+        btnMSP.Name = "btnMSP"
+        btnMSP.Size = New Size(116, 30)
+        btnMSP.TabIndex = 46
+        btnMSP.Text = "MSP DisplayPort"
+        btnToolTip.SetToolTip(btnMSP, "Enables the MSP DisplayPort function" & vbCrLf & "of OpenIPC")
+        btnMSP.UseVisualStyleBackColor = False
         ' 
         ' Label6
         ' 
@@ -1540,6 +1572,17 @@ Partial Class Configurator
         TabPage6.TabIndex = 5
         TabPage6.Text = "OSD"
         ' 
+        ' Label11
+        ' 
+        Label11.AutoSize = True
+        Label11.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label11.ForeColor = Color.White
+        Label11.Location = New Point(472, 321)
+        Label11.Name = "Label11"
+        Label11.Size = New Size(144, 15)
+        Label11.TabIndex = 105
+        Label11.Text = "This OSD is for NVR only"
+        ' 
         ' CheckBox18
         ' 
         CheckBox18.AutoSize = True
@@ -2215,16 +2258,18 @@ Partial Class Configurator
         Label10.TabIndex = 34
         Label10.Text = "SOC:"
         ' 
-        ' Label11
+        ' btnFonts
         ' 
-        Label11.AutoSize = True
-        Label11.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label11.ForeColor = Color.White
-        Label11.Location = New Point(472, 321)
-        Label11.Name = "Label11"
-        Label11.Size = New Size(144, 15)
-        Label11.TabIndex = 105
-        Label11.Text = "This OSD is for NVR only"
+        btnFonts.BackColor = Color.Gold
+        btnFonts.FlatStyle = FlatStyle.Popup
+        btnFonts.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnFonts.Location = New Point(454, 56)
+        btnFonts.Name = "btnFonts"
+        btnFonts.Size = New Size(116, 30)
+        btnFonts.TabIndex = 48
+        btnFonts.Text = "Upload Fonts"
+        btnToolTip.SetToolTip(btnFonts, "Upload the fonts to the OpenIPC camera")
+        btnFonts.UseVisualStyleBackColor = False
         ' 
         ' Configurator
         ' 
@@ -2435,5 +2480,8 @@ Partial Class Configurator
     Friend WithEvents txtSOC As TextBox
     Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
+    Friend WithEvents btnMSP As Button
+    Friend WithEvents btnMavlink As Button
+    Friend WithEvents btnFonts As Button
 
 End Class
