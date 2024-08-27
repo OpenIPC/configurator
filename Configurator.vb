@@ -8,6 +8,7 @@ Imports System.Net.Sockets
 Imports System.Threading
 Imports System.Formats.Tar
 Imports System.IO
+Imports System.Text.Json
 
 Public Class Configurator
     Public OpenIPCIP As String
@@ -202,7 +203,7 @@ err1:
                 If lines(x).StartsWith("  bitrate: ") Then
                     lines(x) = txtBitrate.Text
                 End If
-                If lines(x).StartsWith("  codec: ") Then
+                If lines(x).StartsWith("  codec: h26") Then
                     lines(x) = txtEncode.Text
                 End If
                 If lines(x).StartsWith("  size: ") Then
@@ -378,7 +379,7 @@ err1:
                 For x = 0 To CamallLines.Count() - 1
                     If CamallLines(x).StartsWith("  size:") And txtResolution.Text = "" Then txtResolution.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  fps:") And txtFPS.Text = "" Then txtFPS.Text = ReadLine(x + 1, CamallLines)
-                    If CamallLines(x).StartsWith("  codec:") Then txtEncode.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  codec: h26") Then txtEncode.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  bitrate:") Then txtBitrate.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  exposure:") Then txtExposure.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  contrast:") Then txtContrast.Text = ReadLine(x + 1, CamallLines)
@@ -1159,7 +1160,11 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "keysdl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                If rBtnCam.Checked = True Then
+                    .StartInfo.Arguments = "keysdlcam " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "keysdlgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1179,7 +1184,11 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "keysul " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                If rBtnCam.Checked = True Then
+                    .StartInfo.Arguments = "keysulcam " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "keysulgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1266,7 +1275,7 @@ err1:
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
-        btnSendKeys.Visible = False
+        btnSendKeys.Text = "Send gs.key"
         btnGenerateKeys.Visible = True
         btnUpdate.Visible = False
         btnRuby.Visible = False
@@ -1373,7 +1382,7 @@ err1:
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
-        btnSendKeys.Visible = True
+        btnSendKeys.Text = "Send drone.key"
         btnGenerateKeys.Visible = False
         btnUpdate.Visible = True
         btnRuby.Visible = True
@@ -1480,7 +1489,7 @@ err1:
         txtResX.Visible = False
         txtResY.Visible = False
         checkCustomRes.Visible = False
-        btnSendKeys.Visible = False
+        btnSendKeys.Text = "Send gs.key"
         btnGenerateKeys.Visible = True
         btnUpdate.Visible = False
         btnRuby.Visible = False
@@ -2444,6 +2453,16 @@ err1:
         Else
             MsgBox("Please enter a valid IP address")
         End If
+    End Sub
+
+    Private Sub btnSaveReboot_Click(sender As Object, e As EventArgs) Handles btnSaveReboot.Click
+        txtSaveFreq.PerformClick()
+        txtSaveTLM.PerformClick()
+        txtSaveCam.PerformClick()
+        txtSaveVRX.PerformClick()
+        txtSaveFreq.PerformClick()
+        btnSend.PerformClick()
+        btnReboot.PerformClick()
     End Sub
 
 #End Region

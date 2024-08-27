@@ -47,11 +47,20 @@ if "%1" == "sysup" (
 	plink -ssh root@%2 -pw %3 sysupgrade -k -r -n --force_ver
 )
 
-if "%1" == "keysdl" (
+if "%1" == "keysdlgs" (
 	echo y | pscp -scp -pw %3 root@%2:/root/drone.key .
 )
 
-if "%1" == "keysul" (
+if "%1" == "keysdlcam" (
+	echo y | pscp -scp -pw %3 root@%2:/etc/drone.key .
+)
+
+if "%1" == "keysulgs" (
+	echo y | pscp -scp -pw %3 drone.key root@%2:/etc
+        plink -ssh root@%2 -pw %3 cp /etc/drone.key /etc/gs.key
+)
+
+if "%1" == "keysulcam" (
 	echo y | pscp -scp -pw %3 drone.key root@%2:/etc
 )
 
@@ -158,6 +167,7 @@ if "%1" == "msp" (
 	plink -ssh root@%2 -pw %3 sed -i '/mavfwd --channels/c\msposd --master "$serial" --baudrate "$baud" --channels "$channels" --out 127.0.0.1:$port_tx -osd -r 20 --ahi 0 -v "&"' /usr/bin/telemetry
         plink -ssh root@%2 -pw %3 sed -i '/--out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx/c\ ' /usr/bin/telemetry
         plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
 )
