@@ -2456,13 +2456,231 @@ err1:
     End Sub
 
     Private Sub btnSaveReboot_Click(sender As Object, e As EventArgs) Handles btnSaveReboot.Click
-        txtSaveFreq.PerformClick()
-        txtSaveTLM.PerformClick()
-        txtSaveCam.PerformClick()
-        txtSaveVRX.PerformClick()
-        txtSaveFreq.PerformClick()
-        btnSend.PerformClick()
-        btnReboot.PerformClick()
+        If txtFrequency.Text <> "" Then
+            Dim wfbconf = "wfb.conf"
+            If Not IO.File.Exists(wfbconf) Then
+                MsgBox("File " + wfbconf + " not found!")
+                Return
+            End If
+            Dim x As Integer
+            Dim WFBfilePath = wfbconf
+            Dim lines = IO.File.ReadAllLines(WFBfilePath)
+            For x = 0 To lines.Count() - 1
+                If rBtnRadxaZero3w.Checked Then
+                    Dim wfbng = "wifibroadcast.cfg"
+                    If Not IO.File.Exists(wfbng) Then
+                        MsgBox("File " + wfbng + " not found!")
+                        Return
+                    End If
+
+                    Dim wfbngfilePath = wfbng
+                    Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
+                    If WFBlines(1).StartsWith("wifi_channel = ") Then
+                        WFBlines(1) = txtFrequency.Text
+                    End If
+                    If WFBlines(7).StartsWith("peer = 'connect://") Then
+                        WFBlines(7) = txtMCS.Text
+                    End If
+                    If WFBlines(11).StartsWith("peer = 'connect://") Then
+                        WFBlines(11) = txtSTBC.Text
+                    End If
+                    IO.File.WriteAllLines(wfbngfilePath, WFBlines)
+                    If lines(x).StartsWith("rtw_tx_pwr_idx_override=") Then
+                        lines(x) = txtPower.Text
+                    End If
+                Else
+                    If lines(x).StartsWith("channel=") Then
+                        lines(x) = txtFrequency.Text
+                    End If
+                    If lines(x).StartsWith("driver_txpower_override=") Then
+                        lines(x) = txtPower.Text
+                    End If
+                    If lines(x).StartsWith("frequency=") Then
+                        lines(x) = txtFreq24.Text
+                    End If
+                    If lines(x).StartsWith("txpower=") Then
+                        lines(x) = txtPower24.Text
+                    End If
+                    If rBtnNVR.Checked Then
+                        If lines(x).StartsWith("udp_addr=") Then
+                            lines(x) = txtMCS.Text
+                        End If
+                        If lines(x).StartsWith("udp_port=") Then
+                            lines(x) = txtSTBC.Text
+                        End If
+                    Else
+                        If lines(x).StartsWith("stbc=") Then
+                            lines(x) = txtSTBC.Text
+                        End If
+                        If lines(x).StartsWith("ldpc=") Then
+                            lines(x) = txtLDPC.Text
+                        End If
+                        If lines(x).StartsWith("mcs_index=") Then
+                            lines(x) = txtMCS.Text
+                        End If
+                        If lines(x).StartsWith("fec_k=") Then
+                            lines(x) = txtFECK.Text
+                        End If
+                        If lines(x).StartsWith("fec_n=") Then
+                            lines(x) = txtFECN.Text
+                        End If
+                    End If
+                End If
+            Next
+            IO.File.WriteAllLines(WFBfilePath, lines)
+        End If
+        If txtSerial.Text <> "" Then
+            Dim telemetry = "telemetry.conf"
+            If Not System.IO.File.Exists(telemetry) Then
+                MsgBox("File " + telemetry + " not found!")
+                Return
+            End If
+            Dim x As Integer
+            Dim TLMfilePath As String = telemetry
+            Dim lines = IO.File.ReadAllLines(TLMfilePath)
+            For x = 0 To lines.Count() - 1
+                If lines(x).StartsWith("serial=") Then
+                    lines(x) = txtSerial.Text
+                End If
+                If lines(x).StartsWith("baud=") Then
+                    lines(x) = txtBaud.Text
+                End If
+                If lines(x).StartsWith("router=") Then
+                    lines(x) = txtRouter.Text
+                End If
+                If lines(x).StartsWith("mcs_index=") Then
+                    lines(x) = txtMCSTLM.Text
+                End If
+                If lines(x).StartsWith("aggregate=") Then
+                    lines(x) = txtAggregate.Text
+                End If
+                If lines(x).StartsWith("channels=") Then
+                    lines(x) = txtRC_CHANNEL.Text
+                End If
+            Next
+            IO.File.WriteAllLines(TLMfilePath, lines)
+        End If
+        If txtResolution.Text <> "" Then
+            Dim majestic = "majestic.yaml"
+            If Not IO.File.Exists(majestic) Then
+                MsgBox("File " + majestic + " not found!")
+                Return
+            End If
+            Dim x As Integer
+            Dim CamfilePath = majestic
+            Dim lines = IO.File.ReadAllLines(CamfilePath)
+            For x = 0 To lines.Count() - 1
+                If lines(x).StartsWith("  contrast: ") Then
+                    lines(x) = txtContrast.Text
+                End If
+                If lines(x).StartsWith("  hue: ") Then
+                    lines(x) = txtHue.Text
+                End If
+                If lines(x).StartsWith("  saturation:") Then
+                    lines(x) = txtSaturation.Text
+                End If
+                If lines(x).StartsWith("  luminance: ") Then
+                    lines(x) = txtLuminance.Text
+                End If
+                If lines(x).StartsWith("  bitrate: ") Then
+                    lines(x) = txtBitrate.Text
+                End If
+                If lines(x).StartsWith("  codec: h26") Then
+                    lines(x) = txtEncode.Text
+                End If
+                If lines(x).StartsWith("  size: ") Then
+                    lines(x) = txtResolution.Text
+                End If
+                If lines(x).StartsWith("  fps: ") Then
+                    lines(x) = txtFPS.Text
+                End If
+                If lines(x).StartsWith("  sensorConfig: ") Then
+                    lines(x) = txtSensor.Text
+                End If
+                If lines(x).StartsWith("  exposure: ") Then
+                    lines(x) = txtExposure.Text
+                End If
+            Next
+            IO.File.WriteAllLines(CamfilePath, lines)
+        End If
+        If txtResolutionVRX.Text <> "" Then
+            If rBtnRadxaZero3w.Checked Then
+                Dim setdisplay = "setdisplay.sh"
+                If Not IO.File.Exists(setdisplay) Then
+                    MsgBox("File " + setdisplay + " not found!")
+                    Return
+                End If
+                Dim x, y As Integer
+                Dim setdisplayfilePath = setdisplay
+                Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
+                For x = 0 To setdisplaylines.Count - 1
+                    If setdisplaylines(x).StartsWith("MODE=") Then
+                        setdisplaylines(x) = txtResolutionVRX.Text
+                    End If
+                    If setdisplaylines(x).StartsWith("RATE=") Then
+                        setdisplaylines(x) = txtCodecVRX.Text
+                    End If
+                Next
+                IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
+            Else
+                Dim vdec = "vdec.conf"
+                If Not IO.File.Exists(vdec) Then
+                    MsgBox("File " + vdec + " not found!")
+                    Return
+                End If
+
+                Dim VDECfilePath = vdec
+                Dim lines = IO.File.ReadAllLines(VDECfilePath)
+                For y = 0 To lines.Count - 1
+                    If lines(y).StartsWith("mode=") Then
+                        lines(y) = txtResolutionVRX.Text
+                    End If
+                    If lines(y).StartsWith("codec=") Then
+                        lines(y) = txtCodecVRX.Text
+                    End If
+                    If lines(y).StartsWith("format=") Then
+                        lines(y) = txtFormat.Text
+                    End If
+                    If lines(y).StartsWith("port=") Then
+                        lines(y) = txtPortVRX.Text
+                    End If
+                    If lines(y).StartsWith("mavlink_port=") Then
+                        lines(y) = txtMavlinkVRX.Text
+                    End If
+                    If lines(y).StartsWith("osd=") Then
+                        lines(y) = txtOSD.Text
+                    End If
+                    If lines(y).StartsWith("extra=") Then
+                        lines(y) = txtExtras.Text
+                    End If
+                Next
+                IO.File.WriteAllLines(VDECfilePath, lines)
+            End If
+        End If
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            MsgBox("All settings are saved and will now be uploaded." + vbCrLf + "Click [Enter] multiple times in the script." + vbCrLf + "OpenIPC will reboot after uploading is complete.", MsgBoxStyle.Information, "OpenIPC")
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBtnNVR.Checked Then
+                    .StartInfo.Arguments = "ulvrxr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                ElseIf rBtnRadxaZero3w.Checked Then
+                    .StartInfo.Arguments = "ulwfbngr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "ulr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
     End Sub
 
 #End Region

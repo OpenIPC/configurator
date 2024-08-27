@@ -13,6 +13,14 @@ if "%1" == "ul" (
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/majestic.yaml
 )
 
+if "%1" == "ulr" (
+	echo y | pscp -scp -pw %3 majestic.yaml root@%2:/etc
+	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc
+	echo y | pscp -scp -pw %3 telemetry.conf root@%2:/etc
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/majestic.yaml
+	plink -ssh root@%2 -pw %3 reboot
+)
+
 if "%1" == "dlvrx" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/vdec.conf .
 	echo y | pscp -scp -pw %3 root@%2:/etc/wfb.conf .
@@ -26,6 +34,14 @@ if "%1" == "ulvrx" (
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/vdec.conf
 )
 
+if "%1" == "ulvrxr" (
+	echo y | pscp -scp -pw %3 vdec.conf root@%2:/etc
+	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc
+	echo y | pscp -scp -pw %3 telemetry.conf root@%2:/etc
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/vdec.conf
+	plink -ssh root@%2 -pw %3 reboot
+)
+
 if "%1" == "dlwfbng" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/wifibroadcast.cfg .
 	echo y | pscp -scp -pw %3 root@%2:/etc/modprobe.d/wfb.conf .
@@ -37,6 +53,14 @@ if "%1" == "ulwfbng" (
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 setdisplay.sh root@%2:/home/radxa/scripts/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/setdisplay.sh
+)
+
+if "%1" == "ulwfbngr" (
+	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
+	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
+	echo y | pscp -scp -pw %3 setdisplay.sh root@%2:/home/radxa/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/setdisplay.sh
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "rb" (
