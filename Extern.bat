@@ -45,21 +45,21 @@ if "%1" == "ulvrxr" (
 if "%1" == "dlwfbng" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/wifibroadcast.cfg .
 	echo y | pscp -scp -pw %3 root@%2:/etc/modprobe.d/wfb.conf .
-	echo y | pscp -scp -pw %3 root@%2:/home/radxa/scripts/setdisplay.sh .
+	echo y | pscp -scp -pw %3 root@%2:/home/radxa/scripts/screen-mode .
 )
 
 if "%1" == "ulwfbng" (
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
-	echo y | pscp -scp -pw %3 setdisplay.sh root@%2:/home/radxa/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/setdisplay.sh
+	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
 )
 
 if "%1" == "ulwfbngr" (
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
-	echo y | pscp -scp -pw %3 setdisplay.sh root@%2:/home/radxa/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/setdisplay.sh
+	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
 	plink -ssh root@%2 -pw %3 reboot
 )
 
@@ -125,7 +125,6 @@ if "%1" == "shup" (
 	echo y | pscp -scp -pw %3 *.sh root@%2:/root/
 	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/bin/
 	plink -ssh root@%2 -pw %3 rm /root/channels.sh
-	plink -ssh root@%2 -pw %3 rm /root/setdisplay.sh
 	plink -ssh root@%2 -pw %3 rm /root/816.sh
 	plink -ssh root@%2 -pw %3 rm /root/1080.sh
 	plink -ssh root@%2 -pw %3 rm /root/1080b.sh

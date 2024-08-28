@@ -249,7 +249,7 @@ Partial Class Configurator
         txtFrequency.Location = New Point(248, 20)
         txtFrequency.Name = "txtFrequency"
         txtFrequency.ReadOnly = True
-        txtFrequency.Size = New Size(191, 20)
+        txtFrequency.Size = New Size(325, 20)
         txtFrequency.TabIndex = 3
         ' 
         ' txtResolution
@@ -359,7 +359,7 @@ Partial Class Configurator
         txtPower.Location = New Point(248, 49)
         txtPower.Name = "txtPower"
         txtPower.ReadOnly = True
-        txtPower.Size = New Size(191, 20)
+        txtPower.Size = New Size(325, 20)
         txtPower.TabIndex = 13
         ' 
         ' txtSensor
@@ -380,7 +380,7 @@ Partial Class Configurator
         txtFreq24.Location = New Point(248, 78)
         txtFreq24.Name = "txtFreq24"
         txtFreq24.ReadOnly = True
-        txtFreq24.Size = New Size(191, 20)
+        txtFreq24.Size = New Size(325, 20)
         txtFreq24.TabIndex = 16
         ' 
         ' txtMCS
@@ -391,7 +391,7 @@ Partial Class Configurator
         txtMCS.Location = New Point(248, 136)
         txtMCS.Name = "txtMCS"
         txtMCS.ReadOnly = True
-        txtMCS.Size = New Size(191, 20)
+        txtMCS.Size = New Size(325, 20)
         txtMCS.TabIndex = 15
         ' 
         ' txtLDPC
@@ -402,7 +402,7 @@ Partial Class Configurator
         txtLDPC.Location = New Point(248, 194)
         txtLDPC.Name = "txtLDPC"
         txtLDPC.ReadOnly = True
-        txtLDPC.Size = New Size(191, 20)
+        txtLDPC.Size = New Size(325, 20)
         txtLDPC.TabIndex = 18
         ' 
         ' txtSTBC
@@ -413,7 +413,7 @@ Partial Class Configurator
         txtSTBC.Location = New Point(248, 165)
         txtSTBC.Name = "txtSTBC"
         txtSTBC.ReadOnly = True
-        txtSTBC.Size = New Size(191, 20)
+        txtSTBC.Size = New Size(325, 20)
         txtSTBC.TabIndex = 17
         ' 
         ' txtFECN
@@ -424,7 +424,7 @@ Partial Class Configurator
         txtFECN.Location = New Point(248, 252)
         txtFECN.Name = "txtFECN"
         txtFECN.ReadOnly = True
-        txtFECN.Size = New Size(191, 20)
+        txtFECN.Size = New Size(325, 20)
         txtFECN.TabIndex = 20
         ' 
         ' txtFECK
@@ -435,7 +435,7 @@ Partial Class Configurator
         txtFECK.Location = New Point(248, 223)
         txtFECK.Name = "txtFECK"
         txtFECK.ReadOnly = True
-        txtFECK.Size = New Size(191, 20)
+        txtFECK.Size = New Size(325, 20)
         txtFECK.TabIndex = 19
         ' 
         ' txtPower24
@@ -446,7 +446,7 @@ Partial Class Configurator
         txtPower24.Location = New Point(248, 107)
         txtPower24.Name = "txtPower24"
         txtPower24.ReadOnly = True
-        txtPower24.Size = New Size(191, 20)
+        txtPower24.Size = New Size(325, 20)
         txtPower24.TabIndex = 21
         ' 
         ' TabControl1

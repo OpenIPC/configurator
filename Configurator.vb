@@ -130,7 +130,7 @@ err1:
                         WFBlines(11) = txtSTBC.Text
                     End If
                     IO.File.WriteAllLines(wfbngfilePath, WFBlines)
-                    If lines(x).StartsWith("rtw_tx_pwr_idx_override=") Then
+                    If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
                         lines(x) = txtPower.Text
                     End If
                 Else
@@ -269,6 +269,9 @@ err1:
             WFBngreader.Close()
             txtFrequency.Text = ReadLine(2, WFBngallLines)
             txtPower.Text = ReadLine(6, WFBallLines)
+            For x = 0 To WFBallLines.Count() - 1
+                If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
+            Next x
             txtMCS.Text = ReadLine(8, WFBngallLines)
             txtSTBC.Text = ReadLine(12, WFBngallLines)
         Else
@@ -390,7 +393,7 @@ err1:
                 Next
             End If
         Else
-            Dim setdisplay = "setdisplay.sh"
+            Dim setdisplay = "screen-mode"
             If Not System.IO.File.Exists(setdisplay) Then
                 MsgBox("File " + setdisplay + " not found!")
                 Return
@@ -402,8 +405,15 @@ err1:
                 DisplayReaderallLines.Add(DisplayReader.ReadLine)
             Loop
             DisplayReader.Close()
-            txtResolutionVRX.Text = ReadLine(6, DisplayReaderallLines)
-            txtCodecVRX.Text = ReadLine(7, DisplayReaderallLines)
+            Dim LineOfText As String
+            Dim array() As String
+
+            LineOfText = ReadLine(1, DisplayReaderallLines)
+
+            array = LineOfText.Split("@")
+
+            txtResolutionVRX.Text = array(0)
+            txtCodecVRX.Text = array(1)
         End If
         MsgBox("Settings loaded successfully", MsgBoxStyle.Information, "OpenIPC")
     End Sub
@@ -836,7 +846,7 @@ err1:
 
     Private Sub ComboBox2_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox2.SelectedIndexChanged
         If rBtnRadxaZero3w.Checked Then
-            txtPower.Text = "rtw_tx_pwr_idx_override=" & ComboBox2.SelectedItem.ToString
+            txtPower.Text = "options 88XXau_wfb rtw_tx_pwr_idx_override=" & ComboBox2.SelectedItem.ToString
         Else
             txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
         End If
@@ -1050,21 +1060,16 @@ err1:
     Private Sub txtSaveVRX_Click(sender As Object, e As EventArgs) Handles txtSaveVRX.Click
         If txtResolutionVRX.Text <> "" Then
             If rBtnRadxaZero3w.Checked Then
-                Dim setdisplay = "setdisplay.sh"
+                Dim setdisplay = "screen-mode"
                 If Not IO.File.Exists(setdisplay) Then
                     MsgBox("File " + setdisplay + " not found!")
                     Return
                 End If
-                Dim x, y As Integer
+                Dim x As Integer
                 Dim setdisplayfilePath = setdisplay
                 Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
                 For x = 0 To setdisplaylines.Count - 1
-                    If setdisplaylines(x).StartsWith("MODE=") Then
-                        setdisplaylines(x) = txtResolutionVRX.Text
-                    End If
-                    If setdisplaylines(x).StartsWith("RATE=") Then
-                        setdisplaylines(x) = txtCodecVRX.Text
-                    End If
+                    setdisplaylines(x) = txtResolutionVRX.Text + "@" + txtCodecVRX.Text
                 Next
                 IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
             Else
@@ -1107,7 +1112,7 @@ err1:
 
     Private Sub cmbResolutionVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolutionVRX.SelectedIndexChanged
         If rBtnRadxaZero3w.Checked Then
-            txtResolutionVRX.Text = "MODE=" & cmbResolutionVRX.SelectedItem.ToString
+            txtResolutionVRX.Text = cmbResolutionVRX.SelectedItem.ToString
         Else
             txtResolutionVRX.Text = "mode=" & cmbResolutionVRX.SelectedItem.ToString
         End If
@@ -1115,7 +1120,7 @@ err1:
 
     Private Sub cmbCodecVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbCodecVRX.SelectedIndexChanged
         If rBtnRadxaZero3w.Checked Then
-            txtCodecVRX.Text = "RATE=" & cmbCodecVRX.SelectedItem.ToString
+            txtCodecVRX.Text = cmbCodecVRX.SelectedItem.ToString
         Else
             txtCodecVRX.Text = "codec=" & cmbCodecVRX.SelectedItem.ToString
         End If
@@ -2485,7 +2490,7 @@ err1:
                         WFBlines(11) = txtSTBC.Text
                     End If
                     IO.File.WriteAllLines(wfbngfilePath, WFBlines)
-                    If lines(x).StartsWith("rtw_tx_pwr_idx_override=") Then
+                    If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
                         lines(x) = txtPower.Text
                     End If
                 Else
@@ -2605,21 +2610,16 @@ err1:
         End If
         If txtResolutionVRX.Text <> "" Then
             If rBtnRadxaZero3w.Checked Then
-                Dim setdisplay = "setdisplay.sh"
+                Dim setdisplay = "screen-mode"
                 If Not IO.File.Exists(setdisplay) Then
                     MsgBox("File " + setdisplay + " not found!")
                     Return
                 End If
-                Dim x, y As Integer
+                Dim x As Integer
                 Dim setdisplayfilePath = setdisplay
                 Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
                 For x = 0 To setdisplaylines.Count - 1
-                    If setdisplaylines(x).StartsWith("MODE=") Then
-                        setdisplaylines(x) = txtResolutionVRX.Text
-                    End If
-                    If setdisplaylines(x).StartsWith("RATE=") Then
-                        setdisplaylines(x) = txtCodecVRX.Text
-                    End If
+                    setdisplaylines(x) = txtResolutionVRX.Text + "@" + txtCodecVRX.Text
                 Next
                 IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
             Else
