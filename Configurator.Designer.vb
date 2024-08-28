@@ -92,6 +92,8 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        btnMAVGS = New Button()
+        btnMSPGS = New Button()
         Label9 = New Label()
         Label8 = New Label()
         checkCustomRes = New CheckBox()
@@ -1027,6 +1029,8 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnMAVGS)
+        TabPage4.Controls.Add(btnMSPGS)
         TabPage4.Controls.Add(Label9)
         TabPage4.Controls.Add(Label8)
         TabPage4.Controls.Add(checkCustomRes)
@@ -1051,6 +1055,32 @@ Partial Class Configurator
         TabPage4.Size = New Size(629, 341)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' btnMAVGS
+        ' 
+        btnMAVGS.BackColor = Color.Gold
+        btnMAVGS.FlatStyle = FlatStyle.Popup
+        btnMAVGS.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMAVGS.Location = New Point(454, 56)
+        btnMAVGS.Name = "btnMAVGS"
+        btnMAVGS.Size = New Size(116, 30)
+        btnMAVGS.TabIndex = 63
+        btnMAVGS.Text = "Mavlink"
+        btnToolTip.SetToolTip(btnMAVGS, "Enables the Mavlink telemetry" & vbCrLf & "of OpenIPC")
+        btnMAVGS.UseVisualStyleBackColor = False
+        ' 
+        ' btnMSPGS
+        ' 
+        btnMSPGS.BackColor = Color.Gold
+        btnMSPGS.FlatStyle = FlatStyle.Popup
+        btnMSPGS.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnMSPGS.Location = New Point(454, 20)
+        btnMSPGS.Name = "btnMSPGS"
+        btnMSPGS.Size = New Size(116, 30)
+        btnMSPGS.TabIndex = 62
+        btnMSPGS.Text = "MSP DisplayPort"
+        btnToolTip.SetToolTip(btnMSPGS, "Enables the MSP DisplayPort function" & vbCrLf & "of OpenIPC")
+        btnMSPGS.UseVisualStyleBackColor = False
         ' 
         ' Label9
         ' 
@@ -2499,5 +2529,7 @@ Partial Class Configurator
     Friend WithEvents btnMavlink As Button
     Friend WithEvents btnFonts As Button
     Friend WithEvents btnSaveReboot As Button
+    Friend WithEvents btnMAVGS As Button
+    Friend WithEvents btnMSPGS As Button
 
 End Class

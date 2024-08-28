@@ -1294,6 +1294,8 @@ err1:
         btnDriverBackup.Visible = False
         txtBin.Visible = False
         txtDriver.Visible = False
+        btnMSPGS.Visible = False
+        btnMAVGS.Visible = False
         txtSaveVRX.Visible = True
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
@@ -1402,6 +1404,9 @@ err1:
         txtBin.Visible = True
         txtDriver.Visible = True
         txtSaveVRX.Visible = False
+        btnMSPGS.Visible = False
+        btnMAVGS.Visible = False
+        txtSaveVRX.Visible = False
         btnUART2.Visible = True
         btnUART2OFF.Visible = True
         btnRestartWFB.Visible = True
@@ -1508,6 +1513,8 @@ err1:
         btnDriverBackup.Visible = False
         txtBin.Visible = False
         txtDriver.Visible = False
+        btnMSPGS.Visible = True
+        btnMAVGS.Visible = True
         txtSaveVRX.Visible = True
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
@@ -2675,6 +2682,46 @@ err1:
                 Else
                     .StartInfo.Arguments = "ulr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMSPGS_Click(sender As Object, e As EventArgs) Handles btnMSPGS.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "mspgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMAVGS_Click(sender As Object, e As EventArgs) Handles btnMAVGS.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "mavgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
