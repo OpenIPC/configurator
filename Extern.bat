@@ -187,17 +187,26 @@ if "%1" == "offlinefw" (
 )
 
 if "%1" == "msp" (
-	plink -ssh root@%2 -pw %3 sed -i '/mavfwd --channels/c\msposd --master "$serial" --baudrate "$baud" --channels "$channels" --out 127.0.0.1:$port_tx -osd -r 20 --ahi 0 -v "&"' /usr/bin/telemetry
-        plink -ssh root@%2 -pw %3 sed -i '/--out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx/c\ ' /usr/bin/telemetry
-        plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 -v "&"' /etc/init.d/S98datalink
+        plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
         plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
 )
 
+if "%1" == "mspgs" (
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
+)
+
 if "%1" == "mav" (
-	plink -ssh root@%2 -pw %3 sed -i '/msposd --master/c\mavfwd --channels "$channels" --master "$serial" --baudrate "$baud" -p 100 -t -a "$aggregate" --out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx ">" /dev/null "&"' /usr/bin/telemetry
-        plink -ssh root@%2 -pw %3 sed -i '/killall -q msposd/c\killall -q mavfwd' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 sed -i '/msposd --master/c\echo \"Starting wifibroadcast service...\"' /etc/init.d/S98datalink
+        plink -ssh root@%2 -pw %3 sed -i '/telemetry=false/c\telemetry=true' /etc/datalink.conf
+)
+
+if "%1" == "mavgs" (
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
 )
 
 if "%1" == "fonts" (
