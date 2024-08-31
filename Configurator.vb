@@ -2631,7 +2631,7 @@ err1:
                 IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
             Else
                 Dim vdec = "vdec.conf"
-                If Not IO.File.Exists(vdec) Then
+                If Not IO.File.Exists(vdec) And rBtnNVR.Checked = True Then
                     MsgBox("File " + vdec + " not found!")
                     Return
                 End If
