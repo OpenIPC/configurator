@@ -163,6 +163,9 @@ if "%1" == "shdl" (
 	echo y | pscp -scp -pw %3 root@%2:/root/720p90.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/720p60.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1080p120.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1248p90.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1304p80.sh .
+	echo y | pscp -scp -pw %3 root@%2:/root/1416p70.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/kill.sh .
 )
 
@@ -187,7 +190,8 @@ if "%1" == "offlinefw" (
 )
 
 if "%1" == "msp" (
-	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 -v "&"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 100 -v "&"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
         plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
@@ -201,6 +205,7 @@ if "%1" == "mspgs" (
 
 if "%1" == "mav" (
 	plink -ssh root@%2 -pw %3 sed -i '/msposd --master/c\echo \"Starting wifibroadcast service...\"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/killall -q msposd/c\killall -q mavfwd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=false/c\telemetry=true' /etc/datalink.conf
 )
 
