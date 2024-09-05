@@ -225,6 +225,58 @@ err1:
     End Sub
 
     Private Sub btnRead_Click(sender As Object, e As EventArgs) Handles btnRead.Click
+        Dim settingsconf As String = "settings.conf"
+        If Not IO.File.Exists(settingsconf) Then
+            System.IO.File.Create(settingsconf).Dispose()
+            Dim fileExists As Boolean = File.Exists(settingsconf)
+            Using sw As New StreamWriter(File.Open(settingsconf, FileMode.OpenOrCreate))
+                sw.WriteLine("openipc:192.168.0.1")
+                sw.WriteLine("nvr:192.168.0.1")
+                sw.WriteLine("radxa:192.168.0.1")
+            End Using
+            MsgBox("File " + settingsconf + " not found and default created!")
+        End If
+
+        Dim x As Integer
+        Dim SettingsfilePath = settingsconf
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                Dim lines = IO.File.ReadAllLines(SettingsfilePath)
+                For x = 0 To lines.Count() - 1
+                    If rBtnNVR.Checked Then
+                        If lines(x).StartsWith("nvr:") Then
+                            lines(x) = "nvr:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dlvrx " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    ElseIf rBtnRadxaZero3w.Checked Then
+                        If lines(x).StartsWith("radxa:") Then
+                            lines(x) = "radxa:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dlwfbng " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    Else
+                        If lines(x).StartsWith("openipc:") Then
+                            lines(x) = "openipc:" + txtIP.Text
+                        End If
+                        .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    End If
+                Next
+                IO.File.WriteAllLines(SettingsfilePath, lines)
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+            Return
+        End If
+
         txtResolution.Text = ""
         txtFPS.Text = ""
         txtEncode.Text = ""
@@ -233,6 +285,8 @@ err1:
         txtSaturation.Text = ""
         txtHue.Text = ""
         txtLuminance.Text = ""
+
+        Threading.Thread.Sleep(3000)
 
         Dim wfbconf = "wfb.conf"
         If Not System.IO.File.Exists(wfbconf) Then
@@ -415,7 +469,7 @@ err1:
             txtResolutionVRX.Text = array(0)
             txtCodecVRX.Text = array(1)
         End If
-        MsgBox("Settings loaded successfully", MsgBoxStyle.Information, "OpenIPC")
+        'MsgBox("Settings loaded successfully", MsgBoxStyle.Information, "OpenIPC")
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1296,7 +1350,7 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
-        txtSaveVRX.Visible = True
+        txtSaveVRX.Visible = False
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
         btnRestartWFB.Visible = True
@@ -1407,12 +1461,12 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         txtSaveVRX.Visible = False
-        btnUART2.Visible = True
-        btnUART2OFF.Visible = True
+        btnUART2.Visible = False
+        btnUART2OFF.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
-        txtSaveCam.Visible = True
-        txtSaveTLM.Visible = True
+        txtSaveCam.Visible = False
+        txtSaveTLM.Visible = False
         ComboBox3.Visible = True
         ComboBox4.Visible = True
         ComboBox5.Visible = True
@@ -1515,7 +1569,7 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = True
         btnMAVGS.Visible = True
-        txtSaveVRX.Visible = True
+        txtSaveVRX.Visible = False
         btnUART2.Visible = False
         btnUART2OFF.Visible = False
         btnRestartWFB.Visible = False
@@ -2727,6 +2781,26 @@ err1:
             End With
         Else
             MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        Dim ping As Ping
+        Dim pingReply As PingReply
+
+        ping = New Ping()
+        pingReply = ping.Send(txtIP.Text)
+        If pingReply.Status = IPStatus.Success Then
+            connected.BackColor = Color.FromArgb(30, 255, 30)
+        Else
+            connected.BackColor = Color.FromArgb(255, 30, 30)
+        End If
+        Timer1.Enabled = False
+    End Sub
+
+    Private Sub txtIP_TextChanged(sender As Object, e As EventArgs) Handles txtIP.TextChanged
+        If IsValidIP(txtIP.Text) Then
+            Timer1.Enabled = True
         End If
     End Sub
 

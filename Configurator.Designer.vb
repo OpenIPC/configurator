@@ -193,6 +193,8 @@ Partial Class Configurator
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Label10 = New Label()
+        connected = New PictureBox()
+        Timer1 = New Timer(components)
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -201,6 +203,7 @@ Partial Class Configurator
         TabPage5.SuspendLayout()
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
+        CType(connected, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
         ' btnGet
@@ -210,11 +213,12 @@ Partial Class Configurator
         btnGet.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnGet.Location = New Point(12, 408)
         btnGet.Name = "btnGet"
-        btnGet.Size = New Size(60, 30)
+        btnGet.Size = New Size(45, 30)
         btnGet.TabIndex = 0
         btnGet.Text = "Fetch"
         btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera/VRX" & vbCrLf & "Save the IP address of the selected device")
         btnGet.UseVisualStyleBackColor = False
+        btnGet.Visible = False
         ' 
         ' txtIP
         ' 
@@ -235,13 +239,14 @@ Partial Class Configurator
         btnSend.FlatStyle = FlatStyle.Popup
         btnSend.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnSend.ForeColor = Color.Black
-        btnSend.Location = New Point(264, 408)
+        btnSend.Location = New Point(334, 408)
         btnSend.Name = "btnSend"
         btnSend.Size = New Size(54, 30)
         btnSend.TabIndex = 2
         btnSend.Text = "Upload"
         btnToolTip.SetToolTip(btnSend, "Send the local files with the new " & vbCrLf & "settings to the OpenIPC camera/VRX")
         btnSend.UseVisualStyleBackColor = False
+        btnSend.Visible = False
         ' 
         ' txtFrequency
         ' 
@@ -623,6 +628,7 @@ Partial Class Configurator
         txtSaveFreq.Text = "Save"
         btnToolTip.SetToolTip(txtSaveFreq, "Save the WFB settings to the" & vbCrLf & "local wfb.conf file")
         txtSaveFreq.UseVisualStyleBackColor = False
+        txtSaveFreq.Visible = False
         ' 
         ' TabPage2
         ' 
@@ -831,6 +837,7 @@ Partial Class Configurator
         txtSaveCam.Text = "Save"
         btnToolTip.SetToolTip(txtSaveCam, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
         txtSaveCam.UseVisualStyleBackColor = False
+        txtSaveCam.Visible = False
         ' 
         ' TabPage3
         ' 
@@ -913,6 +920,7 @@ Partial Class Configurator
         btnUART2OFF.Text = "Disable UART2"
         btnToolTip.SetToolTip(btnUART2OFF, "Disable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
         btnUART2OFF.UseVisualStyleBackColor = False
+        btnUART2OFF.Visible = False
         ' 
         ' btnUART2
         ' 
@@ -925,6 +933,7 @@ Partial Class Configurator
         btnUART2.Text = "Enable UART2"
         btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
         btnUART2.UseVisualStyleBackColor = False
+        btnUART2.Visible = False
         ' 
         ' txtSaveTLM
         ' 
@@ -937,6 +946,7 @@ Partial Class Configurator
         txtSaveTLM.Text = "Save"
         btnToolTip.SetToolTip(txtSaveTLM, "Save the Telemetry settings to the" & vbCrLf & "local file telemetry.conf file" & vbCrLf)
         txtSaveTLM.UseVisualStyleBackColor = False
+        txtSaveTLM.Visible = False
         ' 
         ' cmbMCSTLM
         ' 
@@ -1182,6 +1192,7 @@ Partial Class Configurator
         txtSaveVRX.Text = "Save"
         btnToolTip.SetToolTip(txtSaveVRX, "Save the VRX settings" & vbCrLf & "to the local files setdisplay.sh" & vbCrLf & "and vdec.conf")
         txtSaveVRX.UseVisualStyleBackColor = False
+        txtSaveVRX.Visible = False
         ' 
         ' cmbOSD
         ' 
@@ -2173,11 +2184,11 @@ Partial Class Configurator
         btnRead.FlatStyle = FlatStyle.Popup
         btnRead.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnRead.ForeColor = Color.Black
-        btnRead.Location = New Point(77, 408)
+        btnRead.Location = New Point(63, 408)
         btnRead.Name = "btnRead"
-        btnRead.Size = New Size(60, 30)
+        btnRead.Size = New Size(74, 30)
         btnRead.TabIndex = 23
-        btnRead.Text = "Read"
+        btnRead.Text = "Connect"
         btnToolTip.SetToolTip(btnRead, "Read the settings from the local files" & vbCrLf & "that was previously received from the camera/VRX")
         btnRead.UseVisualStyleBackColor = False
         ' 
@@ -2198,7 +2209,7 @@ Partial Class Configurator
         btnReboot.FlatStyle = FlatStyle.Popup
         btnReboot.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnReboot.ForeColor = Color.Black
-        btnReboot.Location = New Point(324, 408)
+        btnReboot.Location = New Point(264, 408)
         btnReboot.Name = "btnReboot"
         btnReboot.Size = New Size(64, 30)
         btnReboot.TabIndex = 25
@@ -2232,6 +2243,7 @@ Partial Class Configurator
         Button4.Text = "Temperature"
         btnToolTip.SetToolTip(Button4, "Check the Camera's temperature")
         Button4.UseVisualStyleBackColor = False
+        Button4.Visible = False
         ' 
         ' txtSOC
         ' 
@@ -2315,12 +2327,26 @@ Partial Class Configurator
         Label10.TabIndex = 34
         Label10.Text = "SOC:"
         ' 
+        ' connected
+        ' 
+        connected.BackColor = Color.Red
+        connected.Location = New Point(13, 408)
+        connected.Name = "connected"
+        connected.Size = New Size(44, 30)
+        connected.TabIndex = 47
+        connected.TabStop = False
+        ' 
+        ' Timer1
+        ' 
+        Timer1.Interval = 2000
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(661, 445)
+        Controls.Add(connected)
         Controls.Add(btnSaveReboot)
         Controls.Add(txtSOC)
         Controls.Add(Label10)
@@ -2358,6 +2384,7 @@ Partial Class Configurator
         TabPage6.ResumeLayout(False)
         TabPage6.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
+        CType(connected, ComponentModel.ISupportInitialize).EndInit()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -2531,5 +2558,8 @@ Partial Class Configurator
     Friend WithEvents btnSaveReboot As Button
     Friend WithEvents btnMAVGS As Button
     Friend WithEvents btnMSPGS As Button
+    Friend WithEvents connected As PictureBox
+    Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
+    Friend WithEvents Timer1 As Timer
 
 End Class
