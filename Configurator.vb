@@ -2522,6 +2522,14 @@ err1:
     End Sub
 
     Private Sub btnSaveReboot_Click(sender As Object, e As EventArgs) Handles btnSaveReboot.Click
+        Dim vdecconf As String = "vdev.conf"
+        If Not IO.File.Exists(vdecconf) Then
+            System.IO.File.Create(vdecconf).Dispose()
+            Dim fileExists As Boolean = File.Exists(vdecconf)
+            Using sw As New StreamWriter(File.Open(vdecconf, FileMode.OpenOrCreate))
+                sw.WriteLine("dummy file ignore it")
+            End Using
+        End If
         If txtFrequency.Text <> "" Then
             Dim wfbconf = "wfb.conf"
             If Not IO.File.Exists(wfbconf) Then

@@ -2335,6 +2335,7 @@ Partial Class Configurator
         connected.Size = New Size(44, 30)
         connected.TabIndex = 47
         connected.TabStop = False
+        btnToolTip.SetToolTip(connected, "Green = pinged and ready to connect" & vbCrLf & "Red = pinged and remote side unreachable")
         ' 
         ' Timer1
         ' 
