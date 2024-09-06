@@ -2522,7 +2522,7 @@ err1:
     End Sub
 
     Private Sub btnSaveReboot_Click(sender As Object, e As EventArgs) Handles btnSaveReboot.Click
-        Dim vdecconf As String = "vdev.conf"
+        Dim vdecconf As String = "vdec.conf"
         If Not IO.File.Exists(vdecconf) Then
             System.IO.File.Create(vdecconf).Dispose()
             Dim fileExists As Boolean = File.Exists(vdecconf)
