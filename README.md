@@ -9,14 +9,10 @@ Run the "OpenIPC Configurator.exe" file.
 
 Enter the IP of the camera/NVR/Radxa Zero 3w.
 
-Click Fetch to receive the setting files.
-
-Then click Read to read the current settings.
+Click Connect to receive and load the setting files.
 
 Edit the settings.
 
-Then click Save.
-
-Then click Upload to send the settings to the camera/NVR/Radxa Zero 3w.
+Then click Save and Reboot.
 
 ![alt text](https://github.com/OpenIPC/configurator/blob/master/configurator.png)
