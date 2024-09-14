@@ -290,7 +290,7 @@ err1:
 
         Dim wfbconf = "wfb.conf"
         If Not System.IO.File.Exists(wfbconf) Then
-            MsgBox("File " + wfbconf + " not found!")
+            MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
             Return
         End If
         Dim WFBreader As New IO.StreamReader(wfbconf)

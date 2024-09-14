@@ -186,6 +186,7 @@ Partial Class Configurator
         txtPassword = New TextBox()
         Button4 = New Button()
         txtSOC = New TextBox()
+        connected = New PictureBox()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
         rBtnRadxaZero3w = New RadioButton()
@@ -193,7 +194,6 @@ Partial Class Configurator
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Label10 = New Label()
-        connected = New PictureBox()
         Timer1 = New Timer(components)
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -231,7 +231,7 @@ Partial Class Configurator
         txtIP.Size = New Size(99, 21)
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.1"
-        btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
+        btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP/NVR/Radxa Zero 3w(WFB-ng)" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
         ' 
         ' btnSend
         ' 
@@ -1360,13 +1360,13 @@ Partial Class Configurator
         ' Label7
         ' 
         Label7.AutoSize = True
-        Label7.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        Label7.Font = New Font("Arial", 7F, FontStyle.Bold)
         Label7.ForeColor = Color.White
-        Label7.Location = New Point(319, 5)
+        Label7.Location = New Point(310, 13)
         Label7.Name = "Label7"
-        Label7.Size = New Size(240, 28)
+        Label7.Size = New Size(307, 12)
         Label7.TabIndex = 51
-        Label7.Text = "<- This is for controlling resolution/bitrate " & vbCrLf & "<- with a TX Controller."
+        Label7.Text = "<- This is for controlling resolution/bitrate with a TX Controller."
         ' 
         ' Button3
         ' 
@@ -1547,7 +1547,7 @@ Partial Class Configurator
         btnSendKeys.Size = New Size(117, 30)
         btnSendKeys.TabIndex = 36
         btnSendKeys.Text = "Send drone.key"
-        btnToolTip.SetToolTip(btnSendKeys, "Send drone.key to the designated IP")
+        btnToolTip.SetToolTip(btnSendKeys, "Send the encrypted key to the designated IP")
         btnSendKeys.UseVisualStyleBackColor = False
         ' 
         ' btnReceiveKeys
@@ -1571,7 +1571,7 @@ Partial Class Configurator
         btnUpdate.Size = New Size(117, 30)
         btnUpdate.TabIndex = 34
         btnUpdate.Text = "Firmware Update"
-        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers")
+        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers" & vbCrLf & "(Requires internet connection)")
         btnUpdate.UseVisualStyleBackColor = False
         ' 
         ' TabPage6
@@ -2189,7 +2189,7 @@ Partial Class Configurator
         btnRead.Size = New Size(74, 30)
         btnRead.TabIndex = 23
         btnRead.Text = "Connect"
-        btnToolTip.SetToolTip(btnRead, "Read the settings from the local files" & vbCrLf & "that was previously received from the camera/VRX")
+        btnToolTip.SetToolTip(btnRead, "Connect to OpenIPC/NVR/Radxa Zero 3w(WFB-ng)." & vbCrLf & "If you have an error check that you have" & vbCrLf & "the LATEST version of Putty installed.")
         btnRead.UseVisualStyleBackColor = False
         ' 
         ' Label1
@@ -2228,7 +2228,7 @@ Partial Class Configurator
         txtPassword.Size = New Size(65, 21)
         txtPassword.TabIndex = 31
         txtPassword.Text = "12345"
-        btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera Password")
+        btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera/NVR/Radxa Zero 3w(WFB-ng)" & vbCrLf & " Password")
         ' 
         ' Button4
         ' 
@@ -2256,7 +2256,17 @@ Partial Class Configurator
         txtSOC.Size = New Size(65, 21)
         txtSOC.TabIndex = 35
         txtSOC.Text = "ssc338q"
-        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC")
+        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC" & vbCrLf & "(For offline update use only)")
+        ' 
+        ' connected
+        ' 
+        connected.BackColor = Color.Red
+        connected.Location = New Point(13, 408)
+        connected.Name = "connected"
+        connected.Size = New Size(44, 30)
+        connected.TabIndex = 47
+        connected.TabStop = False
+        btnToolTip.SetToolTip(connected, "Green = pinged and ready to connect" & vbCrLf & "Red = pinged and remote side unreachable")
         ' 
         ' rBtnCam
         ' 
@@ -2326,16 +2336,6 @@ Partial Class Configurator
         Label10.Size = New Size(35, 15)
         Label10.TabIndex = 34
         Label10.Text = "SOC:"
-        ' 
-        ' connected
-        ' 
-        connected.BackColor = Color.Red
-        connected.Location = New Point(13, 408)
-        connected.Name = "connected"
-        connected.Size = New Size(44, 30)
-        connected.TabIndex = 47
-        connected.TabStop = False
-        btnToolTip.SetToolTip(connected, "Green = pinged and ready to connect" & vbCrLf & "Red = pinged and remote side unreachable")
         ' 
         ' Timer1
         ' 

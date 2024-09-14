@@ -51,7 +51,7 @@ fi
 			wfbPower=45
 			newProfile=1
 			echo "vidRadioProfile1" >/etc/txprofile
-		elif [ $2 -gt 1051 ] && [ $2 -lt 1350 ] ;then
+		elif [ $2 -gt 1101 ] && [ $2 -lt 1350 ] ;then
 			setGI=short
 			setMCS=2
 			setFecK=8
@@ -61,7 +61,7 @@ fi
 			wfbPower=50
 			newProfile=2
 			echo "vidRadioProfile=2" >/etc/txprofile
-		elif [ $2 -lt 1050 ] ;then
+		elif [ $2 -lt 1100 ] ;then
 			setGI=short
 			setMCS=1
 			setFecK=8
@@ -74,7 +74,7 @@ fi
 		fi	
 
 	#calculate driver power
-	setPower=$((wfbPower * 50))
+	setPower=$((wfbPower * 1))
 
 	if [ $newProfile -gt $oldProfile ] ;then
 		
@@ -90,8 +90,6 @@ fi
 	
 		# Increase bit-rate
 		curl -s "http://localhost/api/v1/set?video0.bitrate=$setBitrate"
-        #sleep 0.1
-        #curl "localhost:9000/api/osd/2?font=UbuntuMono-Regular&size=32.0&color=green&text=Bitrate:$setBitrate%20MCS:$setMCS%20FEC:$setFecK%2F$setFecN%20wfbPower:$wfbPower"
 		
 	elif [ $newProfile -lt $oldProfile ] ;then
 
@@ -108,8 +106,6 @@ fi
 	
 		# Increase power
 		iw dev wlan0 set txpower fixed $setPower
-		#sleep 0.1
-		#curl "localhost:9000/api/osd/2?font=UbuntuMono-Regular&size=32.0&color=green&text=Bitrate:$setBitrate%20MCS:$setMCS%20FEC:$setFecK%2F$setFecN%20wfbPower:$wfbPower"
     fi
 
 exit 1
