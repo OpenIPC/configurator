@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: |
           dotnet build --configuration Release
-          Compress-Archive bin\Release\*\*,*.bat,msposd OpenIPC-Configurator.zip
+          Compress-Archive bin\Release\*\*,*.bat,msposd,bf\,inav\ OpenIPC-Configurator.zip
 
       - name: Upload
         uses: softprops/action-gh-release@v2
