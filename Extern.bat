@@ -93,14 +93,19 @@ if "%1" == "keysgen" (
 	plink -ssh root@%2 -pw %3 cp /root/gs.key /etc/
 )
 
-if "%1" == "UART2" (
-	plink -ssh root@%2 -pw %3 sed -i '13 i devmem 0x1F207890 16 0x8' /etc/init.d/S95majestic
-	plink -ssh root@%2 -pw %3 sed -i '14 i stty -F /dev/ttyS2 115200 raw -echo -onlcr' /etc/init.d/S95majestic
+if "%1" == "UART0on" (
+	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/#console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/' /etc/inittab
+	plink -ssh root@%2 -pw %3 reboot
 )
 
-if "%1" == "UART0" (
-	plink -ssh root@%2 -pw %3 sed -i '/devmem 0x1F207890 16 0x8/d' /etc/init.d/S95majestic
-	plink -ssh root@%2 -pw %3 sed -i '/stty -F \/dev\/ttyS2 115200 raw -echo -onlcr/d' /etc/init.d/S95majestic
+if "%1" == "UART0off" (
+	plink -ssh root@%2 -pw %3 sed -i 's/#console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/' /etc/inittab
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "extra" (
+	plink -ssh root@%2 -pw %3 sed -i 's/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" \\/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" --wait 5 --persist 50 -t \\/' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "rswfb" (
@@ -189,13 +194,24 @@ if "%1" == "offlinefw" (
 	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
 )
 
-if "%1" == "msp" (
+if "%1" == "msp0" (
+	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS0 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
+        plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
+        plink -ssh root@%2 -pw %3 killall -q msposd
+        echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
+        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
+        plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "msp2" (
 	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&"' /etc/init.d/S98datalink
 	plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
         plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
+        plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "mspgs" (
@@ -203,12 +219,29 @@ if "%1" == "mspgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
+        plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "mav" (
 	plink -ssh root@%2 -pw %3 sed -i '/msposd --master/c\echo \"Starting wifibroadcast service...\"' /etc/init.d/S98datalink
 	plink -ssh root@%2 -pw %3 sed -i '/killall -q msposd/c\killall -q mavfwd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=false/c\telemetry=true' /etc/datalink.conf
+        plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "dualosd" (
+        plink -ssh root@%2 -pw %3 sed -i '/telemetry=false/c\telemetry=true' /etc/datalink.conf
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "onboardrecon" (
+        plink -ssh root@%2 -pw %3 yaml-cli -s .records.enabled true
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "onboardrecoff" (
+        plink -ssh root@%2 -pw %3 yaml-cli -s .records.enabled false
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "mavgs" (
@@ -216,11 +249,17 @@ if "%1" == "mavgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
+        plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "fonts" (
-        echo y | pscp -scp -pw %3 font.png root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 font_hd.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 bf/font_hd.png root@%2:/usr/bin/
+)
+
+if "%1" == "fontsINAV" (
+        echo y | pscp -scp -pw %3 inav/font.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 inav/font_hd.png root@%2:/usr/bin/
 )
 
 :end

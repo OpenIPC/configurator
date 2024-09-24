@@ -83,12 +83,13 @@ Partial Class Configurator
         cmbResolution = New ComboBox()
         txtSaveCam = New Button()
         TabPage3 = New TabPage()
+        btnExtra = New Button()
         cmbRC_Channel = New ComboBox()
         txtRC_CHANNEL = New TextBox()
         cmbAggregate = New ComboBox()
         txtAggregate = New TextBox()
-        btnUART2OFF = New Button()
-        btnUART2 = New Button()
+        btnUART0OFF = New Button()
+        btnUART0 = New Button()
         txtSaveTLM = New Button()
         cmbMCSTLM = New ComboBox()
         cmbRouter = New ComboBox()
@@ -715,7 +716,7 @@ Partial Class Configurator
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 53
         btnOnboardREC.Text = "Onboard REC"
-        btnToolTip.SetToolTip(btnOnboardREC, "Enables the Mavlink telemetry" & vbCrLf & "while keeping the MSPOSD" & vbCrLf & "on the OpenIPC camera for Dual OSD" & vbCrLf & vbCrLf & "MUST first enable the MSPOSD")
+        btnToolTip.SetToolTip(btnOnboardREC, "Turns ON or OFF the Onboard Recording" & vbCrLf & vbCrLf & "Must select ON or OFF option first")
         btnOnboardREC.UseVisualStyleBackColor = False
         ' 
         ' btnDualOSD
@@ -947,12 +948,13 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(btnExtra)
         TabPage3.Controls.Add(cmbRC_Channel)
         TabPage3.Controls.Add(txtRC_CHANNEL)
         TabPage3.Controls.Add(cmbAggregate)
         TabPage3.Controls.Add(txtAggregate)
-        TabPage3.Controls.Add(btnUART2OFF)
-        TabPage3.Controls.Add(btnUART2)
+        TabPage3.Controls.Add(btnUART0OFF)
+        TabPage3.Controls.Add(btnUART0)
         TabPage3.Controls.Add(txtSaveTLM)
         TabPage3.Controls.Add(cmbMCSTLM)
         TabPage3.Controls.Add(cmbRouter)
@@ -969,6 +971,18 @@ Partial Class Configurator
         TabPage3.Size = New Size(629, 341)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
+        ' 
+        ' btnExtra
+        ' 
+        btnExtra.BackColor = Color.Gold
+        btnExtra.FlatStyle = FlatStyle.Popup
+        btnExtra.Location = New Point(472, 78)
+        btnExtra.Name = "btnExtra"
+        btnExtra.Size = New Size(98, 22)
+        btnExtra.TabIndex = 47
+        btnExtra.Text = "Add EXTRA"
+        btnToolTip.SetToolTip(btnExtra, "Add OSD SOC temperature" & vbCrLf & "Set low delay for the channels.sh switches")
+        btnExtra.UseVisualStyleBackColor = False
         ' 
         ' cmbRC_Channel
         ' 
@@ -1014,31 +1028,29 @@ Partial Class Configurator
         txtAggregate.Size = New Size(191, 20)
         txtAggregate.TabIndex = 43
         ' 
-        ' btnUART2OFF
+        ' btnUART0OFF
         ' 
-        btnUART2OFF.BackColor = Color.Gold
-        btnUART2OFF.FlatStyle = FlatStyle.Popup
-        btnUART2OFF.Location = New Point(322, 301)
-        btnUART2OFF.Name = "btnUART2OFF"
-        btnUART2OFF.Size = New Size(117, 30)
-        btnUART2OFF.TabIndex = 42
-        btnUART2OFF.Text = "Disable UART2"
-        btnToolTip.SetToolTip(btnUART2OFF, "Disable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
-        btnUART2OFF.UseVisualStyleBackColor = False
-        btnUART2OFF.Visible = False
+        btnUART0OFF.BackColor = Color.Gold
+        btnUART0OFF.FlatStyle = FlatStyle.Popup
+        btnUART0OFF.Location = New Point(472, 49)
+        btnUART0OFF.Name = "btnUART0OFF"
+        btnUART0OFF.Size = New Size(98, 22)
+        btnUART0OFF.TabIndex = 42
+        btnUART0OFF.Text = "Disable UART0"
+        btnToolTip.SetToolTip(btnUART0OFF, "Disable UART0 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
+        btnUART0OFF.UseVisualStyleBackColor = False
         ' 
-        ' btnUART2
+        ' btnUART0
         ' 
-        btnUART2.BackColor = Color.Gold
-        btnUART2.FlatStyle = FlatStyle.Popup
-        btnUART2.Location = New Point(322, 265)
-        btnUART2.Name = "btnUART2"
-        btnUART2.Size = New Size(117, 30)
-        btnUART2.TabIndex = 41
-        btnUART2.Text = "Enable UART2"
-        btnToolTip.SetToolTip(btnUART2, "Enable UART2 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
-        btnUART2.UseVisualStyleBackColor = False
-        btnUART2.Visible = False
+        btnUART0.BackColor = Color.Gold
+        btnUART0.FlatStyle = FlatStyle.Popup
+        btnUART0.Location = New Point(472, 20)
+        btnUART0.Name = "btnUART0"
+        btnUART0.Size = New Size(98, 23)
+        btnUART0.TabIndex = 41
+        btnUART0.Text = "Enable UART0"
+        btnToolTip.SetToolTip(btnUART0, "Enable UART0 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
+        btnUART0.UseVisualStyleBackColor = False
         ' 
         ' txtSaveTLM
         ' 
@@ -2556,8 +2568,8 @@ Partial Class Configurator
     Friend WithEvents txtBaud As TextBox
     Friend WithEvents txtSerial As TextBox
     Friend WithEvents txtSaveTLM As Button
-    Friend WithEvents btnUART2OFF As Button
-    Friend WithEvents btnUART2 As Button
+    Friend WithEvents btnUART0OFF As Button
+    Friend WithEvents btnUART0 As Button
     Friend WithEvents TabPage4 As TabPage
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents btnGenerateKeys As Button
@@ -2676,5 +2688,6 @@ Partial Class Configurator
     Friend WithEvents btnOnboardREC As Button
     Friend WithEvents rBtnRECOFF As RadioButton
     Friend WithEvents rBtnRECON As RadioButton
+    Friend WithEvents btnExtra As Button
 
 End Class

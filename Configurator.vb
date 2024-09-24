@@ -1371,8 +1371,8 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         txtSaveVRX.Visible = False
-        btnUART2.Visible = False
-        btnUART2OFF.Visible = False
+        btnUART0.Visible = False
+        btnUART0OFF.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
         txtSaveCam.Visible = False
@@ -1483,8 +1483,8 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         txtSaveVRX.Visible = False
-        btnUART2.Visible = False
-        btnUART2OFF.Visible = False
+        btnUART0.Visible = True
+        btnUART0OFF.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         txtSaveCam.Visible = False
@@ -1594,8 +1594,8 @@ err1:
         btnMSPGS.Visible = True
         btnMAVGS.Visible = True
         txtSaveVRX.Visible = False
-        btnUART2.Visible = False
-        btnUART2OFF.Visible = False
+        btnUART0.Visible = False
+        btnUART0OFF.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
         txtSaveCam.Visible = False
@@ -1905,7 +1905,7 @@ err1:
 
     Public Delegate Sub SelectedTabPageChangeEventHandler(ByVal sender As Object, ByVal e As TabPageChangeEventArgs)
 
-    Private Sub btnUART2_Click_1(sender As Object, e As EventArgs) Handles btnUART2.Click
+    Private Sub btnUART0_Click_1(sender As Object, e As EventArgs) Handles btnUART0.Click
         Dim extern = "extern.bat"
         If Not IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -1916,7 +1916,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "UART2 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.Arguments = "UART0on " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1925,7 +1925,7 @@ err1:
         End If
     End Sub
 
-    Private Sub btnUART2OFF_Click_1(sender As Object, e As EventArgs) Handles btnUART2OFF.Click
+    Private Sub btnUART0OFF_Click_1(sender As Object, e As EventArgs) Handles btnUART0OFF.Click
         Dim extern = "extern.bat"
         If Not IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -1936,7 +1936,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "UART0 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.Arguments = "UART0off " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2906,6 +2906,26 @@ err1:
                 Else
                     .StartInfo.Arguments = "onboardrecoff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnExtra_Click(sender As Object, e As EventArgs) Handles btnExtra.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "extra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
