@@ -104,7 +104,7 @@ err1:
         If txtFrequency.Text <> "" Then
             Dim wfbconf = "wfb.conf"
             If Not IO.File.Exists(wfbconf) Then
-                MsgBox("File " + wfbconf + " not found!")
+                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -114,7 +114,7 @@ err1:
                 If rBtnRadxaZero3w.Checked Then
                     Dim wfbng = "wifibroadcast.cfg"
                     If Not IO.File.Exists(wfbng) Then
-                        MsgBox("File " + wfbng + " not found!")
+                        MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                         Return
                     End If
 
@@ -181,7 +181,7 @@ err1:
         If txtResolution.Text <> "" Then
             Dim majestic = "majestic.yaml"
             If Not IO.File.Exists(majestic) Then
-                MsgBox("File " + majestic + " not found!")
+                MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -282,9 +282,26 @@ err1:
         txtEncode.Text = ""
         txtBitrate.Text = ""
         txtExposure.Text = ""
+        txtContrast.Text = ""
         txtSaturation.Text = ""
         txtHue.Text = ""
         txtLuminance.Text = ""
+        txtSensor.Text = ""
+        txtSerial.Text = ""
+        txtBaud.Text = ""
+        txtRouter.Text = ""
+        txtMCSTLM.Text = ""
+        txtAggregate.Text = ""
+        txtRC_CHANNEL.Text = ""
+        txtFrequency.Text = ""
+        txtPower.Text = ""
+        txtFreq24.Text = ""
+        txtPower24.Text = ""
+        txtMCS.Text = ""
+        txtSTBC.Text = ""
+        txtLDPC.Text = ""
+        txtFECK.Text = ""
+        txtFECN.Text = ""
 
         Threading.Thread.Sleep(3000)
 
@@ -311,7 +328,7 @@ err1:
         ElseIf rBtnRadxaZero3w.Checked Then
             Dim wfbng = "wifibroadcast.cfg"
             If Not System.IO.File.Exists(wfbng) Then
-                MsgBox("File " + wfbng + " not found!")
+                MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim WFBngreader As New IO.StreamReader(wfbng)
@@ -322,7 +339,7 @@ err1:
             Loop
             WFBngreader.Close()
             txtFrequency.Text = ReadLine(2, WFBngallLines)
-            txtPower.Text = ReadLine(6, WFBallLines)
+            If rBtnCam.Checked Then txtPower.Text = ReadLine(6, WFBallLines)
             For x = 0 To WFBallLines.Count() - 1
                 If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
             Next x
@@ -343,7 +360,7 @@ err1:
         If rBtnNVR.Checked Or rBtnCam.Checked Then
             Dim telemetry = "telemetry.conf"
             If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!")
+                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim TLMreader As New IO.StreamReader(telemetry)
@@ -362,7 +379,7 @@ err1:
             If rBtnNVR.Checked Then
                 Dim vdec = "vdec.conf"
                 If Not System.IO.File.Exists(vdec) Then
-                    MsgBox("File " + vdec + " not found!")
+                    MsgBox("File " + vdec + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
                 Dim VDECreader As New IO.StreamReader(vdec)
@@ -423,7 +440,7 @@ err1:
             Else
                 Dim majestic = "majestic.yaml"
                 If Not System.IO.File.Exists(majestic) Then
-                    MsgBox("File " + majestic + " not found!")
+                    MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
                 Dim Camreader As New IO.StreamReader(majestic)
@@ -449,7 +466,7 @@ err1:
         Else
             Dim setdisplay = "screen-mode"
             If Not System.IO.File.Exists(setdisplay) Then
-                MsgBox("File " + setdisplay + " not found!")
+                MsgBox("File " + setdisplay + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim DisplayReader As New IO.StreamReader(setdisplay)
@@ -469,7 +486,8 @@ err1:
             txtResolutionVRX.Text = array(0)
             txtCodecVRX.Text = array(1)
         End If
-        'MsgBox("Settings loaded successfully", MsgBoxStyle.Information, "OpenIPC")
+        btnSaveReboot.Enabled = True
+        btnReboot.Enabled = True
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -838,7 +856,7 @@ err1:
         cmbBaud.Items.Add("19200")
         cmbBaud.Items.Add("38400")
         cmbBaud.Items.Add("57600")
-        cmbBaud.Items.Add("112500")
+        cmbBaud.Items.Add("115200")
         cmbBaud.Text = "Select Baud Rate"
 
         cmbRouter.Items.Clear()
@@ -1080,7 +1098,7 @@ err1:
         If txtSerial.Text <> "" Then
             Dim telemetry = "telemetry.conf"
             If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!")
+                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -1116,7 +1134,7 @@ err1:
             If rBtnRadxaZero3w.Checked Then
                 Dim setdisplay = "screen-mode"
                 If Not IO.File.Exists(setdisplay) Then
-                    MsgBox("File " + setdisplay + " not found!")
+                    MsgBox("File " + setdisplay + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
                 Dim x As Integer
@@ -1129,7 +1147,7 @@ err1:
             Else
                 Dim vdec = "vdec.conf"
                 If Not IO.File.Exists(vdec) Then
-                    MsgBox("File " + vdec + " not found!")
+                    MsgBox("File " + vdec + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
 
@@ -1327,6 +1345,8 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        btnSaveReboot.Enabled = False
+        btnReboot.Enabled = False
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = False
@@ -1436,6 +1456,8 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        btnSaveReboot.Enabled = False
+        btnReboot.Enabled = False
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = True
@@ -1546,6 +1568,8 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        btnSaveReboot.Enabled = False
+        btnReboot.Enabled = False
         Label8.Visible = False
         Label9.Visible = False
         Label10.Visible = False
@@ -2012,7 +2036,7 @@ err1:
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Dim vdec = "vdec.conf"
         If Not IO.File.Exists(vdec) Then
-            MsgBox("File " + vdec + " not found!")
+            MsgBox("File " + vdec + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
             Return
         End If
 
@@ -2462,7 +2486,11 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "msp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                If rBtnttyS2.Checked Then
+                    .StartInfo.Arguments = "msp2 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "msp0 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2473,7 +2501,7 @@ err1:
 
     Private Sub btnMavlink_Click(sender As Object, e As EventArgs) Handles btnMavlink.Click
         Dim extern = "extern.bat"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -2493,8 +2521,8 @@ err1:
 
     Private Sub btnFonts_Click(sender As Object, e As EventArgs) Handles btnFonts.Click
         Dim extern = "extern.bat"
-        Dim font_file1 = "font.png"
-        Dim font_file2 = "font_hd.png"
+        Dim font_file1 = "bf/font.png"
+        Dim font_file2 = "bf/font_hd.png"
         If Not System.IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
@@ -2533,7 +2561,7 @@ err1:
         If txtFrequency.Text <> "" Then
             Dim wfbconf = "wfb.conf"
             If Not IO.File.Exists(wfbconf) Then
-                MsgBox("File " + wfbconf + " not found!")
+                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -2543,7 +2571,7 @@ err1:
                 If rBtnRadxaZero3w.Checked Then
                     Dim wfbng = "wifibroadcast.cfg"
                     If Not IO.File.Exists(wfbng) Then
-                        MsgBox("File " + wfbng + " not found!")
+                        MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                         Return
                     End If
 
@@ -2606,7 +2634,7 @@ err1:
         If txtSerial.Text <> "" Then
             Dim telemetry = "telemetry.conf"
             If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!")
+                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -2637,7 +2665,7 @@ err1:
         If txtResolution.Text <> "" Then
             Dim majestic = "majestic.yaml"
             If Not IO.File.Exists(majestic) Then
-                MsgBox("File " + majestic + " not found!")
+                MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
             Dim x As Integer
@@ -2681,7 +2709,7 @@ err1:
             If rBtnRadxaZero3w.Checked Then
                 Dim setdisplay = "screen-mode"
                 If Not IO.File.Exists(setdisplay) Then
-                    MsgBox("File " + setdisplay + " not found!")
+                    MsgBox("File " + setdisplay + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
                 Dim x As Integer
@@ -2694,7 +2722,7 @@ err1:
             Else
                 Dim vdec = "vdec.conf"
                 If Not IO.File.Exists(vdec) And rBtnNVR.Checked = True Then
-                    MsgBox("File " + vdec + " not found!")
+                    MsgBox("File " + vdec + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                     Return
                 End If
 
@@ -2809,6 +2837,80 @@ err1:
     Private Sub txtIP_TextChanged(sender As Object, e As EventArgs) Handles txtIP.TextChanged
         If IsValidIP(txtIP.Text) Then
             Timer1.Enabled = True
+        End If
+    End Sub
+
+    Private Sub btnFontsINAV_Click(sender As Object, e As EventArgs) Handles btnFontsINAV.Click
+        Dim extern = "extern.bat"
+        Dim font_file1 = "inav/font.png"
+        Dim font_file2 = "inav/font_hd.png"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not System.IO.File.Exists(font_file1) Then
+            MsgBox("File " + font_file1 + " not found!")
+            Return
+        End If
+        If Not System.IO.File.Exists(font_file2) Then
+            MsgBox("File " + font_file2 + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "fontsINAV " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnDualOS_Click(sender As Object, e As EventArgs) Handles btnDualOSD.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "dualosd " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnOnboardREC_Click(sender As Object, e As EventArgs) Handles btnOnboardREC.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBtnRECON.Checked Then
+                    .StartInfo.Arguments = "onboardrecon " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "onboardrecoff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 

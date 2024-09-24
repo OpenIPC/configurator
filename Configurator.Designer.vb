@@ -24,6 +24,8 @@ Partial Class Configurator
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Configurator))
+        rBtnRECOFF = New RadioButton()
+        rBtnRECON = New RadioButton()
         btnGet = New Button()
         txtIP = New TextBox()
         btnSend = New Button()
@@ -60,6 +62,11 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         txtSaveFreq = New Button()
         TabPage2 = New TabPage()
+        btnOnboardREC = New Button()
+        btnDualOSD = New Button()
+        rBtnttyS2 = New RadioButton()
+        rBtnttyS0 = New RadioButton()
+        btnFontsINAV = New Button()
         btnFonts = New Button()
         btnMavlink = New Button()
         btnMSP = New Button()
@@ -205,6 +212,32 @@ Partial Class Configurator
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
+        ' 
+        ' rBtnRECOFF
+        ' 
+        rBtnRECOFF.AutoSize = True
+        rBtnRECOFF.Checked = True
+        rBtnRECOFF.ForeColor = Color.White
+        rBtnRECOFF.Location = New Point(547, 215)
+        rBtnRECOFF.Name = "rBtnRECOFF"
+        rBtnRECOFF.Size = New Size(45, 18)
+        rBtnRECOFF.TabIndex = 55
+        rBtnRECOFF.TabStop = True
+        rBtnRECOFF.Text = "OFF"
+        btnToolTip.SetToolTip(rBtnRECOFF, "Turn OFF the onboard REC")
+        rBtnRECOFF.UseVisualStyleBackColor = True
+        ' 
+        ' rBtnRECON
+        ' 
+        rBtnRECON.AutoSize = True
+        rBtnRECON.ForeColor = Color.White
+        rBtnRECON.Location = New Point(547, 199)
+        rBtnRECON.Name = "rBtnRECON"
+        rBtnRECON.Size = New Size(40, 18)
+        rBtnRECON.TabIndex = 54
+        rBtnRECON.Text = "ON"
+        btnToolTip.SetToolTip(rBtnRECON, "Turn ON the onboard REC")
+        rBtnRECON.UseVisualStyleBackColor = True
         ' 
         ' btnGet
         ' 
@@ -633,6 +666,13 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(rBtnRECOFF)
+        TabPage2.Controls.Add(rBtnRECON)
+        TabPage2.Controls.Add(btnOnboardREC)
+        TabPage2.Controls.Add(btnDualOSD)
+        TabPage2.Controls.Add(rBtnttyS2)
+        TabPage2.Controls.Add(rBtnttyS0)
+        TabPage2.Controls.Add(btnFontsINAV)
         TabPage2.Controls.Add(btnFonts)
         TabPage2.Controls.Add(btnMavlink)
         TabPage2.Controls.Add(btnMSP)
@@ -665,6 +705,71 @@ Partial Class Configurator
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
+        ' btnOnboardREC
+        ' 
+        btnOnboardREC.BackColor = Color.Gold
+        btnOnboardREC.FlatStyle = FlatStyle.Popup
+        btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnOnboardREC.Location = New Point(454, 201)
+        btnOnboardREC.Name = "btnOnboardREC"
+        btnOnboardREC.Size = New Size(87, 30)
+        btnOnboardREC.TabIndex = 53
+        btnOnboardREC.Text = "Onboard REC"
+        btnToolTip.SetToolTip(btnOnboardREC, "Enables the Mavlink telemetry" & vbCrLf & "while keeping the MSPOSD" & vbCrLf & "on the OpenIPC camera for Dual OSD" & vbCrLf & vbCrLf & "MUST first enable the MSPOSD")
+        btnOnboardREC.UseVisualStyleBackColor = False
+        ' 
+        ' btnDualOSD
+        ' 
+        btnDualOSD.BackColor = Color.Gold
+        btnDualOSD.FlatStyle = FlatStyle.Popup
+        btnDualOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnDualOSD.Location = New Point(454, 165)
+        btnDualOSD.Name = "btnDualOSD"
+        btnDualOSD.Size = New Size(116, 30)
+        btnDualOSD.TabIndex = 52
+        btnDualOSD.Text = "Dual OSD"
+        btnToolTip.SetToolTip(btnDualOSD, "Enables the Mavlink telemetry" & vbCrLf & "while keeping the MSPOSD" & vbCrLf & "on the OpenIPC camera for Dual OSD" & vbCrLf & vbCrLf & "MUST first enable the MSPOSD")
+        btnDualOSD.UseVisualStyleBackColor = False
+        ' 
+        ' rBtnttyS2
+        ' 
+        rBtnttyS2.AutoSize = True
+        rBtnttyS2.Checked = True
+        rBtnttyS2.ForeColor = Color.White
+        rBtnttyS2.Location = New Point(528, 36)
+        rBtnttyS2.Name = "rBtnttyS2"
+        rBtnttyS2.Size = New Size(52, 18)
+        rBtnttyS2.TabIndex = 51
+        rBtnttyS2.TabStop = True
+        rBtnttyS2.Text = "ttyS2"
+        btnToolTip.SetToolTip(rBtnttyS2, "Enable MSPOSD on ttyS2")
+        rBtnttyS2.UseVisualStyleBackColor = True
+        ' 
+        ' rBtnttyS0
+        ' 
+        rBtnttyS0.AutoSize = True
+        rBtnttyS0.ForeColor = Color.White
+        rBtnttyS0.Location = New Point(528, 20)
+        rBtnttyS0.Name = "rBtnttyS0"
+        rBtnttyS0.Size = New Size(52, 18)
+        rBtnttyS0.TabIndex = 50
+        rBtnttyS0.Text = "ttyS0"
+        btnToolTip.SetToolTip(rBtnttyS0, "Enable MSPOSD on ttyS0")
+        rBtnttyS0.UseVisualStyleBackColor = True
+        ' 
+        ' btnFontsINAV
+        ' 
+        btnFontsINAV.BackColor = Color.Gold
+        btnFontsINAV.FlatStyle = FlatStyle.Popup
+        btnFontsINAV.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnFontsINAV.Location = New Point(454, 92)
+        btnFontsINAV.Name = "btnFontsINAV"
+        btnFontsINAV.Size = New Size(116, 30)
+        btnFontsINAV.TabIndex = 49
+        btnFontsINAV.Text = "Upload INAV Fonts"
+        btnToolTip.SetToolTip(btnFontsINAV, "Upload the fonts for INAV to the OpenIPC camera")
+        btnFontsINAV.UseVisualStyleBackColor = False
+        ' 
         ' btnFonts
         ' 
         btnFonts.BackColor = Color.Gold
@@ -674,8 +779,8 @@ Partial Class Configurator
         btnFonts.Name = "btnFonts"
         btnFonts.Size = New Size(116, 30)
         btnFonts.TabIndex = 48
-        btnFonts.Text = "Upload Fonts"
-        btnToolTip.SetToolTip(btnFonts, "Upload the fonts to the OpenIPC camera")
+        btnFonts.Text = "Upload BF Fonts"
+        btnToolTip.SetToolTip(btnFonts, "Upload the fonts for Betaflight to the OpenIPC camera")
         btnFonts.UseVisualStyleBackColor = False
         ' 
         ' btnMavlink
@@ -683,7 +788,7 @@ Partial Class Configurator
         btnMavlink.BackColor = Color.Gold
         btnMavlink.FlatStyle = FlatStyle.Popup
         btnMavlink.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMavlink.Location = New Point(454, 92)
+        btnMavlink.Location = New Point(454, 128)
         btnMavlink.Name = "btnMavlink"
         btnMavlink.Size = New Size(116, 30)
         btnMavlink.TabIndex = 47
@@ -698,9 +803,9 @@ Partial Class Configurator
         btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
         btnMSP.Location = New Point(454, 20)
         btnMSP.Name = "btnMSP"
-        btnMSP.Size = New Size(116, 30)
+        btnMSP.Size = New Size(68, 30)
         btnMSP.TabIndex = 46
-        btnMSP.Text = "MSP DisplayPort"
+        btnMSP.Text = "MSPOSD"
         btnToolTip.SetToolTip(btnMSP, "Enables the MSP DisplayPort function" & vbCrLf & "of OpenIPC")
         btnMSP.UseVisualStyleBackColor = False
         ' 
@@ -2168,6 +2273,7 @@ Partial Class Configurator
         ' btnSaveReboot
         ' 
         btnSaveReboot.BackColor = Color.Gold
+        btnSaveReboot.Enabled = False
         btnSaveReboot.FlatStyle = FlatStyle.Popup
         btnSaveReboot.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnSaveReboot.Location = New Point(142, 408)
@@ -2206,6 +2312,7 @@ Partial Class Configurator
         ' btnReboot
         ' 
         btnReboot.BackColor = Color.Gold
+        btnReboot.Enabled = False
         btnReboot.FlatStyle = FlatStyle.Popup
         btnReboot.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnReboot.ForeColor = Color.Black
@@ -2562,5 +2669,12 @@ Partial Class Configurator
     Friend WithEvents connected As PictureBox
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents btnFontsINAV As Button
+    Friend WithEvents rBtnttyS2 As RadioButton
+    Friend WithEvents rBtnttyS0 As RadioButton
+    Friend WithEvents btnDualOSD As Button
+    Friend WithEvents btnOnboardREC As Button
+    Friend WithEvents rBtnRECOFF As RadioButton
+    Friend WithEvents rBtnRECON As RadioButton
 
 End Class
