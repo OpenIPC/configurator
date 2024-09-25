@@ -195,7 +195,7 @@ if "%1" == "offlinefw" (
 )
 
 if "%1" == "msp0" (
-	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS0 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS0 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&" echo \"&L70 &F35 CPU:&C &B Temp:&T\" ">"/tmp/MSPOSD.msg "&"' /etc/init.d/S98datalink
 	plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
         plink -ssh root@%2 -pw %3 killall -q msposd
@@ -205,7 +205,7 @@ if "%1" == "msp0" (
 )
 
 if "%1" == "msp2" (
-	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&"' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 sed -i '/echo \"Starting wifibroadcast service...\"/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v "&" echo \"&L70 &F35 CPU:&C &B Temp:&T\" ">"/tmp/MSPOSD.msg "&"' /etc/init.d/S98datalink
 	plink -ssh root@%2 -pw %3 sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
         plink -ssh root@%2 -pw %3 sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
         plink -ssh root@%2 -pw %3 killall -q msposd

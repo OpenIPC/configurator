@@ -807,7 +807,7 @@ Partial Class Configurator
         btnMSP.Size = New Size(68, 30)
         btnMSP.TabIndex = 46
         btnMSP.Text = "MSPOSD"
-        btnToolTip.SetToolTip(btnMSP, "Enables the MSP DisplayPort function" & vbCrLf & "of OpenIPC")
+        btnToolTip.SetToolTip(btnMSP, "Enables the MSPOSD of OpenIPC" & vbCrLf & "It also adds CPU Bitrate FPS Temp OSD")
         btnMSP.UseVisualStyleBackColor = False
         ' 
         ' Label6
@@ -981,7 +981,7 @@ Partial Class Configurator
         btnExtra.Size = New Size(98, 22)
         btnExtra.TabIndex = 47
         btnExtra.Text = "Add EXTRA"
-        btnToolTip.SetToolTip(btnExtra, "Add OSD SOC temperature" & vbCrLf & "Set low delay for the channels.sh switches")
+        btnToolTip.SetToolTip(btnExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
         btnExtra.UseVisualStyleBackColor = False
         ' 
         ' cmbRC_Channel

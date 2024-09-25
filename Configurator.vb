@@ -1373,6 +1373,7 @@ err1:
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
+        btnExtra.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
         txtSaveCam.Visible = False
@@ -1485,6 +1486,7 @@ err1:
         txtSaveVRX.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
+        btnExtra.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         txtSaveCam.Visible = False
@@ -1596,6 +1598,7 @@ err1:
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
+        btnExtra.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
         txtSaveCam.Visible = False
