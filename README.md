@@ -20,3 +20,7 @@ Try to uninstall and reinstall latest version of Putty.
 Check the IP and network connection.
 
 ![alt text](https://github.com/OpenIPC/configurator/blob/master/configurator.png)
+
+---
+
+[Manual setup](README-manual.md)
