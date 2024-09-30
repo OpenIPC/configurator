@@ -7,11 +7,16 @@
     <StartupObject>OpenIPC_Configurator.My.MyApplication</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
+    <ApplicationIcon>openipc.ico</ApplicationIcon>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <DebugType>none</DebugType>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="openipc.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <Import Include="System.Data" />

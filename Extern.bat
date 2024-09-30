@@ -252,6 +252,14 @@ if "%1" == "mavgs" (
         plink -ssh root@%2 -pw %3 reboot
 )
 
+if "%1" == "mavgs2" (
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+        plink -ssh root@%2 -pw %3 reboot
+)
+
 if "%1" == "fonts" (
         echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/bin/
         echo y | pscp -scp -pw %3 bf/font_hd.png root@%2:/usr/bin/

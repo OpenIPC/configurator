@@ -218,6 +218,12 @@ err1:
                 If lines(x).StartsWith("  exposure: ") Then
                     lines(x) = txtExposure.Text
                 End If
+                If lines(x).StartsWith("  mirror: ") Then
+                    lines(x) = txtMirror.Text
+                End If
+                If lines(x).StartsWith("  flip: ") Then
+                    lines(x) = txtFlip.Text
+                End If
             Next
             IO.File.WriteAllLines(CamfilePath, lines)
             MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
@@ -286,6 +292,8 @@ err1:
         txtSaturation.Text = ""
         txtHue.Text = ""
         txtLuminance.Text = ""
+        txtFlip.Text = ""
+        txtMirror.Text = ""
         txtSensor.Text = ""
         txtSerial.Text = ""
         txtBaud.Text = ""
@@ -460,6 +468,8 @@ err1:
                     If CamallLines(x).StartsWith("  hue:") Then txtHue.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  saturation:") Then txtSaturation.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  luminance:") Then txtLuminance.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  flip:") Then txtFlip.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  mirror:") Then txtMirror.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  sensorConfig:") Then txtSensor.Text = ReadLine(x + 1, CamallLines)
                 Next
             End If
@@ -844,6 +854,16 @@ err1:
         cmbLuminance.Items.Add("100")
         cmbLuminance.Text = "Select Luminance"
 
+        cmbFlip.Items.Clear()
+        cmbFlip.Items.Add("true")
+        cmbFlip.Items.Add("false")
+        cmbFlip.Text = "Select Flip"
+
+        cmbMirror.Items.Clear()
+        cmbMirror.Items.Add("true")
+        cmbMirror.Items.Add("false")
+        cmbMirror.Text = "Select Mirror"
+
         cmbSerial.Items.Clear()
         cmbSerial.Items.Add("/dev/ttyS0")
         cmbSerial.Items.Add("/dev/ttyS1")
@@ -1051,6 +1071,14 @@ err1:
 
     Private Sub cmbLuminance_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbLuminance.SelectedIndexChanged
         txtLuminance.Text = "  luminance: " & cmbLuminance.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbFlip_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFlip.SelectedIndexChanged
+        txtFlip.Text = "  flip: " & cmbFlip.SelectedItem.ToString
+    End Sub
+
+    Private Sub cmbMirror_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMirror.SelectedIndexChanged
+        txtMirror.Text = "  mirror: " & cmbMirror.SelectedItem.ToString
     End Sub
 
     Function IsValidIP(ByVal ipAddress As String) As Boolean
@@ -2705,6 +2733,12 @@ err1:
                 If lines(x).StartsWith("  exposure: ") Then
                     lines(x) = txtExposure.Text
                 End If
+                If lines(x).StartsWith("  mirror: ") Then
+                    lines(x) = txtMirror.Text
+                End If
+                If lines(x).StartsWith("  flip: ") Then
+                    lines(x) = txtFlip.Text
+                End If
             Next
             IO.File.WriteAllLines(CamfilePath, lines)
         End If
@@ -2814,7 +2848,11 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "mavgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                If rBtnMode1.Checked Then
+                    .StartInfo.Arguments = "mavgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "mavgs2 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2936,6 +2974,7 @@ err1:
             MsgBox("Please enter a valid IP address")
         End If
     End Sub
+
 
 #End Region
 End Class
