@@ -219,9 +219,7 @@ if "%1" == "mspgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh
         plink -ssh root@%2 -pw %3 reboot
 )
@@ -253,18 +251,16 @@ if "%1" == "mavgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /home/radxa/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 2 "&"' /config/scripts/stream.sh
         plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "mavgs2" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /config/scripts/stream.sh
         plink -ssh root@%2 -pw %3 reboot
 )
 
