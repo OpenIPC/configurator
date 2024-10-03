@@ -94,17 +94,17 @@ if "%1" == "keysgen" (
 )
 
 if "%1" == "UART0on" (
-	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/#console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/' /etc/inittab
+	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100/#console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
 	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "UART0off" (
-	plink -ssh root@%2 -pw %3 sed -i 's/#console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/console::respawn:\/sbin\/getty -L console 0 vt100 # GENERIC_SERIAL/' /etc/inittab
+	plink -ssh root@%2 -pw %3 sed -i 's/#console::respawn:\/sbin\/getty -L console 0 vt100/console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
 	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "extra" (
-	plink -ssh root@%2 -pw %3 sed -i 's/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" \\/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" --wait 5 --persist 50 -t \\/' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 sed -i 's/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -p 100 -t -a \"$aggregate\" \\/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" --wait 5 --persist 50 -t \\/' /usr/bin/telemetry
 	plink -ssh root@%2 -pw %3 reboot
 )
 
