@@ -46,6 +46,7 @@ if "%1" == "dlwfbng" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/wifibroadcast.cfg .
 	echo y | pscp -scp -pw %3 root@%2:/etc/modprobe.d/wfb.conf .
 	echo y | pscp -scp -pw %3 root@%2:/home/radxa/scripts/screen-mode .
+	echo y | pscp -scp -pw %3 root@%2:/config/scripts/screen-mode .
 )
 
 if "%1" == "ulwfbng" (
@@ -53,6 +54,8 @@ if "%1" == "ulwfbng" (
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
+	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
 )
 
 if "%1" == "ulwfbngr" (
@@ -60,6 +63,8 @@ if "%1" == "ulwfbngr" (
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
+	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
 	plink -ssh root@%2 -pw %3 reboot
 )
 
@@ -130,12 +135,6 @@ if "%1" == "shup" (
 	echo y | pscp -scp -pw %3 *.sh root@%2:/root/
 	echo y | pscp -scp -pw %3 channels.sh root@%2:/usr/bin/
 	plink -ssh root@%2 -pw %3 rm /root/channels.sh
-	plink -ssh root@%2 -pw %3 rm /root/816.sh
-	plink -ssh root@%2 -pw %3 rm /root/1080.sh
-	plink -ssh root@%2 -pw %3 rm /root/1080b.sh
-	plink -ssh root@%2 -pw %3 rm /root/1264.sh
-	plink -ssh root@%2 -pw %3 rm /root/3K.sh
-	plink -ssh root@%2 -pw %3 rm /root/4K.sh
 	plink -ssh root@%2 -pw %3 chmod +x /root/*.sh
 	plink -ssh root@%2 -pw %3 chmod +x /usr/bin/channels.sh
 )
@@ -219,8 +218,8 @@ if "%1" == "mspgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --screen-mode $SCREEN_MODE/c\fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /home/radxa/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
-	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh
         plink -ssh root@%2 -pw %3 reboot
 )
 
