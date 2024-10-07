@@ -1427,6 +1427,9 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
+        rBtnMode1.Visible = False
+        rBtnMode2.Visible = False
+        btnReset.Visible = False
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
@@ -1540,6 +1543,9 @@ err1:
         txtSaveVRX.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
+        rBtnMode1.Visible = False
+        rBtnMode2.Visible = False
+        btnReset.Visible = False
         txtSaveVRX.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
@@ -1652,6 +1658,9 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = True
         btnMAVGS.Visible = True
+        rBtnMode1.Visible = True
+        rBtnMode2.Visible = True
+        btnReset.Visible = True
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
@@ -3001,6 +3010,51 @@ err1:
             End With
         Else
             MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "resetradxa " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnResetCam_Click(sender As Object, e As EventArgs) Handles btnResetCam.Click
+        Dim result As DialogResult = MessageBox.Show("All OpenIPC camera settings will be restored to default.", "Warning!!!", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+            MessageBox.Show("No changes have been done.")
+        ElseIf result = DialogResult.Yes Then
+            Dim extern = "extern.bat"
+            If Not System.IO.File.Exists(extern) Then
+                MsgBox("File " + extern + " not found!")
+                Return
+            End If
+
+            If IsValidIP(txtIP.Text) Then
+                With New Process()
+                    .StartInfo.UseShellExecute = False
+                    .StartInfo.FileName = extern
+                    .StartInfo.Arguments = "resetcam " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    .StartInfo.RedirectStandardOutput = False
+                    .Start()
+                End With
+            Else
+                MsgBox("Please enter a valid IP address")
+            End If
         End If
     End Sub
 

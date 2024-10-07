@@ -258,9 +258,25 @@ if "%1" == "mavgs" (
 if "%1" == "mavgs2" (
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/fpvue --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\fpvue --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate 60 --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
+	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements wfbng,video --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /home/radxa/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 --osd-telem-lvl 1 "&"' /config/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"/c\pixelpilot --osd --screen-mode $SCREEN_MODE --osd-telem-lvl 1 "&"' /config/scripts/stream.sh
         plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "resetradxa" (
+        echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
+	echo y | pscp -scp -pw %3 reset/wfb.conf root@%2:/etc/modprobe.d/
+	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/home/radxa/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
+	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/config/scripts/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
+        plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "resetcam" (
+	plink -ssh root@%2 -pw %3 firstboot
 )
 
 if "%1" == "fonts" (

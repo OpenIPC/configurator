@@ -104,6 +104,7 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        btnReset = New Button()
         rBtnMode1 = New RadioButton()
         rBtnMode2 = New RadioButton()
         btnMAVGS = New Button()
@@ -209,6 +210,7 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Label10 = New Label()
         Timer1 = New Timer(components)
+        btnResetCam = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1210,6 +1212,7 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnReset)
         TabPage4.Controls.Add(rBtnMode1)
         TabPage4.Controls.Add(rBtnMode2)
         TabPage4.Controls.Add(btnMAVGS)
@@ -1238,6 +1241,19 @@ Partial Class Configurator
         TabPage4.Size = New Size(635, 394)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' btnReset
+        ' 
+        btnReset.BackColor = Color.Gold
+        btnReset.FlatStyle = FlatStyle.Popup
+        btnReset.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnReset.Location = New Point(454, 92)
+        btnReset.Name = "btnReset"
+        btnReset.Size = New Size(86, 30)
+        btnReset.TabIndex = 66
+        btnReset.Text = "Reset"
+        btnToolTip.SetToolTip(btnReset, "Reset all the setting files " & vbCrLf & "from Radxa Zero 3w " & vbCrLf & "to the default ones")
+        btnReset.UseVisualStyleBackColor = False
         ' 
         ' rBtnMode1
         ' 
@@ -1492,6 +1508,7 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(btnResetCam)
         TabPage5.Controls.Add(btnOfflinefw)
         TabPage5.Controls.Add(btnWFB)
         TabPage5.Controls.Add(btnRuby)
@@ -1719,7 +1736,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(17, 202)
+        Label4.Location = New Point(17, 254)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -2542,6 +2559,18 @@ Partial Class Configurator
         ' 
         Timer1.Interval = 2000
         ' 
+        ' btnResetCam
+        ' 
+        btnResetCam.BackColor = Color.Gold
+        btnResetCam.FlatStyle = FlatStyle.Popup
+        btnResetCam.Location = New Point(118, 205)
+        btnResetCam.Name = "btnResetCam"
+        btnResetCam.Size = New Size(98, 30)
+        btnResetCam.TabIndex = 55
+        btnResetCam.Text = "Reset Camera"
+        btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
+        btnResetCam.UseVisualStyleBackColor = False
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2778,5 +2807,7 @@ Partial Class Configurator
     Friend WithEvents txtFlip As TextBox
     Friend WithEvents rBtnMode1 As RadioButton
     Friend WithEvents rBtnMode2 As RadioButton
+    Friend WithEvents btnReset As Button
+    Friend WithEvents btnResetCam As Button
 
 End Class
