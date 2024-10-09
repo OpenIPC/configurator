@@ -50,6 +50,7 @@ if "%1" == "dlwfbng" (
 )
 
 if "%1" == "ulwfbng" (
+	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
@@ -59,6 +60,7 @@ if "%1" == "ulwfbng" (
 )
 
 if "%1" == "ulwfbngr" (
+	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
@@ -266,6 +268,7 @@ if "%1" == "mavgs2" (
 )
 
 if "%1" == "resetradxa" (
+	plink -ssh root@%2 -pw %3 apt install dos2unix
         echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 reset/wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/home/radxa/scripts/
@@ -280,6 +283,7 @@ if "%1" == "resetcam" (
 )
 
 if "%1" == "addbuttons" (
+	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 stream.sh root@%2:/config/scripts/
 )
 
