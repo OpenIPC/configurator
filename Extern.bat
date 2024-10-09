@@ -285,6 +285,7 @@ if "%1" == "resetcam" (
 if "%1" == "addbuttons" (
 	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 stream.sh root@%2:/config/scripts/
+        plink -ssh root@%2 -pw %3 dos2unix /config/scripts/addbuttons
 )
 
 if "%1" == "fonts" (
