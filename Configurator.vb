@@ -1402,6 +1402,40 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        txtResolution.Text = ""
+        txtFPS.Text = ""
+        txtEncode.Text = ""
+        txtBitrate.Text = ""
+        txtExposure.Text = ""
+        txtContrast.Text = ""
+        txtSaturation.Text = ""
+        txtHue.Text = ""
+        txtLuminance.Text = ""
+        txtFlip.Text = ""
+        txtMirror.Text = ""
+        txtSensor.Text = ""
+        txtSerial.Text = ""
+        txtBaud.Text = ""
+        txtRouter.Text = ""
+        txtMCSTLM.Text = ""
+        txtAggregate.Text = ""
+        txtRC_CHANNEL.Text = ""
+        txtFrequency.Text = ""
+        txtPower.Text = ""
+        txtFreq24.Text = ""
+        txtPower24.Text = ""
+        txtMCS.Text = ""
+        txtSTBC.Text = ""
+        txtLDPC.Text = ""
+        txtFECK.Text = ""
+        txtFECN.Text = ""
+        txtResolutionVRX.Text = ""
+        txtCodecVRX.Text = ""
+        txtOSD.Text = ""
+        txtFormat.Text = ""
+        txtPortVRX.Text = ""
+        txtMavlinkVRX.Text = ""
+        txtExtras.Text = ""
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1430,6 +1464,7 @@ err1:
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnReset.Visible = False
+        btnAddButtons.Visible = False
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
@@ -1517,6 +1552,40 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        txtResolution.Text = ""
+        txtFPS.Text = ""
+        txtEncode.Text = ""
+        txtBitrate.Text = ""
+        txtExposure.Text = ""
+        txtContrast.Text = ""
+        txtSaturation.Text = ""
+        txtHue.Text = ""
+        txtLuminance.Text = ""
+        txtFlip.Text = ""
+        txtMirror.Text = ""
+        txtSensor.Text = ""
+        txtSerial.Text = ""
+        txtBaud.Text = ""
+        txtRouter.Text = ""
+        txtMCSTLM.Text = ""
+        txtAggregate.Text = ""
+        txtRC_CHANNEL.Text = ""
+        txtFrequency.Text = ""
+        txtPower.Text = ""
+        txtFreq24.Text = ""
+        txtPower24.Text = ""
+        txtMCS.Text = ""
+        txtSTBC.Text = ""
+        txtLDPC.Text = ""
+        txtFECK.Text = ""
+        txtFECN.Text = ""
+        txtResolutionVRX.Text = ""
+        txtCodecVRX.Text = ""
+        txtOSD.Text = ""
+        txtFormat.Text = ""
+        txtPortVRX.Text = ""
+        txtMavlinkVRX.Text = ""
+        txtExtras.Text = ""
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1546,6 +1615,7 @@ err1:
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnReset.Visible = False
+        btnAddButtons.Visible = False
         txtSaveVRX.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
@@ -1633,6 +1703,40 @@ err1:
             rb.BackColor = Color.FromArgb(45, 45, 45)
             rb.ForeColor = Color.White
         End If
+        txtResolution.Text = ""
+        txtFPS.Text = ""
+        txtEncode.Text = ""
+        txtBitrate.Text = ""
+        txtExposure.Text = ""
+        txtContrast.Text = ""
+        txtSaturation.Text = ""
+        txtHue.Text = ""
+        txtLuminance.Text = ""
+        txtFlip.Text = ""
+        txtMirror.Text = ""
+        txtSensor.Text = ""
+        txtSerial.Text = ""
+        txtBaud.Text = ""
+        txtRouter.Text = ""
+        txtMCSTLM.Text = ""
+        txtAggregate.Text = ""
+        txtRC_CHANNEL.Text = ""
+        txtFrequency.Text = ""
+        txtPower.Text = ""
+        txtFreq24.Text = ""
+        txtPower24.Text = ""
+        txtMCS.Text = ""
+        txtSTBC.Text = ""
+        txtLDPC.Text = ""
+        txtFECK.Text = ""
+        txtFECN.Text = ""
+        txtResolutionVRX.Text = ""
+        txtCodecVRX.Text = ""
+        txtOSD.Text = ""
+        txtFormat.Text = ""
+        txtPortVRX.Text = ""
+        txtMavlinkVRX.Text = ""
+        txtExtras.Text = ""
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = False
@@ -1661,6 +1765,7 @@ err1:
         rBtnMode1.Visible = True
         rBtnMode2.Visible = True
         btnReset.Visible = True
+        btnAddButtons.Visible = True
         txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
@@ -3015,7 +3120,7 @@ err1:
 
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         Dim extern = "extern.bat"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -3026,7 +3131,7 @@ err1:
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "resetradxa " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
-                .Start()
+                .Start
             End With
         Else
             MsgBox("Please enter a valid IP address")
@@ -3055,6 +3160,26 @@ err1:
             Else
                 MsgBox("Please enter a valid IP address")
             End If
+        End If
+    End Sub
+
+    Private Sub btnAddButtons_Click(sender As Object, e As EventArgs) Handles btnAddButtons.Click
+        Dim extern = "extern.bat"
+        If Not System.IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "addbuttons " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 

@@ -279,6 +279,10 @@ if "%1" == "resetcam" (
 	plink -ssh root@%2 -pw %3 firstboot
 )
 
+if "%1" == "addbuttons" (
+	echo y | pscp -scp -pw %3 stream.sh root@%2:/config/scripts/
+)
+
 if "%1" == "fonts" (
         echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/bin/
         echo y | pscp -scp -pw %3 bf/font_hd.png root@%2:/usr/bin/

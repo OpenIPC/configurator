@@ -104,6 +104,7 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        btnAddButtons = New Button()
         btnReset = New Button()
         rBtnMode1 = New RadioButton()
         rBtnMode2 = New RadioButton()
@@ -128,6 +129,7 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        btnResetCam = New Button()
         btnOfflinefw = New Button()
         btnWFB = New Button()
         btnRuby = New Button()
@@ -210,7 +212,6 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Label10 = New Label()
         Timer1 = New Timer(components)
-        btnResetCam = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1212,6 +1213,7 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnAddButtons)
         TabPage4.Controls.Add(btnReset)
         TabPage4.Controls.Add(rBtnMode1)
         TabPage4.Controls.Add(rBtnMode2)
@@ -1241,6 +1243,19 @@ Partial Class Configurator
         TabPage4.Size = New Size(635, 394)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' btnAddButtons
+        ' 
+        btnAddButtons.BackColor = Color.Gold
+        btnAddButtons.FlatStyle = FlatStyle.Popup
+        btnAddButtons.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnAddButtons.Location = New Point(454, 128)
+        btnAddButtons.Name = "btnAddButtons"
+        btnAddButtons.Size = New Size(86, 30)
+        btnAddButtons.TabIndex = 67
+        btnAddButtons.Text = "Add Buttons"
+        btnToolTip.SetToolTip(btnAddButtons, "Update Radxa Zero 3w" & vbCrLf & "and add OK/Cancel Up/Down" & vbCrLf & vbCrLf & "For GPIO pins:" & vbCrLf & "https://rubyfpv.com/hardware.php" & vbCrLf & vbCrLf & "Pins: 11,13,16,18")
+        btnAddButtons.UseVisualStyleBackColor = False
         ' 
         ' btnReset
         ' 
@@ -1536,6 +1551,18 @@ Partial Class Configurator
         TabPage5.Size = New Size(635, 394)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
+        ' 
+        ' btnResetCam
+        ' 
+        btnResetCam.BackColor = Color.Gold
+        btnResetCam.FlatStyle = FlatStyle.Popup
+        btnResetCam.Location = New Point(118, 205)
+        btnResetCam.Name = "btnResetCam"
+        btnResetCam.Size = New Size(98, 30)
+        btnResetCam.TabIndex = 55
+        btnResetCam.Text = "Reset Camera"
+        btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
+        btnResetCam.UseVisualStyleBackColor = False
         ' 
         ' btnOfflinefw
         ' 
@@ -2559,18 +2586,6 @@ Partial Class Configurator
         ' 
         Timer1.Interval = 2000
         ' 
-        ' btnResetCam
-        ' 
-        btnResetCam.BackColor = Color.Gold
-        btnResetCam.FlatStyle = FlatStyle.Popup
-        btnResetCam.Location = New Point(118, 205)
-        btnResetCam.Name = "btnResetCam"
-        btnResetCam.Size = New Size(98, 30)
-        btnResetCam.TabIndex = 55
-        btnResetCam.Text = "Reset Camera"
-        btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
-        btnResetCam.UseVisualStyleBackColor = False
-        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2809,5 +2824,6 @@ Partial Class Configurator
     Friend WithEvents rBtnMode2 As RadioButton
     Friend WithEvents btnReset As Button
     Friend WithEvents btnResetCam As Button
+    Friend WithEvents btnAddButtons As Button
 
 End Class
