@@ -490,11 +490,27 @@ err1:
             Dim array() As String
 
             LineOfText = ReadLine(1, DisplayReaderallLines)
-
             array = LineOfText.Split("@")
-
             txtResolutionVRX.Text = array(0)
             txtCodecVRX.Text = array(1)
+
+            Dim stream = "wifibroadcast"
+            If Not System.IO.File.Exists(stream) Then
+                MsgBox("File " + stream + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                Return
+            End If
+            Dim streamReader As New IO.StreamReader(stream)
+            Dim streamReaderallLines = New List(Of String)
+
+            Do While Not streamReader.EndOfStream
+                streamReaderallLines.Add(streamReader.ReadLine)
+            Loop
+            streamReader.Close()
+            Dim streamOfText As String
+            Dim sArray() As String
+            streamOfText = ReadLine(1, streamReaderallLines)
+            sArray = streamOfText.Split("=")
+            txtExtras.Text = sArray(1).Replace("""", "")
         End If
         btnSaveReboot.Enabled = True
         btnReboot.Enabled = True
@@ -1792,8 +1808,8 @@ err1:
         txtPower24.Visible = False
         txtPortVRX.Visible = False
         txtMavlinkVRX.Visible = False
-        txtExtras.Visible = False
-        Label2.Visible = False
+        txtExtras.Visible = True
+        Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
         ComboBox1.Items.Clear()
@@ -3164,6 +3180,25 @@ err1:
     End Sub
 
     Private Sub btnAddButtons_Click(sender As Object, e As EventArgs) Handles btnAddButtons.Click
+        If txtFrequency.Text <> "" Then
+            Dim stream = "stream.sh"
+            If Not IO.File.Exists(stream) Then
+                MsgBox("File " + stream + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                Return
+            End If
+            Dim x As Integer
+            Dim StreamfilePath = stream
+            Dim lines = IO.File.ReadAllLines(StreamfilePath)
+            For x = 0 To lines.Count() - 1
+                If lines(x).StartsWith("        iw") Then
+                    lines(x) = "        iw " + txtExtras.Text + " set freq $Freq"
+                End If
+                If lines(x).StartsWith("           iw") Then
+                    lines(x) = "           iw " + txtExtras.Text + " set freq $Freq"
+                End If
+            Next
+            IO.File.WriteAllLines(StreamfilePath, lines)
+        End If
         Dim extern = "extern.bat"
         If Not System.IO.File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -3182,7 +3217,6 @@ err1:
             MsgBox("Please enter a valid IP address")
         End If
     End Sub
-
 
 #End Region
 End Class

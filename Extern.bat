@@ -47,6 +47,7 @@ if "%1" == "dlwfbng" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/modprobe.d/wfb.conf .
 	echo y | pscp -scp -pw %3 root@%2:/home/radxa/scripts/screen-mode .
 	echo y | pscp -scp -pw %3 root@%2:/config/scripts/screen-mode .
+	echo y | pscp -scp -pw %3 root@%2:/etc/default/wifibroadcast .
 )
 
 if "%1" == "ulwfbng" (
@@ -56,7 +57,7 @@ if "%1" == "ulwfbng" (
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
+	plink -ssh root@%2 -pw %3 dos2unix /config/scripts/screen-mode
 )
 
 if "%1" == "ulwfbngr" (
@@ -66,7 +67,7 @@ if "%1" == "ulwfbngr" (
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/home/radxa/scripts/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
+	plink -ssh root@%2 -pw %3 dos2unix /config/scripts/screen-mode
 	plink -ssh root@%2 -pw %3 reboot
 )
 
@@ -272,9 +273,10 @@ if "%1" == "resetradxa" (
         echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 reset/wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/home/radxa/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /home/radxa/scripts/screen-mode
+	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/etc/default/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /etc/default/wifibroadcast /home/radxa/scripts/screen-mode
 	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/config/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /config/scripts/screen-mode
+	plink -ssh root@%2 -pw %3 dos2unix /config/scripts/screen-mode
         plink -ssh root@%2 -pw %3 reboot
 )
 
@@ -285,7 +287,7 @@ if "%1" == "resetcam" (
 if "%1" == "addbuttons" (
 	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 stream.sh root@%2:/config/scripts/
-        plink -ssh root@%2 -pw %3 dos2unix /config/scripts/addbuttons
+        plink -ssh root@%2 -pw %3 dos2unix /config/scripts/stream.sh
 )
 
 if "%1" == "fonts" (
