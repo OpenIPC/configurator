@@ -1452,6 +1452,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
+        btnResetCam.Enabled = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1508,6 +1509,12 @@ err1:
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
+        btnMSP.Visible = False
+        btnFontsINAV.Visible = False
+        btnMavlink.Visible = False
+        btnOnboardREC.Visible = False
+        rBtnRECON.Visible = False
+        rBtnRECOFF.Visible = False
         Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
@@ -1602,6 +1609,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
+        btnResetCam.Enabled = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1659,6 +1667,12 @@ err1:
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
+        btnMSP.Visible = True
+        btnFontsINAV.Visible = True
+        btnMavlink.Visible = True
+        btnOnboardREC.Visible = True
+        rBtnRECON.Visible = True
+        rBtnRECOFF.Visible = True
         Label2.Visible = True
         txtMCS.ReadOnly = True
         txtSTBC.ReadOnly = True
@@ -1753,6 +1767,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
+        btnResetCam.Enabled = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = False
@@ -1809,6 +1824,12 @@ err1:
         txtPortVRX.Visible = False
         txtMavlinkVRX.Visible = False
         txtExtras.Visible = True
+        btnMSP.Visible = False
+        btnFontsINAV.Visible = False
+        btnMavlink.Visible = False
+        btnOnboardREC.Visible = False
+        rBtnRECON.Visible = False
+        rBtnRECOFF.Visible = False
         Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
@@ -2660,14 +2681,14 @@ err1:
         End If
     End Sub
 
-    Private Sub btnMSP_Click(sender As Object, e As EventArgs) Handles btnMSP.Click
+    Private Sub btnMSP_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         Dim msp_file = "msposd"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
-        If Not System.IO.File.Exists(msp_file) Then
+        If Not File.Exists(msp_file) Then
             MsgBox("File " + msp_file + " not found!")
             Return
         End If
@@ -2676,11 +2697,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                If rBtnttyS2.Checked Then
-                    .StartInfo.Arguments = "msp2 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                Else
-                    .StartInfo.Arguments = "msp0 " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                End If
+                .StartInfo.Arguments = "msp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2689,7 +2706,7 @@ err1:
         End If
     End Sub
 
-    Private Sub btnMavlink_Click(sender As Object, e As EventArgs) Handles btnMavlink.Click
+    Private Sub btnMavlink_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -2709,19 +2726,19 @@ err1:
         End If
     End Sub
 
-    Private Sub btnFonts_Click(sender As Object, e As EventArgs) Handles btnFonts.Click
+    Private Sub btnFonts_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         Dim font_file1 = "bf/font.png"
         Dim font_file2 = "bf/font_hd.png"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
-        If Not System.IO.File.Exists(font_file1) Then
+        If Not File.Exists(font_file1) Then
             MsgBox("File " + font_file1 + " not found!")
             Return
         End If
-        If Not System.IO.File.Exists(font_file2) Then
+        If Not File.Exists(font_file2) Then
             MsgBox("File " + font_file2 + " not found!")
             Return
         End If
@@ -3040,19 +3057,19 @@ err1:
         End If
     End Sub
 
-    Private Sub btnFontsINAV_Click(sender As Object, e As EventArgs) Handles btnFontsINAV.Click
+    Private Sub btnFontsINAV_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         Dim font_file1 = "inav/font.png"
         Dim font_file2 = "inav/font_hd.png"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
-        If Not System.IO.File.Exists(font_file1) Then
+        If Not File.Exists(font_file1) Then
             MsgBox("File " + font_file1 + " not found!")
             Return
         End If
-        If Not System.IO.File.Exists(font_file2) Then
+        If Not File.Exists(font_file2) Then
             MsgBox("File " + font_file2 + " not found!")
             Return
         End If
@@ -3070,7 +3087,7 @@ err1:
         End If
     End Sub
 
-    Private Sub btnDualOS_Click(sender As Object, e As EventArgs) Handles btnDualOSD.Click
+    Private Sub btnDualOS_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
@@ -3090,7 +3107,7 @@ err1:
         End If
     End Sub
 
-    Private Sub btnOnboardREC_Click(sender As Object, e As EventArgs) Handles btnOnboardREC.Click
+    Private Sub btnOnboardREC_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
         If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
