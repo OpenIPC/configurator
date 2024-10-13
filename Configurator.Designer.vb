@@ -81,11 +81,7 @@ Partial Class Configurator
         rBtnRECON = New RadioButton()
         btnOnboardREC = New Button()
         btnDualOSD = New Button()
-        rBtnttyS2 = New RadioButton()
-        rBtnttyS0 = New RadioButton()
         btnFontsINAV = New Button()
-        btnFonts = New Button()
-        btnMavlink = New Button()
         btnMSP = New Button()
         btnExtra = New Button()
         cmbRC_Channel = New ComboBox()
@@ -870,11 +866,7 @@ Partial Class Configurator
         TabPage3.Controls.Add(rBtnRECON)
         TabPage3.Controls.Add(btnOnboardREC)
         TabPage3.Controls.Add(btnDualOSD)
-        TabPage3.Controls.Add(rBtnttyS2)
-        TabPage3.Controls.Add(rBtnttyS0)
         TabPage3.Controls.Add(btnFontsINAV)
-        TabPage3.Controls.Add(btnFonts)
-        TabPage3.Controls.Add(btnMavlink)
         TabPage3.Controls.Add(btnMSP)
         TabPage3.Controls.Add(btnExtra)
         TabPage3.Controls.Add(cmbRC_Channel)
@@ -905,7 +897,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 229)
+        rBtnRECOFF.Location = New Point(547, 192)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -918,7 +910,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 214)
+        rBtnRECON.Location = New Point(547, 177)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -931,7 +923,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 216)
+        btnOnboardREC.Location = New Point(454, 179)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -944,7 +936,7 @@ Partial Class Configurator
         btnDualOSD.BackColor = Color.Gold
         btnDualOSD.FlatStyle = FlatStyle.Popup
         btnDualOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDualOSD.Location = New Point(454, 252)
+        btnDualOSD.Location = New Point(454, 216)
         btnDualOSD.Name = "btnDualOSD"
         btnDualOSD.Size = New Size(116, 30)
         btnDualOSD.TabIndex = 62
@@ -952,34 +944,6 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnDualOSD, "Enables the Mavlink telemetry" & vbCrLf & "while keeping the MSPOSD" & vbCrLf & "on the OpenIPC camera for Dual OSD" & vbCrLf & vbCrLf & "MUST first enable the MSPOSD")
         btnDualOSD.UseVisualStyleBackColor = False
         btnDualOSD.Visible = False
-        ' 
-        ' rBtnttyS2
-        ' 
-        rBtnttyS2.AutoSize = True
-        rBtnttyS2.Checked = True
-        rBtnttyS2.ForeColor = Color.White
-        rBtnttyS2.Location = New Point(580, 123)
-        rBtnttyS2.Name = "rBtnttyS2"
-        rBtnttyS2.Size = New Size(52, 18)
-        rBtnttyS2.TabIndex = 61
-        rBtnttyS2.TabStop = True
-        rBtnttyS2.Text = "ttyS2"
-        btnToolTip.SetToolTip(rBtnttyS2, "Enable MSPOSD on ttyS2")
-        rBtnttyS2.UseVisualStyleBackColor = True
-        rBtnttyS2.Visible = False
-        ' 
-        ' rBtnttyS0
-        ' 
-        rBtnttyS0.AutoSize = True
-        rBtnttyS0.ForeColor = Color.White
-        rBtnttyS0.Location = New Point(580, 107)
-        rBtnttyS0.Name = "rBtnttyS0"
-        rBtnttyS0.Size = New Size(52, 18)
-        rBtnttyS0.TabIndex = 60
-        rBtnttyS0.Text = "ttyS0"
-        btnToolTip.SetToolTip(rBtnttyS0, "Enable MSPOSD on ttyS0")
-        rBtnttyS0.UseVisualStyleBackColor = True
-        rBtnttyS0.Visible = False
         ' 
         ' btnFontsINAV
         ' 
@@ -994,33 +958,6 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnFontsINAV, "Upload the fonts for INAV to the OpenIPC camera")
         btnFontsINAV.UseVisualStyleBackColor = False
         ' 
-        ' btnFonts
-        ' 
-        btnFonts.BackColor = Color.Gold
-        btnFonts.FlatStyle = FlatStyle.Popup
-        btnFonts.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnFonts.Location = New Point(454, 290)
-        btnFonts.Name = "btnFonts"
-        btnFonts.Size = New Size(116, 30)
-        btnFonts.TabIndex = 58
-        btnFonts.Text = "Upload BF Fonts"
-        btnToolTip.SetToolTip(btnFonts, "Upload the fonts for Betaflight to the OpenIPC camera")
-        btnFonts.UseVisualStyleBackColor = False
-        btnFonts.Visible = False
-        ' 
-        ' btnMavlink
-        ' 
-        btnMavlink.BackColor = Color.Gold
-        btnMavlink.FlatStyle = FlatStyle.Popup
-        btnMavlink.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMavlink.Location = New Point(454, 179)
-        btnMavlink.Name = "btnMavlink"
-        btnMavlink.Size = New Size(116, 30)
-        btnMavlink.TabIndex = 57
-        btnMavlink.Text = "Enable Mavlink"
-        btnToolTip.SetToolTip(btnMavlink, "Enables the Mavlink telemetry" & vbCrLf & "of OpenIPC")
-        btnMavlink.UseVisualStyleBackColor = False
-        ' 
         ' btnMSP
         ' 
         btnMSP.BackColor = Color.Gold
@@ -1030,8 +967,8 @@ Partial Class Configurator
         btnMSP.Name = "btnMSP"
         btnMSP.Size = New Size(116, 30)
         btnMSP.TabIndex = 56
-        btnMSP.Text = "Enable MSPOSD"
-        btnToolTip.SetToolTip(btnMSP, "Enables the MSPOSD of OpenIPC" & vbCrLf & "Adds CPU Bitrate FPS Temp OSD" & vbCrLf & "Upload the fonts for Betaflight " & vbCrLf & "to the OpenIPC camera")
+        btnMSP.Text = "Upload MSPOSD"
+        btnToolTip.SetToolTip(btnMSP, "Upload the latest MSPOSD of OpenIPC" & vbCrLf & "Upload the fonts for Betaflight " & vbCrLf & "to the OpenIPC camera")
         btnMSP.UseVisualStyleBackColor = False
         ' 
         ' btnExtra
@@ -2597,7 +2534,7 @@ Partial Class Configurator
         version.AutoSize = True
         version.Font = New Font("Arial", 6F, FontStyle.Bold)
         version.ForeColor = Color.White
-        version.Location = New Point(642, 490)
+        version.Location = New Point(647, 490)
         version.Name = "version"
         version.Size = New Size(22, 10)
         version.TabIndex = 48
@@ -2837,11 +2774,7 @@ Partial Class Configurator
     Friend WithEvents rBtnRECON As RadioButton
     Friend WithEvents btnOnboardREC As Button
     Friend WithEvents btnDualOSD As Button
-    Friend WithEvents rBtnttyS2 As RadioButton
-    Friend WithEvents rBtnttyS0 As RadioButton
     Friend WithEvents btnFontsINAV As Button
-    Friend WithEvents btnFonts As Button
-    Friend WithEvents btnMavlink As Button
     Friend WithEvents btnMSP As Button
     Friend WithEvents version As Label
 

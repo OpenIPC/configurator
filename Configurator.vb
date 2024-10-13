@@ -898,7 +898,8 @@ err1:
         cmbRouter.Items.Clear()
         cmbRouter.Items.Add("0")
         cmbRouter.Items.Add("1")
-        cmbRouter.Text = "Select MAVFWD(0)/MAVLINK(1)"
+        cmbRouter.Items.Add("2")
+        cmbRouter.Text = "Select MAVFWD(0)/MAV-ROUTER(1)/MSPOSD(2)"
 
         cmbMCSTLM.Items.Clear()
         cmbMCSTLM.Items.Add("0")
@@ -1511,7 +1512,6 @@ err1:
         txtExtras.Visible = True
         btnMSP.Visible = False
         btnFontsINAV.Visible = False
-        btnMavlink.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
@@ -1669,7 +1669,6 @@ err1:
         txtExtras.Visible = True
         btnMSP.Visible = True
         btnFontsINAV.Visible = True
-        btnMavlink.Visible = True
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
@@ -1826,7 +1825,6 @@ err1:
         txtExtras.Visible = True
         btnMSP.Visible = False
         btnFontsINAV.Visible = False
-        btnMavlink.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
@@ -2681,81 +2679,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnMSP_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        Dim msp_file = "msposd"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(msp_file) Then
-            MsgBox("File " + msp_file + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "msp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnMavlink_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "mav " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnFonts_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        Dim font_file1 = "bf/font.png"
-        Dim font_file2 = "bf/font_hd.png"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file1) Then
-            MsgBox("File " + font_file1 + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file2) Then
-            MsgBox("File " + font_file2 + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "fonts " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub btnSaveReboot_Click(sender As Object, e As EventArgs) Handles btnSaveReboot.Click
         Dim vdecconf As String = "vdec.conf"
         If Not IO.File.Exists(vdecconf) Then
@@ -3057,80 +2980,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnFontsINAV_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        Dim font_file1 = "inav/font.png"
-        Dim font_file2 = "inav/font_hd.png"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file1) Then
-            MsgBox("File " + font_file1 + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file2) Then
-            MsgBox("File " + font_file2 + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "fontsINAV " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnDualOS_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "dualosd " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnOnboardREC_Click(sender As Object, e As EventArgs)
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                If rBtnRECON.Checked Then
-                    .StartInfo.Arguments = "onboardrecon " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                Else
-                    .StartInfo.Arguments = "onboardrecoff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                End If
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub btnExtra_Click(sender As Object, e As EventArgs) Handles btnExtra.Click
         Dim extern = "extern.bat"
         If Not IO.File.Exists(extern) Then
@@ -3227,6 +3076,105 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "addbuttons " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMSP_Click_1(sender As Object, e As EventArgs) Handles btnMSP.Click
+        Dim extern = "extern.bat"
+        Dim msp_file = "msposd"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not File.Exists(msp_file) Then
+            MsgBox("File " + msp_file + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "msp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnFontsINAV_Click_1(sender As Object, e As EventArgs) Handles btnFontsINAV.Click
+        Dim extern = "extern.bat"
+        Dim font_file1 = "inav/font.png"
+        Dim font_file2 = "inav/font_hd.png"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not File.Exists(font_file1) Then
+            MsgBox("File " + font_file1 + " not found!")
+            Return
+        End If
+        If Not File.Exists(font_file2) Then
+            MsgBox("File " + font_file2 + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "fontsINAV " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnOnboardREC_Click_1(sender As Object, e As EventArgs) Handles btnOnboardREC.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBtnRECON.Checked Then
+                    .StartInfo.Arguments = "onboardrecon " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "onboardrecoff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnDualOSD_Click(sender As Object, e As EventArgs) Handles btnDualOSD.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "dualosd " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

@@ -192,7 +192,6 @@ if "%1" == "offlinefw" (
 )
 
 if "%1" == "msp" (
-        plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=2' /etc/telemetry.conf
         plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
         echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/bin/
@@ -205,11 +204,6 @@ if "%1" == "msp" (
 if "%1" == "mspgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh
-        plink -ssh root@%2 -pw %3 reboot
-)
-
-if "%1" == "mav" (
-        plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=0' /etc/telemetry.conf
         plink -ssh root@%2 -pw %3 reboot
 )
 
