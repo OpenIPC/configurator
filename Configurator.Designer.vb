@@ -968,7 +968,7 @@ Partial Class Configurator
         btnMSP.Size = New Size(116, 30)
         btnMSP.TabIndex = 56
         btnMSP.Text = "Upload MSPOSD"
-        btnToolTip.SetToolTip(btnMSP, "Upload the latest MSPOSD of OpenIPC" & vbCrLf & "Upload the fonts for Betaflight " & vbCrLf & "to the OpenIPC camera")
+        btnToolTip.SetToolTip(btnMSP, resources.GetString("btnMSP.ToolTip"))
         btnMSP.UseVisualStyleBackColor = False
         ' 
         ' btnExtra

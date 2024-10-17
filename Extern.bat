@@ -194,8 +194,8 @@ if "%1" == "offlinefw" (
 if "%1" == "msp" (
         plink -ssh root@%2 -pw %3 killall -q msposd
         echo y | pscp -scp -pw %3 msposd root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 bf/font_hd.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 bf/font.png root@%2:/usr/share/fonts/
+        echo y | pscp -scp -pw %3 bf/font_hd.png root@%2:/usr/share/fonts/
         echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
         plink -ssh root@%2 -pw %3 reboot
@@ -256,8 +256,8 @@ if "%1" == "addbuttons" (
 )
 
 if "%1" == "fontsINAV" (
-        echo y | pscp -scp -pw %3 inav/font.png root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 inav/font_hd.png root@%2:/usr/bin/
+        echo y | pscp -scp -pw %3 inav/font.png root@%2:/usr/share/fonts/
+        echo y | pscp -scp -pw %3 inav/font_hd.png root@%2:/usr/share/fonts/
 )
 
 :end
