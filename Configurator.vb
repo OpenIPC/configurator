@@ -9,11 +9,41 @@ Imports System.Threading
 Imports System.Formats.Tar
 Imports System.IO
 Imports System.Text.Json
+Imports System.Net.WebRequestMethods
+Imports File = System.IO.File
+Imports System.IO.Compression
+
 
 Public Class Configurator
     Public OpenIPCIP As String
     Public NVRIP As String
     Public RadxaIP As String
+    Public WithEvents downloader As WebClient
+
+    Public Sub DownloadStart()
+        downloader = New WebClient
+        downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
+    End Sub
+
+    Private Sub downloader_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs) Handles downloader.DownloadProgressChanged
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        ProgressBar1.Value = e.ProgressPercentage
+        If ProgressBar1.Value = 100 Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        End If
+
+    End Sub
+
     Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
         Dim settingsconf As String = "settings.conf"
         If Not IO.File.Exists(settingsconf) Then
@@ -938,6 +968,34 @@ err1:
         cmbRC_Channel.Items.Add("8")
         cmbRC_Channel.Text = "Select RC Channel"
 
+        Dim dir = "sensors\"
+        For Each file As String In System.IO.Directory.GetFiles(dir)
+            cmbSensor.Items.Add(System.IO.Path.GetFileNameWithoutExtension(file))
+        Next
+        cmbSensor.Text = "Select Sensor"
+
+        cmbVersion.Items.Clear()
+        cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
+        cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
+        cmbVersion.Items.Add("ssc338q_fpv_openipc-urllc-aio-nor")
+        cmbVersion.Items.Add("ssc338q_fpv_runcam-wifilink-nor")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-rubyfpv")
+        cmbVersion.Items.Add("openipc.ssc338q-nand-fpv")
+        cmbVersion.Items.Add("openipc.ssc338q-nand-rubyfpv")
+        cmbVersion.Items.Add("openipc.ssc30kq-nor-fpv")
+        cmbVersion.Items.Add("openipc.ssc30kq-nor-rubyfpv")
+        cmbVersion.Items.Add("openipc.hi3536dv100-nor-fpv")
+        cmbVersion.Items.Add("openipc.gk7205v200-nor-fpv")
+        cmbVersion.Items.Add("openipc.gk7205v200-nor-rubyfpv")
+        cmbVersion.Items.Add("openipc.gk7205v210-nor-fpv")
+        cmbVersion.Items.Add("openipc.gk7205v210-nor-rubyfpv")
+        cmbVersion.Items.Add("openipc.gk7205v300-nor-fpv")
+        cmbVersion.Items.Add("openipc.gk7205v300-nor-rubyfpv")
+        cmbVersion.Items.Add("openipc.hi3516ev300-nor-fpv")
+        cmbVersion.Items.Add("openipc.hi3516ev200-nor-fpv")
+        cmbVersion.Text = "Select OpenIPC Version"
+
         rBtnCam.BackColor = Color.Gold
         rBtnCam.ForeColor = Color.Black
     End Sub
@@ -1459,7 +1517,7 @@ err1:
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = False
-        txtSOC.Visible = False
+        cmbVersion.Visible = False
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1475,7 +1533,7 @@ err1:
         btnBinBackup.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
-        txtBin.Visible = False
+        cmbSensor.Visible = True
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
@@ -1615,7 +1673,7 @@ err1:
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = True
-        txtSOC.Visible = True
+        cmbVersion.Visible = True
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1631,7 +1689,7 @@ err1:
         btnBinBackup.Visible = True
         btnDriver.Visible = True
         btnDriverBackup.Visible = True
-        txtBin.Visible = True
+        cmbSensor.Visible = True
         txtDriver.Visible = True
         txtSaveVRX.Visible = False
         btnMSPGS.Visible = False
@@ -1772,7 +1830,7 @@ err1:
         Label8.Visible = False
         Label9.Visible = False
         Label10.Visible = False
-        txtSOC.Visible = False
+        cmbVersion.Visible = False
         txtResX.Visible = False
         txtResY.Visible = False
         checkCustomRes.Visible = False
@@ -1788,7 +1846,7 @@ err1:
         btnBinBackup.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
-        txtBin.Visible = False
+        cmbSensor.Visible = False
         txtDriver.Visible = False
         btnMSPGS.Visible = True
         btnMAVGS.Visible = True
@@ -2474,7 +2532,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "binup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
+                .StartInfo.Arguments = "binup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbSensor.Text + ".bin"
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2514,7 +2572,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
+                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbSensor.Text + ".bin"
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2574,7 +2632,7 @@ err1:
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "shup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtBin.Text
+                .StartInfo.Arguments = "shup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -2660,20 +2718,8 @@ err1:
     End Sub
 
     Private Sub btnOfflinefw_Click(sender As Object, e As EventArgs) Handles btnOfflinefw.Click
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
         If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txtSOC.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
+            DownloadStart()
         Else
             MsgBox("Please enter a valid IP address")
         End If

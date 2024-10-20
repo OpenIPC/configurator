@@ -125,6 +125,10 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        cmbVersion = New ComboBox()
+        Label10 = New Label()
+        ProgressBar1 = New ProgressBar()
+        cmbSensor = New ComboBox()
         btnResetCam = New Button()
         btnOfflinefw = New Button()
         btnWFB = New Button()
@@ -135,7 +139,6 @@ Partial Class Configurator
         btnDriverBackup = New Button()
         btnBinBackup = New Button()
         txtDriver = New TextBox()
-        txtBin = New TextBox()
         btnDriver = New Button()
         btnSensor = New Button()
         Label5 = New Label()
@@ -198,7 +201,6 @@ Partial Class Configurator
         btnReboot = New Button()
         txtPassword = New TextBox()
         Button4 = New Button()
-        txtSOC = New TextBox()
         connected = New PictureBox()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
@@ -206,7 +208,6 @@ Partial Class Configurator
         Label3 = New Label()
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
-        Label10 = New Label()
         Timer1 = New Timer(components)
         version = New Label()
         TabControl1.SuspendLayout()
@@ -1466,6 +1467,10 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(cmbVersion)
+        TabPage5.Controls.Add(Label10)
+        TabPage5.Controls.Add(ProgressBar1)
+        TabPage5.Controls.Add(cmbSensor)
         TabPage5.Controls.Add(btnResetCam)
         TabPage5.Controls.Add(btnOfflinefw)
         TabPage5.Controls.Add(btnWFB)
@@ -1476,7 +1481,6 @@ Partial Class Configurator
         TabPage5.Controls.Add(btnDriverBackup)
         TabPage5.Controls.Add(btnBinBackup)
         TabPage5.Controls.Add(txtDriver)
-        TabPage5.Controls.Add(txtBin)
         TabPage5.Controls.Add(btnDriver)
         TabPage5.Controls.Add(btnSensor)
         TabPage5.Controls.Add(Label5)
@@ -1495,13 +1499,53 @@ Partial Class Configurator
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
+        ' cmbVersion
+        ' 
+        cmbVersion.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbVersion.FlatStyle = FlatStyle.Popup
+        cmbVersion.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbVersion.FormattingEnabled = True
+        cmbVersion.Location = New Point(76, 240)
+        cmbVersion.Name = "cmbVersion"
+        cmbVersion.Size = New Size(243, 22)
+        cmbVersion.TabIndex = 59
+        ' 
+        ' Label10
+        ' 
+        Label10.AutoSize = True
+        Label10.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label10.ForeColor = Color.White
+        Label10.Location = New Point(17, 241)
+        Label10.Name = "Label10"
+        Label10.Size = New Size(53, 15)
+        Label10.TabIndex = 58
+        Label10.Text = "Version:"
+        ' 
+        ' ProgressBar1
+        ' 
+        ProgressBar1.Location = New Point(324, 368)
+        ProgressBar1.Name = "ProgressBar1"
+        ProgressBar1.Size = New Size(305, 20)
+        ProgressBar1.TabIndex = 57
+        ' 
+        ' cmbSensor
+        ' 
+        cmbSensor.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbSensor.FlatStyle = FlatStyle.Popup
+        cmbSensor.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbSensor.FormattingEnabled = True
+        cmbSensor.Location = New Point(17, 106)
+        cmbSensor.Name = "cmbSensor"
+        cmbSensor.Size = New Size(125, 22)
+        cmbSensor.TabIndex = 56
+        ' 
         ' btnResetCam
         ' 
         btnResetCam.BackColor = Color.Gold
         btnResetCam.FlatStyle = FlatStyle.Popup
-        btnResetCam.Location = New Point(118, 205)
+        btnResetCam.Location = New Point(17, 205)
         btnResetCam.Name = "btnResetCam"
-        btnResetCam.Size = New Size(98, 30)
+        btnResetCam.Size = New Size(117, 30)
         btnResetCam.TabIndex = 55
         btnResetCam.Text = "Reset Camera"
         btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
@@ -1511,9 +1555,9 @@ Partial Class Configurator
         ' 
         btnOfflinefw.BackColor = Color.Gold
         btnOfflinefw.FlatStyle = FlatStyle.Popup
-        btnOfflinefw.Location = New Point(222, 205)
+        btnOfflinefw.Location = New Point(140, 205)
         btnOfflinefw.Name = "btnOfflinefw"
-        btnOfflinefw.Size = New Size(98, 30)
+        btnOfflinefw.Size = New Size(179, 30)
         btnOfflinefw.TabIndex = 54
         btnOfflinefw.Text = "Offline Update"
         btnToolTip.SetToolTip(btnOfflinefw, "1. Download and extract the uImage" & vbCrLf & "and squashfs files in the folder of the" & vbCrLf & "OpenIPC Configurator" & vbCrLf & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
@@ -1616,19 +1660,6 @@ Partial Class Configurator
         txtDriver.Text = "sensor_imx415_mipi.ko"
         btnToolTip.SetToolTip(txtDriver, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
         ' 
-        ' txtBin
-        ' 
-        txtBin.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        txtBin.BorderStyle = BorderStyle.FixedSingle
-        txtBin.Font = New Font("Arial", 9F, FontStyle.Bold)
-        txtBin.ForeColor = Color.White
-        txtBin.Location = New Point(17, 106)
-        txtBin.Name = "txtBin"
-        txtBin.Size = New Size(125, 21)
-        txtBin.TabIndex = 45
-        txtBin.Text = "imx415_fpv.bin"
-        btnToolTip.SetToolTip(txtBin, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
-        ' 
         ' btnDriver
         ' 
         btnDriver.BackColor = Color.Gold
@@ -1706,7 +1737,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(17, 254)
+        Label4.Location = New Point(17, 265)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -2433,19 +2464,6 @@ Partial Class Configurator
         Button4.UseVisualStyleBackColor = False
         Button4.Visible = False
         ' 
-        ' txtSOC
-        ' 
-        txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        txtSOC.BorderStyle = BorderStyle.FixedSingle
-        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
-        txtSOC.ForeColor = Color.White
-        txtSOC.Location = New Point(334, 441)
-        txtSOC.Name = "txtSOC"
-        txtSOC.Size = New Size(65, 21)
-        txtSOC.TabIndex = 35
-        txtSOC.Text = "ssc338q"
-        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC" & vbCrLf & "(For offline update use only)")
-        ' 
         ' connected
         ' 
         connected.BackColor = Color.Red
@@ -2514,17 +2532,6 @@ Partial Class Configurator
         ' BackgroundWorker1
         ' 
         ' 
-        ' Label10
-        ' 
-        Label10.AutoSize = True
-        Label10.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label10.ForeColor = Color.White
-        Label10.Location = New Point(304, 443)
-        Label10.Name = "Label10"
-        Label10.Size = New Size(35, 15)
-        Label10.TabIndex = 34
-        Label10.Text = "SOC:"
-        ' 
         ' Timer1
         ' 
         Timer1.Interval = 2000
@@ -2549,8 +2556,6 @@ Partial Class Configurator
         Controls.Add(version)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
-        Controls.Add(txtSOC)
-        Controls.Add(Label10)
         Controls.Add(Button4)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
@@ -2731,7 +2736,6 @@ Partial Class Configurator
     Friend WithEvents btnDriver As Button
     Friend WithEvents btnSensor As Button
     Friend WithEvents txtDriver As TextBox
-    Friend WithEvents txtBin As TextBox
     Friend WithEvents btnDriverBackup As Button
     Friend WithEvents btnBinBackup As Button
     Friend WithEvents Label6 As Label
@@ -2751,8 +2755,6 @@ Partial Class Configurator
     Friend WithEvents btnRuby As Button
     Friend WithEvents btnWFB As Button
     Friend WithEvents btnOfflinefw As Button
-    Friend WithEvents txtSOC As TextBox
-    Friend WithEvents Label10 As Label
     Friend WithEvents Label11 As Label
     Friend WithEvents btnSaveReboot As Button
     Friend WithEvents btnMAVGS As Button
@@ -2777,5 +2779,9 @@ Partial Class Configurator
     Friend WithEvents btnFontsINAV As Button
     Friend WithEvents btnMSP As Button
     Friend WithEvents version As Label
+    Friend WithEvents cmbSensor As ComboBox
+    Friend WithEvents ProgressBar1 As ProgressBar
+    Friend WithEvents cmbVersion As ComboBox
+    Friend WithEvents Label10 As Label
 
 End Class

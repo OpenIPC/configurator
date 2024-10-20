@@ -186,9 +186,10 @@ if "%1" == "wfbfw" (
 )
 
 if "%1" == "offlinefw" (
-	echo y | pscp -scp -pw %3 uImage.%4 root@%2:/tmp
-	echo y | pscp -scp -pw %3 rootfs.squashfs.%4 root@%2:/tmp
-	plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
+	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
+        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz
+        plink -ssh root@%2 -pw %3 tar -xvf /tmp/%4.tar -C /tmp
+        plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
 )
 
 if "%1" == "msp" (
