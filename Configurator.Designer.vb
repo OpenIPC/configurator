@@ -1509,6 +1509,7 @@ Partial Class Configurator
         cmbVersion.Name = "cmbVersion"
         cmbVersion.Size = New Size(243, 22)
         cmbVersion.TabIndex = 59
+        btnToolTip.SetToolTip(cmbVersion, "Select a version from this menu." & vbCrLf & "Make sure you select the correct " & vbCrLf & "version for your camera.")
         ' 
         ' Label10
         ' 
@@ -1560,7 +1561,7 @@ Partial Class Configurator
         btnOfflinefw.Size = New Size(179, 30)
         btnOfflinefw.TabIndex = 54
         btnOfflinefw.Text = "Offline Update"
-        btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
+        btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
         btnOfflinefw.UseVisualStyleBackColor = False
         ' 
         ' btnWFB

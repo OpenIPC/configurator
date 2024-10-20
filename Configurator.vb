@@ -1515,7 +1515,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
-        btnResetCam.Enabled = False
+        btnResetCam.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1530,14 +1530,15 @@ err1:
         btnUpdate.Visible = False
         btnRuby.Visible = False
         btnWFB.Visible = False
-        btnOfflinefw.Visible = False
+        btnOfflinefw.Visible = True
+        cmbVersion.Visible = True
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
         btnBinBackup.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
-        cmbSensor.Visible = True
+        cmbSensor.Visible = False
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
@@ -1671,7 +1672,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
-        btnResetCam.Enabled = True
+        btnResetCam.Visible = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1687,6 +1688,7 @@ err1:
         btnRuby.Visible = True
         btnWFB.Visible = True
         btnOfflinefw.Visible = True
+        cmbVersion.Visible = True
         Button2.Visible = True
         Button3.Visible = True
         btnSensor.Visible = True
@@ -1828,7 +1830,7 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
-        btnResetCam.Enabled = False
+        btnResetCam.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = False
@@ -1844,6 +1846,7 @@ err1:
         btnRuby.Visible = False
         btnWFB.Visible = False
         btnOfflinefw.Visible = False
+        cmbVersion.Visible = False
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
