@@ -23,7 +23,7 @@ Public Class Configurator
     Public Sub DownloadStart()
         downloader = New WebClient
         If cmbVersion.Text = "ssc338q_fpv_emax-wyvern-link-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-mario-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-urllc-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_runcam-wifilink-nor" Then
-            downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz") Then
+            downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         Else
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/firmware/releases/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         End If
