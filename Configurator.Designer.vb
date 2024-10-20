@@ -1560,7 +1560,7 @@ Partial Class Configurator
         btnOfflinefw.Size = New Size(179, 30)
         btnOfflinefw.TabIndex = 54
         btnOfflinefw.Text = "Offline Update"
-        btnToolTip.SetToolTip(btnOfflinefw, "1. Download and extract the uImage" & vbCrLf & "and squashfs files in the folder of the" & vbCrLf & "OpenIPC Configurator" & vbCrLf & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
+        btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
         btnOfflinefw.UseVisualStyleBackColor = False
         ' 
         ' btnWFB
