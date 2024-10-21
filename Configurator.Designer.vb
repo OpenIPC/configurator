@@ -1539,6 +1539,7 @@ Partial Class Configurator
         cmbSensor.Name = "cmbSensor"
         cmbSensor.Size = New Size(125, 22)
         cmbSensor.TabIndex = 56
+        btnToolTip.SetToolTip(cmbSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot" & vbCrLf)
         ' 
         ' btnResetCam
         ' 
@@ -1683,7 +1684,7 @@ Partial Class Configurator
         btnSensor.Size = New Size(125, 30)
         btnSensor.TabIndex = 43
         btnSensor.Text = "Sensor Bin Update"
-        btnToolTip.SetToolTip(btnSensor, "Transfer the imx415_fpv.bin" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera" & vbCrLf)
+        btnToolTip.SetToolTip(btnSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot")
         btnSensor.UseVisualStyleBackColor = False
         ' 
         ' Label5

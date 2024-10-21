@@ -2534,8 +2534,24 @@ err1:
             MsgBox("File " + extern + " not found!")
             Return
         End If
+        If txtResolution.Text <> "" And cmbSensor.Text <> "Select Sensor" Then
+            Dim majestic = "majestic.yaml"
+            If Not IO.File.Exists(majestic) Then
+                MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                Return
+            End If
+            Dim x As Integer
+            Dim CamfilePath = majestic
+            Dim lines = IO.File.ReadAllLines(CamfilePath)
+            For x = 0 To lines.Count() - 1
+                If lines(x).StartsWith("  sensorConfig: ") Then
+                    lines(x) = txtSensor.Text
+                End If
+            Next
+            IO.File.WriteAllLines(CamfilePath, lines)
+        End If
 
-        If IsValidIP(txtIP.Text) Then
+        If IsValidIP(txtIP.Text) And cmbSensor.Text <> "Select Sensor" Then
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
@@ -2544,7 +2560,7 @@ err1:
                 .Start()
             End With
         Else
-            MsgBox("Please enter a valid IP address")
+            MsgBox("Please enter a valid IP address and select a sensor calibration file to install")
         End If
     End Sub
 
@@ -2725,10 +2741,10 @@ err1:
     End Sub
 
     Private Sub btnOfflinefw_Click(sender As Object, e As EventArgs) Handles btnOfflinefw.Click
-        If IsValidIP(txtIP.Text) Then
+        If IsValidIP(txtIP.Text) And cmbVersion.Text <> "Select OpenIPC Version" Then
             DownloadStart()
         Else
-            MsgBox("Please enter a valid IP address")
+            MsgBox("Please enter a valid IP address and select an OpenIPC version to flash")
         End If
     End Sub
 

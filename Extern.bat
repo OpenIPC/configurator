@@ -123,6 +123,7 @@ if "%1" == "rsmaj" (
 
 if "%1" == "binup" (
 	echo y | pscp -scp -pw %3 %4 root@%2:/etc/sensors/
+	plink -ssh root@%2 -pw %3 yaml-cli -s .isp.sensorConfig /etc/sensors/%4
 )
 
 if "%1" == "koup" (
