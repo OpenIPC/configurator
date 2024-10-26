@@ -1491,7 +1491,6 @@ Partial Class Configurator
         TabPage5.Controls.Add(btnGenerateKeys)
         TabPage5.Controls.Add(btnSendKeys)
         TabPage5.Controls.Add(btnReceiveKeys)
-        TabPage5.Controls.Add(btnUpdate)
         TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
@@ -1505,9 +1504,9 @@ Partial Class Configurator
         cmbVersion.FlatStyle = FlatStyle.Popup
         cmbVersion.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         cmbVersion.FormattingEnabled = True
-        cmbVersion.Location = New Point(76, 240)
+        cmbVersion.Location = New Point(69, 240)
         cmbVersion.Name = "cmbVersion"
-        cmbVersion.Size = New Size(243, 22)
+        cmbVersion.Size = New Size(240, 22)
         cmbVersion.TabIndex = 59
         btnToolTip.SetToolTip(cmbVersion, "Select a version from this menu." & vbCrLf & "Make sure you select the correct " & vbCrLf & "version for your camera.")
         ' 
@@ -1547,7 +1546,7 @@ Partial Class Configurator
         btnResetCam.FlatStyle = FlatStyle.Popup
         btnResetCam.Location = New Point(17, 205)
         btnResetCam.Name = "btnResetCam"
-        btnResetCam.Size = New Size(117, 30)
+        btnResetCam.Size = New Size(125, 30)
         btnResetCam.TabIndex = 55
         btnResetCam.Text = "Reset Camera"
         btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
@@ -1557,37 +1556,39 @@ Partial Class Configurator
         ' 
         btnOfflinefw.BackColor = Color.Gold
         btnOfflinefw.FlatStyle = FlatStyle.Popup
-        btnOfflinefw.Location = New Point(140, 205)
+        btnOfflinefw.Location = New Point(148, 205)
         btnOfflinefw.Name = "btnOfflinefw"
-        btnOfflinefw.Size = New Size(179, 30)
+        btnOfflinefw.Size = New Size(161, 30)
         btnOfflinefw.TabIndex = 54
-        btnOfflinefw.Text = "Offline Update"
-        btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & "2. Press the Offline Update and do not" & vbCrLf & "touch anything until the process is done")
+        btnOfflinefw.Text = "Update Camera"
+        btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & "2. Press the Update Camera and do not" & vbCrLf & "touch anything until the process is done")
         btnOfflinefw.UseVisualStyleBackColor = False
         ' 
         ' btnWFB
         ' 
         btnWFB.BackColor = Color.Gold
         btnWFB.FlatStyle = FlatStyle.Popup
-        btnWFB.Location = New Point(263, 169)
+        btnWFB.Location = New Point(572, 131)
         btnWFB.Name = "btnWFB"
         btnWFB.Size = New Size(57, 30)
         btnWFB.TabIndex = 53
         btnWFB.Text = "WFB-ng"
         btnToolTip.SetToolTip(btnWFB, "Switch to WFB-ng firmware")
         btnWFB.UseVisualStyleBackColor = False
+        btnWFB.Visible = False
         ' 
         ' btnRuby
         ' 
         btnRuby.BackColor = Color.Gold
         btnRuby.FlatStyle = FlatStyle.Popup
-        btnRuby.Location = New Point(263, 133)
+        btnRuby.Location = New Point(572, 95)
         btnRuby.Name = "btnRuby"
         btnRuby.Size = New Size(57, 30)
         btnRuby.TabIndex = 52
         btnRuby.Text = "Ruby"
         btnToolTip.SetToolTip(btnRuby, "Switch to OpenIPC Ruby FPV firmware")
         btnRuby.UseVisualStyleBackColor = False
+        btnRuby.Visible = False
         ' 
         ' Label7
         ' 
@@ -1749,9 +1750,9 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(140, 133)
+        btnGenerateKeys.Location = New Point(148, 131)
         btnGenerateKeys.Name = "btnGenerateKeys"
-        btnGenerateKeys.Size = New Size(117, 30)
+        btnGenerateKeys.Size = New Size(161, 30)
         btnGenerateKeys.TabIndex = 37
         btnGenerateKeys.Text = "Generate keys"
         btnToolTip.SetToolTip(btnGenerateKeys, "Generate gs.key and drone.key" & vbCrLf & "to the Ground Station and" & vbCrLf & "copy gs.key to /etc/")
@@ -1763,7 +1764,7 @@ Partial Class Configurator
         btnSendKeys.FlatStyle = FlatStyle.Popup
         btnSendKeys.Location = New Point(17, 169)
         btnSendKeys.Name = "btnSendKeys"
-        btnSendKeys.Size = New Size(117, 30)
+        btnSendKeys.Size = New Size(125, 30)
         btnSendKeys.TabIndex = 36
         btnSendKeys.Text = "Send drone.key"
         btnToolTip.SetToolTip(btnSendKeys, "Send the encrypted key to the designated IP")
@@ -1773,9 +1774,9 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(140, 169)
+        btnReceiveKeys.Location = New Point(148, 169)
         btnReceiveKeys.Name = "btnReceiveKeys"
-        btnReceiveKeys.Size = New Size(117, 30)
+        btnReceiveKeys.Size = New Size(161, 30)
         btnReceiveKeys.TabIndex = 35
         btnReceiveKeys.Text = "Receive drone.key"
         btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
@@ -1785,13 +1786,14 @@ Partial Class Configurator
         ' 
         btnUpdate.BackColor = Color.Gold
         btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(17, 133)
+        btnUpdate.Location = New Point(357, 436)
         btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(117, 30)
+        btnUpdate.Size = New Size(125, 30)
         btnUpdate.TabIndex = 34
         btnUpdate.Text = "Firmware Update"
         btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers" & vbCrLf & "(Requires internet connection)")
         btnUpdate.UseVisualStyleBackColor = False
+        btnUpdate.Visible = False
         ' 
         ' TabPage6
         ' 
@@ -2572,6 +2574,7 @@ Partial Class Configurator
         Controls.Add(btnSend)
         Controls.Add(btnGet)
         Controls.Add(MenuStrip1)
+        Controls.Add(btnUpdate)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MenuStrip1

@@ -1684,9 +1684,9 @@ err1:
         checkCustomRes.Visible = True
         btnSendKeys.Text = "Send drone.key"
         btnGenerateKeys.Visible = False
-        btnUpdate.Visible = True
-        btnRuby.Visible = True
-        btnWFB.Visible = True
+        btnUpdate.Visible = False
+        btnRuby.Visible = False
+        btnWFB.Visible = False
         btnOfflinefw.Visible = True
         cmbVersion.Visible = True
         Button2.Visible = True
