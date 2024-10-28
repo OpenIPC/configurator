@@ -201,6 +201,7 @@ if "%1" == "msp" (
         echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
+        plink -ssh root@%2 -pw %3 sed -i 's/router=/router=2/' /etc/telemetry.conf
         plink -ssh root@%2 -pw %3 reboot
 )
 

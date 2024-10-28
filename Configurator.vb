@@ -732,6 +732,9 @@ err1:
         ComboBox8.Items.Add("10")
         ComboBox8.Items.Add("11")
         ComboBox8.Items.Add("12")
+        ComboBox8.Items.Add("13")
+        ComboBox8.Items.Add("14")
+        ComboBox8.Items.Add("15")
         ComboBox8.Text = "Select FEC K"
 
         ComboBox9.Items.Clear()
@@ -747,6 +750,9 @@ err1:
         ComboBox9.Items.Add("10")
         ComboBox9.Items.Add("11")
         ComboBox9.Items.Add("12")
+        ComboBox9.Items.Add("13")
+        ComboBox9.Items.Add("14")
+        ComboBox9.Items.Add("15")
         ComboBox9.Text = "Select FEC N"
 
         cmbResolution.Items.Clear()
@@ -930,10 +936,10 @@ err1:
         cmbBaud.Text = "Select Baud Rate"
 
         cmbRouter.Items.Clear()
-        cmbRouter.Items.Add("0")
-        cmbRouter.Items.Add("1")
-        cmbRouter.Items.Add("2")
-        cmbRouter.Text = "Select MAVFWD(0)/MAV-ROUTER(1)/MSPOSD(2)"
+        cmbRouter.Items.Add("MAVFWD")
+        cmbRouter.Items.Add("MAVLINK-ROUTER")
+        cmbRouter.Items.Add("MSPOSD")
+        cmbRouter.Text = "Select Router"
 
         cmbMCSTLM.Items.Clear()
         cmbMCSTLM.Items.Add("0")
@@ -1223,7 +1229,13 @@ err1:
     End Sub
 
     Private Sub cmbRouter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRouter.SelectedIndexChanged
-        txtRouter.Text = "router=" & cmbRouter.SelectedItem.ToString
+        If cmbRouter.Text = "MAVFWD" Then
+            txtRouter.Text = "router=0"
+        ElseIf cmbRouter.Text = "MAVLINK-ROUTER" Then
+            txtRouter.Text = "router=1"
+        ElseIf cmbRouter.Text = "MSPOSD" Then
+            txtRouter.Text = "router=2"
+        End If
     End Sub
 
     Private Sub cmbMCSTLM_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbMCSTLM.SelectedIndexChanged
@@ -1515,7 +1527,8 @@ err1:
         txtPortVRX.Text = ""
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
-        btnResetCam.Visible = False
+        btnResetCam.Visible = True
+        btnResetCam.Text = "Reset NVR"
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1531,6 +1544,7 @@ err1:
         btnRuby.Visible = False
         btnWFB.Visible = False
         btnOfflinefw.Visible = True
+        btnOfflinefw.Text = "Update NVR"
         cmbVersion.Visible = True
         Button2.Visible = False
         Button3.Visible = False
@@ -1673,6 +1687,7 @@ err1:
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
         btnResetCam.Visible = True
+        btnResetCam.Text = "Reset Camera"
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1688,6 +1703,7 @@ err1:
         btnRuby.Visible = False
         btnWFB.Visible = False
         btnOfflinefw.Visible = True
+        btnOfflinefw.Text = "Update Camera"
         cmbVersion.Visible = True
         Button2.Visible = True
         Button3.Visible = True

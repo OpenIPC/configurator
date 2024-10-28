@@ -149,7 +149,6 @@ Partial Class Configurator
         btnGenerateKeys = New Button()
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
-        btnUpdate = New Button()
         TabPage6 = New TabPage()
         Label11 = New Label()
         CheckBox18 = New CheckBox()
@@ -194,6 +193,7 @@ Partial Class Configurator
         btnDOWN = New Button()
         btnUP = New Button()
         PictureBox1 = New PictureBox()
+        btnUpdate = New Button()
         btnSaveReboot = New Button()
         btnRead = New Button()
         Label1 = New Label()
@@ -210,6 +210,7 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
+        GroupBox1 = New GroupBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -219,6 +220,7 @@ Partial Class Configurator
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -1469,9 +1471,7 @@ Partial Class Configurator
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         TabPage5.Controls.Add(cmbVersion)
         TabPage5.Controls.Add(Label10)
-        TabPage5.Controls.Add(ProgressBar1)
         TabPage5.Controls.Add(cmbSensor)
-        TabPage5.Controls.Add(btnResetCam)
         TabPage5.Controls.Add(btnOfflinefw)
         TabPage5.Controls.Add(btnWFB)
         TabPage5.Controls.Add(btnRuby)
@@ -1491,6 +1491,7 @@ Partial Class Configurator
         TabPage5.Controls.Add(btnGenerateKeys)
         TabPage5.Controls.Add(btnSendKeys)
         TabPage5.Controls.Add(btnReceiveKeys)
+        TabPage5.Controls.Add(GroupBox1)
         TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
@@ -1504,7 +1505,7 @@ Partial Class Configurator
         cmbVersion.FlatStyle = FlatStyle.Popup
         cmbVersion.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         cmbVersion.FormattingEnabled = True
-        cmbVersion.Location = New Point(69, 240)
+        cmbVersion.Location = New Point(69, 366)
         cmbVersion.Name = "cmbVersion"
         cmbVersion.Size = New Size(240, 22)
         cmbVersion.TabIndex = 59
@@ -1515,7 +1516,7 @@ Partial Class Configurator
         Label10.AutoSize = True
         Label10.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label10.ForeColor = Color.White
-        Label10.Location = New Point(17, 241)
+        Label10.Location = New Point(17, 367)
         Label10.Name = "Label10"
         Label10.Size = New Size(53, 15)
         Label10.TabIndex = 58
@@ -1523,9 +1524,9 @@ Partial Class Configurator
         ' 
         ' ProgressBar1
         ' 
-        ProgressBar1.Location = New Point(324, 368)
+        ProgressBar1.Location = New Point(326, 35)
         ProgressBar1.Name = "ProgressBar1"
-        ProgressBar1.Size = New Size(305, 20)
+        ProgressBar1.Size = New Size(285, 20)
         ProgressBar1.TabIndex = 57
         ' 
         ' cmbSensor
@@ -1544,9 +1545,10 @@ Partial Class Configurator
         ' 
         btnResetCam.BackColor = Color.Gold
         btnResetCam.FlatStyle = FlatStyle.Popup
-        btnResetCam.Location = New Point(17, 205)
+        btnResetCam.ForeColor = SystemColors.ControlText
+        btnResetCam.Location = New Point(104, 10)
         btnResetCam.Name = "btnResetCam"
-        btnResetCam.Size = New Size(125, 30)
+        btnResetCam.Size = New Size(94, 20)
         btnResetCam.TabIndex = 55
         btnResetCam.Text = "Reset Camera"
         btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
@@ -1556,9 +1558,9 @@ Partial Class Configurator
         ' 
         btnOfflinefw.BackColor = Color.Gold
         btnOfflinefw.FlatStyle = FlatStyle.Popup
-        btnOfflinefw.Location = New Point(148, 205)
+        btnOfflinefw.Location = New Point(210, 341)
         btnOfflinefw.Name = "btnOfflinefw"
-        btnOfflinefw.Size = New Size(161, 30)
+        btnOfflinefw.Size = New Size(99, 20)
         btnOfflinefw.TabIndex = 54
         btnOfflinefw.Text = "Update Camera"
         btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & "2. Press the Update Camera and do not" & vbCrLf & "touch anything until the process is done")
@@ -1740,7 +1742,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(17, 265)
+        Label4.Location = New Point(17, 200)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -1762,7 +1764,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(17, 169)
+        btnSendKeys.Location = New Point(17, 167)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(125, 30)
         btnSendKeys.TabIndex = 36
@@ -1774,26 +1776,13 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(148, 169)
+        btnReceiveKeys.Location = New Point(148, 167)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(161, 30)
         btnReceiveKeys.TabIndex = 35
         btnReceiveKeys.Text = "Receive drone.key"
         btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
         btnReceiveKeys.UseVisualStyleBackColor = False
-        ' 
-        ' btnUpdate
-        ' 
-        btnUpdate.BackColor = Color.Gold
-        btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(357, 436)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(125, 30)
-        btnUpdate.TabIndex = 34
-        btnUpdate.Text = "Firmware Update"
-        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers" & vbCrLf & "(Requires internet connection)")
-        btnUpdate.UseVisualStyleBackColor = False
-        btnUpdate.Visible = False
         ' 
         ' TabPage6
         ' 
@@ -2386,6 +2375,19 @@ Partial Class Configurator
         PictureBox1.TabIndex = 46
         PictureBox1.TabStop = False
         ' 
+        ' btnUpdate
+        ' 
+        btnUpdate.BackColor = Color.Gold
+        btnUpdate.FlatStyle = FlatStyle.Popup
+        btnUpdate.Location = New Point(357, 436)
+        btnUpdate.Name = "btnUpdate"
+        btnUpdate.Size = New Size(125, 30)
+        btnUpdate.TabIndex = 34
+        btnUpdate.Text = "Firmware Update"
+        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers" & vbCrLf & "(Requires internet connection)")
+        btnUpdate.UseVisualStyleBackColor = False
+        btnUpdate.Visible = False
+        ' 
         ' btnSaveReboot
         ' 
         btnSaveReboot.BackColor = Color.Gold
@@ -2551,6 +2553,18 @@ Partial Class Configurator
         version.TabIndex = 48
         version.Text = "v 1.7"
         ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(btnResetCam)
+        GroupBox1.Controls.Add(ProgressBar1)
+        GroupBox1.ForeColor = Color.White
+        GroupBox1.Location = New Point(6, 331)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(622, 63)
+        GroupBox1.TabIndex = 60
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Installation Menu"
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2597,6 +2611,7 @@ Partial Class Configurator
         TabPage6.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(connected, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -2788,5 +2803,6 @@ Partial Class Configurator
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents cmbVersion As ComboBox
     Friend WithEvents Label10 As Label
+    Friend WithEvents GroupBox1 As GroupBox
 
 End Class
