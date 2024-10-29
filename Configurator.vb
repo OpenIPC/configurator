@@ -40,7 +40,7 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text
+                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1545,6 +1545,7 @@ err1:
         btnWFB.Visible = False
         btnOfflinefw.Visible = True
         btnOfflinefw.Text = "Update NVR"
+        txtSOC.Visible = True
         cmbVersion.Visible = True
         Button2.Visible = False
         Button3.Visible = False
@@ -1704,6 +1705,7 @@ err1:
         btnWFB.Visible = False
         btnOfflinefw.Visible = True
         btnOfflinefw.Text = "Update Camera"
+        txtSOC.Visible = True
         cmbVersion.Visible = True
         Button2.Visible = True
         Button3.Visible = True
@@ -1857,6 +1859,7 @@ err1:
         txtResY.Visible = False
         checkCustomRes.Visible = False
         btnSendKeys.Text = "Send gs.key"
+        txtSOC.Visible = False
         btnGenerateKeys.Visible = True
         btnUpdate.Visible = False
         btnRuby.Visible = False

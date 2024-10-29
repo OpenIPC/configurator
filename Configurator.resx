@@ -120,16 +120,6 @@
   <metadata name="btnToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
-  <data name="btnMSP.ToolTip" xml:space="preserve">
-    <value>Upload the latest MSPOSD of OpenIPC
-Upload the fonts for Betaflight to the OpenIPC camera
-
-To enter the VTX menu move: 
-LEFT stick to bottom right and
-RIGHT stick to bottom left
-
-MSPVTX is partially working, do NOT use</value>
-  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Step 1: Select which VRX to use
 Step 2: Enter the VRX IP
@@ -140,6 +130,19 @@ Step 6: Select the option [OpenIPC Camera]
 Step 7: Enter the OpenIPC camera IP
 Step 8: Click [Send drone.key]
 Step 9: Reboot OpenIPC camera</value>
+  </data>
+  <metadata name="btnToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
+  <data name="btnMSP.ToolTip" xml:space="preserve">
+    <value>Upload the latest MSPOSD of OpenIPC
+Upload the fonts for Betaflight to the OpenIPC camera
+
+To enter the VTX menu move: 
+LEFT stick to bottom right and
+RIGHT stick to bottom left
+
+MSPVTX is partially working, do NOT use</value>
   </data>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="PictureBox1.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

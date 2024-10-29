@@ -127,9 +127,7 @@ Partial Class Configurator
         TabPage5 = New TabPage()
         cmbVersion = New ComboBox()
         Label10 = New Label()
-        ProgressBar1 = New ProgressBar()
         cmbSensor = New ComboBox()
-        btnResetCam = New Button()
         btnOfflinefw = New Button()
         btnWFB = New Button()
         btnRuby = New Button()
@@ -149,6 +147,10 @@ Partial Class Configurator
         btnGenerateKeys = New Button()
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
+        GroupBox1 = New GroupBox()
+        txtSOC = New TextBox()
+        btnResetCam = New Button()
+        ProgressBar1 = New ProgressBar()
         TabPage6 = New TabPage()
         Label11 = New Label()
         CheckBox18 = New CheckBox()
@@ -210,17 +212,17 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
-        GroupBox1 = New GroupBox()
+        Label12 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         TabPage3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
+        GroupBox1.SuspendLayout()
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox1.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -1522,13 +1524,6 @@ Partial Class Configurator
         Label10.TabIndex = 58
         Label10.Text = "Version:"
         ' 
-        ' ProgressBar1
-        ' 
-        ProgressBar1.Location = New Point(326, 35)
-        ProgressBar1.Name = "ProgressBar1"
-        ProgressBar1.Size = New Size(285, 20)
-        ProgressBar1.TabIndex = 57
-        ' 
         ' cmbSensor
         ' 
         cmbSensor.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
@@ -1540,19 +1535,6 @@ Partial Class Configurator
         cmbSensor.Size = New Size(125, 22)
         cmbSensor.TabIndex = 56
         btnToolTip.SetToolTip(cmbSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot" & vbCrLf)
-        ' 
-        ' btnResetCam
-        ' 
-        btnResetCam.BackColor = Color.Gold
-        btnResetCam.FlatStyle = FlatStyle.Popup
-        btnResetCam.ForeColor = SystemColors.ControlText
-        btnResetCam.Location = New Point(104, 10)
-        btnResetCam.Name = "btnResetCam"
-        btnResetCam.Size = New Size(94, 20)
-        btnResetCam.TabIndex = 55
-        btnResetCam.Text = "Reset Camera"
-        btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
-        btnResetCam.UseVisualStyleBackColor = False
         ' 
         ' btnOfflinefw
         ' 
@@ -1783,6 +1765,53 @@ Partial Class Configurator
         btnReceiveKeys.Text = "Receive drone.key"
         btnToolTip.SetToolTip(btnReceiveKeys, "Receive drone.key from the designated IP")
         btnReceiveKeys.UseVisualStyleBackColor = False
+        ' 
+        ' GroupBox1
+        ' 
+        GroupBox1.Controls.Add(Label12)
+        GroupBox1.Controls.Add(txtSOC)
+        GroupBox1.Controls.Add(btnResetCam)
+        GroupBox1.Controls.Add(ProgressBar1)
+        GroupBox1.ForeColor = Color.White
+        GroupBox1.Location = New Point(6, 331)
+        GroupBox1.Name = "GroupBox1"
+        GroupBox1.Size = New Size(622, 63)
+        GroupBox1.TabIndex = 60
+        GroupBox1.TabStop = False
+        GroupBox1.Text = "Installation Menu"
+        ' 
+        ' txtSOC
+        ' 
+        txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        txtSOC.BorderStyle = BorderStyle.FixedSingle
+        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtSOC.ForeColor = Color.White
+        txtSOC.Location = New Point(372, 8)
+        txtSOC.Name = "txtSOC"
+        txtSOC.Size = New Size(99, 21)
+        txtSOC.TabIndex = 58
+        txtSOC.Text = "ssc338q"
+        btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC here before you update")
+        ' 
+        ' btnResetCam
+        ' 
+        btnResetCam.BackColor = Color.Gold
+        btnResetCam.FlatStyle = FlatStyle.Popup
+        btnResetCam.ForeColor = SystemColors.ControlText
+        btnResetCam.Location = New Point(104, 10)
+        btnResetCam.Name = "btnResetCam"
+        btnResetCam.Size = New Size(94, 20)
+        btnResetCam.TabIndex = 55
+        btnResetCam.Text = "Reset Camera"
+        btnToolTip.SetToolTip(btnResetCam, "Reset OpenIPC camera settings " & vbCrLf & "to factory defaults")
+        btnResetCam.UseVisualStyleBackColor = False
+        ' 
+        ' ProgressBar1
+        ' 
+        ProgressBar1.Location = New Point(326, 35)
+        ProgressBar1.Name = "ProgressBar1"
+        ProgressBar1.Size = New Size(285, 20)
+        ProgressBar1.TabIndex = 57
         ' 
         ' TabPage6
         ' 
@@ -2553,17 +2582,16 @@ Partial Class Configurator
         version.TabIndex = 48
         version.Text = "v 1.7"
         ' 
-        ' GroupBox1
+        ' Label12
         ' 
-        GroupBox1.Controls.Add(btnResetCam)
-        GroupBox1.Controls.Add(ProgressBar1)
-        GroupBox1.ForeColor = Color.White
-        GroupBox1.Location = New Point(6, 331)
-        GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(622, 63)
-        GroupBox1.TabIndex = 60
-        GroupBox1.TabStop = False
-        GroupBox1.Text = "Installation Menu"
+        Label12.AutoSize = True
+        Label12.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label12.ForeColor = Color.White
+        Label12.Location = New Point(335, 12)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(35, 15)
+        Label12.TabIndex = 59
+        Label12.Text = "SOC:"
         ' 
         ' Configurator
         ' 
@@ -2607,11 +2635,12 @@ Partial Class Configurator
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
         TabPage5.PerformLayout()
+        GroupBox1.ResumeLayout(False)
+        GroupBox1.PerformLayout()
         TabPage6.ResumeLayout(False)
         TabPage6.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(connected, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox1.ResumeLayout(False)
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -2804,5 +2833,7 @@ Partial Class Configurator
     Friend WithEvents cmbVersion As ComboBox
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents txtSOC As TextBox
+    Friend WithEvents Label12 As Label
 
 End Class

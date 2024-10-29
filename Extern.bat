@@ -190,7 +190,7 @@ if "%1" == "offlinefw" (
 	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
         plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz
         plink -ssh root@%2 -pw %3 tar -xvf /tmp/%4.tar -C /tmp
-        plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%4 --rootfs=/tmp/rootfs.squashfs.%4 -n
+        plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n
 )
 
 if "%1" == "msp" (
@@ -201,7 +201,7 @@ if "%1" == "msp" (
         echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
 	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini
         plink -ssh root@%2 -pw %3 chmod +x /usr/bin/msposd
-        plink -ssh root@%2 -pw %3 sed -i 's/router=/router=2/' /etc/telemetry.conf
+        plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=2' /etc/telemetry.conf
         plink -ssh root@%2 -pw %3 reboot
 )
 
