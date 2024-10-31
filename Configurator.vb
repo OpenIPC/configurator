@@ -101,9 +101,9 @@ Public Class Configurator
         End If
     End Sub
 
-    Private Sub btnSend_Click(sender As Object, e As EventArgs) Handles btnSend.Click
+    Private Sub btnSend_Click(sender As Object, e As EventArgs)
         Dim extern = "extern.bat"
-        If Not System.IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -133,136 +133,6 @@ Public Class Configurator
         Exit Function
 err1:
     End Function
-
-    Private Sub txtSaveFreq_Click(sender As Object, e As EventArgs) Handles txtSaveFreq.Click
-        If txtFrequency.Text <> "" Then
-            Dim wfbconf = "wfb.conf"
-            If Not IO.File.Exists(wfbconf) Then
-                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
-            End If
-            Dim x As Integer
-            Dim WFBfilePath = wfbconf
-            Dim lines = IO.File.ReadAllLines(WFBfilePath)
-            For x = 0 To lines.Count() - 1
-                If rBtnRadxaZero3w.Checked Then
-                    Dim wfbng = "wifibroadcast.cfg"
-                    If Not IO.File.Exists(wfbng) Then
-                        MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                        Return
-                    End If
-
-                    Dim wfbngfilePath = wfbng
-                    Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
-                    If WFBlines(1).StartsWith("wifi_channel = ") Then
-                        WFBlines(1) = txtFrequency.Text
-                    End If
-                    If WFBlines(7).StartsWith("peer = 'connect://") Then
-                        WFBlines(7) = txtMCS.Text
-                    End If
-                    If WFBlines(11).StartsWith("peer = 'connect://") Then
-                        WFBlines(11) = txtSTBC.Text
-                    End If
-                    IO.File.WriteAllLines(wfbngfilePath, WFBlines)
-                    If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
-                        lines(x) = txtPower.Text
-                    End If
-                Else
-                    If lines(x).StartsWith("channel=") Then
-                        lines(x) = txtFrequency.Text
-                    End If
-                    If lines(x).StartsWith("driver_txpower_override=") Then
-                        lines(x) = txtPower.Text
-                    End If
-                    If lines(x).StartsWith("frequency=") Then
-                        lines(x) = txtFreq24.Text
-                    End If
-                    If lines(x).StartsWith("txpower=") Then
-                        lines(x) = txtPower24.Text
-                    End If
-                    If rBtnNVR.Checked Then
-                        If lines(x).StartsWith("udp_addr=") Then
-                            lines(x) = txtMCS.Text
-                        End If
-                        If lines(x).StartsWith("udp_port=") Then
-                            lines(x) = txtSTBC.Text
-                        End If
-                    Else
-                        If lines(x).StartsWith("stbc=") Then
-                            lines(x) = txtSTBC.Text
-                        End If
-                        If lines(x).StartsWith("ldpc=") Then
-                            lines(x) = txtLDPC.Text
-                        End If
-                        If lines(x).StartsWith("mcs_index=") Then
-                            lines(x) = txtMCS.Text
-                        End If
-                        If lines(x).StartsWith("fec_k=") Then
-                            lines(x) = txtFECK.Text
-                        End If
-                        If lines(x).StartsWith("fec_n=") Then
-                            lines(x) = txtFECN.Text
-                        End If
-                    End If
-                End If
-            Next
-            IO.File.WriteAllLines(WFBfilePath, lines)
-            MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
-        End If
-    End Sub
-
-    Private Sub txtSaveCam_Click(sender As Object, e As EventArgs) Handles txtSaveCam.Click
-        If txtResolution.Text <> "" Then
-            Dim majestic = "majestic.yaml"
-            If Not IO.File.Exists(majestic) Then
-                MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
-            End If
-            Dim x As Integer
-            Dim CamfilePath = majestic
-            Dim lines = IO.File.ReadAllLines(CamfilePath)
-            For x = 0 To lines.Count() - 1
-                If lines(x).StartsWith("  contrast: ") Then
-                    lines(x) = txtContrast.Text
-                End If
-                If lines(x).StartsWith("  hue: ") Then
-                    lines(x) = txtHue.Text
-                End If
-                If lines(x).StartsWith("  saturation:") Then
-                    lines(x) = txtSaturation.Text
-                End If
-                If lines(x).StartsWith("  luminance: ") Then
-                    lines(x) = txtLuminance.Text
-                End If
-                If lines(x).StartsWith("  bitrate: ") Then
-                    lines(x) = txtBitrate.Text
-                End If
-                If lines(x).StartsWith("  codec: h26") Then
-                    lines(x) = txtEncode.Text
-                End If
-                If lines(x).StartsWith("  size: ") Then
-                    lines(x) = txtResolution.Text
-                End If
-                If lines(x).StartsWith("  fps: ") Then
-                    lines(x) = txtFPS.Text
-                End If
-                If lines(x).StartsWith("  sensorConfig: ") Then
-                    lines(x) = txtSensor.Text
-                End If
-                If lines(x).StartsWith("  exposure: ") Then
-                    lines(x) = txtExposure.Text
-                End If
-                If lines(x).StartsWith("  mirror: ") Then
-                    lines(x) = txtMirror.Text
-                End If
-                If lines(x).StartsWith("  flip: ") Then
-                    lines(x) = txtFlip.Text
-                End If
-            Next
-            IO.File.WriteAllLines(CamfilePath, lines)
-            MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
-        End If
-    End Sub
 
     Private Sub btnRead_Click(sender As Object, e As EventArgs) Handles btnRead.Click
         Dim settingsconf As String = "settings.conf"
@@ -345,7 +215,7 @@ err1:
         txtFECK.Text = ""
         txtFECN.Text = ""
 
-        Threading.Thread.Sleep(3000)
+        Threading.Thread.Sleep(5000)
 
         Dim wfbconf = "wfb.conf"
         If Not System.IO.File.Exists(wfbconf) Then
@@ -1242,94 +1112,6 @@ err1:
         txtMCSTLM.Text = "mcs_index=" & cmbMCSTLM.SelectedItem.ToString
     End Sub
 
-    Private Sub txtSaveTLM_Click(sender As Object, e As EventArgs) Handles txtSaveTLM.Click
-        If txtSerial.Text <> "" Then
-            Dim telemetry = "telemetry.conf"
-            If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
-            End If
-            Dim x As Integer
-            Dim TLMfilePath As String = telemetry
-            Dim lines = IO.File.ReadAllLines(TLMfilePath)
-            For x = 0 To lines.Count() - 1
-                If lines(x).StartsWith("serial=") Then
-                    lines(x) = txtSerial.Text
-                End If
-                If lines(x).StartsWith("baud=") Then
-                    lines(x) = txtBaud.Text
-                End If
-                If lines(x).StartsWith("router=") Then
-                    lines(x) = txtRouter.Text
-                End If
-                If lines(x).StartsWith("mcs_index=") Then
-                    lines(x) = txtMCSTLM.Text
-                End If
-                If lines(x).StartsWith("aggregate=") Then
-                    lines(x) = txtAggregate.Text
-                End If
-                If lines(x).StartsWith("channels=") Then
-                    lines(x) = txtRC_CHANNEL.Text
-                End If
-            Next
-            IO.File.WriteAllLines(TLMfilePath, lines)
-            MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
-        End If
-    End Sub
-
-    Private Sub txtSaveVRX_Click(sender As Object, e As EventArgs) Handles txtSaveVRX.Click
-        If txtResolutionVRX.Text <> "" Then
-            If rBtnRadxaZero3w.Checked Then
-                Dim setdisplay = "screen-mode"
-                If Not IO.File.Exists(setdisplay) Then
-                    MsgBox("File " + setdisplay + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                    Return
-                End If
-                Dim x As Integer
-                Dim setdisplayfilePath = setdisplay
-                Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
-                For x = 0 To setdisplaylines.Count - 1
-                    setdisplaylines(x) = txtResolutionVRX.Text + "@" + txtCodecVRX.Text
-                Next
-                IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
-            Else
-                Dim vdec = "vdec.conf"
-                If Not IO.File.Exists(vdec) Then
-                    MsgBox("File " + vdec + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                    Return
-                End If
-
-                Dim VDECfilePath = vdec
-                Dim lines = IO.File.ReadAllLines(VDECfilePath)
-                For y = 0 To lines.Count - 1
-                    If lines(y).StartsWith("mode=") Then
-                        lines(y) = txtResolutionVRX.Text
-                    End If
-                    If lines(y).StartsWith("codec=") Then
-                        lines(y) = txtCodecVRX.Text
-                    End If
-                    If lines(y).StartsWith("format=") Then
-                        lines(y) = txtFormat.Text
-                    End If
-                    If lines(y).StartsWith("port=") Then
-                        lines(y) = txtPortVRX.Text
-                    End If
-                    If lines(y).StartsWith("mavlink_port=") Then
-                        lines(y) = txtMavlinkVRX.Text
-                    End If
-                    If lines(y).StartsWith("osd=") Then
-                        lines(y) = txtOSD.Text
-                    End If
-                    If lines(y).StartsWith("extra=") Then
-                        lines(y) = txtExtras.Text
-                    End If
-                Next
-                IO.File.WriteAllLines(VDECfilePath, lines)
-            End If
-            MsgBox("Settings saved successfully", MsgBoxStyle.Information, "OpenIPC")
-        End If
-    End Sub
-
     Private Sub cmbResolutionVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolutionVRX.SelectedIndexChanged
         If rBtnRadxaZero3w.Checked Then
             txtResolutionVRX.Text = cmbResolutionVRX.SelectedItem.ToString
@@ -1414,26 +1196,6 @@ err1:
                 Else
                     .StartInfo.Arguments = "keysulgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 End If
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnUpdate_Click_1(sender As Object, e As EventArgs) Handles btnUpdate.Click
-        Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "sysup " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1540,9 +1302,6 @@ err1:
         checkCustomRes.Visible = True
         btnSendKeys.Text = "Send gs.key"
         btnGenerateKeys.Visible = True
-        btnUpdate.Visible = False
-        btnRuby.Visible = False
-        btnWFB.Visible = False
         btnOfflinefw.Visible = True
         btnOfflinefw.Text = "Update NVR"
         txtSOC.Visible = True
@@ -1550,7 +1309,6 @@ err1:
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
-        btnBinBackup.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
         cmbSensor.Visible = False
@@ -1561,14 +1319,11 @@ err1:
         rBtnMode2.Visible = False
         btnReset.Visible = False
         btnAddButtons.Visible = False
-        txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
-        txtSaveCam.Visible = False
-        txtSaveTLM.Visible = False
         ComboBox3.Visible = True
         ComboBox4.Visible = True
         ComboBox5.Visible = False
@@ -1700,9 +1455,6 @@ err1:
         checkCustomRes.Visible = True
         btnSendKeys.Text = "Send drone.key"
         btnGenerateKeys.Visible = False
-        btnUpdate.Visible = False
-        btnRuby.Visible = False
-        btnWFB.Visible = False
         btnOfflinefw.Visible = True
         btnOfflinefw.Text = "Update Camera"
         txtSOC.Visible = True
@@ -1710,26 +1462,21 @@ err1:
         Button2.Visible = True
         Button3.Visible = True
         btnSensor.Visible = True
-        btnBinBackup.Visible = True
         btnDriver.Visible = True
         btnDriverBackup.Visible = True
         cmbSensor.Visible = True
         txtDriver.Visible = True
-        txtSaveVRX.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnReset.Visible = False
         btnAddButtons.Visible = False
-        txtSaveVRX.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
         btnExtra.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
-        txtSaveCam.Visible = False
-        txtSaveTLM.Visible = False
         ComboBox3.Visible = True
         ComboBox4.Visible = True
         ComboBox5.Visible = True
@@ -1861,15 +1608,11 @@ err1:
         btnSendKeys.Text = "Send gs.key"
         txtSOC.Visible = False
         btnGenerateKeys.Visible = True
-        btnUpdate.Visible = False
-        btnRuby.Visible = False
-        btnWFB.Visible = False
         btnOfflinefw.Visible = False
         cmbVersion.Visible = False
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
-        btnBinBackup.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
         cmbSensor.Visible = False
@@ -1880,14 +1623,11 @@ err1:
         rBtnMode2.Visible = True
         btnReset.Visible = True
         btnAddButtons.Visible = True
-        txtSaveVRX.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
-        txtSaveCam.Visible = False
-        txtSaveTLM.Visible = False
         ComboBox3.Visible = False
         ComboBox4.Visible = False
         ComboBox5.Visible = False
@@ -2603,26 +2343,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnBinBackup_Click(sender As Object, e As EventArgs) Handles btnBinBackup.Click
-        Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "bindl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbSensor.Text + ".bin"
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub btnDriverBackup_Click(sender As Object, e As EventArgs) Handles btnDriverBackup.Click
         Dim extern = "extern.bat"
         If Not IO.File.Exists(extern) Then
@@ -2691,26 +2411,6 @@ err1:
         End If
     End Sub
 
-    Private Sub Button4_Click(sender As Object, e As EventArgs) Handles Button4.Click
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "temp " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub cmbAggregate_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbAggregate.SelectedIndexChanged
         txtAggregate.Text = "aggregate=" & cmbAggregate.SelectedItem.ToString
     End Sub
@@ -2719,45 +2419,6 @@ err1:
         txtRC_CHANNEL.Text = "channels=" & cmbRC_Channel.SelectedItem.ToString
     End Sub
 
-    Private Sub btnRuby_Click(sender As Object, e As EventArgs) Handles btnRuby.Click
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "rubyfw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btnWFB_Click(sender As Object, e As EventArgs) Handles btnWFB.Click
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "wfbfw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
 
     Private Sub btnOfflinefw_Click(sender As Object, e As EventArgs) Handles btnOfflinefw.Click
         If IsValidIP(txtIP.Text) And cmbVersion.Text <> "Select OpenIPC Version" Then

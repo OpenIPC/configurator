@@ -26,7 +26,6 @@ Partial Class Configurator
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Configurator))
         btnGet = New Button()
         txtIP = New TextBox()
-        btnSend = New Button()
         txtFrequency = New TextBox()
         txtResolution = New TextBox()
         txtFPS = New TextBox()
@@ -58,7 +57,6 @@ Partial Class Configurator
         ComboBox3 = New ComboBox()
         ComboBox2 = New ComboBox()
         ComboBox1 = New ComboBox()
-        txtSaveFreq = New Button()
         TabPage2 = New TabPage()
         cmbMirror = New ComboBox()
         cmbFlip = New ComboBox()
@@ -75,7 +73,6 @@ Partial Class Configurator
         cmbCodec = New ComboBox()
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
-        txtSaveCam = New Button()
         TabPage3 = New TabPage()
         rBtnRECOFF = New RadioButton()
         rBtnRECON = New RadioButton()
@@ -90,7 +87,6 @@ Partial Class Configurator
         txtAggregate = New TextBox()
         btnUART0OFF = New Button()
         btnUART0 = New Button()
-        txtSaveTLM = New Button()
         cmbMCSTLM = New ComboBox()
         cmbRouter = New ComboBox()
         cmbBaud = New ComboBox()
@@ -114,7 +110,6 @@ Partial Class Configurator
         txtFormat = New TextBox()
         cmbFormat = New ComboBox()
         Label2 = New Label()
-        txtSaveVRX = New Button()
         cmbOSD = New ComboBox()
         cmbCodecVRX = New ComboBox()
         cmbResolutionVRX = New ComboBox()
@@ -129,13 +124,10 @@ Partial Class Configurator
         Label10 = New Label()
         cmbSensor = New ComboBox()
         btnOfflinefw = New Button()
-        btnWFB = New Button()
-        btnRuby = New Button()
         Label7 = New Label()
         Button3 = New Button()
         Button2 = New Button()
         btnDriverBackup = New Button()
-        btnBinBackup = New Button()
         txtDriver = New TextBox()
         btnDriver = New Button()
         btnSensor = New Button()
@@ -148,7 +140,6 @@ Partial Class Configurator
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         GroupBox1 = New GroupBox()
-        Label12 = New Label()
         txtSOC = New TextBox()
         btnResetCam = New Button()
         ProgressBar1 = New ProgressBar()
@@ -196,14 +187,12 @@ Partial Class Configurator
         btnDOWN = New Button()
         btnUP = New Button()
         PictureBox1 = New PictureBox()
-        btnUpdate = New Button()
         btnSaveReboot = New Button()
         btnRead = New Button()
         Label1 = New Label()
         btnToolTip = New ToolTip(components)
         btnReboot = New Button()
         txtPassword = New TextBox()
-        Button4 = New Button()
         connected = New PictureBox()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
@@ -251,21 +240,6 @@ Partial Class Configurator
         txtIP.TabIndex = 1
         txtIP.Text = "192.168.0.1"
         btnToolTip.SetToolTip(txtIP, "Type the OpenIPC Camera IP/NVR/Radxa Zero 3w(WFB-ng)" & vbCrLf & "in a correct format XXX.XXX.XXX.XXX")
-        ' 
-        ' btnSend
-        ' 
-        btnSend.BackColor = Color.Gold
-        btnSend.FlatStyle = FlatStyle.Popup
-        btnSend.Font = New Font("Arial", 8.25F, FontStyle.Bold)
-        btnSend.ForeColor = Color.Black
-        btnSend.Location = New Point(334, 468)
-        btnSend.Name = "btnSend"
-        btnSend.Size = New Size(54, 30)
-        btnSend.TabIndex = 2
-        btnSend.Text = "Upload"
-        btnToolTip.SetToolTip(btnSend, "Send the local files with the new " & vbCrLf & "settings to the OpenIPC camera/VRX")
-        btnSend.UseVisualStyleBackColor = False
-        btnSend.Visible = False
         ' 
         ' txtFrequency
         ' 
@@ -506,7 +480,6 @@ Partial Class Configurator
         TabPage1.Controls.Add(ComboBox3)
         TabPage1.Controls.Add(ComboBox2)
         TabPage1.Controls.Add(ComboBox1)
-        TabPage1.Controls.Add(txtSaveFreq)
         TabPage1.Controls.Add(txtFrequency)
         TabPage1.Controls.Add(txtPower24)
         TabPage1.Controls.Add(txtPower)
@@ -635,20 +608,6 @@ Partial Class Configurator
         ComboBox1.Size = New Size(214, 22)
         ComboBox1.TabIndex = 26
         ' 
-        ' txtSaveFreq
-        ' 
-        txtSaveFreq.BackColor = Color.Gold
-        txtSaveFreq.FlatStyle = FlatStyle.Popup
-        txtSaveFreq.Font = New Font("Arial", 8.25F, FontStyle.Bold)
-        txtSaveFreq.Location = New Point(137, 365)
-        txtSaveFreq.Name = "txtSaveFreq"
-        txtSaveFreq.Size = New Size(58, 23)
-        txtSaveFreq.TabIndex = 25
-        txtSaveFreq.Text = "Save"
-        btnToolTip.SetToolTip(txtSaveFreq, "Save the WFB settings to the" & vbCrLf & "local wfb.conf file")
-        txtSaveFreq.UseVisualStyleBackColor = False
-        txtSaveFreq.Visible = False
-        ' 
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
@@ -667,7 +626,6 @@ Partial Class Configurator
         TabPage2.Controls.Add(cmbCodec)
         TabPage2.Controls.Add(cmbFPS)
         TabPage2.Controls.Add(cmbResolution)
-        TabPage2.Controls.Add(txtSaveCam)
         TabPage2.Controls.Add(txtResolution)
         TabPage2.Controls.Add(txtSensor)
         TabPage2.Controls.Add(txtFPS)
@@ -851,19 +809,6 @@ Partial Class Configurator
         cmbResolution.Size = New Size(214, 22)
         cmbResolution.TabIndex = 35
         ' 
-        ' txtSaveCam
-        ' 
-        txtSaveCam.BackColor = Color.Gold
-        txtSaveCam.FlatStyle = FlatStyle.Popup
-        txtSaveCam.Location = New Point(137, 365)
-        txtSaveCam.Name = "txtSaveCam"
-        txtSaveCam.Size = New Size(58, 23)
-        txtSaveCam.TabIndex = 26
-        txtSaveCam.Text = "Save"
-        btnToolTip.SetToolTip(txtSaveCam, "Save the Majestic settings to the" & vbCrLf & "local file majestic.yaml file" & vbCrLf)
-        txtSaveCam.UseVisualStyleBackColor = False
-        txtSaveCam.Visible = False
-        ' 
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
@@ -880,7 +825,6 @@ Partial Class Configurator
         TabPage3.Controls.Add(txtAggregate)
         TabPage3.Controls.Add(btnUART0OFF)
         TabPage3.Controls.Add(btnUART0)
-        TabPage3.Controls.Add(txtSaveTLM)
         TabPage3.Controls.Add(cmbMCSTLM)
         TabPage3.Controls.Add(cmbRouter)
         TabPage3.Controls.Add(cmbBaud)
@@ -1057,19 +1001,6 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnUART0, "Enable UART0 serial port" & vbCrLf & "Must also be selected to the Serial Selector")
         btnUART0.UseVisualStyleBackColor = False
         ' 
-        ' txtSaveTLM
-        ' 
-        txtSaveTLM.BackColor = Color.Gold
-        txtSaveTLM.FlatStyle = FlatStyle.Popup
-        txtSaveTLM.Location = New Point(137, 365)
-        txtSaveTLM.Name = "txtSaveTLM"
-        txtSaveTLM.Size = New Size(58, 23)
-        txtSaveTLM.TabIndex = 40
-        txtSaveTLM.Text = "Save"
-        btnToolTip.SetToolTip(txtSaveTLM, "Save the Telemetry settings to the" & vbCrLf & "local file telemetry.conf file" & vbCrLf)
-        txtSaveTLM.UseVisualStyleBackColor = False
-        txtSaveTLM.Visible = False
-        ' 
         ' cmbMCSTLM
         ' 
         cmbMCSTLM.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
@@ -1175,7 +1106,6 @@ Partial Class Configurator
         TabPage4.Controls.Add(txtFormat)
         TabPage4.Controls.Add(cmbFormat)
         TabPage4.Controls.Add(Label2)
-        TabPage4.Controls.Add(txtSaveVRX)
         TabPage4.Controls.Add(cmbOSD)
         TabPage4.Controls.Add(cmbCodecVRX)
         TabPage4.Controls.Add(cmbResolutionVRX)
@@ -1358,20 +1288,6 @@ Partial Class Configurator
         Label2.Text = "Be careful what you are changing in the fields below. It could break the VRX."
         Label2.TextAlign = ContentAlignment.TopCenter
         ' 
-        ' txtSaveVRX
-        ' 
-        txtSaveVRX.BackColor = Color.Gold
-        txtSaveVRX.FlatStyle = FlatStyle.Popup
-        txtSaveVRX.ForeColor = Color.Black
-        txtSaveVRX.Location = New Point(137, 365)
-        txtSaveVRX.Name = "txtSaveVRX"
-        txtSaveVRX.Size = New Size(58, 23)
-        txtSaveVRX.TabIndex = 53
-        txtSaveVRX.Text = "Save"
-        btnToolTip.SetToolTip(txtSaveVRX, "Save the VRX settings" & vbCrLf & "to the local files setdisplay.sh" & vbCrLf & "and vdec.conf")
-        txtSaveVRX.UseVisualStyleBackColor = False
-        txtSaveVRX.Visible = False
-        ' 
         ' cmbOSD
         ' 
         cmbOSD.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
@@ -1475,13 +1391,10 @@ Partial Class Configurator
         TabPage5.Controls.Add(Label10)
         TabPage5.Controls.Add(cmbSensor)
         TabPage5.Controls.Add(btnOfflinefw)
-        TabPage5.Controls.Add(btnWFB)
-        TabPage5.Controls.Add(btnRuby)
         TabPage5.Controls.Add(Label7)
         TabPage5.Controls.Add(Button3)
         TabPage5.Controls.Add(Button2)
         TabPage5.Controls.Add(btnDriverBackup)
-        TabPage5.Controls.Add(btnBinBackup)
         TabPage5.Controls.Add(txtDriver)
         TabPage5.Controls.Add(btnDriver)
         TabPage5.Controls.Add(btnSensor)
@@ -1548,32 +1461,6 @@ Partial Class Configurator
         btnToolTip.SetToolTip(btnOfflinefw, "1. Select the version you wish to flash." & vbCrLf & "Make sure you select the correct one." & vbCrLf & "2. Press the Update Camera and do not" & vbCrLf & "touch anything until the process is done")
         btnOfflinefw.UseVisualStyleBackColor = False
         ' 
-        ' btnWFB
-        ' 
-        btnWFB.BackColor = Color.Gold
-        btnWFB.FlatStyle = FlatStyle.Popup
-        btnWFB.Location = New Point(572, 131)
-        btnWFB.Name = "btnWFB"
-        btnWFB.Size = New Size(57, 30)
-        btnWFB.TabIndex = 53
-        btnWFB.Text = "WFB-ng"
-        btnToolTip.SetToolTip(btnWFB, "Switch to WFB-ng firmware")
-        btnWFB.UseVisualStyleBackColor = False
-        btnWFB.Visible = False
-        ' 
-        ' btnRuby
-        ' 
-        btnRuby.BackColor = Color.Gold
-        btnRuby.FlatStyle = FlatStyle.Popup
-        btnRuby.Location = New Point(572, 95)
-        btnRuby.Name = "btnRuby"
-        btnRuby.Size = New Size(57, 30)
-        btnRuby.TabIndex = 52
-        btnRuby.Text = "Ruby"
-        btnToolTip.SetToolTip(btnRuby, "Switch to OpenIPC Ruby FPV firmware")
-        btnRuby.UseVisualStyleBackColor = False
-        btnRuby.Visible = False
-        ' 
         ' Label7
         ' 
         Label7.AutoSize = True
@@ -1621,18 +1508,7 @@ Partial Class Configurator
         btnDriverBackup.Text = "Sensor Driver Backup"
         btnToolTip.SetToolTip(btnDriverBackup, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the the Sigmastar OpenIPC camera" & vbCrLf & "to the backup folder in the location " & vbCrLf & "of the OpenIPC Configurator.exe file" & vbCrLf)
         btnDriverBackup.UseVisualStyleBackColor = False
-        ' 
-        ' btnBinBackup
-        ' 
-        btnBinBackup.BackColor = Color.Gold
-        btnBinBackup.FlatStyle = FlatStyle.Popup
-        btnBinBackup.Location = New Point(17, 36)
-        btnBinBackup.Name = "btnBinBackup"
-        btnBinBackup.Size = New Size(125, 30)
-        btnBinBackup.TabIndex = 47
-        btnBinBackup.Text = "Sensor Bin Backup"
-        btnToolTip.SetToolTip(btnBinBackup, "Transfer the imx415_fpv.bin" & vbCrLf & "from the the Sigmastar OpenIPC camera" & vbCrLf & "to the backup folder in the location " & vbCrLf & "of the OpenIPC Configurator.exe file" & vbCrLf)
-        btnBinBackup.UseVisualStyleBackColor = False
+        btnDriverBackup.Visible = False
         ' 
         ' txtDriver
         ' 
@@ -1646,6 +1522,7 @@ Partial Class Configurator
         txtDriver.TabIndex = 46
         txtDriver.Text = "sensor_imx415_mipi.ko"
         btnToolTip.SetToolTip(txtDriver, "Type the subnet to scan" & vbCrLf & "in a correct format XXX.XXX.XXX." & vbCrLf & "eg. 192.168.0.")
+        txtDriver.Visible = False
         ' 
         ' btnDriver
         ' 
@@ -1659,6 +1536,7 @@ Partial Class Configurator
         btnDriver.Text = "Sensor Driver Update"
         btnToolTip.SetToolTip(btnDriver, "Transfer the sensor_imx415_mipi.ko" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe file" & vbCrLf & "to the Sigmastar OpenIPC camera")
         btnDriver.UseVisualStyleBackColor = False
+        btnDriver.Visible = False
         ' 
         ' btnSensor
         ' 
@@ -1768,7 +1646,6 @@ Partial Class Configurator
         ' 
         ' GroupBox1
         ' 
-        GroupBox1.Controls.Add(Label12)
         GroupBox1.Controls.Add(txtSOC)
         GroupBox1.Controls.Add(btnResetCam)
         GroupBox1.Controls.Add(ProgressBar1)
@@ -1780,27 +1657,16 @@ Partial Class Configurator
         GroupBox1.TabStop = False
         GroupBox1.Text = "Installation Menu"
         ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label12.ForeColor = Color.White
-        Label12.Location = New Point(335, 12)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(35, 15)
-        Label12.TabIndex = 59
-        Label12.Text = "SOC:"
-        ' 
         ' txtSOC
         ' 
         txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         txtSOC.BorderStyle = BorderStyle.FixedSingle
         txtSOC.Enabled = False
-        txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
+        txtSOC.Font = New Font("Arial", 5F, FontStyle.Bold)
         txtSOC.ForeColor = Color.White
-        txtSOC.Location = New Point(372, 8)
+        txtSOC.Location = New Point(207, 12)
         txtSOC.Name = "txtSOC"
-        txtSOC.Size = New Size(99, 21)
+        txtSOC.Size = New Size(90, 15)
         txtSOC.TabIndex = 58
         txtSOC.Text = "ssc338q"
         btnToolTip.SetToolTip(txtSOC, "Type the OpenIPC Camera SOC here before you update")
@@ -2416,19 +2282,6 @@ Partial Class Configurator
         PictureBox1.TabIndex = 46
         PictureBox1.TabStop = False
         ' 
-        ' btnUpdate
-        ' 
-        btnUpdate.BackColor = Color.Gold
-        btnUpdate.FlatStyle = FlatStyle.Popup
-        btnUpdate.Location = New Point(357, 436)
-        btnUpdate.Name = "btnUpdate"
-        btnUpdate.Size = New Size(125, 30)
-        btnUpdate.TabIndex = 34
-        btnUpdate.Text = "Firmware Update"
-        btnToolTip.SetToolTip(btnUpdate, "Update the firmware" & vbCrLf & "from the OpenIPC servers" & vbCrLf & "(Requires internet connection)")
-        btnUpdate.UseVisualStyleBackColor = False
-        btnUpdate.Visible = False
-        ' 
         ' btnSaveReboot
         ' 
         btnSaveReboot.BackColor = Color.Gold
@@ -2495,21 +2348,6 @@ Partial Class Configurator
         txtPassword.TabIndex = 31
         txtPassword.Text = "12345"
         btnToolTip.SetToolTip(txtPassword, "Type the OpenIPC Camera/NVR/Radxa Zero 3w(WFB-ng)" & vbCrLf & " Password")
-        ' 
-        ' Button4
-        ' 
-        Button4.BackColor = Color.Gold
-        Button4.FlatStyle = FlatStyle.Popup
-        Button4.Font = New Font("Arial", 8.25F, FontStyle.Bold)
-        Button4.ForeColor = Color.Black
-        Button4.Location = New Point(394, 468)
-        Button4.Name = "Button4"
-        Button4.Size = New Size(88, 30)
-        Button4.TabIndex = 33
-        Button4.Text = "Temperature"
-        btnToolTip.SetToolTip(Button4, "Check the Camera's temperature")
-        Button4.UseVisualStyleBackColor = False
-        Button4.Visible = False
         ' 
         ' connected
         ' 
@@ -2603,7 +2441,6 @@ Partial Class Configurator
         Controls.Add(version)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
-        Controls.Add(Button4)
         Controls.Add(txtPassword)
         Controls.Add(txtIP)
         Controls.Add(Label3)
@@ -2614,10 +2451,8 @@ Partial Class Configurator
         Controls.Add(Label1)
         Controls.Add(btnRead)
         Controls.Add(TabControl1)
-        Controls.Add(btnSend)
         Controls.Add(btnGet)
         Controls.Add(MenuStrip1)
-        Controls.Add(btnUpdate)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
         MainMenuStrip = MenuStrip1
@@ -2648,7 +2483,6 @@ Partial Class Configurator
 
     Friend WithEvents btnGet As Button
     Friend WithEvents txtIP As TextBox
-    Friend WithEvents btnSend As Button
     Friend WithEvents txtFrequency As TextBox
     Friend WithEvents txtResolution As TextBox
     Friend WithEvents txtFPS As TextBox
@@ -2671,8 +2505,6 @@ Partial Class Configurator
     Friend WithEvents TabControl1 As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents TabPage2 As TabPage
-    Friend WithEvents txtSaveFreq As Button
-    Friend WithEvents txtSaveCam As Button
     Friend WithEvents btnRead As Button
     Friend WithEvents ComboBox1 As ComboBox
     Friend WithEvents ComboBox2 As ComboBox
@@ -2704,7 +2536,6 @@ Partial Class Configurator
     Friend WithEvents txtRouter As TextBox
     Friend WithEvents txtBaud As TextBox
     Friend WithEvents txtSerial As TextBox
-    Friend WithEvents txtSaveTLM As Button
     Friend WithEvents btnUART0OFF As Button
     Friend WithEvents btnUART0 As Button
     Friend WithEvents TabPage4 As TabPage
@@ -2712,8 +2543,6 @@ Partial Class Configurator
     Friend WithEvents btnGenerateKeys As Button
     Friend WithEvents btnSendKeys As Button
     Friend WithEvents btnReceiveKeys As Button
-    Friend WithEvents btnUpdate As Button
-    Friend WithEvents txtSaveVRX As Button
     Friend WithEvents cmbOSD As ComboBox
     Friend WithEvents cmbCodecVRX As ComboBox
     Friend WithEvents cmbResolutionVRX As ComboBox
@@ -2787,7 +2616,6 @@ Partial Class Configurator
     Friend WithEvents btnSensor As Button
     Friend WithEvents txtDriver As TextBox
     Friend WithEvents btnDriverBackup As Button
-    Friend WithEvents btnBinBackup As Button
     Friend WithEvents Label6 As Label
     Friend WithEvents Button2 As Button
     Friend WithEvents Button3 As Button
@@ -2797,13 +2625,10 @@ Partial Class Configurator
     Friend WithEvents txtResY As TextBox
     Friend WithEvents Label9 As Label
     Friend WithEvents Label8 As Label
-    Friend WithEvents Button4 As Button
     Friend WithEvents cmbAggregate As ComboBox
     Friend WithEvents txtAggregate As TextBox
     Friend WithEvents cmbRC_Channel As ComboBox
     Friend WithEvents txtRC_CHANNEL As TextBox
-    Friend WithEvents btnRuby As Button
-    Friend WithEvents btnWFB As Button
     Friend WithEvents btnOfflinefw As Button
     Friend WithEvents Label11 As Label
     Friend WithEvents btnSaveReboot As Button
@@ -2835,6 +2660,5 @@ Partial Class Configurator
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtSOC As TextBox
-    Friend WithEvents Label12 As Label
 
 End Class
