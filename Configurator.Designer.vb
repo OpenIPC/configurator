@@ -148,6 +148,7 @@ Partial Class Configurator
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         GroupBox1 = New GroupBox()
+        Label12 = New Label()
         txtSOC = New TextBox()
         btnResetCam = New Button()
         ProgressBar1 = New ProgressBar()
@@ -212,7 +213,6 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
-        Label12 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1780,10 +1780,22 @@ Partial Class Configurator
         GroupBox1.TabStop = False
         GroupBox1.Text = "Installation Menu"
         ' 
+        ' Label12
+        ' 
+        Label12.AutoSize = True
+        Label12.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label12.ForeColor = Color.White
+        Label12.Location = New Point(335, 12)
+        Label12.Name = "Label12"
+        Label12.Size = New Size(35, 15)
+        Label12.TabIndex = 59
+        Label12.Text = "SOC:"
+        ' 
         ' txtSOC
         ' 
         txtSOC.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         txtSOC.BorderStyle = BorderStyle.FixedSingle
+        txtSOC.Enabled = False
         txtSOC.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtSOC.ForeColor = Color.White
         txtSOC.Location = New Point(372, 8)
@@ -2581,17 +2593,6 @@ Partial Class Configurator
         version.Size = New Size(22, 10)
         version.TabIndex = 48
         version.Text = "v 1.7"
-        ' 
-        ' Label12
-        ' 
-        Label12.AutoSize = True
-        Label12.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label12.ForeColor = Color.White
-        Label12.Location = New Point(335, 12)
-        Label12.Name = "Label12"
-        Label12.Size = New Size(35, 15)
-        Label12.TabIndex = 59
-        Label12.Text = "SOC:"
         ' 
         ' Configurator
         ' 

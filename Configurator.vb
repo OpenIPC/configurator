@@ -3271,5 +3271,33 @@ err1:
         End If
     End Sub
 
+    Private Sub cmbVersion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbVersion.SelectedIndexChanged
+        If cmbVersion.SelectedItem.ToString.Contains("ssc338q") Then
+            txtSOC.Text = "ssc338q"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("ssc30kq") Then
+            txtSOC.Text = "ssc30kq"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("hi3536dv100") Then
+            txtSOC.Text = "hi3536dv100"
+            btnOfflinefw.Text = "Update NVR"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("gk7205v200") Then
+            txtSOC.Text = "gk7205v200"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("gk7205v210") Then
+            txtSOC.Text = "gk7205v210"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("gk7205v300") Then
+            txtSOC.Text = "gk7205v300"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("hi3516ev300") Then
+            txtSOC.Text = "hi3516ev300"
+            btnOfflinefw.Text = "Update Camera"
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("hi3516ev200") Then
+            txtSOC.Text = "hi3516ev200"
+            btnOfflinefw.Text = "Update Camera"
+        End If
+    End Sub
+
 #End Region
 End Class
