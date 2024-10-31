@@ -70,10 +70,6 @@ if "%1" == "rb" (
 	plink -ssh root@%2 -pw %3 reboot
 )
 
-if "%1" == "sysup" (
-	plink -ssh root@%2 -pw %3 sysupgrade -k -r -n --force_ver
-)
-
 if "%1" == "keysdlgs" (
 	echo y | pscp -scp -pw %3 root@%2:/root/drone.key .
 )
@@ -170,20 +166,6 @@ if "%1" == "shdl" (
 	echo y | pscp -scp -pw %3 root@%2:/root/1304p80.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/1416p70.sh .
 	echo y | pscp -scp -pw %3 root@%2:/root/kill.sh .
-)
-
-if "%1" == "temp" (
-	plink -ssh root@%2 -pw %3 cat /sys/devices/virtual/mstar/msys/TEMP_R
-)
-
-if "%1" == "rubyfw" (
-	plink -ssh root@%2 -pw %3 sed -i 's/BUILD_OPTION=fpv/BUILD_OPTION=rubyfpv/' /etc/os-release
-	plink -ssh root@%2 -pw %3 fw_setenv upgrade https://github.com/OpenIPC/firmware/releases/download/latest/openipc.ssc338q-nor-rubyfpv.tgz
-)
-
-if "%1" == "wfbfw" (
-	plink -ssh root@%2 -pw %3 sed -i 's/BUILD_OPTION=rubyfpv/BUILD_OPTION=fpv/' /etc/os-release
-	plink -ssh root@%2 -pw %3 fw_setenv upgrade https://github.com/OpenIPC/firmware/releases/download/latest/ssc338q_fpv_openipc-urllc-aio-nor.tgz
 )
 
 if "%1" == "offlinefw" (
