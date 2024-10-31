@@ -5,10 +5,11 @@ This guide provides step-by-step instructions to install and configure msposd on
 ## Prerequisites
 
 - Access to the device's file system and terminal.
-- The following files from the root of this repository:
+- The following file from the root of this repository:
   - msposd
   - font.png
   - font_hd.png
+  - vtxmenu.ini
 
 ## Installation Steps
 
@@ -17,6 +18,12 @@ This guide provides step-by-step instructions to install and configure msposd on
 Copy the following files from the root of this repository to the `/usr/bin/` directory on your device:
 
 - msposd
+
+Copy the following files from the root of this repository to the `/etc/` directory on your device:
+
+- vtxmenu.ini
+
+Copy the following files from the BF or INAV folders of this repository to the `/usr/share/fonts/` directory on your device:
 - font.png
 - font_hd.png
 
@@ -24,18 +31,12 @@ Copy the following files from the root of this repository to the `/usr/bin/` dir
 
 Execute the following commands on your device:
 
-#### Update the S98datalink Service
 
-    sed -i '/echo "Starting wifibroadcast service..."/c\msposd --master /dev/ttyS2 --baudrate 115200 --channels 8 --out 127.0.0.1:14555 -osd -r 20 --ahi 0 --wait 5 --persist 50 -v &' /etc/init.d/S98datalink
-    sed -i '/killall -q mavfwd/c\killall -q msposd' /etc/init.d/S98datalink
+#### Change the router type
 
-#### Disable Default Telemetry
+    vi /etc/telemetry.conf
 
-    sed -i '/telemetry=true/c\telemetry=false' /etc/datalink.conf
-
-#### Terminate Any Running Instances of msposd
-
-    killall -q msposd
+In the file change the router from whatever it is to router=2
 
 #### Set Execution Permissions
 
