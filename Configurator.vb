@@ -215,7 +215,7 @@ err1:
         txtFECK.Text = ""
         txtFECN.Text = ""
 
-        Threading.Thread.Sleep(5000)
+        Threading.Thread.Sleep(3000)
 
         Dim wfbconf = "wfb.conf"
         If Not System.IO.File.Exists(wfbconf) Then
