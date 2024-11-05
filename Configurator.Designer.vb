@@ -202,6 +202,7 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
+        btnMSPExtra = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -812,6 +813,7 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(btnMSPExtra)
         TabPage3.Controls.Add(rBtnRECOFF)
         TabPage3.Controls.Add(rBtnRECON)
         TabPage3.Controls.Add(btnOnboardREC)
@@ -846,7 +848,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 192)
+        rBtnRECOFF.Location = New Point(547, 220)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -859,7 +861,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 177)
+        rBtnRECON.Location = New Point(547, 205)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -872,7 +874,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 179)
+        btnOnboardREC.Location = New Point(454, 207)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -885,7 +887,7 @@ Partial Class Configurator
         btnDualOSD.BackColor = Color.Gold
         btnDualOSD.FlatStyle = FlatStyle.Popup
         btnDualOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDualOSD.Location = New Point(454, 216)
+        btnDualOSD.Location = New Point(454, 244)
         btnDualOSD.Name = "btnDualOSD"
         btnDualOSD.Size = New Size(116, 30)
         btnDualOSD.TabIndex = 62
@@ -2432,6 +2434,19 @@ Partial Class Configurator
         version.TabIndex = 48
         version.Text = "v 1.7"
         ' 
+        ' btnMSPExtra
+        ' 
+        btnMSPExtra.BackColor = Color.Gold
+        btnMSPExtra.FlatStyle = FlatStyle.Popup
+        btnMSPExtra.Font = New Font("Arial", 7F, FontStyle.Bold)
+        btnMSPExtra.Location = New Point(454, 179)
+        btnMSPExtra.Name = "btnMSPExtra"
+        btnMSPExtra.Size = New Size(116, 22)
+        btnMSPExtra.TabIndex = 66
+        btnMSPExtra.Text = "Add MSPOSD EXTRA"
+        btnToolTip.SetToolTip(btnMSPExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
+        btnMSPExtra.UseVisualStyleBackColor = False
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2660,5 +2675,6 @@ Partial Class Configurator
     Friend WithEvents Label10 As Label
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtSOC As TextBox
+    Friend WithEvents btnMSPExtra As Button
 
 End Class

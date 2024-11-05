@@ -107,6 +107,11 @@ if "%1" == "extra" (
 	plink -ssh root@%2 -pw %3 reboot
 )
 
+if "%1" == "mspextra" (
+	plink -ssh root@%2 -pw %3 sed -i 's/echo \"Starting wifibroadcast service...\"/echo \"\&L70 \&F35 CPU:\&C \&B Temp:\&T\" ">"\/tmp\/MSPOSD.msg "\&"/' /etc/init.d/S98datalink
+	plink -ssh root@%2 -pw %3 reboot	
+)
+
 if "%1" == "rswfb" (
 	plink -ssh root@%2 -pw %3 wifibroadcast stop
 	plink -ssh root@%2 -pw %3 sleep 3

@@ -1322,6 +1322,7 @@ err1:
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
+        btnMSPExtra.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
         ComboBox3.Visible = True
@@ -1475,6 +1476,7 @@ err1:
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
         btnExtra.Visible = True
+        btnMSPExtra.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         ComboBox3.Visible = True
@@ -1626,6 +1628,7 @@ err1:
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
+        btnMSPExtra.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
         ComboBox3.Visible = False
@@ -2957,6 +2960,26 @@ err1:
         ElseIf cmbVersion.SelectedItem.ToString.Contains("hi3516ev200") Then
             txtSOC.Text = "hi3516ev200"
             btnOfflinefw.Text = "Update Camera"
+        End If
+    End Sub
+
+    Private Sub btnMSPExtra_Click(sender As Object, e As EventArgs) Handles btnMSPExtra.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "mspextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 
