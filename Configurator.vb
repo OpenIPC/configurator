@@ -1463,10 +1463,10 @@ err1:
         Button2.Visible = True
         Button3.Visible = True
         btnSensor.Visible = True
-        btnDriver.Visible = True
-        btnDriverBackup.Visible = True
+        btnDriver.Visible = False
+        btnDriverBackup.Visible = False
         cmbSensor.Visible = True
-        txtDriver.Visible = True
+        txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         rBtnMode1.Visible = False
@@ -2321,6 +2321,35 @@ err1:
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
+            btnSaveReboot.Enabled = False
+            btnReboot.Enabled = False
+            txtResolution.Text = ""
+            txtFPS.Text = ""
+            txtEncode.Text = ""
+            txtBitrate.Text = ""
+            txtExposure.Text = ""
+            txtContrast.Text = ""
+            txtSaturation.Text = ""
+            txtHue.Text = ""
+            txtLuminance.Text = ""
+            txtFlip.Text = ""
+            txtMirror.Text = ""
+            txtSensor.Text = ""
+            txtSerial.Text = ""
+            txtBaud.Text = ""
+            txtRouter.Text = ""
+            txtMCSTLM.Text = ""
+            txtAggregate.Text = ""
+            txtRC_CHANNEL.Text = ""
+            txtFrequency.Text = ""
+            txtPower.Text = ""
+            txtFreq24.Text = ""
+            txtPower24.Text = ""
+            txtMCS.Text = ""
+            txtSTBC.Text = ""
+            txtLDPC.Text = ""
+            txtFECK.Text = ""
+            txtFECN.Text = ""
         Else
             MsgBox("Please enter a valid IP address and select a sensor calibration file to install")
         End If

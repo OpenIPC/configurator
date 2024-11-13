@@ -74,6 +74,7 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         TabPage3 = New TabPage()
+        btnMSPExtra = New Button()
         rBtnRECOFF = New RadioButton()
         rBtnRECON = New RadioButton()
         btnOnboardREC = New Button()
@@ -202,7 +203,6 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
-        btnMSPExtra = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -842,6 +842,19 @@ Partial Class Configurator
         TabPage3.Size = New Size(635, 394)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
+        ' 
+        ' btnMSPExtra
+        ' 
+        btnMSPExtra.BackColor = Color.Gold
+        btnMSPExtra.FlatStyle = FlatStyle.Popup
+        btnMSPExtra.Font = New Font("Arial", 7F, FontStyle.Bold)
+        btnMSPExtra.Location = New Point(454, 179)
+        btnMSPExtra.Name = "btnMSPExtra"
+        btnMSPExtra.Size = New Size(116, 22)
+        btnMSPExtra.TabIndex = 66
+        btnMSPExtra.Text = "Add MSPOSD EXTRA"
+        btnToolTip.SetToolTip(btnMSPExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
+        btnMSPExtra.UseVisualStyleBackColor = False
         ' 
         ' rBtnRECOFF
         ' 
@@ -1549,7 +1562,7 @@ Partial Class Configurator
         btnSensor.Size = New Size(125, 30)
         btnSensor.TabIndex = 43
         btnSensor.Text = "Sensor Bin Update"
-        btnToolTip.SetToolTip(btnSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot")
+        btnToolTip.SetToolTip(btnSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update")
         btnSensor.UseVisualStyleBackColor = False
         ' 
         ' Label5
@@ -2433,19 +2446,6 @@ Partial Class Configurator
         version.Size = New Size(22, 10)
         version.TabIndex = 48
         version.Text = "v 1.7"
-        ' 
-        ' btnMSPExtra
-        ' 
-        btnMSPExtra.BackColor = Color.Gold
-        btnMSPExtra.FlatStyle = FlatStyle.Popup
-        btnMSPExtra.Font = New Font("Arial", 7F, FontStyle.Bold)
-        btnMSPExtra.Location = New Point(454, 179)
-        btnMSPExtra.Name = "btnMSPExtra"
-        btnMSPExtra.Size = New Size(116, 22)
-        btnMSPExtra.TabIndex = 66
-        btnMSPExtra.Text = "Add MSPOSD EXTRA"
-        btnToolTip.SetToolTip(btnMSPExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
-        btnMSPExtra.UseVisualStyleBackColor = False
         ' 
         ' Configurator
         ' 
