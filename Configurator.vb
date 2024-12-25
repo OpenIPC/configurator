@@ -1526,6 +1526,7 @@ err1:
         txtExtras.Visible = True
         btnMSP.Visible = True
         btnFontsINAV.Visible = False
+
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
