@@ -47,6 +47,8 @@ Partial Class Configurator
         txtPower24 = New TextBox()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        cmbBandwidth = New ComboBox()
+        txtBandwidth = New TextBox()
         btnRestartWFB = New Button()
         ComboBox9 = New ComboBox()
         ComboBox8 = New ComboBox()
@@ -203,6 +205,7 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
+        btn40MHz = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -389,7 +392,7 @@ Partial Class Configurator
         txtMCS.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtMCS.BorderStyle = BorderStyle.FixedSingle
         txtMCS.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        txtMCS.Location = New Point(248, 136)
+        txtMCS.Location = New Point(248, 162)
         txtMCS.Name = "txtMCS"
         txtMCS.ReadOnly = True
         txtMCS.Size = New Size(325, 20)
@@ -400,7 +403,7 @@ Partial Class Configurator
         txtLDPC.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtLDPC.BorderStyle = BorderStyle.FixedSingle
         txtLDPC.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        txtLDPC.Location = New Point(248, 194)
+        txtLDPC.Location = New Point(248, 220)
         txtLDPC.Name = "txtLDPC"
         txtLDPC.ReadOnly = True
         txtLDPC.Size = New Size(325, 20)
@@ -411,7 +414,7 @@ Partial Class Configurator
         txtSTBC.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtSTBC.BorderStyle = BorderStyle.FixedSingle
         txtSTBC.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        txtSTBC.Location = New Point(248, 165)
+        txtSTBC.Location = New Point(248, 191)
         txtSTBC.Name = "txtSTBC"
         txtSTBC.ReadOnly = True
         txtSTBC.Size = New Size(325, 20)
@@ -422,7 +425,7 @@ Partial Class Configurator
         txtFECN.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtFECN.BorderStyle = BorderStyle.FixedSingle
         txtFECN.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        txtFECN.Location = New Point(248, 252)
+        txtFECN.Location = New Point(248, 278)
         txtFECN.Name = "txtFECN"
         txtFECN.ReadOnly = True
         txtFECN.Size = New Size(325, 20)
@@ -433,7 +436,7 @@ Partial Class Configurator
         txtFECK.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtFECK.BorderStyle = BorderStyle.FixedSingle
         txtFECK.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        txtFECK.Location = New Point(248, 223)
+        txtFECK.Location = New Point(248, 249)
         txtFECK.Name = "txtFECK"
         txtFECK.ReadOnly = True
         txtFECK.Size = New Size(325, 20)
@@ -471,6 +474,8 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage1.Controls.Add(cmbBandwidth)
+        TabPage1.Controls.Add(txtBandwidth)
         TabPage1.Controls.Add(btnRestartWFB)
         TabPage1.Controls.Add(ComboBox9)
         TabPage1.Controls.Add(ComboBox8)
@@ -497,6 +502,28 @@ Partial Class Configurator
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
+        ' cmbBandwidth
+        ' 
+        cmbBandwidth.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbBandwidth.FlatStyle = FlatStyle.Popup
+        cmbBandwidth.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbBandwidth.FormattingEnabled = True
+        cmbBandwidth.Location = New Point(19, 134)
+        cmbBandwidth.Name = "cmbBandwidth"
+        cmbBandwidth.Size = New Size(214, 22)
+        cmbBandwidth.TabIndex = 47
+        ' 
+        ' txtBandwidth
+        ' 
+        txtBandwidth.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        txtBandwidth.BorderStyle = BorderStyle.FixedSingle
+        txtBandwidth.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        txtBandwidth.Location = New Point(248, 135)
+        txtBandwidth.Name = "txtBandwidth"
+        txtBandwidth.ReadOnly = True
+        txtBandwidth.Size = New Size(325, 20)
+        txtBandwidth.TabIndex = 46
+        ' 
         ' btnRestartWFB
         ' 
         btnRestartWFB.BackColor = Color.Gold
@@ -516,7 +543,7 @@ Partial Class Configurator
         ComboBox9.FlatStyle = FlatStyle.Popup
         ComboBox9.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ComboBox9.FormattingEnabled = True
-        ComboBox9.Location = New Point(19, 252)
+        ComboBox9.Location = New Point(19, 278)
         ComboBox9.Name = "ComboBox9"
         ComboBox9.Size = New Size(214, 22)
         ComboBox9.TabIndex = 34
@@ -527,7 +554,7 @@ Partial Class Configurator
         ComboBox8.FlatStyle = FlatStyle.Popup
         ComboBox8.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ComboBox8.FormattingEnabled = True
-        ComboBox8.Location = New Point(19, 223)
+        ComboBox8.Location = New Point(19, 249)
         ComboBox8.Name = "ComboBox8"
         ComboBox8.Size = New Size(214, 22)
         ComboBox8.TabIndex = 33
@@ -538,7 +565,7 @@ Partial Class Configurator
         ComboBox7.FlatStyle = FlatStyle.Popup
         ComboBox7.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ComboBox7.FormattingEnabled = True
-        ComboBox7.Location = New Point(19, 194)
+        ComboBox7.Location = New Point(19, 220)
         ComboBox7.Name = "ComboBox7"
         ComboBox7.Size = New Size(214, 22)
         ComboBox7.TabIndex = 32
@@ -549,7 +576,7 @@ Partial Class Configurator
         ComboBox6.FlatStyle = FlatStyle.Popup
         ComboBox6.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ComboBox6.FormattingEnabled = True
-        ComboBox6.Location = New Point(19, 165)
+        ComboBox6.Location = New Point(19, 191)
         ComboBox6.Name = "ComboBox6"
         ComboBox6.Size = New Size(214, 22)
         ComboBox6.TabIndex = 31
@@ -560,7 +587,7 @@ Partial Class Configurator
         ComboBox5.FlatStyle = FlatStyle.Popup
         ComboBox5.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         ComboBox5.FormattingEnabled = True
-        ComboBox5.Location = New Point(19, 136)
+        ComboBox5.Location = New Point(19, 162)
         ComboBox5.Name = "ComboBox5"
         ComboBox5.Size = New Size(214, 22)
         ComboBox5.TabIndex = 30
@@ -813,6 +840,7 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(btn40MHz)
         TabPage3.Controls.Add(btnMSPExtra)
         TabPage3.Controls.Add(rBtnRECOFF)
         TabPage3.Controls.Add(rBtnRECON)
@@ -848,20 +876,21 @@ Partial Class Configurator
         btnMSPExtra.BackColor = Color.Gold
         btnMSPExtra.FlatStyle = FlatStyle.Popup
         btnMSPExtra.Font = New Font("Arial", 7F, FontStyle.Bold)
-        btnMSPExtra.Location = New Point(454, 179)
+        btnMSPExtra.Location = New Point(454, 316)
         btnMSPExtra.Name = "btnMSPExtra"
         btnMSPExtra.Size = New Size(116, 22)
         btnMSPExtra.TabIndex = 66
         btnMSPExtra.Text = "Add MSPOSD EXTRA"
         btnToolTip.SetToolTip(btnMSPExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
         btnMSPExtra.UseVisualStyleBackColor = False
+        btnMSPExtra.Visible = False
         ' 
         ' rBtnRECOFF
         ' 
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 220)
+        rBtnRECOFF.Location = New Point(547, 193)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -874,7 +903,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 205)
+        rBtnRECON.Location = New Point(547, 178)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -887,7 +916,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 207)
+        btnOnboardREC.Location = New Point(454, 180)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -914,13 +943,14 @@ Partial Class Configurator
         btnFontsINAV.BackColor = Color.Gold
         btnFontsINAV.FlatStyle = FlatStyle.Popup
         btnFontsINAV.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnFontsINAV.Location = New Point(454, 143)
+        btnFontsINAV.Location = New Point(454, 280)
         btnFontsINAV.Name = "btnFontsINAV"
         btnFontsINAV.Size = New Size(116, 30)
         btnFontsINAV.TabIndex = 59
         btnFontsINAV.Text = "Upload INAV Fonts"
         btnToolTip.SetToolTip(btnFontsINAV, "Upload the fonts for INAV to the OpenIPC camera")
         btnFontsINAV.UseVisualStyleBackColor = False
+        btnFontsINAV.Visible = False
         ' 
         ' btnMSP
         ' 
@@ -931,8 +961,8 @@ Partial Class Configurator
         btnMSP.Name = "btnMSP"
         btnMSP.Size = New Size(116, 30)
         btnMSP.TabIndex = 56
-        btnMSP.Text = "Upload MSPOSD"
-        btnToolTip.SetToolTip(btnMSP, resources.GetString("btnMSP.ToolTip"))
+        btnMSP.Text = "Latest VTXMENU"
+        btnToolTip.SetToolTip(btnMSP, "Upload the latest vtxmenu for the MSPOSD of OpenIPC" & vbCrLf & vbCrLf & "To enter the VTX menu move: " & vbCrLf & "LEFT stick to bottom right and" & vbCrLf & "RIGHT stick to bottom left")
         btnMSP.UseVisualStyleBackColor = False
         ' 
         ' btnExtra
@@ -2447,6 +2477,19 @@ Partial Class Configurator
         version.TabIndex = 48
         version.Text = "v 1.7"
         ' 
+        ' btn40MHz
+        ' 
+        btn40MHz.BackColor = Color.Gold
+        btn40MHz.FlatStyle = FlatStyle.Popup
+        btn40MHz.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btn40MHz.Location = New Point(454, 144)
+        btn40MHz.Name = "btn40MHz"
+        btn40MHz.Size = New Size(116, 30)
+        btn40MHz.TabIndex = 67
+        btn40MHz.Text = "Enable 40MHz"
+        btnToolTip.SetToolTip(btn40MHz, "Upload the modified wifibroadcast file to enable the 40MHz mode")
+        btn40MHz.UseVisualStyleBackColor = False
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2676,5 +2719,8 @@ Partial Class Configurator
     Friend WithEvents GroupBox1 As GroupBox
     Friend WithEvents txtSOC As TextBox
     Friend WithEvents btnMSPExtra As Button
+    Friend WithEvents cmbBandwidth As ComboBox
+    Friend WithEvents txtBandwidth As TextBox
+    Friend WithEvents btn40MHz As Button
 
 End Class

@@ -209,6 +209,7 @@ err1:
         txtPower.Text = ""
         txtFreq24.Text = ""
         txtPower24.Text = ""
+        txtBandwidth.Text = ""
         txtMCS.Text = ""
         txtSTBC.Text = ""
         txtLDPC.Text = ""
@@ -262,6 +263,7 @@ err1:
             txtPower.Text = ReadLine(10, WFBallLines)
             txtFreq24.Text = ReadLine(8, WFBallLines)
             txtPower24.Text = ReadLine(9, WFBallLines)
+            txtBandwidth.Text = ReadLine(11, WFBallLines)
             txtMCS.Text = ReadLine(14, WFBallLines)
             txtSTBC.Text = ReadLine(12, WFBallLines)
             txtLDPC.Text = ReadLine(13, WFBallLines)
@@ -544,6 +546,11 @@ err1:
         ComboBox4.Items.Add("58")
         ComboBox4.Text = "Select 2.4GHz TX Power"
 
+        cmbBandwidth.Items.Clear()
+        cmbBandwidth.Items.Add("20")
+        cmbBandwidth.Items.Add("40")
+        cmbBandwidth.Text = "Select Channel Bandwidth"
+
         ComboBox5.Items.Clear()
         ComboBox5.Items.Add("0")
         ComboBox5.Items.Add("1")
@@ -704,7 +711,17 @@ err1:
         cmbBitrate.Items.Add("17408")
         cmbBitrate.Items.Add("18432")
         cmbBitrate.Items.Add("19456")
-        cmbBitrate.Items.Add("19968")
+        cmbBitrate.Items.Add("20480")
+        cmbBitrate.Items.Add("21504")
+        cmbBitrate.Items.Add("22528")
+        cmbBitrate.Items.Add("23552")
+        cmbBitrate.Items.Add("24576")
+        cmbBitrate.Items.Add("25600")
+        cmbBitrate.Items.Add("26624")
+        cmbBitrate.Items.Add("27648")
+        cmbBitrate.Items.Add("28672")
+        cmbBitrate.Items.Add("29692")
+        cmbBitrate.Items.Add("30720")
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
@@ -910,6 +927,10 @@ err1:
         txtPower24.Text = "txpower=" & ComboBox4.SelectedItem.ToString
     End Sub
 
+    Private Sub cmbBandwidth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBandwidth.SelectedIndexChanged
+        txtBandwidth.Text = "bandwidth=" & cmbBandwidth.SelectedItem.ToString
+    End Sub
+
     Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
         txtMCS.Text = "mcs_index=" & ComboBox5.SelectedItem.ToString
     End Sub
@@ -1080,6 +1101,7 @@ err1:
             txtPower.Text = ""
             txtFreq24.Text = ""
             txtPower24.Text = ""
+            txtBandwidth.Text = ""
             txtMCS.Text = ""
             txtSTBC.Text = ""
             txtLDPC.Text = ""
@@ -1277,6 +1299,7 @@ err1:
         txtPower.Text = ""
         txtFreq24.Text = ""
         txtPower24.Text = ""
+        txtBandwidth.Text = ""
         txtMCS.Text = ""
         txtSTBC.Text = ""
         txtLDPC.Text = ""
@@ -1431,6 +1454,7 @@ err1:
         txtPower.Text = ""
         txtFreq24.Text = ""
         txtPower24.Text = ""
+        txtBandwidth.Text = ""
         txtMCS.Text = ""
         txtSTBC.Text = ""
         txtLDPC.Text = ""
@@ -1476,7 +1500,7 @@ err1:
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
         btnExtra.Visible = True
-        btnMSPExtra.Visible = True
+        btnMSPExtra.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         ComboBox3.Visible = True
@@ -1499,7 +1523,7 @@ err1:
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
         btnMSP.Visible = True
-        btnFontsINAV.Visible = True
+        btnFontsINAV.Visible = False
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
@@ -1585,6 +1609,7 @@ err1:
         txtPower.Text = ""
         txtFreq24.Text = ""
         txtPower24.Text = ""
+        txtBandwidth.Text = ""
         txtMCS.Text = ""
         txtSTBC.Text = ""
         txtLDPC.Text = ""
@@ -2345,6 +2370,7 @@ err1:
             txtPower.Text = ""
             txtFreq24.Text = ""
             txtPower24.Text = ""
+            txtBandwidth.Text = ""
             txtMCS.Text = ""
             txtSTBC.Text = ""
             txtLDPC.Text = ""
@@ -2513,6 +2539,9 @@ err1:
                     End If
                     If lines(x).StartsWith("txpower=") Then
                         lines(x) = txtPower24.Text
+                    End If
+                    If lines(x).StartsWith("bandwidth=") Then
+                        lines(x) = txtBandwidth.Text
                     End If
                     If rBtnNVR.Checked Then
                         If lines(x).StartsWith("udp_addr=") Then
@@ -3004,6 +3033,31 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "mspextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btn40MHz_Click(sender As Object, e As EventArgs) Handles btn40MHz.Click
+        Dim extern = "extern.bat"
+        Dim wifi_file = "reset/wifibroadcast"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        If Not File.Exists(wifi_file) Then
+            MsgBox("File " + wifi_file + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "40mhz " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
