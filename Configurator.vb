@@ -1316,6 +1316,7 @@ err1:
         btnResetCam.Text = "Reset NVR"
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
+        btn40MHz.Visible = False
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = False
@@ -1469,6 +1470,7 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = True
         btnResetCam.Text = "Reset Camera"
+        btn40MHz.Visible = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = True
@@ -1623,6 +1625,7 @@ err1:
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
         btnResetCam.Visible = False
+        btn40MHz.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = False
