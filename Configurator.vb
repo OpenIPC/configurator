@@ -2899,13 +2899,8 @@ err1:
 
     Private Sub btnMSP_Click_1(sender As Object, e As EventArgs) Handles btnMSP.Click
         Dim extern = "extern.bat"
-        Dim msp_file = "msposd"
         If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(msp_file) Then
-            MsgBox("File " + msp_file + " not found!")
             Return
         End If
 
