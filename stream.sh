@@ -17,6 +17,8 @@ gpio_offset4="9"
 gpio_offset5="10"
 freq_list=("5180" "5200" "5220" "5240" "5260" "5280" "5300" "5320" "5500" "5520" "5540" "5560" "5580" "5600" "5620" "5640" "5660" "5680" "5700" "5720" "5745" "5765" "5785" "5805" "5825")
 chan_list=("36" "40" "44" "48" "52" "56" "60" "64" "100" "104" "108" "112" "116" "120" "124" "128" "132" "136" "140" "144" "149" "153" "157" "161" "165")
+FILE="/etc/default/wifibroadcast"
+WFB_CFG="/etc/wifibroadcast.cfg"
 
 cd /media
 
@@ -70,26 +72,51 @@ while true; do
         echo "$Freq"
     fi
     if [ $(gpioget $gpio_chip2 $gpio_offset2) -eq 1 ]; then
-        for Freq in ${freq_list[@]}; do
-           Chan=${chan_list[$j]}
-           if [ $(gpioget $gpio_chip2 $gpio_offset3) -eq 1 ]; then
-               echo "exit loop"
-               break
-           fi
-           iw wlx04d4c464afea set freq $Freq
-           sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
-           j=$((j+1))
-           if [[ $j -gt 24 ]]
-           then
-              j=0
-           fi
-           echo "$Freq"
-           sleep 3
-           if [ $(gpioget $gpio_chip2 $gpio_offset3) -eq 1 ]; then
-               echo "exit loop"
-               break
-           fi
+        if [[ -f "$FILE" ]]; then
+            NIC_NAMES=$(grep -oP '^WFB_NICS="\K[^"]+' "$FILE")
+
+            if [[ -n "$NIC_NAMES" ]]; then
+                IFS=' ' read -r -a NICS <<< "$NIC_NAMES"
+            else
+                echo "No NIC names found in WFB_NICS variable. Exiting."
+                exit 1
+            fi
+        else
+            echo "File $FILE not found. Exiting."
+            exit 1
+        fi
+
+        if [[ -f "$WFB_CFG" ]]; then
+            CHANNEL=$(grep 'wifi_channel = ' $WFB_CFG | sed 's/^.*= //')
+        else
+            echo "File $WFB_CFG not found. Exiting."
+            exit 1
+        fi
+
+        for NIC in "${NICS[@]}"; do
+            sudo iw dev "$NIC" set channel "$CHANNEL" HT40+
         done
+#        for Freq in ${freq_list[@]}; do
+#           Chan=${chan_list[$j]}
+#           if [ $(gpioget $gpio_chip2 $gpio_offset3) -eq 1 ]; then
+#               echo "exit loop"
+#               break
+#           fi
+#           iw wlx00c0caafee0e set freq $Freq
+#           sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
+#           j=$((j+1))
+#           if [[ $j -gt 24 ]]
+#           then
+#              j=0
+#           fi
+#           echo "$Freq"
+#           sleep 3
+#           if [ $(gpioget $gpio_chip2 $gpio_offset3) -eq 1 ]; then
+#               echo "exit loop"
+#               break
+#           fi
+#        done
     fi
     sleep 0.2
 done
+
