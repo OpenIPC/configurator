@@ -76,6 +76,7 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         TabPage3 = New TabPage()
+        btn40MHz = New Button()
         btnMSPExtra = New Button()
         rBtnRECOFF = New RadioButton()
         rBtnRECON = New RadioButton()
@@ -205,7 +206,6 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         version = New Label()
-        btn40MHz = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -871,6 +871,19 @@ Partial Class Configurator
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
+        ' btn40MHz
+        ' 
+        btn40MHz.BackColor = Color.Gold
+        btn40MHz.FlatStyle = FlatStyle.Popup
+        btn40MHz.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btn40MHz.Location = New Point(454, 107)
+        btn40MHz.Name = "btn40MHz"
+        btn40MHz.Size = New Size(116, 30)
+        btn40MHz.TabIndex = 67
+        btn40MHz.Text = "Enable 40MHz"
+        btnToolTip.SetToolTip(btn40MHz, "Upload the modified wifibroadcast file to enable the 40MHz mode")
+        btn40MHz.UseVisualStyleBackColor = False
+        ' 
         ' btnMSPExtra
         ' 
         btnMSPExtra.BackColor = Color.Gold
@@ -890,7 +903,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 193)
+        rBtnRECOFF.Location = New Point(547, 156)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -903,7 +916,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 178)
+        rBtnRECON.Location = New Point(547, 141)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -916,7 +929,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 180)
+        btnOnboardREC.Location = New Point(454, 143)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -957,13 +970,14 @@ Partial Class Configurator
         btnMSP.BackColor = Color.Gold
         btnMSP.FlatStyle = FlatStyle.Popup
         btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMSP.Location = New Point(454, 107)
+        btnMSP.Location = New Point(454, 344)
         btnMSP.Name = "btnMSP"
         btnMSP.Size = New Size(116, 30)
         btnMSP.TabIndex = 56
         btnMSP.Text = "Latest VTXMENU"
         btnToolTip.SetToolTip(btnMSP, "Upload the latest vtxmenu for the MSPOSD of OpenIPC" & vbCrLf & vbCrLf & "To enter the VTX menu move: " & vbCrLf & "LEFT stick to bottom right and" & vbCrLf & "RIGHT stick to bottom left")
         btnMSP.UseVisualStyleBackColor = False
+        btnMSP.Visible = False
         ' 
         ' btnExtra
         ' 
@@ -2476,19 +2490,6 @@ Partial Class Configurator
         version.Size = New Size(22, 10)
         version.TabIndex = 48
         version.Text = "v 1.7"
-        ' 
-        ' btn40MHz
-        ' 
-        btn40MHz.BackColor = Color.Gold
-        btn40MHz.FlatStyle = FlatStyle.Popup
-        btn40MHz.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn40MHz.Location = New Point(454, 144)
-        btn40MHz.Name = "btn40MHz"
-        btn40MHz.Size = New Size(116, 30)
-        btn40MHz.TabIndex = 67
-        btn40MHz.Text = "Enable 40MHz"
-        btnToolTip.SetToolTip(btn40MHz, "Upload the modified wifibroadcast file to enable the 40MHz mode")
-        btn40MHz.UseVisualStyleBackColor = False
         ' 
         ' Configurator
         ' 
