@@ -22,7 +22,7 @@ Public Class Configurator
 
     Public Sub DownloadStart()
         downloader = New WebClient
-        If cmbVersion.Text = "ssc338q_fpv_emax-wyvern-link-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-mario-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-urllc-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_runcam-wifilink-nor" Then
+        If cmbVersion.Text = "ssc338q_fpv_emax-wyvern-link-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-thinker-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-mario-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_openipc-urllc-aio-nor" Or cmbVersion.Text = "ssc338q_fpv_runcam-wifilink-nor" Then
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         Else
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/firmware/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
@@ -874,6 +874,7 @@ err1:
         cmbVersion.Items.Clear()
         cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
+        cmbVersion.Items.Add("ssc338q_fpv_openipc-thinker-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-urllc-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_runcam-wifilink-nor")
         cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
@@ -1347,6 +1348,7 @@ err1:
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnMSPExtra.Visible = False
+        btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
         ComboBox3.Visible = True
@@ -1502,7 +1504,8 @@ err1:
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
         btnExtra.Visible = True
-        btnMSPExtra.Visible = False
+        btnMSPExtra.Visible = True
+        btnMSPExtraRemove.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         ComboBox3.Visible = True
@@ -1657,6 +1660,7 @@ err1:
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnMSPExtra.Visible = False
+        btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
         ComboBox3.Visible = False
@@ -3056,6 +3060,26 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "40mhz " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMSPExtraRemove_Click(sender As Object, e As EventArgs) Handles btnMSPExtraRemove.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "remmspextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

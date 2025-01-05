@@ -107,6 +107,17 @@ if "%1" == "extra" (
 	plink -ssh root@%2 -pw %3 reboot
 )
 
+if "%1" == "mspextra" (
+	echo y | pscp -scp -pw %3 reset/telemetry root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 reboot	
+)
+
+if "%1" == "remmspextra" (
+	plink -ssh root@%2 -pw %3 sed -i 's/sleep 5/#sleep 5/' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 reboot	
+)
+
 if "%1" == "rswfb" (
 	plink -ssh root@%2 -pw %3 wifibroadcast stop
 	plink -ssh root@%2 -pw %3 sleep 3
@@ -181,7 +192,6 @@ if "%1" == "msp" (
 	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini
         plink -ssh root@%2 -pw %3 reboot
 )
-
 
 if "%1" == "40mhz" (
         echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/usr/bin/
