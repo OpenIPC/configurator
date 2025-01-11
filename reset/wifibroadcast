@@ -135,6 +135,9 @@ case "$1" in
 			load_modules
 			load_interface
 			if [ "$bandwidth" = "40" ]; then
+                                iw dev "$wlan" set monitor none
+		                iwconfig "$wlan" mode monitor
+		                ifconfig "$wlan" up
 				iw "$wlan" set channel "$channel" HT40+
 			fi
 			if ! cat "$keydir/$unit.key" > /dev/null 2>&1; then
