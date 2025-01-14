@@ -76,6 +76,7 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         TabPage3 = New TabPage()
+        btnMSPGSExtra = New Button()
         btnMSPExtraRemove = New Button()
         btn40MHz = New Button()
         btnMSPExtra = New Button()
@@ -101,6 +102,8 @@ Partial Class Configurator
         txtBaud = New TextBox()
         txtSerial = New TextBox()
         TabPage4 = New TabPage()
+        btnGSMSPOSD = New Button()
+        btnAIRMSPOSD = New Button()
         btnAddButtons = New Button()
         btnReset = New Button()
         rBtnMode1 = New RadioButton()
@@ -476,6 +479,8 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage1.Controls.Add(version)
+        TabPage1.Controls.Add(Label12)
         TabPage1.Controls.Add(cmbBandwidth)
         TabPage1.Controls.Add(txtBandwidth)
         TabPage1.Controls.Add(btnRestartWFB)
@@ -842,6 +847,7 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(btnMSPGSExtra)
         TabPage3.Controls.Add(btnMSPExtraRemove)
         TabPage3.Controls.Add(btn40MHz)
         TabPage3.Controls.Add(btnMSPExtra)
@@ -874,17 +880,30 @@ Partial Class Configurator
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
+        ' btnMSPGSExtra
+        ' 
+        btnMSPGSExtra.BackColor = Color.Gold
+        btnMSPGSExtra.FlatStyle = FlatStyle.Popup
+        btnMSPGSExtra.Font = New Font("Arial", 7.3F, FontStyle.Bold)
+        btnMSPGSExtra.Location = New Point(454, 171)
+        btnMSPGSExtra.Name = "btnMSPGSExtra"
+        btnMSPGSExtra.Size = New Size(116, 22)
+        btnMSPGSExtra.TabIndex = 69
+        btnMSPGSExtra.Text = "MSPOSD GS EXTRA"
+        btnToolTip.SetToolTip(btnMSPGSExtra, "Enable MSPOSD on the Ground Station (Radxa)" & vbCrLf & "Add OSD SOC temperature")
+        btnMSPGSExtra.UseVisualStyleBackColor = False
+        ' 
         ' btnMSPExtraRemove
         ' 
         btnMSPExtraRemove.BackColor = Color.Gold
         btnMSPExtraRemove.FlatStyle = FlatStyle.Popup
         btnMSPExtraRemove.Font = New Font("Arial", 8F, FontStyle.Bold)
-        btnMSPExtraRemove.Location = New Point(454, 171)
+        btnMSPExtraRemove.Location = New Point(454, 198)
         btnMSPExtraRemove.Name = "btnMSPExtraRemove"
         btnMSPExtraRemove.Size = New Size(116, 22)
         btnMSPExtraRemove.TabIndex = 68
         btnMSPExtraRemove.Text = "- MSPOSD EXTRA"
-        btnToolTip.SetToolTip(btnMSPExtraRemove, "Remove OSD SOC temperature")
+        btnToolTip.SetToolTip(btnMSPExtraRemove, "Remove OSD SOC temperature" & vbCrLf & "Works for both Air or GS")
         btnMSPExtraRemove.UseVisualStyleBackColor = False
         ' 
         ' btn40MHz
@@ -904,13 +923,13 @@ Partial Class Configurator
         ' 
         btnMSPExtra.BackColor = Color.Gold
         btnMSPExtra.FlatStyle = FlatStyle.Popup
-        btnMSPExtra.Font = New Font("Arial", 8F, FontStyle.Bold)
+        btnMSPExtra.Font = New Font("Arial", 7.4F, FontStyle.Bold)
         btnMSPExtra.Location = New Point(454, 143)
         btnMSPExtra.Name = "btnMSPExtra"
         btnMSPExtra.Size = New Size(116, 22)
         btnMSPExtra.TabIndex = 66
-        btnMSPExtra.Text = "+ MSPOSD EXTRA"
-        btnToolTip.SetToolTip(btnMSPExtra, "Add OSD SOC temperature")
+        btnMSPExtra.Text = "MSPOSD AIR EXTRA"
+        btnToolTip.SetToolTip(btnMSPExtra, "Enable MSPOSD on the Air Unit" & vbCrLf & "Add OSD SOC temperature" & vbCrLf)
         btnMSPExtra.UseVisualStyleBackColor = False
         ' 
         ' rBtnRECOFF
@@ -918,7 +937,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 212)
+        rBtnRECOFF.Location = New Point(547, 239)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -931,7 +950,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 197)
+        rBtnRECON.Location = New Point(547, 224)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -944,7 +963,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 199)
+        btnOnboardREC.Location = New Point(454, 226)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -1166,6 +1185,8 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnGSMSPOSD)
+        TabPage4.Controls.Add(btnAIRMSPOSD)
         TabPage4.Controls.Add(btnAddButtons)
         TabPage4.Controls.Add(btnReset)
         TabPage4.Controls.Add(rBtnMode1)
@@ -1196,38 +1217,66 @@ Partial Class Configurator
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
         ' 
+        ' btnGSMSPOSD
+        ' 
+        btnGSMSPOSD.BackColor = Color.Gold
+        btnGSMSPOSD.FlatStyle = FlatStyle.Popup
+        btnGSMSPOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnGSMSPOSD.Location = New Point(454, 55)
+        btnGSMSPOSD.Name = "btnGSMSPOSD"
+        btnGSMSPOSD.Size = New Size(86, 30)
+        btnGSMSPOSD.TabIndex = 69
+        btnGSMSPOSD.Text = "MSPOSD GS"
+        btnToolTip.SetToolTip(btnGSMSPOSD, "Enables the OSD on the Ground Station side" & vbCrLf & "Works only on Radxa SBC 1.9.2 and higher" & vbCrLf)
+        btnGSMSPOSD.UseVisualStyleBackColor = False
+        ' 
+        ' btnAIRMSPOSD
+        ' 
+        btnAIRMSPOSD.BackColor = Color.Gold
+        btnAIRMSPOSD.FlatStyle = FlatStyle.Popup
+        btnAIRMSPOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnAIRMSPOSD.Location = New Point(454, 20)
+        btnAIRMSPOSD.Name = "btnAIRMSPOSD"
+        btnAIRMSPOSD.Size = New Size(86, 30)
+        btnAIRMSPOSD.TabIndex = 68
+        btnAIRMSPOSD.Text = "MSPOSD AIR"
+        btnToolTip.SetToolTip(btnAIRMSPOSD, "Enables the MSPOSD on the Drone side" & vbCrLf & "Works only on Radxa SBC 1.9.2 and higher")
+        btnAIRMSPOSD.UseVisualStyleBackColor = False
+        ' 
         ' btnAddButtons
         ' 
         btnAddButtons.BackColor = Color.Gold
         btnAddButtons.FlatStyle = FlatStyle.Popup
         btnAddButtons.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnAddButtons.Location = New Point(454, 128)
+        btnAddButtons.Location = New Point(454, 210)
         btnAddButtons.Name = "btnAddButtons"
         btnAddButtons.Size = New Size(86, 30)
         btnAddButtons.TabIndex = 67
         btnAddButtons.Text = "Add Buttons"
         btnToolTip.SetToolTip(btnAddButtons, "Update Radxa Zero 3w" & vbCrLf & "and add OK/Cancel Up/Down" & vbCrLf & vbCrLf & "For GPIO pins:" & vbCrLf & "https://rubyfpv.com/hardware.php" & vbCrLf & vbCrLf & "Pins: 11,13,16,18")
         btnAddButtons.UseVisualStyleBackColor = False
+        btnAddButtons.Visible = False
         ' 
         ' btnReset
         ' 
         btnReset.BackColor = Color.Gold
         btnReset.FlatStyle = FlatStyle.Popup
         btnReset.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnReset.Location = New Point(454, 92)
+        btnReset.Location = New Point(454, 174)
         btnReset.Name = "btnReset"
         btnReset.Size = New Size(86, 30)
         btnReset.TabIndex = 66
         btnReset.Text = "Reset"
         btnToolTip.SetToolTip(btnReset, "Reset all the setting files " & vbCrLf & "from Radxa Zero 3w " & vbCrLf & "to the default ones")
         btnReset.UseVisualStyleBackColor = False
+        btnReset.Visible = False
         ' 
         ' rBtnMode1
         ' 
         rBtnMode1.AutoSize = True
         rBtnMode1.Checked = True
         rBtnMode1.ForeColor = Color.White
-        rBtnMode1.Location = New Point(546, 72)
+        rBtnMode1.Location = New Point(546, 297)
         rBtnMode1.Name = "rBtnMode1"
         rBtnMode1.Size = New Size(76, 18)
         rBtnMode1.TabIndex = 65
@@ -1235,44 +1284,48 @@ Partial Class Configurator
         rBtnMode1.Text = "Extended"
         btnToolTip.SetToolTip(rBtnMode1, "Enable MSPOSD on ttyS2")
         rBtnMode1.UseVisualStyleBackColor = True
+        rBtnMode1.Visible = False
         ' 
         ' rBtnMode2
         ' 
         rBtnMode2.AutoSize = True
         rBtnMode2.ForeColor = Color.White
-        rBtnMode2.Location = New Point(546, 56)
+        rBtnMode2.Location = New Point(546, 281)
         rBtnMode2.Name = "rBtnMode2"
         rBtnMode2.Size = New Size(63, 18)
         rBtnMode2.TabIndex = 64
         rBtnMode2.Text = "Simple"
         btnToolTip.SetToolTip(rBtnMode2, "Enable MSPOSD on ttyS0")
         rBtnMode2.UseVisualStyleBackColor = True
+        rBtnMode2.Visible = False
         ' 
         ' btnMAVGS
         ' 
         btnMAVGS.BackColor = Color.Gold
         btnMAVGS.FlatStyle = FlatStyle.Popup
         btnMAVGS.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMAVGS.Location = New Point(454, 56)
+        btnMAVGS.Location = New Point(454, 281)
         btnMAVGS.Name = "btnMAVGS"
         btnMAVGS.Size = New Size(86, 30)
         btnMAVGS.TabIndex = 63
         btnMAVGS.Text = "Mavlink OSD"
         btnToolTip.SetToolTip(btnMAVGS, "Enables the Mavlink telemetry" & vbCrLf & "of OpenIPC")
         btnMAVGS.UseVisualStyleBackColor = False
+        btnMAVGS.Visible = False
         ' 
         ' btnMSPGS
         ' 
         btnMSPGS.BackColor = Color.Gold
         btnMSPGS.FlatStyle = FlatStyle.Popup
         btnMSPGS.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMSPGS.Location = New Point(454, 20)
+        btnMSPGS.Location = New Point(454, 245)
         btnMSPGS.Name = "btnMSPGS"
         btnMSPGS.Size = New Size(86, 30)
         btnMSPGS.TabIndex = 62
-        btnMSPGS.Text = "MSP OSD"
-        btnToolTip.SetToolTip(btnMSPGS, "Enables the MSP DisplayPort function" & vbCrLf & "of OpenIPC")
+        btnMSPGS.Text = "MSPOSD"
+        btnToolTip.SetToolTip(btnMSPGS, "Enables the MSP DisplayPort function")
         btnMSPGS.UseVisualStyleBackColor = False
+        btnMSPGS.Visible = False
         ' 
         ' Label9
         ' 
@@ -2500,22 +2553,22 @@ Partial Class Configurator
         version.AutoSize = True
         version.Font = New Font("Arial", 6F, FontStyle.Bold)
         version.ForeColor = Color.White
-        version.Location = New Point(647, 490)
+        version.Location = New Point(604, 372)
         version.Name = "version"
-        version.Size = New Size(22, 10)
+        version.Size = New Size(28, 10)
         version.TabIndex = 48
-        version.Text = "v 1.7"
+        version.Text = "v 1.9.2"
         ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(628, 472)
+        Label12.Location = New Point(591, 381)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 49
-        Label12.Text = "11/01/2025"
+        Label12.Text = "14/01/2025"
         ' 
         ' Configurator
         ' 
@@ -2523,8 +2576,6 @@ Partial Class Configurator
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(667, 507)
-        Controls.Add(Label12)
-        Controls.Add(version)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
         Controls.Add(txtPassword)
@@ -2752,5 +2803,8 @@ Partial Class Configurator
     Friend WithEvents btn40MHz As Button
     Friend WithEvents btnMSPExtraRemove As Button
     Friend WithEvents Label12 As Label
+    Friend WithEvents btnMSPGSExtra As Button
+    Friend WithEvents btnGSMSPOSD As Button
+    Friend WithEvents btnAIRMSPOSD As Button
 
 End Class

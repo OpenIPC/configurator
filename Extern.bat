@@ -113,9 +113,27 @@ if "%1" == "mspextra" (
         plink -ssh root@%2 -pw %3 reboot	
 )
 
+if "%1" == "mspgsextra" (
+	echo y | pscp -scp -pw %3 reset/telemetry_gs root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/telemetry_gs
+        plink -ssh root@%2 -pw %3 mv /usr/bin/telemetry_gs /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/telemetry
+        plink -ssh root@%2 -pw %3 reboot	
+)
+
 if "%1" == "remmspextra" (
 	plink -ssh root@%2 -pw %3 sed -i 's/sleep 5/#sleep 5/' /usr/bin/telemetry
 	plink -ssh root@%2 -pw %3 reboot	
+)
+
+if "%1" == "msposdair" (
+	plink -ssh root@%2 -pw %3 sed -i 's/ground/air/' /config/scripts/osd
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "msposdgs" (
+	plink -ssh root@%2 -pw %3 sed -i 's/air/ground/' /config/scripts/osd
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "rswfb" (

@@ -256,8 +256,9 @@ err1:
             For x = 0 To WFBallLines.Count() - 1
                 If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
             Next x
-            txtMCS.Text = ReadLine(8, WFBngallLines)
-            txtSTBC.Text = ReadLine(12, WFBngallLines)
+            txtBandwidth.Text = ReadLine(10, WFBngallLines)
+            txtMCS.Text = ReadLine(6, WFBngallLines)
+            txtSTBC.Text = ReadLine(9, WFBngallLines)
         Else
             txtFrequency.Text = ReadLine(7, WFBallLines)
             txtPower.Text = ReadLine(10, WFBallLines)
@@ -1342,12 +1343,15 @@ err1:
         btnMAVGS.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
+        btnAIRMSPOSD.Visible = False
+        btnGSMSPOSD.Visible = False
         btnReset.Visible = False
         btnAddButtons.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnMSPExtra.Visible = False
+        btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
@@ -1499,12 +1503,15 @@ err1:
         btnMAVGS.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
+        btnAIRMSPOSD.Visible = False
+        btnGSMSPOSD.Visible = False
         btnReset.Visible = False
         btnAddButtons.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
         btnExtra.Visible = True
         btnMSPExtra.Visible = True
+        btnMSPGSExtra.Visible = True
         btnMSPExtraRemove.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
@@ -1526,7 +1533,7 @@ err1:
         txtPower24.Visible = True
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
-        txtExtras.Visible = True
+        txtExtras.Visible = False
         btnMSP.Visible = False
         btnFontsINAV.Visible = False
         btnOnboardREC.Visible = True
@@ -1650,16 +1657,19 @@ err1:
         btnDriverBackup.Visible = False
         cmbSensor.Visible = False
         txtDriver.Visible = False
-        btnMSPGS.Visible = True
-        btnMAVGS.Visible = True
-        rBtnMode1.Visible = True
-        rBtnMode2.Visible = True
-        btnReset.Visible = True
-        btnAddButtons.Visible = True
+        btnMSPGS.Visible = False
+        btnMAVGS.Visible = False
+        rBtnMode1.Visible = False
+        rBtnMode2.Visible = False
+        btnAIRMSPOSD.Visible = True
+        btnGSMSPOSD.Visible = True
+        btnReset.Visible = False
+        btnAddButtons.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
         btnExtra.Visible = False
         btnMSPExtra.Visible = False
+        btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
@@ -1681,13 +1691,13 @@ err1:
         txtPower24.Visible = False
         txtPortVRX.Visible = False
         txtMavlinkVRX.Visible = False
-        txtExtras.Visible = True
+        txtExtras.Visible = False
         btnMSP.Visible = False
         btnFontsINAV.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
-        Label2.Visible = True
+        Label2.Visible = False
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
         ComboBox1.Items.Clear()
@@ -2524,11 +2534,14 @@ err1:
                     If WFBlines(1).StartsWith("wifi_channel = ") Then
                         WFBlines(1) = txtFrequency.Text
                     End If
-                    If WFBlines(7).StartsWith("peer = 'connect://") Then
-                        WFBlines(7) = txtMCS.Text
+                    If WFBlines(5).StartsWith("peer = 'connect://") Then
+                        WFBlines(5) = txtMCS.Text
                     End If
-                    If WFBlines(11).StartsWith("peer = 'connect://") Then
-                        WFBlines(11) = txtSTBC.Text
+                    If WFBlines(8).StartsWith("peer = 'connect://") Then
+                        WFBlines(8) = txtSTBC.Text
+                    End If
+                    If WFBlines(9).StartsWith("bandwidth") Then
+                        WFBlines(9) = txtBandwidth.Text
                     End If
                     IO.File.WriteAllLines(wfbngfilePath, WFBlines)
                     If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
@@ -3025,7 +3038,7 @@ err1:
 
     Private Sub btnMSPExtra_Click(sender As Object, e As EventArgs) Handles btnMSPExtra.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -3080,6 +3093,66 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "remmspextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnMSPGSExtra_Click(sender As Object, e As EventArgs) Handles btnMSPGSExtra.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "mspgsextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnAIRMSPOSD_Click(sender As Object, e As EventArgs) Handles btnAIRMSPOSD.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "msposdair " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnGSMSPOSD_Click(sender As Object, e As EventArgs) Handles btnGSMSPOSD.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "msposdgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
