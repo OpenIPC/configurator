@@ -812,6 +812,7 @@ err1:
         cmbSerial.Items.Add("/dev/ttyS0")
         cmbSerial.Items.Add("/dev/ttyS1")
         cmbSerial.Items.Add("/dev/ttyS2")
+        cmbSerial.Items.Add("/dev/ttyS3")
         cmbSerial.Text = "Select Serial Port"
 
         cmbBaud.Items.Clear()

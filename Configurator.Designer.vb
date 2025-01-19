@@ -479,8 +479,6 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        TabPage1.Controls.Add(version)
-        TabPage1.Controls.Add(Label12)
         TabPage1.Controls.Add(cmbBandwidth)
         TabPage1.Controls.Add(txtBandwidth)
         TabPage1.Controls.Add(btnRestartWFB)
@@ -2553,22 +2551,22 @@ Partial Class Configurator
         version.AutoSize = True
         version.Font = New Font("Arial", 6F, FontStyle.Bold)
         version.ForeColor = Color.White
-        version.Location = New Point(604, 372)
+        version.Location = New Point(611, 434)
         version.Name = "version"
-        version.Size = New Size(28, 10)
-        version.TabIndex = 48
-        version.Text = "v 1.9.2"
+        version.Size = New Size(40, 10)
+        version.TabIndex = 50
+        version.Text = "SBC 1.9.3"
         ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(591, 381)
+        Label12.Location = New Point(610, 444)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
-        Label12.TabIndex = 49
-        Label12.Text = "14/01/2025"
+        Label12.TabIndex = 51
+        Label12.Text = "19/01/2025"
         ' 
         ' Configurator
         ' 
@@ -2576,6 +2574,8 @@ Partial Class Configurator
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(667, 507)
+        Controls.Add(version)
+        Controls.Add(Label12)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
         Controls.Add(txtPassword)
@@ -2790,7 +2790,6 @@ Partial Class Configurator
     Friend WithEvents btnDualOSD As Button
     Friend WithEvents btnFontsINAV As Button
     Friend WithEvents btnMSP As Button
-    Friend WithEvents version As Label
     Friend WithEvents cmbSensor As ComboBox
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents cmbVersion As ComboBox
@@ -2802,9 +2801,10 @@ Partial Class Configurator
     Friend WithEvents txtBandwidth As TextBox
     Friend WithEvents btn40MHz As Button
     Friend WithEvents btnMSPExtraRemove As Button
-    Friend WithEvents Label12 As Label
     Friend WithEvents btnMSPGSExtra As Button
     Friend WithEvents btnGSMSPOSD As Button
     Friend WithEvents btnAIRMSPOSD As Button
+    Friend WithEvents version As Label
+    Friend WithEvents Label12 As Label
 
 End Class
