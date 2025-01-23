@@ -209,7 +209,6 @@ Partial Class Configurator
         MenuStrip1 = New MenuStrip()
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
-        version = New Label()
         Label12 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
@@ -2518,6 +2517,7 @@ Partial Class Configurator
         rBtnRadxaZero3w.TabIndex = 29
         rBtnRadxaZero3w.Text = "Radxa Zero 3w (WFB-ng)"
         rBtnRadxaZero3w.UseVisualStyleBackColor = True
+        rBtnRadxaZero3w.Visible = False
         ' 
         ' Label3
         ' 
@@ -2546,27 +2546,16 @@ Partial Class Configurator
         ' 
         Timer1.Interval = 2000
         ' 
-        ' version
-        ' 
-        version.AutoSize = True
-        version.Font = New Font("Arial", 6F, FontStyle.Bold)
-        version.ForeColor = Color.White
-        version.Location = New Point(611, 434)
-        version.Name = "version"
-        version.Size = New Size(40, 10)
-        version.TabIndex = 50
-        version.Text = "SBC 1.9.3"
-        ' 
         ' Label12
         ' 
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(610, 444)
+        Label12.Location = New Point(610, 434)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "19/01/2025"
+        Label12.Text = "23/01/2025"
         ' 
         ' Configurator
         ' 
@@ -2574,7 +2563,6 @@ Partial Class Configurator
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(667, 507)
-        Controls.Add(version)
         Controls.Add(Label12)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
@@ -2804,7 +2792,6 @@ Partial Class Configurator
     Friend WithEvents btnMSPGSExtra As Button
     Friend WithEvents btnGSMSPOSD As Button
     Friend WithEvents btnAIRMSPOSD As Button
-    Friend WithEvents version As Label
     Friend WithEvents Label12 As Label
 
 End Class
