@@ -396,7 +396,7 @@ err1:
             Dim LineOfText As String
             Dim array() As String
 
-            LineOfText = ReadLine(1, DisplayReaderallLines)
+            LineOfText = ReadLine(2, DisplayReaderallLines)
             array = LineOfText.Split("@")
             txtResolutionVRX.Text = array(0)
             txtCodecVRX.Text = array(1)
@@ -1139,7 +1139,7 @@ err1:
 
     Private Sub cmbResolutionVRX_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolutionVRX.SelectedIndexChanged
         If rBtnRadxaZero3w.Checked Then
-            txtResolutionVRX.Text = cmbResolutionVRX.SelectedItem.ToString
+            txtResolutionVRX.Text = "mode = " + cmbResolutionVRX.SelectedItem.ToString
         Else
             txtResolutionVRX.Text = "mode=" & cmbResolutionVRX.SelectedItem.ToString
         End If
@@ -2683,7 +2683,7 @@ err1:
                 Dim setdisplayfilePath = setdisplay
                 Dim setdisplaylines = IO.File.ReadAllLines(setdisplayfilePath)
                 For x = 0 To setdisplaylines.Count - 1
-                    setdisplaylines(x) = txtResolutionVRX.Text + "@" + txtCodecVRX.Text
+                    setdisplaylines(1) = txtResolutionVRX.Text + "@" + txtCodecVRX.Text
                 Next
                 IO.File.WriteAllLines(setdisplayfilePath, setdisplaylines)
             Else

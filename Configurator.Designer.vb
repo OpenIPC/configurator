@@ -210,6 +210,7 @@ Partial Class Configurator
         BackgroundWorker1 = New ComponentModel.BackgroundWorker()
         Timer1 = New Timer(components)
         Label12 = New Label()
+        Label13 = New Label()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -2517,7 +2518,6 @@ Partial Class Configurator
         rBtnRadxaZero3w.TabIndex = 29
         rBtnRadxaZero3w.Text = "Radxa Zero 3w (WFB-ng)"
         rBtnRadxaZero3w.UseVisualStyleBackColor = True
-        rBtnRadxaZero3w.Visible = False
         ' 
         ' Label3
         ' 
@@ -2551,11 +2551,22 @@ Partial Class Configurator
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(610, 434)
+        Label12.Location = New Point(610, 443)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "23/01/2025"
+        Label12.Text = "27/01/2025"
+        ' 
+        ' Label13
+        ' 
+        Label13.AutoSize = True
+        Label13.Font = New Font("Arial", 6F, FontStyle.Bold)
+        Label13.ForeColor = Color.White
+        Label13.Location = New Point(606, 433)
+        Label13.Name = "Label13"
+        Label13.Size = New Size(45, 10)
+        Label13.TabIndex = 52
+        Label13.Text = "SBC v1.9.6"
         ' 
         ' Configurator
         ' 
@@ -2563,6 +2574,7 @@ Partial Class Configurator
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(667, 507)
+        Controls.Add(Label13)
         Controls.Add(Label12)
         Controls.Add(connected)
         Controls.Add(btnSaveReboot)
@@ -2793,5 +2805,6 @@ Partial Class Configurator
     Friend WithEvents btnGSMSPOSD As Button
     Friend WithEvents btnAIRMSPOSD As Button
     Friend WithEvents Label12 As Label
+    Friend WithEvents Label13 As Label
 
 End Class

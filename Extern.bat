@@ -127,12 +127,12 @@ if "%1" == "remmspextra" (
 )
 
 if "%1" == "msposdair" (
-	plink -ssh root@%2 -pw %3 sed -i 's/ground/air/' /config/scripts/osd
+	plink -ssh root@%2 -pw %3 sed -i 's/render = ground/render = air/' /config/scripts/osd
 	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "msposdgs" (
-	plink -ssh root@%2 -pw %3 sed -i 's/air/ground/' /config/scripts/osd
+	plink -ssh root@%2 -pw %3 sed -i 's/render = air/render = ground/' /config/scripts/osd
 	plink -ssh root@%2 -pw %3 reboot
 )
 
