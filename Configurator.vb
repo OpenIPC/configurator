@@ -1511,7 +1511,7 @@ err1:
         btnExtra.Visible = True
         btnMSPExtra.Visible = True
         btnMSPGSExtra.Visible = True
-        btnMSPExtraRemove.Visible = True
+        btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         ComboBox3.Visible = True

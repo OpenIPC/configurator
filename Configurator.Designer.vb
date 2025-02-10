@@ -985,6 +985,7 @@ Partial Class Configurator
         btnMSPExtraRemove.Text = "- MSPOSD EXTRA"
         btnToolTip.SetToolTip(btnMSPExtraRemove, "Remove OSD SOC temperature" & vbCrLf & "Works for both Air or GS")
         btnMSPExtraRemove.UseVisualStyleBackColor = False
+        btnMSPExtraRemove.Visible = False
         ' 
         ' btn40MHz
         ' 
