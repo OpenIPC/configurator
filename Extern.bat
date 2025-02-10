@@ -265,10 +265,16 @@ if "%1" == "resetcam" (
 	plink -ssh root@%2 -pw %3 firstboot
 )
 
-if "%1" == "addbuttons" (
-	plink -ssh root@%2 -pw %3 apt install dos2unix
-	echo y | pscp -scp -pw %3 stream.sh root@%2:/config/scripts/
-        plink -ssh root@%2 -pw %3 dos2unix /config/scripts/stream.sh
+if "%1" == "alink" (
+        plink -ssh root@%2 -pw %3 killall alink_drone
+	echo y | pscp -scp -pw %3 alink_drone root@%2:/usr/bin/
+	echo y | pscp -scp -pw %3 alink.conf root@%2:/etc/
+	echo y | pscp -scp -pw %3 txprofiles/%4.conf root@%2:/etc/
+        plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf
+        plink -ssh root@%2 -pw %3 dos2unix /etc/alink.conf /etc/txprofiles.conf
+	plink -ssh root@%2 -pw %3 chmod +x /usr/bin/alink_drone
+	plink -ssh root@%2 -pw %3 cli -s .video0.qpDelta -12
+        plink -ssh root@%2 -pw %3 reboot
 )
 
 :end
