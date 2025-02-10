@@ -1316,6 +1316,7 @@ err1:
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         btn40MHz.Visible = False
+        Alink.Visible = False
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = False
@@ -1379,7 +1380,7 @@ err1:
         Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
-        ComboBox1.Items.Clear()
+        ComboBox1.Items.Clear
         ComboBox1.Items.Add("5180 MHz [36]")
         ComboBox1.Items.Add("5200 MHz [40]")
         ComboBox1.Items.Add("5220 MHz [44]")
@@ -1409,7 +1410,7 @@ err1:
         ComboBox1.Items.Add("5865 MHz [173]")
         ComboBox1.Items.Add("5885 MHz [177]")
         ComboBox1.Text = "Select 5.8GHz Frequency"
-        cmbResolutionVRX.Items.Clear()
+        cmbResolutionVRX.Items.Clear
         cmbResolutionVRX.Items.Add("720p60")
         cmbResolutionVRX.Items.Add("1080p60")
         cmbResolutionVRX.Items.Add("1024x768x60")
@@ -1418,7 +1419,7 @@ err1:
         cmbResolutionVRX.Items.Add("1600x1200x60")
         cmbResolutionVRX.Items.Add("2560x1440x30")
         cmbResolutionVRX.Text = "Select Resolution"
-        cmbCodecVRX.Items.Clear()
+        cmbCodecVRX.Items.Clear
         cmbCodecVRX.Items.Add("h264")
         cmbCodecVRX.Items.Add("h265")
         cmbCodecVRX.Text = "Select Codec"
@@ -1476,6 +1477,7 @@ err1:
         btn40MHz.Visible = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
+        Alink.Visible = True
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = True
@@ -1539,7 +1541,7 @@ err1:
         Label2.Visible = True
         txtMCS.ReadOnly = True
         txtSTBC.ReadOnly = True
-        ComboBox1.Items.Clear()
+        ComboBox1.Items.Clear
         ComboBox1.Items.Add("5180 MHz [36]")
         ComboBox1.Items.Add("5200 MHz [40]")
         ComboBox1.Items.Add("5220 MHz [44]")
@@ -1569,7 +1571,7 @@ err1:
         ComboBox1.Items.Add("5865 MHz [173]")
         ComboBox1.Items.Add("5885 MHz [177]")
         ComboBox1.Text = "Select 5.8GHz Frequency"
-        cmbResolutionVRX.Items.Clear()
+        cmbResolutionVRX.Items.Clear
         cmbResolutionVRX.Items.Add("720p60")
         cmbResolutionVRX.Items.Add("1080p60")
         cmbResolutionVRX.Items.Add("1024x768x60")
@@ -1578,7 +1580,7 @@ err1:
         cmbResolutionVRX.Items.Add("1600x1200x60")
         cmbResolutionVRX.Items.Add("2560x1440x30")
         cmbResolutionVRX.Text = "Select Resolution"
-        cmbCodecVRX.Items.Clear()
+        cmbCodecVRX.Items.Clear
         cmbCodecVRX.Items.Add("h264")
         cmbCodecVRX.Items.Add("h265")
         cmbCodecVRX.Text = "Select Codec"
@@ -1633,6 +1635,7 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = False
         btn40MHz.Visible = False
+        Alink.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Label8.Visible = False
@@ -3150,6 +3153,36 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "msposdgs " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub Alink_Click(sender As Object, e As EventArgs) Handles Alink.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        Dim txprofile As String
+        If alink1.Checked Then
+            txprofile = "mario"
+        ElseIf alink2.Checked Then
+            txprofile = "ac56"
+        ElseIf alink3.Checked Then
+            txprofile = "eu"
+        Else
+            txprofile = "af1"
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "alink " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txprofile
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

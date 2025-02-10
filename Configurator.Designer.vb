@@ -60,6 +60,11 @@ Partial Class Configurator
         ComboBox2 = New ComboBox()
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
+        Alink = New Button()
+        alink0 = New RadioButton()
+        alink3 = New RadioButton()
+        alink1 = New RadioButton()
+        alink2 = New RadioButton()
         cmbMirror = New ComboBox()
         cmbFlip = New ComboBox()
         txtMirror = New TextBox()
@@ -211,6 +216,7 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
+        GroupBox2 = New GroupBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -221,6 +227,7 @@ Partial Class Configurator
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
+        GroupBox2.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -644,6 +651,7 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(GroupBox2)
         TabPage2.Controls.Add(cmbMirror)
         TabPage2.Controls.Add(cmbFlip)
         TabPage2.Controls.Add(txtMirror)
@@ -675,6 +683,65 @@ Partial Class Configurator
         TabPage2.Size = New Size(635, 394)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' Alink
+        ' 
+        Alink.BackColor = Color.Gold
+        Alink.FlatStyle = FlatStyle.Popup
+        Alink.ForeColor = SystemColors.ControlText
+        Alink.Location = New Point(11, 128)
+        Alink.Name = "Alink"
+        Alink.Size = New Size(159, 23)
+        Alink.TabIndex = 64
+        Alink.Text = "Adaptive Link"
+        btnToolTip.SetToolTip(Alink, "Enables the Adaptive Link" & vbCrLf)
+        Alink.UseVisualStyleBackColor = False
+        ' 
+        ' alink0
+        ' 
+        alink0.AutoSize = True
+        alink0.Checked = True
+        alink0.ForeColor = Color.White
+        alink0.Location = New Point(11, 19)
+        alink0.Name = "alink0"
+        alink0.Size = New Size(131, 18)
+        alink0.TabIndex = 63
+        alink0.TabStop = True
+        alink0.Text = "EMAX rtl8812au AF1"
+        alink0.UseVisualStyleBackColor = True
+        ' 
+        ' alink3
+        ' 
+        alink3.AutoSize = True
+        alink3.ForeColor = Color.White
+        alink3.Location = New Point(12, 91)
+        alink3.Name = "alink3"
+        alink3.Size = New Size(158, 18)
+        alink3.TabIndex = 62
+        alink3.Text = "RunCam/EMAX rtl8812eu"
+        alink3.UseVisualStyleBackColor = True
+        ' 
+        ' alink1
+        ' 
+        alink1.AutoSize = True
+        alink1.ForeColor = Color.White
+        alink1.Location = New Point(12, 43)
+        alink1.Name = "alink1"
+        alink1.Size = New Size(130, 18)
+        alink1.TabIndex = 61
+        alink1.Text = "Mario AIO rtl8812au"
+        alink1.UseVisualStyleBackColor = True
+        ' 
+        ' alink2
+        ' 
+        alink2.AutoSize = True
+        alink2.ForeColor = Color.White
+        alink2.Location = New Point(12, 67)
+        alink2.Name = "alink2"
+        alink2.Size = New Size(137, 18)
+        alink2.TabIndex = 60
+        alink2.Text = "ASUS AC56 rtl8812au"
+        alink2.UseVisualStyleBackColor = True
         ' 
         ' cmbMirror
         ' 
@@ -2555,7 +2622,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "29/01/2025"
+        Label12.Text = "10/02/2025"
         ' 
         ' Label13
         ' 
@@ -2567,6 +2634,21 @@ Partial Class Configurator
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.6"
+        ' 
+        ' GroupBox2
+        ' 
+        GroupBox2.Controls.Add(alink0)
+        GroupBox2.Controls.Add(Alink)
+        GroupBox2.Controls.Add(alink3)
+        GroupBox2.Controls.Add(alink1)
+        GroupBox2.Controls.Add(alink2)
+        GroupBox2.ForeColor = Color.White
+        GroupBox2.Location = New Point(445, 20)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(183, 165)
+        GroupBox2.TabIndex = 65
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "TX Profiles"
         ' 
         ' Configurator
         ' 
@@ -2614,6 +2696,8 @@ Partial Class Configurator
         TabPage6.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(connected, ComponentModel.ISupportInitialize).EndInit()
+        GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
@@ -2806,5 +2890,12 @@ Partial Class Configurator
     Friend WithEvents btnAIRMSPOSD As Button
     Friend WithEvents Label12 As Label
     Friend WithEvents Label13 As Label
+    Friend WithEvents RadioButton20 As RadioButton
+    Friend WithEvents alink2 As RadioButton
+    Friend WithEvents alink1 As RadioButton
+    Friend WithEvents Alink As Button
+    Friend WithEvents alink0 As RadioButton
+    Friend WithEvents alink3 As RadioButton
+    Friend WithEvents GroupBox2 As GroupBox
 
 End Class
