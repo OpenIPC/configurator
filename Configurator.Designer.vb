@@ -60,8 +60,9 @@ Partial Class Configurator
         ComboBox2 = New ComboBox()
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
-        Alink = New Button()
+        GroupBox2 = New GroupBox()
         alink0 = New RadioButton()
+        Alink = New Button()
         alink3 = New RadioButton()
         alink1 = New RadioButton()
         alink2 = New RadioButton()
@@ -216,10 +217,10 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
-        GroupBox2 = New GroupBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
+        GroupBox2.SuspendLayout()
         TabPage3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
@@ -227,7 +228,6 @@ Partial Class Configurator
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
-        GroupBox2.SuspendLayout()
         SuspendLayout()
         ' 
         ' btnGet
@@ -684,18 +684,20 @@ Partial Class Configurator
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
-        ' Alink
+        ' GroupBox2
         ' 
-        Alink.BackColor = Color.Gold
-        Alink.FlatStyle = FlatStyle.Popup
-        Alink.ForeColor = SystemColors.ControlText
-        Alink.Location = New Point(11, 128)
-        Alink.Name = "Alink"
-        Alink.Size = New Size(159, 23)
-        Alink.TabIndex = 64
-        Alink.Text = "Adaptive Link"
-        btnToolTip.SetToolTip(Alink, "Enables the Adaptive Link" & vbCrLf)
-        Alink.UseVisualStyleBackColor = False
+        GroupBox2.Controls.Add(alink0)
+        GroupBox2.Controls.Add(Alink)
+        GroupBox2.Controls.Add(alink3)
+        GroupBox2.Controls.Add(alink1)
+        GroupBox2.Controls.Add(alink2)
+        GroupBox2.ForeColor = Color.White
+        GroupBox2.Location = New Point(445, 20)
+        GroupBox2.Name = "GroupBox2"
+        GroupBox2.Size = New Size(183, 165)
+        GroupBox2.TabIndex = 65
+        GroupBox2.TabStop = False
+        GroupBox2.Text = "TX Profiles"
         ' 
         ' alink0
         ' 
@@ -709,6 +711,19 @@ Partial Class Configurator
         alink0.TabStop = True
         alink0.Text = "EMAX rtl8812au AF1"
         alink0.UseVisualStyleBackColor = True
+        ' 
+        ' Alink
+        ' 
+        Alink.BackColor = Color.Gold
+        Alink.FlatStyle = FlatStyle.Popup
+        Alink.ForeColor = SystemColors.ControlText
+        Alink.Location = New Point(11, 128)
+        Alink.Name = "Alink"
+        Alink.Size = New Size(159, 23)
+        Alink.TabIndex = 64
+        Alink.Text = "Adaptive Link"
+        btnToolTip.SetToolTip(Alink, "Enables the Adaptive Link" & vbCrLf)
+        Alink.UseVisualStyleBackColor = False
         ' 
         ' alink3
         ' 
@@ -954,7 +969,7 @@ Partial Class Configurator
         btnMSPGSExtra.Name = "btnMSPGSExtra"
         btnMSPGSExtra.Size = New Size(116, 22)
         btnMSPGSExtra.TabIndex = 69
-        btnMSPGSExtra.Text = "MSPOSD GS EXTRA"
+        btnMSPGSExtra.Text = "MSPOSD GS"
         btnToolTip.SetToolTip(btnMSPGSExtra, "Enable MSPOSD on the Ground Station (Radxa)" & vbCrLf & "Add OSD SOC temperature")
         btnMSPGSExtra.UseVisualStyleBackColor = False
         ' 
@@ -993,7 +1008,7 @@ Partial Class Configurator
         btnMSPExtra.Name = "btnMSPExtra"
         btnMSPExtra.Size = New Size(116, 22)
         btnMSPExtra.TabIndex = 66
-        btnMSPExtra.Text = "MSPOSD AIR EXTRA"
+        btnMSPExtra.Text = "MSPOSD AIR"
         btnToolTip.SetToolTip(btnMSPExtra, "Enable MSPOSD on the Air Unit" & vbCrLf & "Add OSD SOC temperature" & vbCrLf)
         btnMSPExtra.UseVisualStyleBackColor = False
         ' 
@@ -2635,21 +2650,6 @@ Partial Class Configurator
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.6"
         ' 
-        ' GroupBox2
-        ' 
-        GroupBox2.Controls.Add(alink0)
-        GroupBox2.Controls.Add(Alink)
-        GroupBox2.Controls.Add(alink3)
-        GroupBox2.Controls.Add(alink1)
-        GroupBox2.Controls.Add(alink2)
-        GroupBox2.ForeColor = Color.White
-        GroupBox2.Location = New Point(445, 20)
-        GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(183, 165)
-        GroupBox2.TabIndex = 65
-        GroupBox2.TabStop = False
-        GroupBox2.Text = "TX Profiles"
-        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
@@ -2684,6 +2684,8 @@ Partial Class Configurator
         TabPage1.PerformLayout()
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
+        GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
         TabPage4.ResumeLayout(False)
@@ -2696,8 +2698,6 @@ Partial Class Configurator
         TabPage6.PerformLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).EndInit()
         CType(connected, ComponentModel.ISupportInitialize).EndInit()
-        GroupBox2.ResumeLayout(False)
-        GroupBox2.PerformLayout()
         ResumeLayout(False)
         PerformLayout()
     End Sub
