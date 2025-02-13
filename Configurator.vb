@@ -247,7 +247,7 @@ err1:
                 WFBngallLines.Add(WFBngreader.ReadLine)
             Loop
             WFBngreader.Close()
-            txtFrequency.Text = ReadLine(2, WFBngallLines)
+            txtFrequency.Text = ReadLine(3, WFBngallLines)
             If rBtnCam.Checked Then txtPower.Text = ReadLine(6, WFBallLines)
             For x = 0 To WFBallLines.Count() - 1
                 If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
@@ -2537,8 +2537,8 @@ err1:
 
                     Dim wfbngfilePath = wfbng
                     Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
-                    If WFBlines(1).StartsWith("wifi_channel = ") Then
-                        WFBlines(1) = txtFrequency.Text
+                    If WFBlines(2).StartsWith("wifi_channel = ") Then
+                        WFBlines(2) = txtFrequency.Text
                     End If
                     If WFBlines(6).StartsWith("peer = 'connect://") Then
                         WFBlines(6) = txtMCS.Text
