@@ -869,6 +869,12 @@ err1:
         Next
         cmbSensor.Text = "Select Sensor"
 
+        Dim dirTX = "txprofiles\"
+        For Each fileTX As String In System.IO.Directory.GetFiles(dirTX)
+            cmbTXProfile.Items.Add(System.IO.Path.GetFileNameWithoutExtension(fileTX))
+        Next
+        cmbTXProfile.Text = "Select TXProfile"
+
         cmbVersion.Items.Clear()
         cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
@@ -3167,28 +3173,23 @@ err1:
             MsgBox("File " + extern + " not found!")
             Return
         End If
-        Dim txprofile As String
-        If alink1.Checked Then
-            txprofile = "mario"
-        ElseIf alink2.Checked Then
-            txprofile = "ac56"
-        ElseIf alink3.Checked Then
-            txprofile = "eu"
-        Else
-            txprofile = "af1"
+        If cmbTXProfile.Text <> "Select TXProfile" Then
+            If IsValidIP(txtIP.Text) Then
+                With New Process()
+                    .StartInfo.UseShellExecute = False
+                    .StartInfo.FileName = extern
+                    .StartInfo.Arguments = "alink " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbTXProfile.Text
+                    .StartInfo.RedirectStandardOutput = False
+                    .Start()
+                End With
+            Else
+                MsgBox("Please enter a valid IP address")
+            End If
         End If
+    End Sub
 
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "alink " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + txprofile
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
+    Private Sub alink1_CheckedChanged(sender As Object, e As EventArgs)
+
     End Sub
 
 #End Region

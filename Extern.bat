@@ -274,6 +274,8 @@ if "%1" == "alink" (
         plink -ssh root@%2 -pw %3 dos2unix /etc/alink.conf /etc/txprofiles.conf
 	plink -ssh root@%2 -pw %3 chmod +x /usr/bin/alink_drone
 	plink -ssh root@%2 -pw %3 cli -s .video0.qpDelta -12
+	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
+	plink -ssh root@%2 -pw %3 cli -s .fpv.noiseLevel 0
 	plink -ssh root@%2 -pw %3 sed -i -e '$i \/usr/bin/alink_drone --ip 10.5.0.10 --port 9999 "&"' /etc/rc.local
         plink -ssh root@%2 -pw %3 reboot
 )
