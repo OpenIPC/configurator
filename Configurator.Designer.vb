@@ -61,6 +61,7 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
         GroupBox2 = New GroupBox()
+        cmbTXProfile = New ComboBox()
         Alink = New Button()
         cmbMirror = New ComboBox()
         cmbFlip = New ComboBox()
@@ -213,7 +214,6 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
-        cmbTXProfile = New ComboBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -693,6 +693,18 @@ Partial Class Configurator
         GroupBox2.TabStop = False
         GroupBox2.Text = "TX Profiles"
         ' 
+        ' cmbTXProfile
+        ' 
+        cmbTXProfile.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbTXProfile.FlatStyle = FlatStyle.Popup
+        cmbTXProfile.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbTXProfile.FormattingEnabled = True
+        cmbTXProfile.Location = New Point(11, 27)
+        cmbTXProfile.Name = "cmbTXProfile"
+        cmbTXProfile.Size = New Size(159, 22)
+        cmbTXProfile.TabIndex = 65
+        btnToolTip.SetToolTip(cmbTXProfile, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot" & vbCrLf)
+        ' 
         ' Alink
         ' 
         Alink.BackColor = Color.Gold
@@ -926,7 +938,7 @@ Partial Class Configurator
         btnMSPExtraRemove.BackColor = Color.Gold
         btnMSPExtraRemove.FlatStyle = FlatStyle.Popup
         btnMSPExtraRemove.Font = New Font("Arial", 8F, FontStyle.Bold)
-        btnMSPExtraRemove.Location = New Point(454, 198)
+        btnMSPExtraRemove.Location = New Point(454, 344)
         btnMSPExtraRemove.Name = "btnMSPExtraRemove"
         btnMSPExtraRemove.Size = New Size(116, 22)
         btnMSPExtraRemove.TabIndex = 68
@@ -1033,14 +1045,13 @@ Partial Class Configurator
         btnMSP.BackColor = Color.Gold
         btnMSP.FlatStyle = FlatStyle.Popup
         btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMSP.Location = New Point(454, 344)
+        btnMSP.Location = New Point(454, 199)
         btnMSP.Name = "btnMSP"
-        btnMSP.Size = New Size(116, 30)
+        btnMSP.Size = New Size(116, 22)
         btnMSP.TabIndex = 56
         btnMSP.Text = "Latest VTXMENU"
         btnToolTip.SetToolTip(btnMSP, "Upload the latest vtxmenu for the MSPOSD of OpenIPC" & vbCrLf & vbCrLf & "To enter the VTX menu move: " & vbCrLf & "LEFT stick to bottom right and" & vbCrLf & "RIGHT stick to bottom left")
         btnMSP.UseVisualStyleBackColor = False
-        btnMSP.Visible = False
         ' 
         ' btnExtra
         ' 
@@ -2598,18 +2609,6 @@ Partial Class Configurator
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.7"
-        ' 
-        ' cmbTXProfile
-        ' 
-        cmbTXProfile.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
-        cmbTXProfile.FlatStyle = FlatStyle.Popup
-        cmbTXProfile.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
-        cmbTXProfile.FormattingEnabled = True
-        cmbTXProfile.Location = New Point(11, 27)
-        cmbTXProfile.Name = "cmbTXProfile"
-        cmbTXProfile.Size = New Size(159, 22)
-        cmbTXProfile.TabIndex = 65
-        btnToolTip.SetToolTip(cmbTXProfile, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot" & vbCrLf)
         ' 
         ' Configurator
         ' 

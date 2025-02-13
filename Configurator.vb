@@ -1539,7 +1539,7 @@ err1:
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = False
-        btnMSP.Visible = False
+        btnMSP.Visible = True
         btnFontsINAV.Visible = False
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
