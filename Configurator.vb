@@ -933,7 +933,7 @@ err1:
     End Sub
 
     Private Sub cmbBandwidth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBandwidth.SelectedIndexChanged
-        txtBandwidth.Text = "bandwidth=" & cmbBandwidth.SelectedItem.ToString
+        txtBandwidth.Text = "bandwidth = " & cmbBandwidth.SelectedItem.ToString
     End Sub
 
     Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
