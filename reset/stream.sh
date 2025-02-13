@@ -20,58 +20,23 @@ MHZ_BUTTON=`gpiofind PIN_38`
 start_ap_mode() {
     echo "Starting AP mode..." > /run/pixelpilot.msg
 
-    # Stop any existing wireless services that might interfere
-    sudo systemctl stop hostapd 2>/dev/null
-    sudo systemctl stop dnsmasq 2>/dev/null
-    sleep 1
-
-    # Ensure wlan0 is in a clean state
-    sudo ip link set wlan0 down
-    sleep 1
-    sudo ip addr flush dev wlan0
-    sleep 1
-
-    # Configure network and verify
-    sudo ip addr add 192.168.4.1/24 dev wlan0
-    sleep 1
-    
-    # Verify IP assignment
-    if ! ip addr show wlan0 | grep -q "192.168.4.1/24"; then
-        echo "Failed to assign IP to wlan0" > /run/pixelpilot.msg
-        return 1
-    fi
-
-    # Start hostapd and verify
-    sudo systemctl start hostapd
-    sleep 2
-    if ! systemctl is-active --quiet hostapd; then
-        echo "Failed to start hostapd" > /run/pixelpilot.msg
-        return 1
-    fi
-
-    # Bring up interface
-    sudo ip link set wlan0 up
-    sleep 1
-    if [[ $(ip link show wlan0 | grep -c "UP") -eq 0 ]]; then
-        echo "Failed to bring up wlan0" > /run/pixelpilot.msg
-        return 1
-    fi
-
-    # Start web UI
-    cd /config/webUI
-    sudo python3 /config/webUI/app.py &
-    sleep 2
-    
-    # Start DHCP server and verify
-    sudo systemctl start dnsmasq
-    sleep 2
-    if ! systemctl is-active --quiet dnsmasq; then
-        echo "Failed to start dnsmasq" > /run/pixelpilot.msg
-        return 1
+    # Check if connection already exists
+    if nmcli connection show | grep -q "Hostspot"; then
+        echo "Hostspot connection exists. Starting it..."
+        nmcli con up Hostspot
+    else
+        echo "Creating new Hostspot connection..."
+        nmcli con add type wifi ifname wlan0 con-name Hostspot autoconnect no ssid RadxaGroundstation
+        nmcli con modify Hostspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared
+        nmcli con modify Hostspot wifi-sec.key-mgmt wpa-psk
+        nmcli con modify Hostspot wifi-sec.psk "radxaopenipc"
+        nmcli con modify Hostspot ipv4.addresses 192.168.4.1/24
+        echo "Starting Hostspot..."
+        nmcli con up Hostspot
     fi
     
     AP_MODE=1
-    echo "AP mode on." > /run/pixelpilot.msg
+    echo "AP mode on. Connect to 'RadxaGroundstation'." > /run/pixelpilot.msg
     echo "AP mode started. Connect to 'RadxaGroundstation' network to access files."
     return 0
 }
@@ -80,16 +45,12 @@ start_ap_mode() {
 stop_ap_mode() {
     echo "Stopping AP mode..." > /run/pixelpilot.msg
     echo "Stopping AP mode..."
-    sudo pkill python3 /config/webUI/app.py
-    sudo systemctl stop hostapd
-    sudo systemctl stop dnsmasq
-    
-    sudo ip link set wlan0 down
-    sudo ip addr flush dev wlan0
+
+    nmcli con down Hostspot
     
     AP_MODE=0
     echo "AP mode off." > /run/pixelpilot.msg
-    echo "Wifibroadcast mode restored."
+    echo "AP mode off."
 }
 
 # Rest of your existing variables and initialization code...
@@ -123,7 +84,7 @@ PID=$!
 #Start MSPOSD on gs-side
 if [[ "$OSD" == "ground" ]]; then
     # Wait for IP to become available, with timeout
-    max_attempts=60  # 60 attempts = 120 seconds with 2 second sleep
+    max_attempts=120  # 120 attempts = 10 minutes with 5 second sleep
     attempt=1
     
     echo "Waiting for 10.5.0.1 to become available..."
@@ -131,7 +92,7 @@ if [[ "$OSD" == "ground" ]]; then
         if [ $attempt -ge $max_attempts ]; then
             exit 1
         fi
-        sleep 2
+        sleep 5
         ((attempt++))
     done
     
@@ -169,6 +130,27 @@ while true; do
                     sleep 1
                 fi
             fi
+        else
+            # Regular short press handling for MHZ button
+            if [ "$mhz_press_start" -ne 0 ] && [ "$AP_MODE" -eq 0 ]; then
+                echo "toggling 40MHz bandwidth"
+                if [[ -f "$WFB_CFG" ]]; then
+                    bandwidth=$(grep '^bandwidth =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
+                else
+                    echo "File $WFB_CFG not found."
+                fi
+
+                if [[ $bandwidth -eq 20 ]]; then
+                    echo "setting to 40MHz" > /run/pixelpilot.msg
+                    sudo sed -i "/^bandwidth =/ s/=.*/= 40/" $WFB_CFG
+                    systemctl restart wifibroadcast
+                elif [[ $bandwidth -eq 40 ]]; then
+                    echo "setting to 20MHz" > /run/pixelpilot.msg
+                    sudo sed -i "/^bandwidth =/ s/=.*/= 20/" $WFB_CFG
+                    systemctl restart wifibroadcast
+                fi
+            fi
+            mhz_press_start=0
         fi
 
         # Regular button handling (only when not in AP mode)
@@ -190,7 +172,7 @@ while true; do
                     Chan=${full_chan_list[$i]}
                     sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
                     echo "$Freq" > /run/pixelpilot.msg
-                    sudo systemctl restart wifibroadcast
+                    systemctl restart wifibroadcast
                 elif [ "$bandwidth" -eq 40 ]; then
                     i=$((i+1))
                     if [[ $i -gt 12 ]]
@@ -201,7 +183,7 @@ while true; do
                     Chan=${wide_chan_list[$i]}
                     sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
                     echo "$Freq" > /run/pixelpilot.msg
-                    sudo systemctl restart wifibroadcast
+                    systemctl restart wifibroadcast
                 fi
             elif [ "$DOWN_BUTTON_STATE" -eq 1 ]; then
                 # Your existing DOWN button handling code
@@ -216,7 +198,7 @@ while true; do
                     Chan=${full_chan_list[$i]}
                     sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
                     echo "$Freq" > /run/pixelpilot.msg
-                    sudo systemctl restart wifibroadcast
+                    systemctl restart wifibroadcast
                 elif [ "$bandwidth" -eq 40 ]; then
                     i=$((i-1))
                     if [[ $i -lt 0 ]]
@@ -227,7 +209,7 @@ while true; do
                     Chan=${wide_chan_list[$i]}
                     sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
                     echo "$Freq" > /run/pixelpilot.msg
-                    sudo systemctl restart wifibroadcast
+                    systemctl restart wifibroadcast
                 fi
             fi
         fi
