@@ -13,30 +13,65 @@ DVR_BUTTON=`gpiofind PIN_32`
 UP_BUTTON=`gpiofind PIN_16`
 DOWN_BUTTON=`gpiofind PIN_18`
 LEFT_BUTTON=`gpiofind PIN_13`
-#RIGHT_BUTTON=`gpiofind PIN_11`
-MHZ_BUTTON=`gpiofind PIN_11`
+RIGHT_BUTTON=`gpiofind PIN_11`
+MHZ_BUTTON=`gpiofind PIN_38`
 
 # Function to start AP mode
 start_ap_mode() {
     echo "Starting AP mode..." > /run/pixelpilot.msg
 
-    # Check if connection already exists
-    if nmcli connection show | grep -q "Hostspot"; then
-        echo "Hostspot connection exists. Starting it..."
-        nmcli con up Hostspot
-    else
-        echo "Creating new Hostspot connection..."
-        nmcli con add type wifi ifname wlan0 con-name Hostspot autoconnect no ssid RadxaGroundstation
-        nmcli con modify Hostspot 802-11-wireless.mode ap 802-11-wireless.band bg ipv4.method shared
-        nmcli con modify Hostspot wifi-sec.key-mgmt wpa-psk
-        nmcli con modify Hostspot wifi-sec.psk "radxaopenipc"
-        nmcli con modify Hostspot ipv4.addresses 192.168.4.1/24
-        echo "Starting Hostspot..."
-        nmcli con up Hostspot
+    # Stop any existing wireless services that might interfere
+    sudo systemctl stop hostapd 2>/dev/null
+    sudo systemctl stop dnsmasq 2>/dev/null
+    sleep 1
+
+    # Ensure wlan0 is in a clean state
+    sudo ip link set wlan0 down
+    sleep 1
+    sudo ip addr flush dev wlan0
+    sleep 1
+
+    # Configure network and verify
+    sudo ip addr add 192.168.4.1/24 dev wlan0
+    sleep 1
+    
+    # Verify IP assignment
+    if ! ip addr show wlan0 | grep -q "192.168.4.1/24"; then
+        echo "Failed to assign IP to wlan0" > /run/pixelpilot.msg
+        return 1
     fi
 
+    # Start hostapd and verify
+    sudo systemctl start hostapd
+    sleep 2
+    if ! systemctl is-active --quiet hostapd; then
+        echo "Failed to start hostapd" > /run/pixelpilot.msg
+        return 1
+    fi
+
+    # Bring up interface
+    sudo ip link set wlan0 up
+    sleep 1
+    if [[ $(ip link show wlan0 | grep -c "UP") -eq 0 ]]; then
+        echo "Failed to bring up wlan0" > /run/pixelpilot.msg
+        return 1
+    fi
+
+    # Start web UI
+    cd /config/webUI
+    sudo python3 /config/webUI/app.py &
+    sleep 2
+    
+    # Start DHCP server and verify
+    sudo systemctl start dnsmasq
+    sleep 2
+    if ! systemctl is-active --quiet dnsmasq; then
+        echo "Failed to start dnsmasq" > /run/pixelpilot.msg
+        return 1
+    fi
+    
     AP_MODE=1
-    echo "AP mode on. Connect to 'RadxaGroundstation'." > /run/pixelpilot.msg
+    echo "AP mode on." > /run/pixelpilot.msg
     echo "AP mode started. Connect to 'RadxaGroundstation' network to access files."
     return 0
 }
@@ -45,12 +80,16 @@ start_ap_mode() {
 stop_ap_mode() {
     echo "Stopping AP mode..." > /run/pixelpilot.msg
     echo "Stopping AP mode..."
-
-    nmcli con down Hostspot
-
+    sudo pkill python3 /config/webUI/app.py
+    sudo systemctl stop hostapd
+    sudo systemctl stop dnsmasq
+    
+    sudo ip link set wlan0 down
+    sudo ip addr flush dev wlan0
+    
     AP_MODE=0
     echo "AP mode off." > /run/pixelpilot.msg
-    echo "AP mode off."
+    echo "Wifibroadcast mode restored."
 }
 
 # Rest of your existing variables and initialization code...
@@ -78,23 +117,24 @@ else
 fi
 
 #Start PixelPilot
-pixelpilot --osd --osd-elements 0 --osd-custom-message --osd-config /config/scripts/osd.json --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr-template $DVR_PATH/record_%Y-%m-%d>
+pixelpilot --osd --osd-elements 0 --osd-custom-message --osd-config /config/scripts/osd.json --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr-template $DVR_PATH/record_%Y-%m-%d_%H-%M-%S.mp4 &
 PID=$!
+
 #Start MSPOSD on gs-side
 if [[ "$OSD" == "ground" ]]; then
     # Wait for IP to become available, with timeout
-    max_attempts=120  # 120 attempts = 10 minutes with 5 second sleep
+    max_attempts=60  # 60 attempts = 120 seconds with 2 second sleep
     attempt=1
-
+    
     echo "Waiting for 10.5.0.1 to become available..."
     while ! ping -c 1 -W 1 10.5.0.1 >/dev/null 2>&1; do
         if [ $attempt -ge $max_attempts ]; then
             exit 1
         fi
-        sleep 5
+        sleep 2
         ((attempt++))
     done
-
+    
     echo "IP 10.5.0.1 is available, starting msposd_rockchip"
     msposd_rockchip --osd --ahi 0 --matrix 11 -v -r 5 --master 10.5.0.1:5000 &
 fi
@@ -110,7 +150,7 @@ while true; do
         MHZ_BUTTON_STATE=$(gpioget $MHZ_BUTTON)
         UP_BUTTON_STATE=$(gpioget $UP_BUTTON)
         DOWN_BUTTON_STATE=$(gpioget $DOWN_BUTTON)
-
+        
         # Handle MHZ button long press
         if [ "$MHZ_BUTTON_STATE" -eq 1 ]; then
             if [ "$mhz_press_start" -eq 0 ]; then
@@ -118,7 +158,7 @@ while true; do
             else
                 current_time=$(date +%s)
                 elapsed=$((current_time - mhz_press_start))
-
+                
                 if [ "$elapsed" -ge "$LONG_PRESS_DURATION" ]; then
                     if [ "$AP_MODE" -eq 0 ]; then
                         start_ap_mode
@@ -129,27 +169,6 @@ while true; do
                     sleep 1
                 fi
             fi
-        else
-            # Regular short press handling for MHZ button
-            if [ "$mhz_press_start" -ne 0 ] && [ "$AP_MODE" -eq 0 ]; then
-                echo "toggling 40MHz bandwidth"
-                if [[ -f "$WFB_CFG" ]]; then
-                    bandwidth=$(grep '^bandwidth =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
-                else
-                    echo "File $WFB_CFG not found."
-                fi
-
-                if [[ $bandwidth -eq 20 ]]; then
-                    echo "setting to 40MHz" > /run/pixelpilot.msg
-                    sudo sed -i "/^bandwidth =/ s/=.*/= 40/" $WFB_CFG
-                    systemctl restart wifibroadcast
-                elif [[ $bandwidth -eq 40 ]]; then
-                    echo "setting to 20MHz" > /run/pixelpilot.msg
-                    sudo sed -i "/^bandwidth =/ s/=.*/= 20/" $WFB_CFG
-                    systemctl restart wifibroadcast
-                fi
-            fi
-            mhz_press_start=0
         fi
 
         # Regular button handling (only when not in AP mode)
@@ -212,6 +231,6 @@ while true; do
                 fi
             fi
         fi
-
+        
         sleep 0.1
 done
