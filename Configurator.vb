@@ -252,9 +252,9 @@ err1:
             For x = 0 To WFBallLines.Count() - 1
                 If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
             Next x
-            txtBandwidth.Text = ReadLine(10, WFBngallLines)
-            txtMCS.Text = ReadLine(6, WFBngallLines)
-            txtSTBC.Text = ReadLine(9, WFBngallLines)
+            txtBandwidth.Text = ReadLine(11, WFBngallLines)
+            txtMCS.Text = ReadLine(7, WFBngallLines)
+            txtSTBC.Text = ReadLine(10, WFBngallLines)
         Else
             txtFrequency.Text = ReadLine(7, WFBallLines)
             txtPower.Text = ReadLine(10, WFBallLines)
@@ -2540,14 +2540,14 @@ err1:
                     If WFBlines(1).StartsWith("wifi_channel = ") Then
                         WFBlines(1) = txtFrequency.Text
                     End If
-                    If WFBlines(5).StartsWith("peer = 'connect://") Then
-                        WFBlines(5) = txtMCS.Text
+                    If WFBlines(6).StartsWith("peer = 'connect://") Then
+                        WFBlines(6) = txtMCS.Text
                     End If
-                    If WFBlines(8).StartsWith("peer = 'connect://") Then
-                        WFBlines(8) = txtSTBC.Text
+                    If WFBlines(9).StartsWith("peer = 'connect://") Then
+                        WFBlines(9) = txtSTBC.Text
                     End If
-                    If WFBlines(9).StartsWith("bandwidth") Then
-                        WFBlines(9) = txtBandwidth.Text
+                    If WFBlines(10).StartsWith("bandwidth") Then
+                        WFBlines(10) = txtBandwidth.Text
                     End If
                     IO.File.WriteAllLines(wfbngfilePath, WFBlines)
                     If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
