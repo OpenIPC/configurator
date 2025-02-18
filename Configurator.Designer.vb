@@ -61,6 +61,8 @@ Partial Class Configurator
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
         GroupBox2 = New GroupBox()
+        Label14 = New Label()
+        trackWeight = New TrackBar()
         cmbTXProfile = New ComboBox()
         Alink = New Button()
         cmbMirror = New ComboBox()
@@ -218,6 +220,7 @@ Partial Class Configurator
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         GroupBox2.SuspendLayout()
+        CType(trackWeight, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
@@ -683,15 +686,36 @@ Partial Class Configurator
         ' 
         ' GroupBox2
         ' 
+        GroupBox2.Controls.Add(Label14)
+        GroupBox2.Controls.Add(trackWeight)
         GroupBox2.Controls.Add(cmbTXProfile)
         GroupBox2.Controls.Add(Alink)
         GroupBox2.ForeColor = Color.White
         GroupBox2.Location = New Point(445, 20)
         GroupBox2.Name = "GroupBox2"
-        GroupBox2.Size = New Size(183, 165)
+        GroupBox2.Size = New Size(183, 252)
         GroupBox2.TabIndex = 65
         GroupBox2.TabStop = False
-        GroupBox2.Text = "TX Profiles"
+        GroupBox2.Text = "Adaptive Link Setup"
+        ' 
+        ' Label14
+        ' 
+        Label14.AutoSize = True
+        Label14.Font = New Font("Arial", 9F, FontStyle.Bold)
+        Label14.ForeColor = Color.White
+        Label14.Location = New Point(11, 133)
+        Label14.Name = "Label14"
+        Label14.Size = New Size(163, 15)
+        Label14.TabIndex = 67
+        Label14.Text = "RSSI                                   SNR"
+        ' 
+        ' trackWeight
+        ' 
+        trackWeight.Location = New Point(11, 162)
+        trackWeight.Name = "trackWeight"
+        trackWeight.Size = New Size(159, 45)
+        trackWeight.TabIndex = 66
+        btnToolTip.SetToolTip(trackWeight, "Sets how much consideration " & vbCrLf & "the Adaptive Link puts on" & vbCrLf & "Ground Station RSSI vs SNR")
         ' 
         ' cmbTXProfile
         ' 
@@ -710,12 +734,12 @@ Partial Class Configurator
         Alink.BackColor = Color.Gold
         Alink.FlatStyle = FlatStyle.Popup
         Alink.ForeColor = SystemColors.ControlText
-        Alink.Location = New Point(11, 128)
+        Alink.Location = New Point(11, 213)
         Alink.Name = "Alink"
         Alink.Size = New Size(159, 23)
         Alink.TabIndex = 64
-        Alink.Text = "Adaptive Link"
-        btnToolTip.SetToolTip(Alink, "Enables the Adaptive Link" & vbCrLf)
+        Alink.Text = "Install Adaptive Link"
+        btnToolTip.SetToolTip(Alink, "Installs the OpenIPC Adaptive Link" & vbCrLf)
         Alink.UseVisualStyleBackColor = False
         ' 
         ' cmbMirror
@@ -2597,7 +2621,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "16/02/2025"
+        Label12.Text = "18/02/2025"
         ' 
         ' Label13
         ' 
@@ -2645,6 +2669,8 @@ Partial Class Configurator
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
         GroupBox2.ResumeLayout(False)
+        GroupBox2.PerformLayout()
+        CType(trackWeight, ComponentModel.ISupportInitialize).EndInit()
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
         TabPage4.ResumeLayout(False)
@@ -2853,5 +2879,7 @@ Partial Class Configurator
     Friend WithEvents Alink As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents cmbTXProfile As ComboBox
+    Friend WithEvents Label14 As Label
+    Friend WithEvents trackWeight As TrackBar
 
 End Class

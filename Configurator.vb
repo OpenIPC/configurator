@@ -3178,6 +3178,20 @@ err1:
             MsgBox("File " + extern + " not found!")
             Return
         End If
+        Dim alink_info = "alink.conf"
+        If Not IO.File.Exists(alink_info) Then
+            MsgBox("File " + alink_info + " not found!")
+            Return
+        End If
+        Dim alink_info_filePath = alink_info
+        Dim alink_info_lines = IO.File.ReadAllLines(alink_info_filePath)
+        If alink_info_lines(6).StartsWith("rssi_weight=") Then
+            alink_info_lines(6) = "rssi_weight=" + CStr(1.0 - (trackWeight.Value / 10))
+        End If
+        If alink_info_lines(7).StartsWith("snr_weight=") Then
+            alink_info_lines(7) = "snr_weight=" + CStr(trackWeight.Value / 10)
+        End If
+        IO.File.WriteAllLines(alink_info_filePath, alink_info_lines)
         If cmbTXProfile.Text <> "Select TXProfile" Then
             If IsValidIP(txtIP.Text) Then
                 With New Process()
@@ -3191,10 +3205,6 @@ err1:
                 MsgBox("Please enter a valid IP address")
             End If
         End If
-    End Sub
-
-    Private Sub alink1_CheckedChanged(sender As Object, e As EventArgs)
-
     End Sub
 
 #End Region
