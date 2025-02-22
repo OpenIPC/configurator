@@ -633,6 +633,8 @@ err1:
         cmbResolution.Items.Add("1280x720")
         cmbResolution.Items.Add("1456x816")
         cmbResolution.Items.Add("1920x1080")
+        cmbResolution.Items.Add("1440x1080")
+        cmbResolution.Items.Add("1920x1440")
         cmbResolution.Items.Add("2104x1184")
         cmbResolution.Items.Add("2208x1248")
         cmbResolution.Items.Add("2240x1264")
