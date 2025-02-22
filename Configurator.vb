@@ -3193,16 +3193,21 @@ err1:
         End If
         IO.File.WriteAllLines(alink_info_filePath, alink_info_lines)
         If cmbTXProfile.Text <> "Select TXProfile" Then
-            If IsValidIP(txtIP.Text) Then
-                With New Process()
-                    .StartInfo.UseShellExecute = False
-                    .StartInfo.FileName = extern
-                    .StartInfo.Arguments = "alink " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbTXProfile.Text
-                    .StartInfo.RedirectStandardOutput = False
-                    .Start()
-                End With
-            Else
-                MsgBox("Please enter a valid IP address")
+            Dim result As DialogResult = MessageBox.Show("The Adaptive Link in ""Alpha State Of Development"" and will probably not work correctly. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
+            If result = DialogResult.No Then
+                MessageBox.Show("No changes have been done.")
+            ElseIf result = DialogResult.Yes Then
+                If IsValidIP(txtIP.Text) Then
+                    With New Process()
+                        .StartInfo.UseShellExecute = False
+                        .StartInfo.FileName = extern
+                        .StartInfo.Arguments = "alink " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbTXProfile.Text
+                        .StartInfo.RedirectStandardOutput = False
+                        .Start()
+                    End With
+                Else
+                    MsgBox("Please enter a valid IP address")
+                End If
             End If
         End If
     End Sub
