@@ -3195,7 +3195,7 @@ err1:
         End If
         IO.File.WriteAllLines(alink_info_filePath, alink_info_lines)
         If cmbTXProfile.Text <> "Select TXProfile" Then
-            Dim result As DialogResult = MessageBox.Show("The Adaptive Link in ""Alpha State Of Development"" and will probably not work correctly. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
+            Dim result As DialogResult = MessageBox.Show("The Adaptive Link is in ""Alpha State Of Development"" and will probably not work correctly. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
                 MessageBox.Show("No changes have been done.")
             ElseIf result = DialogResult.Yes Then
