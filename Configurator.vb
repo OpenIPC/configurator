@@ -877,6 +877,12 @@ err1:
         Next
         cmbTXProfile.Text = "Select TXProfile"
 
+        Dim dirPresets = "presets\"
+        For Each filePresets As String In System.IO.Directory.GetFiles(dirPresets)
+            cmbPresets.Items.Add(System.IO.Path.GetFileNameWithoutExtension(filePresets))
+        Next
+        cmbPresets.Text = "Select Preset"
+
         cmbVersion.Items.Clear()
         cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
@@ -3210,6 +3216,28 @@ err1:
                 Else
                     MsgBox("Please enter a valid IP address")
                 End If
+            End If
+        End If
+    End Sub
+
+    Private Sub btnPreset_Click(sender As Object, e As EventArgs) Handles btnPreset.Click
+        Dim selected_preset = "presets/" + CStr(cmbPresets.Text) + ".bat"
+        If Not File.Exists(selected_preset) Then
+            MsgBox("File " + selected_preset + " not found!")
+            Return
+        End If
+
+        If cmbPresets.Text <> "Select Preset" Then
+            If IsValidIP(txtIP.Text) Then
+                With New Process()
+                    .StartInfo.UseShellExecute = False
+                    .StartInfo.FileName = selected_preset
+                    .StartInfo.Arguments = "preset " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    .StartInfo.RedirectStandardOutput = False
+                    .Start()
+                End With
+            Else
+                MsgBox("Please enter a valid IP address")
             End If
         End If
     End Sub

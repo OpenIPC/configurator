@@ -106,6 +106,10 @@ Partial Class Configurator
         txtRouter = New TextBox()
         txtBaud = New TextBox()
         txtSerial = New TextBox()
+        TabPage7 = New TabPage()
+        GroupBox3 = New GroupBox()
+        cmbPresets = New ComboBox()
+        btnPreset = New Button()
         TabPage4 = New TabPage()
         btnGSMSPOSD = New Button()
         btnAIRMSPOSD = New Button()
@@ -222,6 +226,8 @@ Partial Class Configurator
         GroupBox2.SuspendLayout()
         CType(trackWeight, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
+        TabPage7.SuspendLayout()
+        GroupBox3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
         GroupBox1.SuspendLayout()
@@ -470,6 +476,7 @@ Partial Class Configurator
         TabControl1.Controls.Add(TabPage1)
         TabControl1.Controls.Add(TabPage2)
         TabControl1.Controls.Add(TabPage3)
+        TabControl1.Controls.Add(TabPage7)
         TabControl1.Controls.Add(TabPage4)
         TabControl1.Controls.Add(TabPage5)
         TabControl1.Controls.Add(TabPage6)
@@ -479,7 +486,7 @@ Partial Class Configurator
         TabControl1.Multiline = True
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(643, 423)
+        TabControl1.Size = New Size(678, 423)
         TabControl1.SizeMode = TabSizeMode.Fixed
         TabControl1.TabIndex = 22
         ' 
@@ -510,7 +517,7 @@ Partial Class Configurator
         TabPage1.Location = New Point(4, 25)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(635, 394)
+        TabPage1.Size = New Size(670, 394)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
@@ -680,7 +687,7 @@ Partial Class Configurator
         TabPage2.Location = New Point(4, 25)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(635, 394)
+        TabPage2.Size = New Size(670, 394)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
         ' 
@@ -940,7 +947,7 @@ Partial Class Configurator
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.RightToLeft = RightToLeft.No
-        TabPage3.Size = New Size(635, 394)
+        TabPage3.Size = New Size(670, 394)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
@@ -1246,6 +1253,53 @@ Partial Class Configurator
         txtSerial.Size = New Size(191, 20)
         txtSerial.TabIndex = 5
         ' 
+        ' TabPage7
+        ' 
+        TabPage7.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage7.Controls.Add(GroupBox3)
+        TabPage7.Location = New Point(4, 25)
+        TabPage7.Name = "TabPage7"
+        TabPage7.Size = New Size(670, 394)
+        TabPage7.TabIndex = 6
+        TabPage7.Text = "Presets"
+        ' 
+        ' GroupBox3
+        ' 
+        GroupBox3.Controls.Add(cmbPresets)
+        GroupBox3.Controls.Add(btnPreset)
+        GroupBox3.ForeColor = Color.White
+        GroupBox3.Location = New Point(3, 3)
+        GroupBox3.Name = "GroupBox3"
+        GroupBox3.Size = New Size(664, 388)
+        GroupBox3.TabIndex = 66
+        GroupBox3.TabStop = False
+        GroupBox3.Text = "OpenIPC Camera Presets"
+        ' 
+        ' cmbPresets
+        ' 
+        cmbPresets.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbPresets.FlatStyle = FlatStyle.Popup
+        cmbPresets.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbPresets.FormattingEnabled = True
+        cmbPresets.Location = New Point(11, 27)
+        cmbPresets.Name = "cmbPresets"
+        cmbPresets.Size = New Size(636, 22)
+        cmbPresets.TabIndex = 65
+        btnToolTip.SetToolTip(cmbPresets, "1.Select a Preset" & vbCrLf & "2.Click Install Selected Preset" & vbCrLf)
+        ' 
+        ' btnPreset
+        ' 
+        btnPreset.BackColor = Color.Gold
+        btnPreset.FlatStyle = FlatStyle.Popup
+        btnPreset.ForeColor = SystemColors.ControlText
+        btnPreset.Location = New Point(499, 359)
+        btnPreset.Name = "btnPreset"
+        btnPreset.Size = New Size(159, 23)
+        btnPreset.TabIndex = 64
+        btnPreset.Text = "Install Selected Preset"
+        btnToolTip.SetToolTip(btnPreset, "Installs the OpenIPC Adaptive Link" & vbCrLf)
+        btnPreset.UseVisualStyleBackColor = False
+        ' 
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
@@ -1277,7 +1331,7 @@ Partial Class Configurator
         TabPage4.Location = New Point(4, 25)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(635, 394)
+        TabPage4.Size = New Size(670, 394)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
         ' 
@@ -1601,7 +1655,7 @@ Partial Class Configurator
         TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(635, 394)
+        TabPage5.Size = New Size(670, 394)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
@@ -1843,7 +1897,7 @@ Partial Class Configurator
         GroupBox1.ForeColor = Color.White
         GroupBox1.Location = New Point(6, 331)
         GroupBox1.Name = "GroupBox1"
-        GroupBox1.Size = New Size(622, 63)
+        GroupBox1.Size = New Size(658, 63)
         GroupBox1.TabIndex = 60
         GroupBox1.TabStop = False
         GroupBox1.Text = "Installation Menu"
@@ -1879,7 +1933,7 @@ Partial Class Configurator
         ' 
         ProgressBar1.Location = New Point(326, 35)
         ProgressBar1.Name = "ProgressBar1"
-        ProgressBar1.Size = New Size(285, 20)
+        ProgressBar1.Size = New Size(326, 20)
         ProgressBar1.TabIndex = 57
         ' 
         ' TabPage6
@@ -1931,7 +1985,7 @@ Partial Class Configurator
         TabPage6.Location = New Point(4, 25)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
-        TabPage6.Size = New Size(635, 394)
+        TabPage6.Size = New Size(670, 394)
         TabPage6.TabIndex = 5
         TabPage6.Text = "OSD"
         ' 
@@ -1940,7 +1994,7 @@ Partial Class Configurator
         Label11.AutoSize = True
         Label11.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label11.ForeColor = Color.White
-        Label11.Location = New Point(472, 321)
+        Label11.Location = New Point(519, 367)
         Label11.Name = "Label11"
         Label11.Size = New Size(144, 15)
         Label11.TabIndex = 105
@@ -2555,7 +2609,7 @@ Partial Class Configurator
         rBtnCam.AutoSize = True
         rBtnCam.Checked = True
         rBtnCam.ForeColor = Color.White
-        rBtnCam.Location = New Point(488, 443)
+        rBtnCam.Location = New Point(523, 442)
         rBtnCam.Name = "rBtnCam"
         rBtnCam.Size = New Size(116, 19)
         rBtnCam.TabIndex = 27
@@ -2567,7 +2621,7 @@ Partial Class Configurator
         ' 
         rBtnNVR.AutoSize = True
         rBtnNVR.ForeColor = Color.White
-        rBtnNVR.Location = New Point(488, 463)
+        rBtnNVR.Location = New Point(523, 462)
         rBtnNVR.Name = "rBtnNVR"
         rBtnNVR.Size = New Size(87, 19)
         rBtnNVR.TabIndex = 28
@@ -2578,7 +2632,7 @@ Partial Class Configurator
         ' 
         rBtnRadxaZero3w.AutoSize = True
         rBtnRadxaZero3w.ForeColor = Color.White
-        rBtnRadxaZero3w.Location = New Point(488, 483)
+        rBtnRadxaZero3w.Location = New Point(523, 482)
         rBtnRadxaZero3w.Name = "rBtnRadxaZero3w"
         rBtnRadxaZero3w.Size = New Size(156, 19)
         rBtnRadxaZero3w.TabIndex = 29
@@ -2617,18 +2671,18 @@ Partial Class Configurator
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(610, 443)
+        Label12.Location = New Point(649, 444)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "22/02/2025"
+        Label12.Text = "25/02/2025"
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label13.ForeColor = Color.White
-        Label13.Location = New Point(606, 433)
+        Label13.Location = New Point(645, 434)
         Label13.Name = "Label13"
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
@@ -2639,7 +2693,7 @@ Partial Class Configurator
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
-        ClientSize = New Size(667, 507)
+        ClientSize = New Size(700, 507)
         Controls.Add(Label13)
         Controls.Add(Label12)
         Controls.Add(connected)
@@ -2673,6 +2727,8 @@ Partial Class Configurator
         CType(trackWeight, ComponentModel.ISupportInitialize).EndInit()
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
+        TabPage7.ResumeLayout(False)
+        GroupBox3.ResumeLayout(False)
         TabPage4.ResumeLayout(False)
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
@@ -2881,5 +2937,9 @@ Partial Class Configurator
     Friend WithEvents cmbTXProfile As ComboBox
     Friend WithEvents Label14 As Label
     Friend WithEvents trackWeight As TrackBar
+    Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents cmbPresets As ComboBox
+    Friend WithEvents btnPreset As Button
 
 End Class
