@@ -25,6 +25,7 @@ if "%1" == "preset" (
         plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=12' /etc/wfb.conf
         plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=2' /etc/telemetry.conf
 	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100/#console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 :end
