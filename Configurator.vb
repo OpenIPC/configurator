@@ -364,7 +364,7 @@ err1:
                 For x = 0 To CamallLines.Count() - 1
                     If CamallLines(x).StartsWith("  size:") And txtResolution.Text = "" Then txtResolution.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  fps:") And txtFPS.Text = "" Then txtFPS.Text = ReadLine(x + 1, CamallLines)
-                    If CamallLines(x).StartsWith("  codec: h26") Then txtEncode.Text = ReadLine(x + 1, CamallLines)
+                    If CamallLines(x).StartsWith("  codec: h26") And txtEncode.Text = "" Then txtEncode.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  bitrate:") Then txtBitrate.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  exposure:") Then txtExposure.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  contrast:") Then txtContrast.Text = ReadLine(x + 1, CamallLines)
