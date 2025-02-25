@@ -2817,7 +2817,7 @@ err1:
         pingReply = ping.Send(txtIP.Text)
         If pingReply.Status = IPStatus.Success Then
             connected.BackColor = Color.FromArgb(30, 255, 30)
-            btnRead.Enabled=true
+            btnRead.Enabled = True
         Else
             connected.BackColor = Color.FromArgb(255, 30, 30)
             btnRead.Enabled = False
