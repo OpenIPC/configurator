@@ -6,6 +6,11 @@ if "%1" == "dl" (
 	echo y | pscp -scp -pw %3 root@%2:/etc/telemetry.conf .
 )
 
+if "%1" == "dlyaml" (
+	echo y | pscp -scp -pw %3 root@%2:/etc/majestic.yaml .
+	echo y | pscp -scp -pw %3 root@%2:/etc/wfb.yaml .
+)
+
 if "%1" == "ul" (
 	echo y | pscp -scp -pw %3 majestic.yaml root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc
@@ -19,6 +24,12 @@ if "%1" == "ulr" (
 	echo y | pscp -scp -pw %3 telemetry.conf root@%2:/etc
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.conf /etc/telemetry.conf /etc/majestic.yaml
 	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "ulyamlr" (
+	echo y | pscp -scp -pw %3 majestic.yaml root@%2:/etc
+	echo y | pscp -scp -pw %3 wfb.yaml root@%2:/etc
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.yaml /etc/majestic.yaml
 )
 
 if "%1" == "dlvrx" (
@@ -203,6 +214,13 @@ if "%1" == "offlinefw" (
         plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz
         plink -ssh root@%2 -pw %3 tar -xvf /tmp/%4.tar -C /tmp
         plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n
+)
+
+if "%1" == "offlinefwf" (
+	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
+        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz
+        plink -ssh root@%2 -pw %3 tar -xvf /tmp/%4.tar -C /tmp
+        plink -ssh root@%2 -pw %3 sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n -f
 )
 
 if "%1" == "msp" (
