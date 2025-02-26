@@ -108,6 +108,7 @@ Partial Class Configurator
         txtSerial = New TextBox()
         TabPage7 = New TabPage()
         GroupBox3 = New GroupBox()
+        lblPreset = New TextBox()
         cmbPresets = New ComboBox()
         btnPreset = New Button()
         TabPage4 = New TabPage()
@@ -157,6 +158,7 @@ Partial Class Configurator
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         GroupBox1 = New GroupBox()
+        chkForce = New CheckBox()
         txtSOC = New TextBox()
         btnResetCam = New Button()
         ProgressBar1 = New ProgressBar()
@@ -220,6 +222,7 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
+        chkYAML = New CheckBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1265,6 +1268,7 @@ Partial Class Configurator
         ' 
         ' GroupBox3
         ' 
+        GroupBox3.Controls.Add(lblPreset)
         GroupBox3.Controls.Add(cmbPresets)
         GroupBox3.Controls.Add(btnPreset)
         GroupBox3.ForeColor = Color.White
@@ -1274,6 +1278,19 @@ Partial Class Configurator
         GroupBox3.TabIndex = 66
         GroupBox3.TabStop = False
         GroupBox3.Text = "OpenIPC Camera Presets"
+        ' 
+        ' lblPreset
+        ' 
+        lblPreset.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        lblPreset.BorderStyle = BorderStyle.FixedSingle
+        lblPreset.Font = New Font("Arial", 7F, FontStyle.Bold)
+        lblPreset.ForeColor = Color.White
+        lblPreset.Location = New Point(11, 55)
+        lblPreset.Multiline = True
+        lblPreset.Name = "lblPreset"
+        lblPreset.Size = New Size(636, 298)
+        lblPreset.TabIndex = 66
+        btnToolTip.SetToolTip(lblPreset, "Settings selected to be loaded.")
         ' 
         ' cmbPresets
         ' 
@@ -1292,12 +1309,12 @@ Partial Class Configurator
         btnPreset.BackColor = Color.Gold
         btnPreset.FlatStyle = FlatStyle.Popup
         btnPreset.ForeColor = SystemColors.ControlText
-        btnPreset.Location = New Point(499, 359)
+        btnPreset.Location = New Point(488, 359)
         btnPreset.Name = "btnPreset"
         btnPreset.Size = New Size(159, 23)
         btnPreset.TabIndex = 64
-        btnPreset.Text = "Install Selected Preset"
-        btnToolTip.SetToolTip(btnPreset, "Installs the OpenIPC Adaptive Link" & vbCrLf)
+        btnPreset.Text = "Apply Selected Preset"
+        btnToolTip.SetToolTip(btnPreset, "Apply the Selected Preset" & vbCrLf)
         btnPreset.UseVisualStyleBackColor = False
         ' 
         ' TabPage4
@@ -1891,6 +1908,7 @@ Partial Class Configurator
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.Controls.Add(chkForce)
         GroupBox1.Controls.Add(txtSOC)
         GroupBox1.Controls.Add(btnResetCam)
         GroupBox1.Controls.Add(ProgressBar1)
@@ -1901,6 +1919,17 @@ Partial Class Configurator
         GroupBox1.TabIndex = 60
         GroupBox1.TabStop = False
         GroupBox1.Text = "Installation Menu"
+        ' 
+        ' chkForce
+        ' 
+        chkForce.AutoSize = True
+        chkForce.Location = New Point(309, 10)
+        chkForce.Name = "chkForce"
+        chkForce.Size = New Size(103, 18)
+        chkForce.TabIndex = 59
+        chkForce.Text = "Force Version"
+        btnToolTip.SetToolTip(chkForce, "Bypasses the CPU check and update " & vbCrLf & "the camera to ANY firmware selected." & vbCrLf & "Be carefull what is loaded," & vbCrLf & "this may brick the camera.")
+        chkForce.UseVisualStyleBackColor = True
         ' 
         ' txtSOC
         ' 
@@ -2675,7 +2704,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "25/02/2025"
+        Label12.Text = "26/02/2025"
         ' 
         ' Label13
         ' 
@@ -2688,12 +2717,25 @@ Partial Class Configurator
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.7"
         ' 
+        ' chkYAML
+        ' 
+        chkYAML.AutoSize = True
+        chkYAML.ForeColor = Color.White
+        chkYAML.Location = New Point(334, 474)
+        chkYAML.Name = "chkYAML"
+        chkYAML.Size = New Size(116, 19)
+        chkYAML.TabIndex = 60
+        chkYAML.Text = "YAML file system"
+        btnToolTip.SetToolTip(chkYAML, "Enables the new YAML file system.")
+        chkYAML.UseVisualStyleBackColor = True
+        ' 
         ' Configurator
         ' 
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         ClientSize = New Size(700, 507)
+        Controls.Add(chkYAML)
         Controls.Add(Label13)
         Controls.Add(Label12)
         Controls.Add(connected)
@@ -2729,6 +2771,7 @@ Partial Class Configurator
         TabPage3.PerformLayout()
         TabPage7.ResumeLayout(False)
         GroupBox3.ResumeLayout(False)
+        GroupBox3.PerformLayout()
         TabPage4.ResumeLayout(False)
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
@@ -2941,5 +2984,8 @@ Partial Class Configurator
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents cmbPresets As ComboBox
     Friend WithEvents btnPreset As Button
+    Friend WithEvents chkForce As CheckBox
+    Friend WithEvents chkYAML As CheckBox
+    Friend WithEvents lblPreset As TextBox
 
 End Class

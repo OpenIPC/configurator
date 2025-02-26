@@ -12,6 +12,7 @@ Imports System.Text.Json
 Imports System.Net.WebRequestMethods
 Imports File = System.IO.File
 Imports System.IO.Compression
+Imports System.Diagnostics.Eventing.Reader
 
 
 Public Class Configurator
@@ -36,7 +37,11 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                If chkForce.Checked = False Then
+                    .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                Else
+                    .StartInfo.Arguments = "offlinefwf " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -171,7 +176,35 @@ err1:
                         If lines(x).StartsWith("openipc:") Then
                             lines(x) = "openipc:" + txtIP.Text
                         End If
-                        .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                        If chkYAML.Checked = False Then
+                            .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+
+                            cmbSerial.Items.Clear()
+                            cmbSerial.Items.Add("/dev/ttyS0")
+                            cmbSerial.Items.Add("/dev/ttyS1")
+                            cmbSerial.Items.Add("/dev/ttyS2")
+                            cmbSerial.Items.Add("/dev/ttyS3")
+                            cmbSerial.Text = "Select Serial Port"
+
+                            cmbRouter.Items.Clear()
+                            cmbRouter.Items.Add("MAVFWD")
+                            cmbRouter.Items.Add("MSPOSD")
+                            cmbRouter.Text = "Select Router"
+                        Else
+                            .StartInfo.Arguments = "dlyaml " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+
+                            cmbSerial.Items.Clear()
+                            cmbSerial.Items.Add("ttyS0")
+                            cmbSerial.Items.Add("ttyS1")
+                            cmbSerial.Items.Add("ttyS2")
+                            cmbSerial.Items.Add("ttyS3")
+                            cmbSerial.Text = "Select Serial Port"
+
+                            cmbRouter.Items.Clear()
+                            cmbRouter.Items.Add("mavfwd")
+                            cmbRouter.Items.Add("msposd")
+                            cmbRouter.Text = "Select Router"
+                        End If
                     End If
                 Next
                 IO.File.WriteAllLines(SettingsfilePath, lines)
@@ -213,80 +246,107 @@ err1:
         txtFECN.Text = ""
 
         Threading.Thread.Sleep(3000)
-
-        Dim wfbconf = "wfb.conf"
-        If Not System.IO.File.Exists(wfbconf) Then
-            MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-            Return
-        End If
-        Dim WFBreader As New IO.StreamReader(wfbconf)
-        Dim WFBallLines = New List(Of String)
-
-        Do While Not WFBreader.EndOfStream
-            WFBallLines.Add(WFBreader.ReadLine)
-        Loop
-        WFBreader.Close()
-
-        If rBtnNVR.Checked Then
-            txtFrequency.Text = ReadLine(7, WFBallLines)
-            txtPower.Text = ReadLine(10, WFBallLines)
-            txtFreq24.Text = ReadLine(8, WFBallLines)
-            txtPower24.Text = ReadLine(9, WFBallLines)
-            txtMCS.Text = ReadLine(14, WFBallLines)
-            txtSTBC.Text = ReadLine(15, WFBallLines)
-        ElseIf rBtnRadxaZero3w.Checked Then
-            Dim wfbng = "wifibroadcast.cfg"
-            If Not System.IO.File.Exists(wfbng) Then
-                MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+        If chkYAML.Checked = False Then
+            Dim wfbconf = "wfb.conf"
+            If Not System.IO.File.Exists(wfbconf) Then
+                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
                 Return
             End If
-            Dim WFBngreader As New IO.StreamReader(wfbng)
-            Dim WFBngallLines = New List(Of String)
+            Dim WFBreader As New IO.StreamReader(wfbconf)
+            Dim WFBallLines = New List(Of String)
 
-            Do While Not WFBngreader.EndOfStream
-                WFBngallLines.Add(WFBngreader.ReadLine)
+            Do While Not WFBreader.EndOfStream
+                WFBallLines.Add(WFBreader.ReadLine)
             Loop
-            WFBngreader.Close()
-            txtFrequency.Text = ReadLine(3, WFBngallLines)
-            If rBtnCam.Checked Then txtPower.Text = ReadLine(6, WFBallLines)
-            For x = 0 To WFBallLines.Count() - 1
-                If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
-            Next x
-            txtBandwidth.Text = ReadLine(11, WFBngallLines)
-            txtMCS.Text = ReadLine(7, WFBngallLines)
-            txtSTBC.Text = ReadLine(10, WFBngallLines)
+            WFBreader.Close()
+
+            If rBtnNVR.Checked Then
+                txtFrequency.Text = ReadLine(7, WFBallLines)
+                txtPower.Text = ReadLine(10, WFBallLines)
+                txtFreq24.Text = ReadLine(8, WFBallLines)
+                txtPower24.Text = ReadLine(9, WFBallLines)
+                txtMCS.Text = ReadLine(14, WFBallLines)
+                txtSTBC.Text = ReadLine(15, WFBallLines)
+            ElseIf rBtnRadxaZero3w.Checked Then
+                Dim wfbng = "wifibroadcast.cfg"
+                If Not System.IO.File.Exists(wfbng) Then
+                    MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                    Return
+                End If
+                Dim WFBngreader As New IO.StreamReader(wfbng)
+                Dim WFBngallLines = New List(Of String)
+
+                Do While Not WFBngreader.EndOfStream
+                    WFBngallLines.Add(WFBngreader.ReadLine)
+                Loop
+                WFBngreader.Close()
+                txtFrequency.Text = ReadLine(3, WFBngallLines)
+                If rBtnCam.Checked Then txtPower.Text = ReadLine(6, WFBallLines)
+                For x = 0 To WFBallLines.Count() - 1
+                    If WFBallLines(x).StartsWith("options 88XXau_wfb ") Then txtPower.Text = ReadLine(x + 1, WFBallLines)
+                Next x
+                txtBandwidth.Text = ReadLine(11, WFBngallLines)
+                txtMCS.Text = ReadLine(7, WFBngallLines)
+                txtSTBC.Text = ReadLine(10, WFBngallLines)
+            Else
+                txtFrequency.Text = ReadLine(7, WFBallLines)
+                txtPower.Text = ReadLine(10, WFBallLines)
+                txtFreq24.Text = ReadLine(8, WFBallLines)
+                txtPower24.Text = ReadLine(9, WFBallLines)
+                txtBandwidth.Text = ReadLine(11, WFBallLines)
+                txtMCS.Text = ReadLine(14, WFBallLines)
+                txtSTBC.Text = ReadLine(12, WFBallLines)
+                txtLDPC.Text = ReadLine(13, WFBallLines)
+                txtFECK.Text = ReadLine(20, WFBallLines)
+                txtFECN.Text = ReadLine(21, WFBallLines)
+            End If
         Else
-            txtFrequency.Text = ReadLine(7, WFBallLines)
-            txtPower.Text = ReadLine(10, WFBallLines)
-            txtFreq24.Text = ReadLine(8, WFBallLines)
-            txtPower24.Text = ReadLine(9, WFBallLines)
-            txtBandwidth.Text = ReadLine(11, WFBallLines)
-            txtMCS.Text = ReadLine(14, WFBallLines)
-            txtSTBC.Text = ReadLine(12, WFBallLines)
-            txtLDPC.Text = ReadLine(13, WFBallLines)
-            txtFECK.Text = ReadLine(20, WFBallLines)
-            txtFECN.Text = ReadLine(21, WFBallLines)
+            Dim wfbconf = "wfb.yaml"
+            If Not System.IO.File.Exists(wfbconf) Then
+                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                Return
+            End If
+            Dim WFBreader As New IO.StreamReader(wfbconf)
+            Dim WFBallLines = New List(Of String)
+
+            Do While Not WFBreader.EndOfStream
+                WFBallLines.Add(WFBreader.ReadLine)
+            Loop
+            WFBreader.Close()
+            txtFrequency.Text = ReadLine(3, WFBallLines)
+            txtPower.Text = ReadLine(2, WFBallLines)
+            txtBandwidth.Text = ReadLine(4, WFBallLines)
+            txtMCS.Text = ReadLine(6, WFBallLines)
+            txtSTBC.Text = ReadLine(10, WFBallLines)
+            txtLDPC.Text = ReadLine(11, WFBallLines)
+            txtFECK.Text = ReadLine(8, WFBallLines)
+            txtFECN.Text = ReadLine(9, WFBallLines)
+            txtRouter.Text = ReadLine(14, WFBallLines)
+            txtSerial.Text = ReadLine(15, WFBallLines)
         End If
+
 
         If rBtnNVR.Checked Or rBtnCam.Checked Then
-            Dim telemetry = "telemetry.conf"
-            If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
-            End If
-            Dim TLMreader As New IO.StreamReader(telemetry)
-            Dim TLMallLines = New List(Of String)
+            If chkYAML.Checked = False Then
+                Dim telemetry = "telemetry.conf"
+                If Not System.IO.File.Exists(telemetry) Then
+                    MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                    Return
+                End If
+                Dim TLMreader As New IO.StreamReader(telemetry)
+                Dim TLMallLines = New List(Of String)
 
-            Do While Not TLMreader.EndOfStream
-                TLMallLines.Add(TLMreader.ReadLine)
-            Loop
-            TLMreader.Close()
-            txtSerial.Text = ReadLine(4, TLMallLines)
-            txtBaud.Text = ReadLine(5, TLMallLines)
-            txtRouter.Text = ReadLine(8, TLMallLines)
-            txtMCSTLM.Text = ReadLine(14, TLMallLines)
-            txtAggregate.Text = ReadLine(26, TLMallLines)
-            txtRC_CHANNEL.Text = ReadLine(29, TLMallLines)
+                Do While Not TLMreader.EndOfStream
+                    TLMallLines.Add(TLMreader.ReadLine)
+                Loop
+                TLMreader.Close()
+                txtSerial.Text = ReadLine(4, TLMallLines)
+                txtBaud.Text = ReadLine(5, TLMallLines)
+                txtRouter.Text = ReadLine(8, TLMallLines)
+                txtMCSTLM.Text = ReadLine(14, TLMallLines)
+                txtAggregate.Text = ReadLine(26, TLMallLines)
+                txtRC_CHANNEL.Text = ReadLine(29, TLMallLines)
+            End If
             If rBtnNVR.Checked Then
                 Dim vdec = "vdec.conf"
                 If Not System.IO.File.Exists(vdec) Then
@@ -824,7 +884,6 @@ err1:
 
         cmbRouter.Items.Clear()
         cmbRouter.Items.Add("MAVFWD")
-        cmbRouter.Items.Add("MAVLINK-ROUTER")
         cmbRouter.Items.Add("MSPOSD")
         cmbRouter.Text = "Select Router"
 
@@ -917,8 +976,12 @@ err1:
         If rBtnRadxaZero3w.Checked Then
             txtFrequency.Text = "wifi_channel = " & last4Letter
         Else
-            txtFrequency.Text = "channel=" & last4Letter
-            txtFreq24.Text = "frequency="
+            If chkYAML.Checked = False Then
+                txtFrequency.Text = "channel=" & last4Letter
+                txtFreq24.Text = "frequency="
+            Else
+                txtFrequency.Text = "  channel: " & last4Letter
+            End If
         End If
     End Sub
 
@@ -926,7 +989,11 @@ err1:
         If rBtnRadxaZero3w.Checked Then
             txtPower.Text = "options 88XXau_wfb rtw_tx_pwr_idx_override=" & ComboBox2.SelectedItem.ToString
         Else
-            txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
+            If chkYAML.Checked = False Then
+                txtPower.Text = "driver_txpower_override=" & ComboBox2.SelectedItem.ToString
+            Else
+                txtPower.Text = "  txpower: " & ComboBox2.SelectedItem.ToString
+            End If
         End If
     End Sub
 
@@ -943,30 +1010,55 @@ err1:
 
     Private Sub cmbBandwidth_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBandwidth.SelectedIndexChanged
         If rBtnCam.Checked Then
-            txtBandwidth.Text = "bandwidth=" & cmbBandwidth.SelectedItem.ToString
+            If chkYAML.Checked = False Then
+                txtBandwidth.Text = "bandwidth=" & cmbBandwidth.SelectedItem.ToString
+            Else
+                txtBandwidth.Text = "  width: " & cmbBandwidth.SelectedItem.ToString
+            End If
         Else
             txtBandwidth.Text = "bandwidth = " & cmbBandwidth.SelectedItem.ToString
         End If
     End Sub
 
     Private Sub ComboBox5_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox5.SelectedIndexChanged
-        txtMCS.Text = "mcs_index=" & ComboBox5.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtMCS.Text = "mcs_index=" & ComboBox5.SelectedItem.ToString
+        Else
+            txtMCS.Text = "  mcs_index: " & ComboBox5.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub ComboBox6_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox6.SelectedIndexChanged
-        txtSTBC.Text = "stbc=" & ComboBox6.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtSTBC.Text = "stbc=" & ComboBox6.SelectedItem.ToString
+        Else
+            txtSTBC.Text = "  stbc: " & ComboBox6.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub ComboBox7_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox7.SelectedIndexChanged
-        txtLDPC.Text = "ldpc=" & ComboBox7.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtLDPC.Text = "ldpc=" & ComboBox7.SelectedItem.ToString
+        Else
+            txtLDPC.Text = "  ldpc: " & ComboBox7.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub ComboBox8_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox8.SelectedIndexChanged
-        txtFECK.Text = "fec_k=" & ComboBox8.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtFECK.Text = "fec_k=" & ComboBox8.SelectedItem.ToString
+        Else
+            txtFECK.Text = "  fec_k: " & ComboBox8.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub ComboBox9_SelectedIndexChanged(sender As Object, e As EventArgs) Handles ComboBox9.SelectedIndexChanged
-        txtFECN.Text = "fec_n=" & ComboBox9.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtFECN.Text = "fec_n=" & ComboBox9.SelectedItem.ToString
+        Else
+            txtFECN.Text = "  fec_n: " & ComboBox9.SelectedItem.ToString
+        End If
+
     End Sub
 
     Private Sub cmbResolution_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbResolution.SelectedIndexChanged
@@ -1131,7 +1223,11 @@ err1:
     End Sub
 
     Private Sub cmbSerial_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbSerial.SelectedIndexChanged
-        txtSerial.Text = "serial=" & cmbSerial.SelectedItem.ToString
+        If chkYAML.Checked = False Then
+            txtSerial.Text = "serial=" & cmbSerial.SelectedItem.ToString
+        Else
+            txtSerial.Text = "  serial: " & cmbSerial.SelectedItem.ToString
+        End If
     End Sub
 
     Private Sub cmbBaud_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbBaud.SelectedIndexChanged
@@ -1139,12 +1235,14 @@ err1:
     End Sub
 
     Private Sub cmbRouter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbRouter.SelectedIndexChanged
-        If cmbRouter.Text = "MAVFWD" Then
-            txtRouter.Text = "router=0"
-        ElseIf cmbRouter.Text = "MAVLINK-ROUTER" Then
-            txtRouter.Text = "router=1"
-        ElseIf cmbRouter.Text = "MSPOSD" Then
-            txtRouter.Text = "router=2"
+        If chkYAML.Checked = False Then
+            If cmbRouter.Text = "MAVFWD" Then
+                txtRouter.Text = "router=0"
+            ElseIf cmbRouter.Text = "MSPOSD" Then
+                txtRouter.Text = "router=2"
+            End If
+        Else
+            txtRouter.Text = "  router: " & cmbRouter.SelectedItem.ToString
         End If
     End Sub
 
@@ -2531,117 +2629,165 @@ err1:
                 sw.WriteLine("dummy file ignore it")
             End Using
         End If
-        If txtFrequency.Text <> "" Then
-            Dim wfbconf = "wfb.conf"
-            If Not IO.File.Exists(wfbconf) Then
-                MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
-            End If
-            Dim x As Integer
-            Dim WFBfilePath = wfbconf
-            Dim lines = IO.File.ReadAllLines(WFBfilePath)
-            For x = 0 To lines.Count() - 1
-                If rBtnRadxaZero3w.Checked Then
-                    Dim wfbng = "wifibroadcast.cfg"
-                    If Not IO.File.Exists(wfbng) Then
-                        MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                        Return
-                    End If
-
-                    Dim wfbngfilePath = wfbng
-                    Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
-                    If WFBlines(2).StartsWith("wifi_channel = ") Then
-                        WFBlines(2) = txtFrequency.Text
-                    End If
-                    If WFBlines(6).StartsWith("peer = 'connect://") Then
-                        WFBlines(6) = txtMCS.Text
-                    End If
-                    If WFBlines(9).StartsWith("peer = 'connect://") Then
-                        WFBlines(9) = txtSTBC.Text
-                    End If
-                    If WFBlines(10).StartsWith("bandwidth") Then
-                        WFBlines(10) = txtBandwidth.Text
-                    End If
-                    IO.File.WriteAllLines(wfbngfilePath, WFBlines)
-                    If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
-                        lines(x) = txtPower.Text
-                    End If
-                Else
-                    If lines(x).StartsWith("channel=") Then
-                        lines(x) = txtFrequency.Text
-                    End If
-                    If lines(x).StartsWith("driver_txpower_override=") Then
-                        lines(x) = txtPower.Text
-                    End If
-                    If lines(x).StartsWith("frequency=") Then
-                        lines(x) = txtFreq24.Text
-                    End If
-                    If lines(x).StartsWith("txpower=") Then
-                        lines(x) = txtPower24.Text
-                    End If
-                    If lines(x).StartsWith("bandwidth=") Then
-                        lines(x) = txtBandwidth.Text
-                    End If
-                    If rBtnNVR.Checked Then
-                        If lines(x).StartsWith("udp_addr=") Then
-                            lines(x) = txtMCS.Text
+        If chkYAML.Checked = False Then
+            If txtFrequency.Text <> "" Then
+                Dim wfbconf = "wfb.conf"
+                If Not IO.File.Exists(wfbconf) Then
+                    MsgBox("File " + wfbconf + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                    Return
+                End If
+                Dim x As Integer
+                Dim WFBfilePath = wfbconf
+                Dim lines = IO.File.ReadAllLines(WFBfilePath)
+                For x = 0 To lines.Count() - 1
+                    If rBtnRadxaZero3w.Checked Then
+                        Dim wfbng = "wifibroadcast.cfg"
+                        If Not IO.File.Exists(wfbng) Then
+                            MsgBox("File " + wfbng + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                            Return
                         End If
-                        If lines(x).StartsWith("udp_port=") Then
-                            lines(x) = txtSTBC.Text
+
+                        Dim wfbngfilePath = wfbng
+                        Dim WFBlines = IO.File.ReadAllLines(wfbngfilePath)
+                        If WFBlines(2).StartsWith("wifi_channel = ") Then
+                            WFBlines(2) = txtFrequency.Text
+                        End If
+                        If WFBlines(6).StartsWith("peer = 'connect://") Then
+                            WFBlines(6) = txtMCS.Text
+                        End If
+                        If WFBlines(9).StartsWith("peer = 'connect://") Then
+                            WFBlines(9) = txtSTBC.Text
+                        End If
+                        If WFBlines(10).StartsWith("bandwidth") Then
+                            WFBlines(10) = txtBandwidth.Text
+                        End If
+                        IO.File.WriteAllLines(wfbngfilePath, WFBlines)
+                        If lines(x).StartsWith("options 88XXau_wfb rtw_tx_pwr_idx_override=") Then
+                            lines(x) = txtPower.Text
                         End If
                     Else
-                        If lines(x).StartsWith("stbc=") Then
-                            lines(x) = txtSTBC.Text
+                        If lines(x).StartsWith("channel=") Then
+                            lines(x) = txtFrequency.Text
                         End If
-                        If lines(x).StartsWith("ldpc=") Then
-                            lines(x) = txtLDPC.Text
+                        If lines(x).StartsWith("driver_txpower_override=") Then
+                            lines(x) = txtPower.Text
                         End If
-                        If lines(x).StartsWith("mcs_index=") Then
-                            lines(x) = txtMCS.Text
+                        If lines(x).StartsWith("frequency=") Then
+                            lines(x) = txtFreq24.Text
                         End If
-                        If lines(x).StartsWith("fec_k=") Then
-                            lines(x) = txtFECK.Text
+                        If lines(x).StartsWith("txpower=") Then
+                            lines(x) = txtPower24.Text
                         End If
-                        If lines(x).StartsWith("fec_n=") Then
-                            lines(x) = txtFECN.Text
+                        If lines(x).StartsWith("bandwidth=") Then
+                            lines(x) = txtBandwidth.Text
+                        End If
+                        If rBtnNVR.Checked Then
+                            If lines(x).StartsWith("udp_addr=") Then
+                                lines(x) = txtMCS.Text
+                            End If
+                            If lines(x).StartsWith("udp_port=") Then
+                                lines(x) = txtSTBC.Text
+                            End If
+                        Else
+                            If lines(x).StartsWith("stbc=") Then
+                                lines(x) = txtSTBC.Text
+                            End If
+                            If lines(x).StartsWith("ldpc=") Then
+                                lines(x) = txtLDPC.Text
+                            End If
+                            If lines(x).StartsWith("mcs_index=") Then
+                                lines(x) = txtMCS.Text
+                            End If
+                            If lines(x).StartsWith("fec_k=") Then
+                                lines(x) = txtFECK.Text
+                            End If
+                            If lines(x).StartsWith("fec_n=") Then
+                                lines(x) = txtFECN.Text
+                            End If
                         End If
                     End If
-                End If
-            Next
-            IO.File.WriteAllLines(WFBfilePath, lines)
-        End If
-        If txtSerial.Text <> "" Then
-            Dim telemetry = "telemetry.conf"
-            If Not System.IO.File.Exists(telemetry) Then
-                MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
-                Return
+                Next
+                IO.File.WriteAllLines(WFBfilePath, lines)
             End If
-            Dim x As Integer
-            Dim TLMfilePath As String = telemetry
-            Dim lines = IO.File.ReadAllLines(TLMfilePath)
-            For x = 0 To lines.Count() - 1
-                If lines(x).StartsWith("serial=") Then
-                    lines(x) = txtSerial.Text
+            If txtSerial.Text <> "" Then
+                Dim telemetry = "telemetry.conf"
+                If Not System.IO.File.Exists(telemetry) Then
+                    MsgBox("File " + telemetry + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                    Return
                 End If
-                If lines(x).StartsWith("baud=") Then
-                    lines(x) = txtBaud.Text
+                Dim x As Integer
+                Dim TLMfilePath As String = telemetry
+                Dim lines = IO.File.ReadAllLines(TLMfilePath)
+                For x = 0 To lines.Count() - 1
+                    If lines(x).StartsWith("serial=") Then
+                        lines(x) = txtSerial.Text
+                    End If
+                    If lines(x).StartsWith("baud=") Then
+                        lines(x) = txtBaud.Text
+                    End If
+                    If lines(x).StartsWith("router=") Then
+                        lines(x) = txtRouter.Text
+                    End If
+                    If lines(x).StartsWith("mcs_index=") Then
+                        lines(x) = txtMCSTLM.Text
+                    End If
+                    If lines(x).StartsWith("aggregate=") Then
+                        lines(x) = txtAggregate.Text
+                    End If
+                    If lines(x).StartsWith("channels=") Then
+                        lines(x) = txtRC_CHANNEL.Text
+                    End If
+                Next
+                IO.File.WriteAllLines(TLMfilePath, lines)
+            End If
+        Else
+            If txtFrequency.Text <> "" Then
+                Dim wfbyaml = "wfb.yaml"
+                If Not IO.File.Exists(wfbyaml) Then
+                    MsgBox("File " + wfbyaml + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
+                    Return
                 End If
-                If lines(x).StartsWith("router=") Then
-                    lines(x) = txtRouter.Text
-                End If
-                If lines(x).StartsWith("mcs_index=") Then
-                    lines(x) = txtMCSTLM.Text
-                End If
-                If lines(x).StartsWith("aggregate=") Then
-                    lines(x) = txtAggregate.Text
-                End If
-                If lines(x).StartsWith("channels=") Then
-                    lines(x) = txtRC_CHANNEL.Text
-                End If
-            Next
-            IO.File.WriteAllLines(TLMfilePath, lines)
+                Dim y As Integer
+                Dim WFBfilePath = wfbyaml
+                Dim lines = IO.File.ReadAllLines(WFBfilePath)
+                For y = 0 To lines.Count() - 1
+                    If rBtnCam.Checked Then
+                        If lines(y).StartsWith("  channel: ") Then
+                            lines(y) = txtFrequency.Text
+                        End If
+                        If lines(y).StartsWith("  txpower: ") Then
+                            lines(y) = txtPower.Text
+                        End If
+                        If lines(y).StartsWith("  width: ") Then
+                            lines(y) = txtBandwidth.Text
+                        End If
+                        If lines(y).StartsWith("  stbc: ") Then
+                            lines(y) = txtSTBC.Text
+                        End If
+                        If lines(y).StartsWith("  ldpc: ") Then
+                            lines(y) = txtLDPC.Text
+                        End If
+                        If lines(y).StartsWith("  mcs_index: ") Then
+                            lines(y) = txtMCS.Text
+                        End If
+                        If lines(y).StartsWith("  fec_k: ") Then
+                            lines(y) = txtFECK.Text
+                        End If
+                        If lines(y).StartsWith("  fec_n: ") Then
+                            lines(y) = txtFECN.Text
+                        End If
+                        If lines(y).StartsWith("  serial: ") Then
+                            lines(y) = txtSerial.Text
+                        End If
+                        If lines(y).StartsWith("  router: ") Then
+                            lines(y) = txtRouter.Text
+                        End If
+                    End If
+                Next y
+                IO.File.WriteAllLines(WFBfilePath, lines)
+            End If
         End If
-        If txtResolution.Text <> "" Then
+            If txtResolution.Text <> "" Then
             Dim majestic = "majestic.yaml"
             If Not IO.File.Exists(majestic) Then
                 MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
@@ -2755,7 +2901,11 @@ err1:
                 ElseIf rBtnRadxaZero3w.Checked Then
                     .StartInfo.Arguments = "ulwfbngr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 Else
-                    .StartInfo.Arguments = "ulr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    If chkYAML.Checked = False Then
+                        .StartInfo.Arguments = "ulr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    Else
+                        .StartInfo.Arguments = "ulyamlr " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    End If
                 End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
@@ -3242,6 +3392,11 @@ err1:
                 MsgBox("Please enter a valid IP address")
             End If
         End If
+    End Sub
+
+    Private Sub cmbPresets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPresets.SelectedIndexChanged
+        Dim wfbconf = "presets/" + cmbPresets.Text + ".bat"
+        lblPreset.Text = System.IO.File.ReadAllText(wfbconf)
     End Sub
 
 #End Region
