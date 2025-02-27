@@ -15,8 +15,6 @@ if "%1" == "preset" (
 	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=/dev/ttyS0' /etc/telemetry.conf
 	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=2' /etc/telemetry.conf
 	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100/#console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
-	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast
 	plink -ssh root@%2 -pw %3 cli -s .isp.sensorConfig /etc/sensors/imx415_milos15.bin
 	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
 	plink -ssh root@%2 -pw %3 cli -s .fpv.noiseLevel 0
@@ -24,6 +22,8 @@ if "%1" == "preset" (
 	echo y | pscp -scp -pw %3 sensors/imx415_milos15.bin root@%2:/etc/sensors/
 	echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
 	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast
 	plink -ssh root@%2 -pw %3 reboot
 )
 
