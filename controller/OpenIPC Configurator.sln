@@ -1,11 +1,19 @@
+<<<<<<< HEAD:controller/OpenIPC Configurator.sln
 ﻿
+=======
+
+>>>>>>> upstream/master:OpenIPC Configurator.sln
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34701.34
 MinimumVisualStudioVersion = 10.0.40219.1
+<<<<<<< HEAD:controller/OpenIPC Configurator.sln
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "OpenIPC Configurator", "OpenIPC Configurator.vbproj", "{D23EA7C6-0FFE-443B-AB1B-1383FDDD0483}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIPC Configurator Crossplatform", "..\OpenIPC Configurator Crossplatform\OpenIPC Configurator Crossplatform.csproj", "{AAFD9D1B-C5ED-4E43-82E6-A69161CF42DA}"
+=======
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "OpenIPC Configurator", "OpenIPC Configurator.vbproj", "{D23EA7C6-0FFE-443B-AB1B-1383FDDD0483}"
+>>>>>>> upstream/master:OpenIPC Configurator.sln
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +25,13 @@ Global
 		{D23EA7C6-0FFE-443B-AB1B-1383FDDD0483}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D23EA7C6-0FFE-443B-AB1B-1383FDDD0483}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D23EA7C6-0FFE-443B-AB1B-1383FDDD0483}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD:controller/OpenIPC Configurator.sln
 		{AAFD9D1B-C5ED-4E43-82E6-A69161CF42DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AAFD9D1B-C5ED-4E43-82E6-A69161CF42DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AAFD9D1B-C5ED-4E43-82E6-A69161CF42DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AAFD9D1B-C5ED-4E43-82E6-A69161CF42DA}.Release|Any CPU.Build.0 = Release|Any CPU
+=======
+>>>>>>> upstream/master:OpenIPC Configurator.sln
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

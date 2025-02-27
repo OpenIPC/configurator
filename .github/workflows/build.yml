@@ -3,21 +3,22 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build
         run: |
           dotnet build --configuration Release
-          Compress-Archive bin\Release\*\*.dll,bin\Release\*\*.exe,bin\Release\*\*.json OpenIPC-Configurator.zip
+          Compress-Archive bin\Release\*\*,*.bat,*.conf,alink_drone,vtxmenu.ini,reset\,presets\,sensors\,txprofiles\ OpenIPC-Configurator.zip
 
       - name: Upload
-        uses: softprops/action-gh-release@master
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: latest
           files: OpenIPC-Configurator.zip

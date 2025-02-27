@@ -1,14 +1,35 @@
+<<<<<<< HEAD:controller/OpenIPC Configurator.vbproj
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+=======
+<Project Sdk="Microsoft.NET.Sdk">
+>>>>>>> upstream/master:OpenIPC Configurator.vbproj
 
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net8.0-windows</TargetFramework>
     <RootNamespace>OpenIPC_Configurator</RootNamespace>
+<<<<<<< HEAD:controller/OpenIPC Configurator.vbproj
     <StartupObject>Sub Main</StartupObject>
     <UseWindowsForms>true</UseWindowsForms>
     <MyType>WindowsForms</MyType>
   </PropertyGroup>
 
+=======
+    <StartupObject>OpenIPC_Configurator.My.MyApplication</StartupObject>
+    <UseWindowsForms>true</UseWindowsForms>
+    <MyType>WindowsForms</MyType>
+    <ApplicationIcon>openipc.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="openipc.ico" />
+  </ItemGroup>
+
+>>>>>>> upstream/master:OpenIPC Configurator.vbproj
   <ItemGroup>
     <Import Include="System.Data" />
     <Import Include="System.Drawing" />
@@ -21,6 +42,22 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+<<<<<<< HEAD:controller/OpenIPC Configurator.vbproj
+=======
+    <Compile Update="My Project\Resources.Designer.vb">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+>>>>>>> upstream/master:OpenIPC Configurator.vbproj
   </ItemGroup>
 
   <ItemGroup>
