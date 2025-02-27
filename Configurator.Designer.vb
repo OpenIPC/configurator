@@ -108,6 +108,8 @@ Partial Class Configurator
         txtSerial = New TextBox()
         TabPage7 = New TabPage()
         GroupBox3 = New GroupBox()
+        namePreset = New TextBox()
+        createPreset = New Button()
         lblPreset = New TextBox()
         cmbPresets = New ComboBox()
         btnPreset = New Button()
@@ -213,6 +215,7 @@ Partial Class Configurator
         btnReboot = New Button()
         txtPassword = New TextBox()
         connected = New PictureBox()
+        chkYAML = New CheckBox()
         rBtnCam = New RadioButton()
         rBtnNVR = New RadioButton()
         rBtnRadxaZero3w = New RadioButton()
@@ -222,7 +225,6 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
-        chkYAML = New CheckBox()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1268,6 +1270,8 @@ Partial Class Configurator
         ' 
         ' GroupBox3
         ' 
+        GroupBox3.Controls.Add(namePreset)
+        GroupBox3.Controls.Add(createPreset)
         GroupBox3.Controls.Add(lblPreset)
         GroupBox3.Controls.Add(cmbPresets)
         GroupBox3.Controls.Add(btnPreset)
@@ -1278,6 +1282,31 @@ Partial Class Configurator
         GroupBox3.TabIndex = 66
         GroupBox3.TabStop = False
         GroupBox3.Text = "OpenIPC Camera Presets"
+        ' 
+        ' namePreset
+        ' 
+        namePreset.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        namePreset.BorderStyle = BorderStyle.FixedSingle
+        namePreset.Font = New Font("Arial", 8.25F, FontStyle.Bold)
+        namePreset.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
+        namePreset.Location = New Point(162, 362)
+        namePreset.Name = "namePreset"
+        namePreset.Size = New Size(336, 20)
+        namePreset.TabIndex = 68
+        btnToolTip.SetToolTip(namePreset, "Type the name of your preset." & vbCrLf & "If no name given it will be named custom_XXX.bat")
+        ' 
+        ' createPreset
+        ' 
+        createPreset.BackColor = Color.Gold
+        createPreset.FlatStyle = FlatStyle.Popup
+        createPreset.ForeColor = SystemColors.ControlText
+        createPreset.Location = New Point(11, 359)
+        createPreset.Name = "createPreset"
+        createPreset.Size = New Size(145, 23)
+        createPreset.TabIndex = 67
+        createPreset.Text = "Create Custom Preset"
+        btnToolTip.SetToolTip(createPreset, "Create a Custom Preset with the current loaded settings" & vbCrLf)
+        createPreset.UseVisualStyleBackColor = False
         ' 
         ' lblPreset
         ' 
@@ -1309,9 +1338,9 @@ Partial Class Configurator
         btnPreset.BackColor = Color.Gold
         btnPreset.FlatStyle = FlatStyle.Popup
         btnPreset.ForeColor = SystemColors.ControlText
-        btnPreset.Location = New Point(488, 359)
+        btnPreset.Location = New Point(504, 359)
         btnPreset.Name = "btnPreset"
-        btnPreset.Size = New Size(159, 23)
+        btnPreset.Size = New Size(143, 23)
         btnPreset.TabIndex = 64
         btnPreset.Text = "Apply Selected Preset"
         btnToolTip.SetToolTip(btnPreset, "Apply the Selected Preset" & vbCrLf)
@@ -2633,6 +2662,18 @@ Partial Class Configurator
         connected.TabStop = False
         btnToolTip.SetToolTip(connected, "Green = pinged and ready to connect" & vbCrLf & "Red = pinged and remote side unreachable")
         ' 
+        ' chkYAML
+        ' 
+        chkYAML.AutoSize = True
+        chkYAML.ForeColor = Color.White
+        chkYAML.Location = New Point(334, 474)
+        chkYAML.Name = "chkYAML"
+        chkYAML.Size = New Size(116, 19)
+        chkYAML.TabIndex = 60
+        chkYAML.Text = "YAML file system"
+        btnToolTip.SetToolTip(chkYAML, "Enables the new YAML file system.")
+        chkYAML.UseVisualStyleBackColor = True
+        ' 
         ' rBtnCam
         ' 
         rBtnCam.AutoSize = True
@@ -2704,7 +2745,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "26/02/2025"
+        Label12.Text = "27/02/2025"
         ' 
         ' Label13
         ' 
@@ -2716,18 +2757,6 @@ Partial Class Configurator
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.7"
-        ' 
-        ' chkYAML
-        ' 
-        chkYAML.AutoSize = True
-        chkYAML.ForeColor = Color.White
-        chkYAML.Location = New Point(334, 474)
-        chkYAML.Name = "chkYAML"
-        chkYAML.Size = New Size(116, 19)
-        chkYAML.TabIndex = 60
-        chkYAML.Text = "YAML file system"
-        btnToolTip.SetToolTip(chkYAML, "Enables the new YAML file system.")
-        chkYAML.UseVisualStyleBackColor = True
         ' 
         ' Configurator
         ' 
@@ -2987,5 +3016,7 @@ Partial Class Configurator
     Friend WithEvents chkForce As CheckBox
     Friend WithEvents chkYAML As CheckBox
     Friend WithEvents lblPreset As TextBox
+    Friend WithEvents createPreset As Button
+    Friend WithEvents namePreset As TextBox
 
 End Class

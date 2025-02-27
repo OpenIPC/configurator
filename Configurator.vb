@@ -1128,6 +1128,7 @@ err1:
 
     Private Sub cmbFPS_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbFPS.SelectedIndexChanged
         txtFPS.Text = "  fps: " & cmbFPS.SelectedItem.ToString
+        cmbExposure.Text = Math.Floor(1000 / CInt(cmbFPS.SelectedItem.ToString))
         txtExposure.Text = "  exposure: " & Math.Floor(1000 / CInt(cmbFPS.SelectedItem.ToString))
     End Sub
 
@@ -2787,7 +2788,7 @@ err1:
                 IO.File.WriteAllLines(WFBfilePath, lines)
             End If
         End If
-            If txtResolution.Text <> "" Then
+        If txtResolution.Text <> "" Then
             Dim majestic = "majestic.yaml"
             If Not IO.File.Exists(majestic) Then
                 MsgBox("File " + majestic + " not found!" + vbCrLf + "Install the latest version of Putty and try again.")
@@ -3373,7 +3374,7 @@ err1:
     End Sub
 
     Private Sub btnPreset_Click(sender As Object, e As EventArgs) Handles btnPreset.Click
-        Dim selected_preset = "presets/" + CStr(cmbPresets.Text) + ".bat"
+        Dim selected_preset = "presets/" + cmbPresets.Text + ".bat"
         If Not File.Exists(selected_preset) Then
             MsgBox("File " + selected_preset + " not found!")
             Return
@@ -3386,7 +3387,7 @@ err1:
                     .StartInfo.FileName = selected_preset
                     .StartInfo.Arguments = "preset " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                     .StartInfo.RedirectStandardOutput = False
-                    .Start()
+                    .Start
                 End With
             Else
                 MsgBox("Please enter a valid IP address")
@@ -3397,6 +3398,79 @@ err1:
     Private Sub cmbPresets_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbPresets.SelectedIndexChanged
         Dim wfbconf = "presets/" + cmbPresets.Text + ".bat"
         lblPreset.Text = System.IO.File.ReadAllText(wfbconf)
+    End Sub
+
+    Private Sub createPreset_Click(sender As Object, e As EventArgs) Handles createPreset.Click
+        Dim i As Integer
+        Dim dirPresets = "presets\"
+        Dim sSource As String
+        Dim sTarget As String
+        sSource = "presets/1080p60_15Mbps_40MHz_AF1_12_15_UART0_MSPOSD.bat"
+        sTarget = "presets/custom_1.bat"
+        If btnRead.Enabled = True Then
+            If namePreset.Text <> "" Then
+                sTarget = "presets/" + namePreset.Text & ".bat"
+            Else
+                Do While System.IO.File.Exists(sTarget) = True
+                    i = i + 1
+                    sTarget = "presets/custom_" & i & ".bat"
+                Loop
+            End If
+            File.Copy(sSource, sTarget, True)
+            Dim x As Integer
+            Dim PresetfilePath As String = sTarget
+            Dim lines = IO.File.ReadAllLines(PresetfilePath)
+            For x = 0 To lines.Count() - 1
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 cli -s .video0.fps ") And Not cmbFPS.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 cli -s .video0.fps " + cmbFPS.Text
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 cli -s .isp.exposure ") And Not cmbExposure.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 cli -s .isp.exposure " + cmbExposure.Text
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 cli -s .video0.size ") And Not cmbResolution.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 cli -s .video0.size " + cmbResolution.Text
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate ") And Not cmbBitrate.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate " + cmbBitrate.Text
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=") And Not ComboBox2.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=" + ComboBox2.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=") And Not ComboBox6.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=" + ComboBox6.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/ldpc=/c\ldpc=") And Not ComboBox7.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=" + ComboBox7.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=") And Not ComboBox5.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=" + ComboBox5.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=") And Not cmbBandwidth.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=" + cmbBandwidth.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=") And Not ComboBox8.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=" + ComboBox8.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=") And Not ComboBox9.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=" + ComboBox9.Text + "' /etc/wfb.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=") And Not cmbSerial.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=" + cmbSerial.Text + "' /etc/telemetry.conf"
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=") And Not cmbRouter.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=" + cmbRouter.Text + "' /etc/telemetry.conf"
+                End If
+            Next
+            IO.File.WriteAllLines(PresetfilePath, lines)
+            cmbPresets.Items.Clear()
+            For Each filePresets As String In System.IO.Directory.GetFiles(dirPresets)
+                cmbPresets.Items.Add(System.IO.Path.GetFileNameWithoutExtension(filePresets))
+            Next
+            cmbPresets.Text = "Select Preset"
+            MsgBox("Your Custom Preset is created with name " + sTarget.Replace("presets/", "") + vbCrLf + "Please select it from the list and hit Apply Selected Preset.")
+        Else
+            MsgBox("You must Connect and Load the settings before you can Create a new Custom Preset.")
+        End If
     End Sub
 
 #End Region
