@@ -4,11 +4,11 @@ if "%1" == "preset" (
 	plink -ssh root@%2 -pw %3 cli -s .video0.fps 120
 	plink -ssh root@%2 -pw %3 cli -s .isp.exposure 8
 	plink -ssh root@%2 -pw %3 cli -s .video0.size 1280x720
-	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate 15360
+	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate 6144
 	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=40' /etc/wfb.conf
 	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=1' /etc/wfb.conf
 	plink -ssh root@%2 -pw %3 sed -i '/ldpc=/c\ldpc=1' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=2' /etc/wfb.conf
+	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=0' /etc/wfb.conf
 	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=40' /etc/wfb.conf
 	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=8' /etc/wfb.conf
 	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=12' /etc/wfb.conf
