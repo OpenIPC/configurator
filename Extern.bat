@@ -294,7 +294,7 @@ if "%1" == "alink" (
 	plink -ssh root@%2 -pw %3 cli -s .video0.qpDelta -12
 	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
 	plink -ssh root@%2 -pw %3 cli -s .fpv.noiseLevel 0
-	plink -ssh root@%2 -pw %3 sed -i -e '$i \/usr/bin/alink_drone --ip 10.5.0.10 --port 9999 "&"' /etc/rc.local
+	plink -ssh root@%2 -pw %3 sed -i -e '$i alink_drone "&"' /etc/rc.local
         plink -ssh root@%2 -pw %3 reboot
 )
 
