@@ -284,17 +284,10 @@ if "%1" == "resetcam" (
 )
 
 if "%1" == "alink" (
-        plink -ssh root@%2 -pw %3 killall alink_drone
-	echo y | pscp -scp -pw %3 alink_drone root@%2:/usr/bin/
 	echo y | pscp -scp -pw %3 alink.conf root@%2:/etc/
 	echo y | pscp -scp -pw %3 txprofiles/%4.conf root@%2:/etc/
         plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf
         plink -ssh root@%2 -pw %3 dos2unix /etc/alink.conf /etc/txprofiles.conf
-	plink -ssh root@%2 -pw %3 chmod +x /usr/bin/alink_drone
-	plink -ssh root@%2 -pw %3 cli -s .video0.qpDelta -12
-	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
-	plink -ssh root@%2 -pw %3 cli -s .fpv.noiseLevel 0
-	plink -ssh root@%2 -pw %3 sed -i -e '$i alink_drone "&"' /etc/rc.local
         plink -ssh root@%2 -pw %3 reboot
 )
 
