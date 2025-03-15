@@ -1,0 +1,79 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="550"
+		Width="500" Height="520"
+        x:Class="OpenIPC_Configurator_Crossplatform.MainWindow"
+		Icon="/Assets/avalonia-logo.ico"
+		
+        Title="OpenIPC_Configurator_Crossplatform">
+	<Grid>
+		<TabControl Margin="10" 
+					HorizontalAlignment="Left"
+					VerticalAlignment="Top"
+					>
+			<TabItem Header="WFB Settings">
+				<StackPanel HorizontalAlignment="Left">
+					<TextBox Watermark="Frequency" Margin="2"
+							 x:Name="tbFrequency"/>
+					<TextBox Watermark="Power" Margin="2"
+							 x:Name="tbPower"/>
+					<TextBox Watermark="Freq24" Margin="2"
+							 x:Name="tbFreq24"/>
+					<TextBox Watermark="Power24" Margin="2"
+							 x:Name="tbPower24"/>
+					<TextBox Watermark="MCS" Margin="2"
+							 x:Name="tbMcs"/>
+					<TextBox Watermark="STBC" Margin="2"
+							 x:Name="tbStbc"/>
+					<TextBox Watermark="LDPC" Margin="2"
+							 x:Name="tbLdpc"/>
+					<TextBox Watermark="FECK" Margin="2"
+							 x:Name="tbFeck"/>
+					<TextBox Watermark="FECN" Margin="2"
+							 x:Name="tbFecn"/>
+					<Button Content="Save" Width="100" HorizontalContentAlignment="Center"
+							Margin="2" HorizontalAlignment="Center"
+							x:Name="bSaveWfb"/>
+				</StackPanel>
+			</TabItem>
+			<TabItem Header="Camera settings">
+				<StackPanel HorizontalAlignment="Left">
+					<TextBox Watermark="Resolution" Margin="2"
+							 x:Name="tbResolution"/>
+					<TextBox Watermark="FPS" Margin="2"
+							 x:Name="tbFps"/>
+					<TextBox Watermark="Encode" Margin="2"
+							 x:Name="tbEncode"/>
+					<TextBox Watermark="Bitrate" Margin="2"
+							 x:Name="tbBitrate"/>
+					<TextBox Watermark="Exposure" Margin="2"
+							 x:Name="tbExposure"/>
+					<TextBox Watermark="Contrast" Margin="2"
+							 x:Name="tbContrast"/>
+					<TextBox Watermark="Hue" Margin="2"
+							 x:Name="tbHue"/>
+					<TextBox Watermark="Saturation" Margin="2"
+							 x:Name="tbSaturation"/>
+					<TextBox Watermark="Luminance" Margin="2"
+							 x:Name="tbLuminance"/>
+					<TextBox Watermark="Sensor" Margin="2"
+							 x:Name="tbSensor"/>
+					<Button Content="Save" Width="100" HorizontalContentAlignment="Center"
+							Margin="2" HorizontalAlignment="Center"
+							x:Name="bSaveCameraSettings"/>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
+		<TextBox Watermark="IP Address" HorizontalAlignment="Left" VerticalAlignment="Bottom"
+				 Margin="10,0,0,37" Width="200"
+				 x:Name="tbIpAddress"/>
+		<StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+					Margin="10,0,0,1">
+			<Button Content="Fetch" Margin="2" x:Name="bFetch"/>
+			<Button Content="Read" Margin="2" x:Name="bRead"/>
+			<Button Content="Upload" Margin="2" x:Name="bUpload"/>
+		</StackPanel>
+	</Grid>
+</Window>
