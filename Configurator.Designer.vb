@@ -2745,7 +2745,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "12/03/2025"
+        Label12.Text = "17/03/2025"
         ' 
         ' Label13
         ' 
@@ -2756,7 +2756,7 @@ Partial Class Configurator
         Label13.Name = "Label13"
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
-        Label13.Text = "SBC v1.9.7"
+        Label13.Text = "SBC v1.9.8"
         ' 
         ' Configurator
         ' 
