@@ -60,6 +60,8 @@ Partial Class Configurator
         ComboBox2 = New ComboBox()
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
+        btnWideRess = New Button()
+        btnBoxRess = New Button()
         GroupBox2 = New GroupBox()
         Label14 = New Label()
         trackWeight = New TrackBar()
@@ -663,6 +665,8 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(btnWideRess)
+        TabPage2.Controls.Add(btnBoxRess)
         TabPage2.Controls.Add(GroupBox2)
         TabPage2.Controls.Add(cmbMirror)
         TabPage2.Controls.Add(cmbFlip)
@@ -695,6 +699,30 @@ Partial Class Configurator
         TabPage2.Size = New Size(670, 394)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' btnWideRess
+        ' 
+        btnWideRess.BackColor = Color.Gold
+        btnWideRess.FlatStyle = FlatStyle.Popup
+        btnWideRess.Location = New Point(253, 365)
+        btnWideRess.Name = "btnWideRess"
+        btnWideRess.Size = New Size(111, 23)
+        btnWideRess.TabIndex = 67
+        btnWideRess.Text = "16:9 Resolutions"
+        btnToolTip.SetToolTip(btnWideRess, "Enable the 16:9 resolutions" & vbCrLf)
+        btnWideRess.UseVisualStyleBackColor = False
+        ' 
+        ' btnBoxRess
+        ' 
+        btnBoxRess.BackColor = Color.Gold
+        btnBoxRess.FlatStyle = FlatStyle.Popup
+        btnBoxRess.Location = New Point(136, 365)
+        btnBoxRess.Name = "btnBoxRess"
+        btnBoxRess.Size = New Size(111, 23)
+        btnBoxRess.TabIndex = 66
+        btnBoxRess.Text = "4:3 Resolutions"
+        btnToolTip.SetToolTip(btnBoxRess, "Enable the 4:3 resolutions" & vbCrLf)
+        btnBoxRess.UseVisualStyleBackColor = False
         ' 
         ' GroupBox2
         ' 
@@ -813,7 +841,7 @@ Partial Class Configurator
         ' 
         btnRestartMajestic.BackColor = Color.Gold
         btnRestartMajestic.FlatStyle = FlatStyle.Popup
-        btnRestartMajestic.Location = New Point(201, 365)
+        btnRestartMajestic.Location = New Point(19, 365)
         btnRestartMajestic.Name = "btnRestartMajestic"
         btnRestartMajestic.Size = New Size(111, 23)
         btnRestartMajestic.TabIndex = 44
@@ -974,14 +1002,13 @@ Partial Class Configurator
         btnMSPExtraRemove.BackColor = Color.Gold
         btnMSPExtraRemove.FlatStyle = FlatStyle.Popup
         btnMSPExtraRemove.Font = New Font("Arial", 8F, FontStyle.Bold)
-        btnMSPExtraRemove.Location = New Point(454, 344)
+        btnMSPExtraRemove.Location = New Point(454, 199)
         btnMSPExtraRemove.Name = "btnMSPExtraRemove"
         btnMSPExtraRemove.Size = New Size(116, 22)
         btnMSPExtraRemove.TabIndex = 68
         btnMSPExtraRemove.Text = "- MSPOSD EXTRA"
         btnToolTip.SetToolTip(btnMSPExtraRemove, "Remove OSD SOC temperature" & vbCrLf & "Works for both Air or GS")
         btnMSPExtraRemove.UseVisualStyleBackColor = False
-        btnMSPExtraRemove.Visible = False
         ' 
         ' btn40MHz
         ' 
@@ -1014,7 +1041,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 239)
+        rBtnRECOFF.Location = New Point(547, 268)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -1027,7 +1054,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 224)
+        rBtnRECON.Location = New Point(547, 253)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -1040,7 +1067,7 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 226)
+        btnOnboardREC.Location = New Point(454, 255)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
@@ -1053,7 +1080,7 @@ Partial Class Configurator
         btnDualOSD.BackColor = Color.Gold
         btnDualOSD.FlatStyle = FlatStyle.Popup
         btnDualOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDualOSD.Location = New Point(454, 272)
+        btnDualOSD.Location = New Point(454, 308)
         btnDualOSD.Name = "btnDualOSD"
         btnDualOSD.Size = New Size(116, 30)
         btnDualOSD.TabIndex = 62
@@ -1067,7 +1094,7 @@ Partial Class Configurator
         btnFontsINAV.BackColor = Color.Gold
         btnFontsINAV.FlatStyle = FlatStyle.Popup
         btnFontsINAV.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnFontsINAV.Location = New Point(454, 308)
+        btnFontsINAV.Location = New Point(454, 344)
         btnFontsINAV.Name = "btnFontsINAV"
         btnFontsINAV.Size = New Size(116, 30)
         btnFontsINAV.TabIndex = 59
@@ -1081,7 +1108,7 @@ Partial Class Configurator
         btnMSP.BackColor = Color.Gold
         btnMSP.FlatStyle = FlatStyle.Popup
         btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMSP.Location = New Point(454, 199)
+        btnMSP.Location = New Point(454, 228)
         btnMSP.Name = "btnMSP"
         btnMSP.Size = New Size(116, 22)
         btnMSP.TabIndex = 56
@@ -2745,7 +2772,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "17/03/2025"
+        Label12.Text = "18/03/2025"
         ' 
         ' Label13
         ' 
@@ -3018,5 +3045,7 @@ Partial Class Configurator
     Friend WithEvents lblPreset As TextBox
     Friend WithEvents createPreset As Button
     Friend WithEvents namePreset As TextBox
+    Friend WithEvents btnWideRess As Button
+    Friend WithEvents btnBoxRess As Button
 
 End Class

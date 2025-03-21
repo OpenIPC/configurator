@@ -291,6 +291,30 @@ if "%1" == "alink" (
         plink -ssh root@%2 -pw %3 reboot
 )
 
+if "%1" == "box" (
+	echo y | pscp -scp -pw %3 reset/rc.local root@%2:/etc/
+        plink -ssh root@%2 -pw %3 dos2unix /etc/rc.local
+        if "%4" == "1" (
+	        plink -ssh root@%2 -pw %3 sed -i '/echo setprecrop/c\echo setprecrop 0 0 904 0 2436 1828 ">" \/proc\/mi_modules\/mi_vpe\/mi_vpe0' /etc/rc.local
+        )
+        if "%4" == "2" (
+	        plink -ssh root@%2 -pw %3 sed -i '/echo setprecrop/c\echo setprecrop 0 0 904 0 2560 1920 ">" \/proc\/mi_modules\/mi_vpe\/mi_vpe0' /etc/rc.local
+        )
+        if "%4" == "3" (
+	        plink -ssh root@%2 -pw %3 sed -i '/echo setprecrop/c\echo setprecrop 0 0 904 0 1440 1080 ">" \/proc\/mi_modules\/mi_vpe\/mi_vpe0' /etc/rc.local
+        )
+        if "%4" == "4" (
+	        plink -ssh root@%2 -pw %3 sed -i '/echo setprecrop/c\echo setprecrop 0 0 240 0 1440 1080 ">" \/proc\/mi_modules\/mi_vpe\/mi_vpe0' /etc/rc.local
+        )
+        if "%4" == "5" (
+	        plink -ssh root@%2 -pw %3 sed -i '/echo setprecrop/c\echo setprecrop 0 0 904 0 1440 1080 ">" \/proc\/mi_modules\/mi_vpe\/mi_vpe0' /etc/rc.local
+        )
+)
+
+if "%1" == "wide" (
+        plink -ssh root@%2 -pw %3 sed -i '/sleep 0.5/d' /etc/rc.local && sed -i '/echo setprecrop*/d' /etc/rc.local
+)
+
 :end
 echo.
 pause

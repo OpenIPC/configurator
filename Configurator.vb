@@ -699,6 +699,7 @@ err1:
         cmbResolution.Items.Add("2208x1248")
         cmbResolution.Items.Add("2240x1264")
         cmbResolution.Items.Add("2312x1304")
+        cmbResolution.Items.Add("2436x1828")
         cmbResolution.Items.Add("2512x1416")
         cmbResolution.Items.Add("2560x1440")
         cmbResolution.Items.Add("2560x1920")
@@ -1629,7 +1630,7 @@ err1:
         btnExtra.Visible = True
         btnMSPExtra.Visible = True
         btnMSPGSExtra.Visible = True
-        btnMSPExtraRemove.Visible = False
+        btnMSPExtraRemove.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
         ComboBox3.Visible = True
@@ -3470,6 +3471,62 @@ err1:
             MsgBox("Your Custom Preset is created with name " + sTarget.Replace("presets/", "") + vbCrLf + "Please select it from the list and hit Apply Selected Preset.")
         Else
             MsgBox("You must Connect and Load the settings before you can Create a new Custom Preset.")
+        End If
+    End Sub
+
+    Private Sub btnBoxRess_Click(sender As Object, e As EventArgs) Handles btnBoxRess.Click
+        Dim extern = "extern.bat"
+        Dim boxMode As String
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If cmbResolution.Text = "2436x1828" Then
+            boxMode = "1"
+        ElseIf cmbResolution.Text = "2560x1920" Then
+            boxMode = "2"
+        ElseIf cmbResolution.Text = "1440x1080" And cmbFPS.Text = "60" Then
+            boxMode = "3"
+        ElseIf cmbResolution.Text = "1440x1080" And cmbFPS.Text = "90" Then
+            boxMode = "4"
+        ElseIf cmbResolution.Text = "1440x1080" And cmbFPS.Text = "120" Then
+            boxMode = "5"
+        Else
+            MsgBox("Wrong Resolution - FPS combination. Please try again a different one.")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "box " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + boxMode
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnWideRess_Click(sender As Object, e As EventArgs) Handles btnWideRess.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "wide " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
         End If
     End Sub
 
