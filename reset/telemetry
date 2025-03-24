@@ -45,7 +45,7 @@ case "$1" in
                                 msposd --channels "$channels" --master "$serial" --baudrate "$baud"  \
                                         --out 127.0.0.1:$(($port_tx + 1)) -osd -r "$fps" --ahi "$ahi" > /dev/null &
 sleep 5
-echo "&L70&F28&G8CPU:&C CPU:&T\n&B" >/tmp/MSPOSD.msg
+echo "&L70&F28&G8CPU:&C TEMP:&T\n&B" >/tmp/MSPOSD.msg
                         else
                                 mavfwd --channels "$channels" --master "$serial" --baudrate "$baud" -p 100 -t -a "$aggregate" \
                                         --out 127.0.0.1:$port_tx --in 127.0.0.1:$port_rx > /dev/null &

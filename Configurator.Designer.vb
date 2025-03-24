@@ -989,24 +989,24 @@ Partial Class Configurator
         btnMSPGSExtra.BackColor = Color.Gold
         btnMSPGSExtra.FlatStyle = FlatStyle.Popup
         btnMSPGSExtra.Font = New Font("Arial", 7.3F, FontStyle.Bold)
-        btnMSPGSExtra.Location = New Point(454, 171)
+        btnMSPGSExtra.Location = New Point(454, 172)
         btnMSPGSExtra.Name = "btnMSPGSExtra"
         btnMSPGSExtra.Size = New Size(116, 22)
         btnMSPGSExtra.TabIndex = 69
-        btnMSPGSExtra.Text = "MSPOSD GS"
-        btnToolTip.SetToolTip(btnMSPGSExtra, "Enable MSPOSD on the Ground Station (Radxa)" & vbCrLf & "Add OSD SOC temperature")
+        btnMSPGSExtra.Text = "MSPOSD GS EXTRA"
+        btnToolTip.SetToolTip(btnMSPGSExtra, "Enable MSPOSD on the Ground Station (Radxa)" & vbCrLf & "Add OSD SOC temperature" & vbCrLf & "and other stats on the top left corner")
         btnMSPGSExtra.UseVisualStyleBackColor = False
         ' 
         ' btnMSPExtraRemove
         ' 
         btnMSPExtraRemove.BackColor = Color.Gold
         btnMSPExtraRemove.FlatStyle = FlatStyle.Popup
-        btnMSPExtraRemove.Font = New Font("Arial", 8F, FontStyle.Bold)
-        btnMSPExtraRemove.Location = New Point(454, 199)
+        btnMSPExtraRemove.Font = New Font("Arial", 7.4F, FontStyle.Bold)
+        btnMSPExtraRemove.Location = New Point(454, 200)
         btnMSPExtraRemove.Name = "btnMSPExtraRemove"
         btnMSPExtraRemove.Size = New Size(116, 22)
         btnMSPExtraRemove.TabIndex = 68
-        btnMSPExtraRemove.Text = "- MSPOSD EXTRA"
+        btnMSPExtraRemove.Text = "REMOVE EXTRA"
         btnToolTip.SetToolTip(btnMSPExtraRemove, "Remove OSD SOC temperature" & vbCrLf & "Works for both Air or GS")
         btnMSPExtraRemove.UseVisualStyleBackColor = False
         ' 
@@ -1032,8 +1032,8 @@ Partial Class Configurator
         btnMSPExtra.Name = "btnMSPExtra"
         btnMSPExtra.Size = New Size(116, 22)
         btnMSPExtra.TabIndex = 66
-        btnMSPExtra.Text = "MSPOSD AIR"
-        btnToolTip.SetToolTip(btnMSPExtra, "Enable MSPOSD on the Air Unit" & vbCrLf & "Add OSD SOC temperature" & vbCrLf)
+        btnMSPExtra.Text = "MSPOSD AIR EXTRA"
+        btnToolTip.SetToolTip(btnMSPExtra, "Add OSD SOC temperature " & vbCrLf & "and other stats on the top left corner" & vbCrLf)
         btnMSPExtra.UseVisualStyleBackColor = False
         ' 
         ' rBtnRECOFF
@@ -2772,7 +2772,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "22/03/2025"
+        Label12.Text = "24/03/2025"
         ' 
         ' Label13
         ' 

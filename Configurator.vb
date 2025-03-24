@@ -1472,6 +1472,8 @@ err1:
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = False
+        btnBoxRess.Visible = False
+        btnWideRess.Visible = False
         ComboBox3.Visible = True
         ComboBox4.Visible = True
         ComboBox5.Visible = False
@@ -1633,6 +1635,8 @@ err1:
         btnMSPExtraRemove.Visible = True
         btnRestartWFB.Visible = True
         btnRestartMajestic.Visible = True
+        btnBoxRess.Visible = True
+        btnWideRess.Visible = True
         ComboBox3.Visible = True
         ComboBox4.Visible = True
         ComboBox5.Visible = True
@@ -1792,6 +1796,8 @@ err1:
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = False
         btnRestartMajestic.Visible = False
+        btnBoxRess.Visible = False
+        btnWideRess.Visible = False
         ComboBox3.Visible = False
         ComboBox4.Visible = False
         ComboBox5.Visible = False
