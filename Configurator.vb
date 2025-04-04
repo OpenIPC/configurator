@@ -1786,7 +1786,7 @@ err1:
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = True
         btnGSMSPOSD.Visible = True
-        btnReset.Visible = False
+        btnReset.Visible = True
         btnAddButtons.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False

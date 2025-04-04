@@ -6,6 +6,7 @@ REC_FPS=$(grep "^fps = " /config/scripts/rec-fps | cut -d'=' -f2 | tr -d ' ')
 OSD=$(grep "^render = " /config/scripts/osd | cut -d'=' -f2 | tr -d ' ')
 PID=0
 AP_MODE=0
+DVR_RECORDING=0
 LONG_PRESS_DURATION=4  # Duration in seconds for long press
 
 # Button GPIO assignments
@@ -34,7 +35,7 @@ start_ap_mode() {
         echo "Starting Hostspot..."
         nmcli con up Hostspot
     fi
-    
+
     AP_MODE=1
     echo "AP mode on. Connect to 'RadxaGroundstation'." > /run/pixelpilot.msg
     echo "AP mode started. Connect to 'RadxaGroundstation' network to access files."
@@ -47,12 +48,15 @@ stop_ap_mode() {
     echo "Stopping AP mode..."
 
     nmcli con down Hostspot
-    
+
     AP_MODE=0
     echo "AP mode off." > /run/pixelpilot.msg
     echo "AP mode off."
 }
 
+get_latest_video() {
+    find "$DVR_PATH" -name "*.mp4" -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f2- -d" "
+}
 # Rest of your existing variables and initialization code...
 i=0
 
@@ -77,32 +81,33 @@ else
     exit 1
 fi
 
+
+sudo systemctl is-active --quiet wifibroadcast || sudo systemctl restart wifibroadcast
+sudo systemctl is-active --quiet wifibroadcast@gs || sudo systemctl restart wifibroadcast@gs
 #Start PixelPilot
-pixelpilot --osd --osd-elements 0 --osd-custom-message --osd-config /config/scripts/osd.json --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr-template $DVR_PATH/record_%Y-%m-%d_%H-%M-%S.mp4 &
+pixelpilot --osd --osd-elements 0 --osd-custom-message --osd-refresh 100 --osd-config /config/scripts/osd.json --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr-sequenced-files --dvr-template $DVR_PATH/record_%Y-%m-%d_%H-%M-%S.mp4 &
 PID=$!
 
 #Start MSPOSD on gs-side
 if [[ "$OSD" == "ground" ]]; then
-    # Wait for IP to become available, with timeout
-    max_attempts=120  # 120 attempts = 10 minutes with 5 second sleep
-    attempt=1
-    
-    echo "Waiting for 10.5.0.1 to become available..."
-    while ! ping -c 1 -W 1 10.5.0.1 >/dev/null 2>&1; do
-        if [ $attempt -ge $max_attempts ]; then
-            exit 1
-        fi
-        sleep 5
-        ((attempt++))
-    done
-    
-    echo "IP 10.5.0.1 is available, starting msposd_rockchip"
-    msposd_rockchip --osd --ahi 0 --matrix 11 -v -r 5 --master 10.5.0.1:5000 &
+    msposd_rockchip --osd --ahi 0 --matrix 11 -v -r 5 --master 0.0.0.0:14551 &
 fi
 
 # Variables for button press timing
 mhz_press_start=0
 
+# Function to get the current index of the channel
+get_current_index() {
+    local channel=$1
+    local list=("${!2}")
+    for i in "${!list[@]}"; do
+        if [[ "${list[$i]}" == "$channel" ]]; then
+            echo $i
+            return
+        fi
+    done
+    echo -1
+}
 #Begin monitoring gpio for button presses
 echo "Monitoring buttons"
 
@@ -111,7 +116,7 @@ while true; do
         MHZ_BUTTON_STATE=$(gpioget $MHZ_BUTTON)
         UP_BUTTON_STATE=$(gpioget $UP_BUTTON)
         DOWN_BUTTON_STATE=$(gpioget $DOWN_BUTTON)
-        
+
         # Handle MHZ button long press
         if [ "$MHZ_BUTTON_STATE" -eq 1 ]; then
             if [ "$mhz_press_start" -eq 0 ]; then
@@ -119,7 +124,7 @@ while true; do
             else
                 current_time=$(date +%s)
                 elapsed=$((current_time - mhz_press_start))
-                
+
                 if [ "$elapsed" -ge "$LONG_PRESS_DURATION" ]; then
                     if [ "$AP_MODE" -eq 0 ]; then
                         start_ap_mode
@@ -155,64 +160,79 @@ while true; do
 
         # Regular button handling (only when not in AP mode)
         if [ "$AP_MODE" -eq 0 ]; then
+
+            # Get the current channel from the config file
+            current_channel=$(grep '^wifi_channel =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
+            bandwidth=$(grep '^bandwidth =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
+
             if [ "$DVR_BUTTON_STATE" -eq 1 ]; then
+                if [ "$DVR_RECORDING" -eq 0 ]; then
                 echo "toggle DVR for $PID"
                 kill -SIGUSR1 $PID
+                DVR_RECORDING=1
                 sleep 1
+                elif [ "$DVR_RECORDING" -eq 1 ];then
+                    echo "toggle DVR for $PID"
+                    kill -SIGUSR1 $PID
+                    DVR_RECORDING=0
+                    sleep 2
+                    latest_video=$(get_latest_video)
+                    if [ -n "$latest_video" ]; then
+                    # Extract filename without path and extension
+                    filename=$(basename "$latest_video" .mp4)
+                    # Generate thumbnail
+                    sudo ffmpegthumbnailer -i "$latest_video" -o "/etc/webUI/static/thumbnails/${filename}.jpg" -s 320
+                    fi
+                fi
             elif [ "$UP_BUTTON_STATE" -eq 1 ]; then
-                # Your existing UP button handling code
-                bandwidth=$(grep '^bandwidth =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
-                if [ "$bandwidth" -eq 20 ]; then
-                    i=$((i+1))
-                    if [[ $i -gt 24 ]]
-                    then
-                        i=0
-                    fi
-                    Freq=${full_freq_list[$i]}
-                    Chan=${full_chan_list[$i]}
-                    sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
-                    echo "$Freq" > /run/pixelpilot.msg
-                    systemctl restart wifibroadcast
-                elif [ "$bandwidth" -eq 40 ]; then
-                    i=$((i+1))
-                    if [[ $i -gt 12 ]]
-                    then
-                        i=0
-                    fi
-                    Freq=${wide_freq_list[$i]}
-                    Chan=${wide_chan_list[$i]}
-                    sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
-                    echo "$Freq" > /run/pixelpilot.msg
-                    systemctl restart wifibroadcast
+            if [ "$bandwidth" -eq 20 ]; then
+                current_index=$(get_current_index "$current_channel" full_chan_list[@])
+                i=$((current_index+1))
+                if [[ $i -ge ${#full_chan_list[@]} ]]; then
+                i=0
+            fi
+                Freq=${full_freq_list[$i]}
+                Chan=${full_chan_list[$i]}
+                sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
+                echo "Channel: $Chan - $Freq" > /run/pixelpilot.msg
+                systemctl restart wifibroadcast
+            elif [ "$bandwidth" -eq 40 ]; then
+                current_index=$(get_current_index "$current_channel" wide_chan_list[@])
+                i=$((current_index+1))
+                if [[ $i -ge ${#wide_chan_list[@]} ]]; then
+                    i=0
                 fi
+                Freq=${wide_freq_list[$i]}
+                Chan=${wide_chan_list[$i]}
+                sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
+            echo "Channel: $Chan - $Freq" > /run/pixelpilot.msg
+                systemctl restart wifibroadcast
+            fi
             elif [ "$DOWN_BUTTON_STATE" -eq 1 ]; then
-                # Your existing DOWN button handling code
-                bandwidth=$(grep '^bandwidth =' $WFB_CFG | cut -d'=' -f2 | sed 's/^ //')
-                if [ "$bandwidth" -eq 20 ]; then
-                    i=$((i-1))
-                    if [[ $i -lt 0 ]]
-                    then
-                        i=24
-                    fi
-                    Freq=${full_freq_list[$i]}
-                    Chan=${full_chan_list[$i]}
-                    sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
-                    echo "$Freq" > /run/pixelpilot.msg
-                    systemctl restart wifibroadcast
-                elif [ "$bandwidth" -eq 40 ]; then
-                    i=$((i-1))
-                    if [[ $i -lt 0 ]]
-                    then
-                        i=12
-                    fi
-                    Freq=${wide_freq_list[$i]}
-                    Chan=${wide_chan_list[$i]}
-                    sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
-                    echo "$Freq" > /run/pixelpilot.msg
-                    systemctl restart wifibroadcast
+            if [ "$bandwidth" -eq 20 ]; then
+                current_index=$(get_current_index "$current_channel" full_chan_list[@])
+                i=$((current_index-1))
+                if [[ $i -lt 0 ]]; then
+                i=$((${#full_chan_list[@]}-1))
+            fi
+                Freq=${full_freq_list[$i]}
+                Chan=${full_chan_list[$i]}
+                sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
+                echo "Channel: $Chan - $Freq" > /run/pixelpilot.msg
+                systemctl restart wifibroadcast
+            elif [ "$bandwidth" -eq 40 ]; then
+                current_index=$(get_current_index "$current_channel" wide_chan_list[@])
+                i=$((current_index-1))
+                if [[ $i -lt 0 ]]; then
+                i=$((${#wide_chan_list[@]}-1))
                 fi
+                Freq=${wide_freq_list[$i]}
+                Chan=${wide_chan_list[$i]}
+                sudo sed -i "s/wifi_channel = .*/wifi_channel = $Chan/" /etc/wifibroadcast.cfg
+                echo "Channel: $Chan - $Freq" > /run/pixelpilot.msg
+                systemctl restart wifibroadcast
             fi
         fi
-        
-        sleep 0.1
+    fi
+sleep 0.1
 done

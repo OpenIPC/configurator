@@ -1453,11 +1453,11 @@ Partial Class Configurator
         btnReset.BackColor = Color.Gold
         btnReset.FlatStyle = FlatStyle.Popup
         btnReset.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnReset.Location = New Point(454, 174)
+        btnReset.Location = New Point(454, 91)
         btnReset.Name = "btnReset"
         btnReset.Size = New Size(86, 30)
         btnReset.TabIndex = 66
-        btnReset.Text = "Reset"
+        btnReset.Text = "Reset VRX"
         btnToolTip.SetToolTip(btnReset, "Reset all the setting files " & vbCrLf & "from Radxa Zero 3w " & vbCrLf & "to the default ones")
         btnReset.UseVisualStyleBackColor = False
         btnReset.Visible = False
@@ -2706,34 +2706,37 @@ Partial Class Configurator
         rBtnCam.AutoSize = True
         rBtnCam.Checked = True
         rBtnCam.ForeColor = Color.White
-        rBtnCam.Location = New Point(523, 442)
+        rBtnCam.Location = New Point(470, 441)
         rBtnCam.Name = "rBtnCam"
         rBtnCam.Size = New Size(116, 19)
         rBtnCam.TabIndex = 27
         rBtnCam.TabStop = True
         rBtnCam.Text = "OpenIPC Camera"
+        btnToolTip.SetToolTip(rBtnCam, "This option is for ANY Supported OpenIPC Camera")
         rBtnCam.UseVisualStyleBackColor = True
         ' 
         ' rBtnNVR
         ' 
         rBtnNVR.AutoSize = True
         rBtnNVR.ForeColor = Color.White
-        rBtnNVR.Location = New Point(523, 462)
+        rBtnNVR.Location = New Point(470, 461)
         rBtnNVR.Name = "rBtnNVR"
         rBtnNVR.Size = New Size(87, 19)
         rBtnNVR.TabIndex = 28
         rBtnNVR.Text = "NVR Hi3536"
+        btnToolTip.SetToolTip(rBtnNVR, "This option is only for the legacy NVR from HiSilicon Hi3536")
         rBtnNVR.UseVisualStyleBackColor = True
         ' 
         ' rBtnRadxaZero3w
         ' 
         rBtnRadxaZero3w.AutoSize = True
         rBtnRadxaZero3w.ForeColor = Color.White
-        rBtnRadxaZero3w.Location = New Point(523, 482)
+        rBtnRadxaZero3w.Location = New Point(470, 481)
         rBtnRadxaZero3w.Name = "rBtnRadxaZero3w"
-        rBtnRadxaZero3w.Size = New Size(156, 19)
+        rBtnRadxaZero3w.Size = New Size(186, 19)
         rBtnRadxaZero3w.TabIndex = 29
-        rBtnRadxaZero3w.Text = "Radxa Zero 3w (WFB-ng)"
+        rBtnRadxaZero3w.Text = "RunCam/EMAX VRX (WFB-ng)"
+        btnToolTip.SetToolTip(rBtnRadxaZero3w, "This option is also for the Radxa Zero 3w DIY VRXs")
         rBtnRadxaZero3w.UseVisualStyleBackColor = True
         ' 
         ' Label3
@@ -2772,7 +2775,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "24/03/2025"
+        Label12.Text = "04/04/2025"
         ' 
         ' Label13
         ' 

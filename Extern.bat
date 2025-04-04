@@ -61,7 +61,6 @@ if "%1" == "dlwfbng" (
 )
 
 if "%1" == "ulwfbng" (
-	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
@@ -69,7 +68,6 @@ if "%1" == "ulwfbng" (
 )
 
 if "%1" == "ulwfbngr" (
-	plink -ssh root@%2 -pw %3 apt install dos2unix
 	echo y | pscp -scp -pw %3 wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 screen-mode root@%2:/config/scripts/
@@ -269,13 +267,12 @@ if "%1" == "mavgs2" (
 )
 
 if "%1" == "resetradxa" (
-	plink -ssh root@%2 -pw %3 apt install dos2unix
         echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 reset/wfb.conf root@%2:/etc/modprobe.d/
-	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/home/radxa/scripts/
 	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/etc/default/
-	echo y | pscp -scp -pw %3 reset/screen-mode root@%2:/config/scripts/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /etc/default/wifibroadcast /config/scripts/screen-mode
+	echo y | pscp -scp -pw %3 reset/stream.sh reset/osd reset/osd.json reset/rec-fps reset/screen-mode root@%2:/config/scripts/
+	echo y | pscp -scp -pw %3 reset/alink_gs.conf root@%2:/config/
+	plink -ssh root@%2 -pw %3 dos2unix /etc/wifibroadcast.cfg /etc/modprobe.d/wfb.conf /etc/default/wifibroadcast /config/scripts/screen-mode /config/scripts/osd /config/scripts/osd.json /config/scripts/stream.sh /config/scripts/rec-fps /config/alink_gs.conf 
         plink -ssh root@%2 -pw %3 reboot
 )
 
