@@ -85,6 +85,8 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         TabPage3 = New TabPage()
+        nalu = New TextBox()
+        btnBitTest = New Button()
         btnMSPGSExtra = New Button()
         btnMSPExtraRemove = New Button()
         btn40MHz = New Button()
@@ -980,6 +982,8 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage3.Controls.Add(nalu)
+        TabPage3.Controls.Add(btnBitTest)
         TabPage3.Controls.Add(btnMSPGSExtra)
         TabPage3.Controls.Add(btnMSPExtraRemove)
         TabPage3.Controls.Add(btn40MHz)
@@ -1011,6 +1015,32 @@ Partial Class Configurator
         TabPage3.Size = New Size(670, 395)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
+        ' 
+        ' nalu
+        ' 
+        nalu.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        nalu.BorderStyle = BorderStyle.FixedSingle
+        nalu.Font = New Font("Arial", 9F, FontStyle.Bold)
+        nalu.ForeColor = Color.White
+        nalu.Location = New Point(579, 228)
+        nalu.Name = "nalu"
+        nalu.Size = New Size(65, 21)
+        nalu.TabIndex = 71
+        nalu.Text = "3800"
+        btnToolTip.SetToolTip(nalu, "Enter the NALU size here")
+        ' 
+        ' btnBitTest
+        ' 
+        btnBitTest.BackColor = Color.Gold
+        btnBitTest.FlatStyle = FlatStyle.Popup
+        btnBitTest.Font = New Font("Arial", 7.4F, FontStyle.Bold)
+        btnBitTest.Location = New Point(454, 227)
+        btnBitTest.Name = "btnBitTest"
+        btnBitTest.Size = New Size(116, 22)
+        btnBitTest.TabIndex = 70
+        btnBitTest.Text = "High Bitrate Test"
+        btnToolTip.SetToolTip(btnBitTest, "Select MCS4, 40MHz bandwidth, 24Mbps bitrate, " & vbCrLf & "FEC 10/15,STBC 1, LDPC 1")
+        btnBitTest.UseVisualStyleBackColor = False
         ' 
         ' btnMSPGSExtra
         ' 
@@ -3067,5 +3097,7 @@ Partial Class Configurator
     Friend WithEvents rBTNAudioOFF As RadioButton
     Friend WithEvents rBTNAudioON As RadioButton
     Friend WithEvents btnAudio As Button
+    Friend WithEvents btnBitTest As Button
+    Friend WithEvents nalu As TextBox
 
 End Class

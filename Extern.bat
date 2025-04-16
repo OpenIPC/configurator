@@ -318,6 +318,20 @@ if "%1" == "wide" (
         plink -ssh root@%2 -pw %3 sed -i '/sleep 0.5/d' /etc/rc.local && sed -i '/echo setprecrop*/d' /etc/rc.local
 )
 
+if "%1" == "bittest" (
+	plink -ssh root@%2 -pw %3 yaml-cli -s .fpv.noiseLevel 0
+	plink -ssh root@%2 -pw %3 yaml-cli -s .outgoing.naluSize %4
+	echo y | pscp -scp -pw %3 reset/wifibroadcast_test root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_test
+        plink -ssh root@%2 -pw %3 mv /usr/bin/wifibroadcast_test /usr/bin/wifibroadcast
+        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/wifibroadcast
+        plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "resfix" (
+	plink -ssh root@%2 -pw %3 yaml-cli -s .video0.size 1920x1080
+)
+
 :end
 echo.
 pause

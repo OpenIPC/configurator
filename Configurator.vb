@@ -435,6 +435,16 @@ err1:
                     If CamallLines(x).StartsWith("  mirror:") Then txtMirror.Text = ReadLine(x + 1, CamallLines)
                     If CamallLines(x).StartsWith("  sensorConfig:") Then txtSensor.Text = ReadLine(x + 1, CamallLines)
                 Next
+                If txtResolution.Text = "  size: 704x576" Then
+                    With New Process()
+                        .StartInfo.UseShellExecute = False
+                        .StartInfo.FileName = extern
+                        .StartInfo.Arguments = "resfix " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                        .StartInfo.RedirectStandardOutput = False
+                        .Start()
+                    End With
+                    End
+                End If
             End If
         Else
             Dim setdisplay = "screen-mode"
@@ -1435,6 +1445,8 @@ err1:
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         btn40MHz.Visible = False
+        btnBitTest.Visible = False
+        nalu.Visible = False
         Alink.Visible = False
         Label8.Visible = True
         Label9.Visible = True
@@ -1503,7 +1515,7 @@ err1:
         Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
-        ComboBox1.Items.Clear
+        ComboBox1.Items.Clear()
         ComboBox1.Items.Add("5180 MHz [36]")
         ComboBox1.Items.Add("5200 MHz [40]")
         ComboBox1.Items.Add("5220 MHz [44]")
@@ -1533,7 +1545,7 @@ err1:
         ComboBox1.Items.Add("5865 MHz [173]")
         ComboBox1.Items.Add("5885 MHz [177]")
         ComboBox1.Text = "Select 5.8GHz Frequency"
-        cmbResolutionVRX.Items.Clear
+        cmbResolutionVRX.Items.Clear()
         cmbResolutionVRX.Items.Add("720p60")
         cmbResolutionVRX.Items.Add("1080p60")
         cmbResolutionVRX.Items.Add("1024x768x60")
@@ -1542,7 +1554,7 @@ err1:
         cmbResolutionVRX.Items.Add("1600x1200x60")
         cmbResolutionVRX.Items.Add("2560x1440x30")
         cmbResolutionVRX.Text = "Select Resolution"
-        cmbCodecVRX.Items.Clear
+        cmbCodecVRX.Items.Clear()
         cmbCodecVRX.Items.Add("h264")
         cmbCodecVRX.Items.Add("h265")
         cmbCodecVRX.Text = "Select Codec"
@@ -1598,6 +1610,8 @@ err1:
         btnResetCam.Visible = True
         btnResetCam.Text = "Reset Camera"
         btn40MHz.Visible = False
+        btnBitTest.Visible = True
+        nalu.Visible = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Alink.Visible = True
@@ -1668,7 +1682,7 @@ err1:
         Label2.Visible = True
         txtMCS.ReadOnly = True
         txtSTBC.ReadOnly = True
-        ComboBox1.Items.Clear
+        ComboBox1.Items.Clear()
         ComboBox1.Items.Add("5180 MHz [36]")
         ComboBox1.Items.Add("5200 MHz [40]")
         ComboBox1.Items.Add("5220 MHz [44]")
@@ -1698,7 +1712,7 @@ err1:
         ComboBox1.Items.Add("5865 MHz [173]")
         ComboBox1.Items.Add("5885 MHz [177]")
         ComboBox1.Text = "Select 5.8GHz Frequency"
-        cmbResolutionVRX.Items.Clear
+        cmbResolutionVRX.Items.Clear()
         cmbResolutionVRX.Items.Add("720p60")
         cmbResolutionVRX.Items.Add("1080p60")
         cmbResolutionVRX.Items.Add("1024x768x60")
@@ -1707,7 +1721,7 @@ err1:
         cmbResolutionVRX.Items.Add("1600x1200x60")
         cmbResolutionVRX.Items.Add("2560x1440x30")
         cmbResolutionVRX.Text = "Select Resolution"
-        cmbCodecVRX.Items.Clear
+        cmbCodecVRX.Items.Clear()
         cmbCodecVRX.Items.Add("h264")
         cmbCodecVRX.Items.Add("h265")
         cmbCodecVRX.Text = "Select Codec"
@@ -1762,6 +1776,8 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = False
         btn40MHz.Visible = False
+        btnBitTest.Visible = False
+        nalu.Visible = False
         Alink.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
@@ -3008,7 +3024,7 @@ err1:
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "resetradxa " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
-                .Start
+                .Start()
             End With
         Else
             MsgBox("Please enter a valid IP address")
@@ -3380,7 +3396,7 @@ err1:
                     .StartInfo.FileName = selected_preset
                     .StartInfo.Arguments = "preset " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                     .StartInfo.RedirectStandardOutput = False
-                    .Start
+                    .Start()
                 End With
             Else
                 MsgBox("Please enter a valid IP address")
@@ -3538,6 +3554,26 @@ err1:
                 Else
                     .StartInfo.Arguments = "audiooff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 End If
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnBitTest_Click(sender As Object, e As EventArgs) Handles btnBitTest.Click
+        Dim extern = "extern.bat"
+        If Not IO.File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "bittest " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + nalu.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
