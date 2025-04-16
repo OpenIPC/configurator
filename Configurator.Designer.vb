@@ -24,7 +24,6 @@ Partial Class Configurator
     Private Sub InitializeComponent()
         components = New ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Configurator))
-        btnGet = New Button()
         txtIP = New TextBox()
         txtFrequency = New TextBox()
         txtResolution = New TextBox()
@@ -60,6 +59,9 @@ Partial Class Configurator
         ComboBox2 = New ComboBox()
         ComboBox1 = New ComboBox()
         TabPage2 = New TabPage()
+        rBTNAudioOFF = New RadioButton()
+        rBTNAudioON = New RadioButton()
+        btnAudio = New Button()
         btnWideRess = New Button()
         btnBoxRess = New Button()
         GroupBox2 = New GroupBox()
@@ -93,7 +95,6 @@ Partial Class Configurator
         btnDualOSD = New Button()
         btnFontsINAV = New Button()
         btnMSP = New Button()
-        btnExtra = New Button()
         cmbRC_Channel = New ComboBox()
         txtRC_CHANNEL = New TextBox()
         cmbAggregate = New ComboBox()
@@ -243,27 +244,13 @@ Partial Class Configurator
         CType(connected, ComponentModel.ISupportInitialize).BeginInit()
         SuspendLayout()
         ' 
-        ' btnGet
-        ' 
-        btnGet.BackColor = Color.Gold
-        btnGet.FlatStyle = FlatStyle.Popup
-        btnGet.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnGet.Location = New Point(13, 468)
-        btnGet.Name = "btnGet"
-        btnGet.Size = New Size(45, 30)
-        btnGet.TabIndex = 0
-        btnGet.Text = "Fetch"
-        btnToolTip.SetToolTip(btnGet, "Fetch the required files from the OpenIPC Camera/VRX" & vbCrLf & "Save the IP address of the selected device")
-        btnGet.UseVisualStyleBackColor = False
-        btnGet.Visible = False
-        ' 
         ' txtIP
         ' 
         txtIP.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
         txtIP.BorderStyle = BorderStyle.FixedSingle
         txtIP.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtIP.ForeColor = Color.White
-        txtIP.Location = New Point(76, 440)
+        txtIP.Location = New Point(80, 442)
         txtIP.Name = "txtIP"
         txtIP.Size = New Size(99, 21)
         txtIP.TabIndex = 1
@@ -396,7 +383,7 @@ Partial Class Configurator
         txtSensor.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
         txtSensor.BorderStyle = BorderStyle.FixedSingle
         txtSensor.ForeColor = Color.FromArgb(CByte(244), CByte(244), CByte(244))
-        txtSensor.Location = New Point(19, 339)
+        txtSensor.Location = New Point(19, 337)
         txtSensor.Name = "txtSensor"
         txtSensor.Size = New Size(420, 20)
         txtSensor.TabIndex = 14
@@ -493,7 +480,7 @@ Partial Class Configurator
         TabControl1.Multiline = True
         TabControl1.Name = "TabControl1"
         TabControl1.SelectedIndex = 0
-        TabControl1.Size = New Size(678, 423)
+        TabControl1.Size = New Size(678, 424)
         TabControl1.SizeMode = TabSizeMode.Fixed
         TabControl1.TabIndex = 22
         ' 
@@ -524,7 +511,7 @@ Partial Class Configurator
         TabPage1.Location = New Point(4, 25)
         TabPage1.Name = "TabPage1"
         TabPage1.Padding = New Padding(3)
-        TabPage1.Size = New Size(670, 394)
+        TabPage1.Size = New Size(670, 395)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
         ' 
@@ -665,6 +652,9 @@ Partial Class Configurator
         ' TabPage2
         ' 
         TabPage2.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage2.Controls.Add(rBTNAudioOFF)
+        TabPage2.Controls.Add(rBTNAudioON)
+        TabPage2.Controls.Add(btnAudio)
         TabPage2.Controls.Add(btnWideRess)
         TabPage2.Controls.Add(btnBoxRess)
         TabPage2.Controls.Add(GroupBox2)
@@ -696,15 +686,54 @@ Partial Class Configurator
         TabPage2.Location = New Point(4, 25)
         TabPage2.Name = "TabPage2"
         TabPage2.Padding = New Padding(3)
-        TabPage2.Size = New Size(670, 394)
+        TabPage2.Size = New Size(670, 395)
         TabPage2.TabIndex = 1
         TabPage2.Text = "Camera Settings"
+        ' 
+        ' rBTNAudioOFF
+        ' 
+        rBTNAudioOFF.AutoSize = True
+        rBTNAudioOFF.Checked = True
+        rBTNAudioOFF.ForeColor = Color.White
+        rBTNAudioOFF.Location = New Point(549, 305)
+        rBTNAudioOFF.Name = "rBTNAudioOFF"
+        rBTNAudioOFF.Size = New Size(45, 18)
+        rBTNAudioOFF.TabIndex = 70
+        rBTNAudioOFF.TabStop = True
+        rBTNAudioOFF.Text = "OFF"
+        btnToolTip.SetToolTip(rBTNAudioOFF, "Turn OFF the onboard REC")
+        rBTNAudioOFF.UseVisualStyleBackColor = True
+        ' 
+        ' rBTNAudioON
+        ' 
+        rBTNAudioON.AutoSize = True
+        rBTNAudioON.ForeColor = Color.White
+        rBTNAudioON.Location = New Point(549, 288)
+        rBTNAudioON.Name = "rBTNAudioON"
+        rBTNAudioON.Size = New Size(40, 18)
+        rBTNAudioON.TabIndex = 69
+        rBTNAudioON.Text = "ON"
+        btnToolTip.SetToolTip(rBTNAudioON, "Turn ON the onboard REC")
+        rBTNAudioON.UseVisualStyleBackColor = True
+        ' 
+        ' btnAudio
+        ' 
+        btnAudio.BackColor = Color.Gold
+        btnAudio.FlatStyle = FlatStyle.Popup
+        btnAudio.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnAudio.Location = New Point(456, 290)
+        btnAudio.Name = "btnAudio"
+        btnAudio.Size = New Size(87, 30)
+        btnAudio.TabIndex = 68
+        btnAudio.Text = "Audio"
+        btnToolTip.SetToolTip(btnAudio, "Turns ON or OFF the Audio" & vbCrLf & "Select ON or OFF option first")
+        btnAudio.UseVisualStyleBackColor = False
         ' 
         ' btnWideRess
         ' 
         btnWideRess.BackColor = Color.Gold
         btnWideRess.FlatStyle = FlatStyle.Popup
-        btnWideRess.Location = New Point(253, 365)
+        btnWideRess.Location = New Point(253, 363)
         btnWideRess.Name = "btnWideRess"
         btnWideRess.Size = New Size(111, 23)
         btnWideRess.TabIndex = 67
@@ -716,7 +745,7 @@ Partial Class Configurator
         ' 
         btnBoxRess.BackColor = Color.Gold
         btnBoxRess.FlatStyle = FlatStyle.Popup
-        btnBoxRess.Location = New Point(136, 365)
+        btnBoxRess.Location = New Point(136, 363)
         btnBoxRess.Name = "btnBoxRess"
         btnBoxRess.Size = New Size(111, 23)
         btnBoxRess.TabIndex = 66
@@ -831,7 +860,7 @@ Partial Class Configurator
         Label6.AutoSize = True
         Label6.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label6.ForeColor = Color.White
-        Label6.Location = New Point(445, 339)
+        Label6.Location = New Point(445, 337)
         Label6.Name = "Label6"
         Label6.Size = New Size(187, 15)
         Label6.TabIndex = 45
@@ -841,7 +870,7 @@ Partial Class Configurator
         ' 
         btnRestartMajestic.BackColor = Color.Gold
         btnRestartMajestic.FlatStyle = FlatStyle.Popup
-        btnRestartMajestic.Location = New Point(19, 365)
+        btnRestartMajestic.Location = New Point(19, 363)
         btnRestartMajestic.Name = "btnRestartMajestic"
         btnRestartMajestic.Size = New Size(111, 23)
         btnRestartMajestic.TabIndex = 44
@@ -961,7 +990,6 @@ Partial Class Configurator
         TabPage3.Controls.Add(btnDualOSD)
         TabPage3.Controls.Add(btnFontsINAV)
         TabPage3.Controls.Add(btnMSP)
-        TabPage3.Controls.Add(btnExtra)
         TabPage3.Controls.Add(cmbRC_Channel)
         TabPage3.Controls.Add(txtRC_CHANNEL)
         TabPage3.Controls.Add(cmbAggregate)
@@ -980,7 +1008,7 @@ Partial Class Configurator
         TabPage3.Name = "TabPage3"
         TabPage3.Padding = New Padding(3)
         TabPage3.RightToLeft = RightToLeft.No
-        TabPage3.Size = New Size(670, 394)
+        TabPage3.Size = New Size(670, 395)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
         ' 
@@ -989,7 +1017,7 @@ Partial Class Configurator
         btnMSPGSExtra.BackColor = Color.Gold
         btnMSPGSExtra.FlatStyle = FlatStyle.Popup
         btnMSPGSExtra.Font = New Font("Arial", 7.3F, FontStyle.Bold)
-        btnMSPGSExtra.Location = New Point(454, 172)
+        btnMSPGSExtra.Location = New Point(454, 106)
         btnMSPGSExtra.Name = "btnMSPGSExtra"
         btnMSPGSExtra.Size = New Size(116, 22)
         btnMSPGSExtra.TabIndex = 69
@@ -1002,7 +1030,7 @@ Partial Class Configurator
         btnMSPExtraRemove.BackColor = Color.Gold
         btnMSPExtraRemove.FlatStyle = FlatStyle.Popup
         btnMSPExtraRemove.Font = New Font("Arial", 7.4F, FontStyle.Bold)
-        btnMSPExtraRemove.Location = New Point(454, 200)
+        btnMSPExtraRemove.Location = New Point(454, 134)
         btnMSPExtraRemove.Name = "btnMSPExtraRemove"
         btnMSPExtraRemove.Size = New Size(116, 22)
         btnMSPExtraRemove.TabIndex = 68
@@ -1015,20 +1043,21 @@ Partial Class Configurator
         btn40MHz.BackColor = Color.Gold
         btn40MHz.FlatStyle = FlatStyle.Popup
         btn40MHz.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btn40MHz.Location = New Point(454, 107)
+        btn40MHz.Location = New Point(454, 272)
         btn40MHz.Name = "btn40MHz"
         btn40MHz.Size = New Size(116, 30)
         btn40MHz.TabIndex = 67
         btn40MHz.Text = "Enable 40MHz"
         btnToolTip.SetToolTip(btn40MHz, "Upload the modified wifibroadcast file to enable the 40MHz mode")
         btn40MHz.UseVisualStyleBackColor = False
+        btn40MHz.Visible = False
         ' 
         ' btnMSPExtra
         ' 
         btnMSPExtra.BackColor = Color.Gold
         btnMSPExtra.FlatStyle = FlatStyle.Popup
         btnMSPExtra.Font = New Font("Arial", 7.4F, FontStyle.Bold)
-        btnMSPExtra.Location = New Point(454, 143)
+        btnMSPExtra.Location = New Point(454, 78)
         btnMSPExtra.Name = "btnMSPExtra"
         btnMSPExtra.Size = New Size(116, 22)
         btnMSPExtra.TabIndex = 66
@@ -1041,7 +1070,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 268)
+        rBtnRECOFF.Location = New Point(547, 203)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -1054,7 +1083,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 253)
+        rBtnRECON.Location = New Point(547, 188)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -1067,12 +1096,12 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 255)
+        btnOnboardREC.Location = New Point(454, 190)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
         btnOnboardREC.Text = "Onboard REC"
-        btnToolTip.SetToolTip(btnOnboardREC, "Turns ON or OFF the Onboard Recording" & vbCrLf & vbCrLf & "Must select ON or OFF option first")
+        btnToolTip.SetToolTip(btnOnboardREC, "Turns ON or OFF the Onboard Recording" & vbCrLf & "Select ON or OFF option first")
         btnOnboardREC.UseVisualStyleBackColor = False
         ' 
         ' btnDualOSD
@@ -1107,27 +1136,14 @@ Partial Class Configurator
         ' 
         btnMSP.BackColor = Color.Gold
         btnMSP.FlatStyle = FlatStyle.Popup
-        btnMSP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnMSP.Location = New Point(454, 228)
+        btnMSP.Font = New Font("Arial", 6.75F, FontStyle.Bold)
+        btnMSP.Location = New Point(454, 162)
         btnMSP.Name = "btnMSP"
         btnMSP.Size = New Size(116, 22)
         btnMSP.TabIndex = 56
-        btnMSP.Text = "Latest VTXMENU"
+        btnMSP.Text = "Latest YAML VTXMENU"
         btnToolTip.SetToolTip(btnMSP, "Upload the latest vtxmenu for the MSPOSD of OpenIPC" & vbCrLf & vbCrLf & "To enter the VTX menu move: " & vbCrLf & "LEFT stick to bottom right and" & vbCrLf & "RIGHT stick to bottom left")
         btnMSP.UseVisualStyleBackColor = False
-        ' 
-        ' btnExtra
-        ' 
-        btnExtra.BackColor = Color.Gold
-        btnExtra.FlatStyle = FlatStyle.Popup
-        btnExtra.Font = New Font("Arial", 7F, FontStyle.Bold)
-        btnExtra.Location = New Point(454, 79)
-        btnExtra.Name = "btnExtra"
-        btnExtra.Size = New Size(116, 22)
-        btnExtra.TabIndex = 47
-        btnExtra.Text = "Add MAVLINK EXTRA"
-        btnToolTip.SetToolTip(btnExtra, "1) Add OSD SOC temperature" & vbCrLf & "2) Set low delay for the channels.sh switches")
-        btnExtra.UseVisualStyleBackColor = False
         ' 
         ' cmbRC_Channel
         ' 
@@ -1291,7 +1307,7 @@ Partial Class Configurator
         TabPage7.Controls.Add(GroupBox3)
         TabPage7.Location = New Point(4, 25)
         TabPage7.Name = "TabPage7"
-        TabPage7.Size = New Size(670, 394)
+        TabPage7.Size = New Size(670, 395)
         TabPage7.TabIndex = 6
         TabPage7.Text = "Presets"
         ' 
@@ -1404,7 +1420,7 @@ Partial Class Configurator
         TabPage4.Location = New Point(4, 25)
         TabPage4.Name = "TabPage4"
         TabPage4.Padding = New Padding(3)
-        TabPage4.Size = New Size(670, 394)
+        TabPage4.Size = New Size(670, 395)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
         ' 
@@ -1728,7 +1744,7 @@ Partial Class Configurator
         TabPage5.Location = New Point(4, 25)
         TabPage5.Name = "TabPage5"
         TabPage5.Padding = New Padding(3)
-        TabPage5.Size = New Size(670, 394)
+        TabPage5.Size = New Size(670, 395)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
         ' 
@@ -2070,7 +2086,7 @@ Partial Class Configurator
         TabPage6.Location = New Point(4, 25)
         TabPage6.Name = "TabPage6"
         TabPage6.Padding = New Padding(3)
-        TabPage6.Size = New Size(670, 394)
+        TabPage6.Size = New Size(670, 395)
         TabPage6.TabIndex = 5
         TabPage6.Text = "OSD"
         ' 
@@ -2618,7 +2634,7 @@ Partial Class Configurator
         btnSaveReboot.Enabled = False
         btnSaveReboot.FlatStyle = FlatStyle.Popup
         btnSaveReboot.Font = New Font("Arial", 8.25F, FontStyle.Bold)
-        btnSaveReboot.Location = New Point(142, 468)
+        btnSaveReboot.Location = New Point(146, 470)
         btnSaveReboot.Name = "btnSaveReboot"
         btnSaveReboot.Size = New Size(116, 30)
         btnSaveReboot.TabIndex = 46
@@ -2632,7 +2648,7 @@ Partial Class Configurator
         btnRead.FlatStyle = FlatStyle.Popup
         btnRead.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnRead.ForeColor = Color.Black
-        btnRead.Location = New Point(63, 468)
+        btnRead.Location = New Point(67, 470)
         btnRead.Name = "btnRead"
         btnRead.Size = New Size(74, 30)
         btnRead.TabIndex = 23
@@ -2645,7 +2661,7 @@ Partial Class Configurator
         Label1.AutoSize = True
         Label1.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label1.ForeColor = Color.White
-        Label1.Location = New Point(8, 443)
+        Label1.Location = New Point(12, 445)
         Label1.Name = "Label1"
         Label1.Size = New Size(72, 15)
         Label1.TabIndex = 24
@@ -2658,7 +2674,7 @@ Partial Class Configurator
         btnReboot.FlatStyle = FlatStyle.Popup
         btnReboot.Font = New Font("Arial", 8.25F, FontStyle.Bold)
         btnReboot.ForeColor = Color.Black
-        btnReboot.Location = New Point(264, 468)
+        btnReboot.Location = New Point(268, 470)
         btnReboot.Name = "btnReboot"
         btnReboot.Size = New Size(64, 30)
         btnReboot.TabIndex = 25
@@ -2672,7 +2688,7 @@ Partial Class Configurator
         txtPassword.BorderStyle = BorderStyle.FixedSingle
         txtPassword.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtPassword.ForeColor = Color.White
-        txtPassword.Location = New Point(237, 440)
+        txtPassword.Location = New Point(241, 442)
         txtPassword.Name = "txtPassword"
         txtPassword.Size = New Size(65, 21)
         txtPassword.TabIndex = 31
@@ -2682,7 +2698,7 @@ Partial Class Configurator
         ' connected
         ' 
         connected.BackColor = Color.Red
-        connected.Location = New Point(13, 468)
+        connected.Location = New Point(17, 470)
         connected.Name = "connected"
         connected.Size = New Size(44, 30)
         connected.TabIndex = 47
@@ -2692,8 +2708,10 @@ Partial Class Configurator
         ' chkYAML
         ' 
         chkYAML.AutoSize = True
+        chkYAML.Checked = True
+        chkYAML.CheckState = CheckState.Checked
         chkYAML.ForeColor = Color.White
-        chkYAML.Location = New Point(334, 474)
+        chkYAML.Location = New Point(338, 476)
         chkYAML.Name = "chkYAML"
         chkYAML.Size = New Size(116, 19)
         chkYAML.TabIndex = 60
@@ -2706,7 +2724,7 @@ Partial Class Configurator
         rBtnCam.AutoSize = True
         rBtnCam.Checked = True
         rBtnCam.ForeColor = Color.White
-        rBtnCam.Location = New Point(470, 441)
+        rBtnCam.Location = New Point(474, 443)
         rBtnCam.Name = "rBtnCam"
         rBtnCam.Size = New Size(116, 19)
         rBtnCam.TabIndex = 27
@@ -2719,7 +2737,7 @@ Partial Class Configurator
         ' 
         rBtnNVR.AutoSize = True
         rBtnNVR.ForeColor = Color.White
-        rBtnNVR.Location = New Point(470, 461)
+        rBtnNVR.Location = New Point(474, 463)
         rBtnNVR.Name = "rBtnNVR"
         rBtnNVR.Size = New Size(87, 19)
         rBtnNVR.TabIndex = 28
@@ -2731,7 +2749,7 @@ Partial Class Configurator
         ' 
         rBtnRadxaZero3w.AutoSize = True
         rBtnRadxaZero3w.ForeColor = Color.White
-        rBtnRadxaZero3w.Location = New Point(470, 481)
+        rBtnRadxaZero3w.Location = New Point(474, 483)
         rBtnRadxaZero3w.Name = "rBtnRadxaZero3w"
         rBtnRadxaZero3w.Size = New Size(186, 19)
         rBtnRadxaZero3w.TabIndex = 29
@@ -2744,7 +2762,7 @@ Partial Class Configurator
         Label3.AutoSize = True
         Label3.Font = New Font("Arial", 9F, FontStyle.Bold)
         Label3.ForeColor = Color.White
-        Label3.Location = New Point(174, 443)
+        Label3.Location = New Point(178, 445)
         Label3.Name = "Label3"
         Label3.Size = New Size(68, 15)
         Label3.TabIndex = 30
@@ -2771,18 +2789,18 @@ Partial Class Configurator
         Label12.AutoSize = True
         Label12.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label12.ForeColor = Color.White
-        Label12.Location = New Point(649, 444)
+        Label12.Location = New Point(653, 446)
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "04/04/2025"
+        Label12.Text = "16/04/2025"
         ' 
         ' Label13
         ' 
         Label13.AutoSize = True
         Label13.Font = New Font("Arial", 6F, FontStyle.Bold)
         Label13.ForeColor = Color.White
-        Label13.Location = New Point(645, 434)
+        Label13.Location = New Point(649, 436)
         Label13.Name = "Label13"
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
@@ -2793,7 +2811,7 @@ Partial Class Configurator
         AutoScaleDimensions = New SizeF(7F, 15F)
         AutoScaleMode = AutoScaleMode.Font
         BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
-        ClientSize = New Size(700, 507)
+        ClientSize = New Size(700, 510)
         Controls.Add(chkYAML)
         Controls.Add(Label13)
         Controls.Add(Label12)
@@ -2809,7 +2827,6 @@ Partial Class Configurator
         Controls.Add(Label1)
         Controls.Add(btnRead)
         Controls.Add(TabControl1)
-        Controls.Add(btnGet)
         Controls.Add(MenuStrip1)
         FormBorderStyle = FormBorderStyle.FixedSingle
         Icon = CType(resources.GetObject("$this.Icon"), Icon)
@@ -2844,8 +2861,6 @@ Partial Class Configurator
         ResumeLayout(False)
         PerformLayout()
     End Sub
-
-    Friend WithEvents btnGet As Button
     Friend WithEvents txtIP As TextBox
     Friend WithEvents txtFrequency As TextBox
     Friend WithEvents txtResolution As TextBox
@@ -3001,7 +3016,6 @@ Partial Class Configurator
     Friend WithEvents connected As PictureBox
     Friend WithEvents BackgroundWorker2 As System.ComponentModel.BackgroundWorker
     Friend WithEvents Timer1 As Timer
-    Friend WithEvents btnExtra As Button
     Friend WithEvents cmbMirror As ComboBox
     Friend WithEvents cmbFlip As ComboBox
     Friend WithEvents txtMirror As TextBox
@@ -3050,5 +3064,8 @@ Partial Class Configurator
     Friend WithEvents namePreset As TextBox
     Friend WithEvents btnWideRess As Button
     Friend WithEvents btnBoxRess As Button
+    Friend WithEvents rBTNAudioOFF As RadioButton
+    Friend WithEvents rBTNAudioON As RadioButton
+    Friend WithEvents btnAudio As Button
 
 End Class

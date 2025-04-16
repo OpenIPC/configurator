@@ -101,13 +101,10 @@ start_telemetry() {
                 mavfwd -b 115200 -c 8 -p 100 -a 15 -t -m /dev/"$serial" \
                         -o 127.0.0.1:"$port_tx" -i 127.0.0.1:"$port_rx" > /dev/null &
         else
-                if [ "$router" = "msposd" ]; then
-                        size=$(curl -s localhost/api/v1/config.json | jsonfilter -qe "@.video0.size")
-                fi
                 msposd -b 115200 -c 8 -r "$osd_fps" -m /dev/"$serial" \
-                        -o 127.0.0.1:"$port_tx" -z "$size" > /dev/null &
+                        -o 10.5.0.1:"$port_tx" -z "$size" > /dev/null &
 sleep 5
-echo "&L70&F28&G8CPU:&C TEMP:&T\n&B" >/tmp/MSPOSD.msg
+echo -e "&L70&F28&G8CPU:&C TEMP:&T\n&B" >/tmp/MSPOSD.msg
 
         fi
 }

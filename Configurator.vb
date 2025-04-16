@@ -49,11 +49,11 @@ Public Class Configurator
 
     End Sub
 
-    Private Sub btnGet_Click(sender As Object, e As EventArgs) Handles btnGet.Click
-        Dim settingsconf As String = "settings.conf"
-        If Not IO.File.Exists(settingsconf) Then
-            System.IO.File.Create(settingsconf).Dispose()
-            Dim fileExists As Boolean = File.Exists(settingsconf)
+    Private Sub btnGet_Click(sender As Object, e As EventArgs)
+        Dim settingsconf = "settings.conf"
+        If Not File.Exists(settingsconf) Then
+            File.Create(settingsconf).Dispose()
+            Dim fileExists = File.Exists(settingsconf)
             Using sw As New StreamWriter(File.Open(settingsconf, FileMode.OpenOrCreate))
                 sw.WriteLine("openipc:192.168.0.1")
                 sw.WriteLine("nvr:192.168.0.1")
@@ -65,7 +65,7 @@ Public Class Configurator
         Dim x As Integer
         Dim SettingsfilePath = settingsconf
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -74,8 +74,8 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                Dim lines = IO.File.ReadAllLines(SettingsfilePath)
-                For x = 0 To lines.Count() - 1
+                Dim lines = File.ReadAllLines(SettingsfilePath)
+                For x = 0 To lines.Count - 1
                     If rBtnNVR.Checked Then
                         If lines(x).StartsWith("nvr:") Then
                             lines(x) = "nvr:" + txtIP.Text
@@ -93,7 +93,7 @@ Public Class Configurator
                         .StartInfo.Arguments = "dl " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                     End If
                 Next
-                IO.File.WriteAllLines(SettingsfilePath, lines)
+                File.WriteAllLines(SettingsfilePath, lines)
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -1466,7 +1466,6 @@ err1:
         btnAddButtons.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
-        btnExtra.Visible = False
         btnMSPExtra.Visible = False
         btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
@@ -1498,6 +1497,9 @@ err1:
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
+        btnAudio.Visible = False
+        rBTNAudioON.Visible = False
+        rBTNAudioOFF.Visible = False
         Label2.Visible = True
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
@@ -1595,7 +1597,7 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = True
         btnResetCam.Text = "Reset Camera"
-        btn40MHz.Visible = True
+        btn40MHz.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Alink.Visible = True
@@ -1629,7 +1631,6 @@ err1:
         btnAddButtons.Visible = False
         btnUART0.Visible = True
         btnUART0OFF.Visible = True
-        btnExtra.Visible = True
         btnMSPExtra.Visible = True
         btnMSPGSExtra.Visible = True
         btnMSPExtraRemove.Visible = True
@@ -1661,6 +1662,9 @@ err1:
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
+        btnAudio.Visible = True
+        rBTNAudioON.Visible = True
+        rBTNAudioOFF.Visible = True
         Label2.Visible = True
         txtMCS.ReadOnly = True
         txtSTBC.ReadOnly = True
@@ -1790,7 +1794,6 @@ err1:
         btnAddButtons.Visible = False
         btnUART0.Visible = False
         btnUART0OFF.Visible = False
-        btnExtra.Visible = False
         btnMSPExtra.Visible = False
         btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
@@ -1822,6 +1825,9 @@ err1:
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
+        btnAudio.Visible = False
+        rBTNAudioON.Visible = False
+        rBTNAudioOFF.Visible = False
         Label2.Visible = False
         txtMCS.ReadOnly = False
         txtSTBC.ReadOnly = False
@@ -2989,26 +2995,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnExtra_Click(sender As Object, e As EventArgs) Handles btnExtra.Click
-        Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "extra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub btnReset_Click(sender As Object, e As EventArgs) Handles btnReset.Click
         Dim extern = "extern.bat"
         If Not File.Exists(extern) Then
@@ -3262,7 +3248,7 @@ err1:
 
     Private Sub btnMSPExtraRemove_Click(sender As Object, e As EventArgs) Handles btnMSPExtraRemove.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -3528,6 +3514,30 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "wide " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnAudio_Click(sender As Object, e As EventArgs) Handles btnAudio.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                If rBTNAudioON.Checked Then
+                    .StartInfo.Arguments = "audioon " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                Else
+                    .StartInfo.Arguments = "audiooff " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

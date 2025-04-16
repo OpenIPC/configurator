@@ -30,6 +30,7 @@ if "%1" == "ulyamlr" (
 	echo y | pscp -scp -pw %3 majestic.yaml root@%2:/etc
 	echo y | pscp -scp -pw %3 wfb.yaml root@%2:/etc
 	plink -ssh root@%2 -pw %3 dos2unix /etc/wfb.yaml /etc/majestic.yaml
+	plink -ssh root@%2 -pw %3 reboot
 )
 
 if "%1" == "dlvrx" (
@@ -111,27 +112,22 @@ if "%1" == "UART0off" (
 	plink -ssh root@%2 -pw %3 reboot
 )
 
-if "%1" == "extra" (
-	plink -ssh root@%2 -pw %3 sed -i 's/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -p 100 -t -a \"$aggregate\" \\/mavfwd --channels \"$channels\" --master \"$serial\" --baudrate \"$baud\" -a \"$aggregate\" --wait 5 --persist 50 -t \\/' /usr/bin/telemetry
-	plink -ssh root@%2 -pw %3 reboot
-)
-
 if "%1" == "mspextra" (
-	echo y | pscp -scp -pw %3 reset/telemetry root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/telemetry
+	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast
         plink -ssh root@%2 -pw %3 reboot	
 )
 
 if "%1" == "mspgsextra" (
-	echo y | pscp -scp -pw %3 reset/telemetry_gs root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/telemetry_gs
-        plink -ssh root@%2 -pw %3 mv /usr/bin/telemetry_gs /usr/bin/telemetry
-        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/telemetry
+	echo y | pscp -scp -pw %3 reset/wifibroadcast_gs root@%2:/usr/bin/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_gs
+        plink -ssh root@%2 -pw %3 mv /usr/bin/wifibroadcast_gs /usr/bin/wifibroadcast
+        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/wifibroadcast
         plink -ssh root@%2 -pw %3 reboot	
 )
 
 if "%1" == "remmspextra" (
-	plink -ssh root@%2 -pw %3 sed -i 's/sleep 5/#sleep 5/' /usr/bin/telemetry
+	plink -ssh root@%2 -pw %3 sed -i 's/sleep 5/#sleep 5/' /usr/bin/wifibroadcast
 	plink -ssh root@%2 -pw %3 reboot	
 )
 
@@ -251,6 +247,16 @@ if "%1" == "onboardrecon" (
 
 if "%1" == "onboardrecoff" (
         plink -ssh root@%2 -pw %3 yaml-cli -s .records.enabled false
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "audioon" (
+        plink -ssh root@%2 -pw %3 yaml-cli -s .audio.enabled true
+	plink -ssh root@%2 -pw %3 reboot
+)
+
+if "%1" == "audiooff" (
+        plink -ssh root@%2 -pw %3 yaml-cli -s .audio.enabled false
 	plink -ssh root@%2 -pw %3 reboot
 )
 
