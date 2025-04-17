@@ -792,6 +792,16 @@ err1:
         cmbBitrate.Items.Add("28672")
         cmbBitrate.Items.Add("29692")
         cmbBitrate.Items.Add("30720")
+        cmbBitrate.Items.Add("31744")
+        cmbBitrate.Items.Add("32768")
+        cmbBitrate.Items.Add("33792")
+        cmbBitrate.Items.Add("34816")
+        cmbBitrate.Items.Add("35840")
+        cmbBitrate.Items.Add("36864")
+        cmbBitrate.Items.Add("37888")
+        cmbBitrate.Items.Add("38912")
+        cmbBitrate.Items.Add("39936")
+        cmbBitrate.Items.Add("40960")
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
@@ -1445,6 +1455,7 @@ err1:
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         btn40MHz.Visible = False
+        chkYAML.Checked = False
         btnBitTest.Visible = False
         nalu.Visible = False
         Alink.Visible = False
@@ -1610,6 +1621,7 @@ err1:
         btnResetCam.Visible = True
         btnResetCam.Text = "Reset Camera"
         btn40MHz.Visible = False
+        chkYAML.Checked = True
         btnBitTest.Visible = True
         nalu.Visible = True
         btnSaveReboot.Enabled = False
@@ -1776,6 +1788,7 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = False
         btn40MHz.Visible = False
+        chkYAML.Checked = False
         btnBitTest.Visible = False
         nalu.Visible = False
         Alink.Visible = False

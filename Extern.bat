@@ -315,7 +315,7 @@ if "%1" == "box" (
 )
 
 if "%1" == "wide" (
-        plink -ssh root@%2 -pw %3 sed -i '/sleep 0.5/d' /etc/rc.local && sed -i '/echo setprecrop*/d' /etc/rc.local
+        plink -ssh root@%2 -pw %3 sed -i '/sleep 0.5/d' /etc/rc.local "&&" sed -i '/echo setprecrop*/d' /etc/rc.local
 )
 
 if "%1" == "bittest" (

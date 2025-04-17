@@ -1039,7 +1039,7 @@ Partial Class Configurator
         btnBitTest.Size = New Size(116, 22)
         btnBitTest.TabIndex = 70
         btnBitTest.Text = "High Bitrate Test"
-        btnToolTip.SetToolTip(btnBitTest, "Select MCS4, 40MHz bandwidth, 24Mbps bitrate, " & vbCrLf & "FEC 10/15,STBC 1, LDPC 1")
+        btnToolTip.SetToolTip(btnBitTest, "Select 1080p90, MCS6, 40MHz bandwidth, " & vbCrLf & "40Mbps bitrate, FEC 10/15,STBC 1, LDPC 1" & vbCrLf & "tx power 45" & vbCrLf & vbCrLf & "Tested on ASUS AC56(rtl8812au) air unit " & vbCrLf & "and EMAX VRX(rtl8812au)")
         btnBitTest.UseVisualStyleBackColor = False
         ' 
         ' btnMSPGSExtra
@@ -2823,7 +2823,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "16/04/2025"
+        Label12.Text = "17/04/2025"
         ' 
         ' Label13
         ' 
