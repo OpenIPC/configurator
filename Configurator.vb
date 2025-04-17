@@ -316,13 +316,13 @@ err1:
             txtFrequency.Text = ReadLine(3, WFBallLines)
             txtPower.Text = ReadLine(2, WFBallLines)
             txtBandwidth.Text = ReadLine(4, WFBallLines)
-            txtMCS.Text = ReadLine(6, WFBallLines)
-            txtSTBC.Text = ReadLine(10, WFBallLines)
-            txtLDPC.Text = ReadLine(11, WFBallLines)
-            txtFECK.Text = ReadLine(8, WFBallLines)
-            txtFECN.Text = ReadLine(9, WFBallLines)
-            txtRouter.Text = ReadLine(14, WFBallLines)
-            txtSerial.Text = ReadLine(15, WFBallLines)
+            txtMCS.Text = ReadLine(7, WFBallLines)
+            txtSTBC.Text = ReadLine(11, WFBallLines)
+            txtLDPC.Text = ReadLine(12, WFBallLines)
+            txtFECK.Text = ReadLine(9, WFBallLines)
+            txtFECN.Text = ReadLine(10, WFBallLines)
+            txtRouter.Text = ReadLine(15, WFBallLines)
+            txtSerial.Text = ReadLine(16, WFBallLines)
         End If
 
 
