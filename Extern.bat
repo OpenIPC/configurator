@@ -142,8 +142,6 @@ if "%1" == "msposdgs" (
 )
 
 if "%1" == "rswfb" (
-	plink -ssh root@%2 -pw %3 wifibroadcast stop
-	plink -ssh root@%2 -pw %3 sleep 3
 	plink -ssh root@%2 -pw %3 wifibroadcast start
 )
 
@@ -320,12 +318,8 @@ if "%1" == "wide" (
 
 if "%1" == "bittest" (
 	plink -ssh root@%2 -pw %3 yaml-cli -s .fpv.noiseLevel 0
-	plink -ssh root@%2 -pw %3 yaml-cli -s .outgoing.naluSize %4
-	echo y | pscp -scp -pw %3 reset/wifibroadcast_test root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_test
-        plink -ssh root@%2 -pw %3 mv /usr/bin/wifibroadcast_test /usr/bin/wifibroadcast
-        plink -ssh root@%2 -pw %3 chmod +x /usr/bin/wifibroadcast
-        plink -ssh root@%2 -pw %3 reboot
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.mlink %4
+	plink -ssh root@%2 -pw %3 wifibroadcast start
 )
 
 if "%1" == "resfix" (

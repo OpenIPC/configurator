@@ -13,6 +13,7 @@ Imports System.Net.WebRequestMethods
 Imports File = System.IO.File
 Imports System.IO.Compression
 Imports System.Diagnostics.Eventing.Reader
+Imports System.Windows.Forms.VisualStyles.VisualStyleElement.ToolTip
 
 
 Public Class Configurator
@@ -316,6 +317,8 @@ err1:
             txtFrequency.Text = ReadLine(3, WFBallLines)
             txtPower.Text = ReadLine(2, WFBallLines)
             txtBandwidth.Text = ReadLine(4, WFBallLines)
+            Dim s As String = ReadLine(5, WFBallLines)
+            nalu.Text = s.Substring(s.Length - 4)
             txtMCS.Text = ReadLine(7, WFBallLines)
             txtSTBC.Text = ReadLine(11, WFBallLines)
             txtLDPC.Text = ReadLine(12, WFBallLines)
@@ -1457,7 +1460,6 @@ err1:
         btn40MHz.Visible = False
         chkYAML.Checked = False
         btnBitTest.Visible = False
-        nalu.Visible = False
         Alink.Visible = False
         Label8.Visible = True
         Label9.Visible = True
@@ -1496,8 +1498,6 @@ err1:
         btnRestartMajestic.Visible = False
         btnBoxRess.Visible = False
         btnWideRess.Visible = False
-        ComboBox3.Visible = True
-        ComboBox4.Visible = True
         ComboBox5.Visible = False
         ComboBox6.Visible = False
         ComboBox7.Visible = False
@@ -1510,8 +1510,22 @@ err1:
         txtFECN.Visible = False
         txtOSD.Visible = True
         txtFormat.Visible = True
-        txtFreq24.Visible = True
-        txtPower24.Visible = True
+        chkYAML.Visible = False
+        If chkYAML.Checked = False Then
+            ComboBox3.Visible = True
+            txtFreq24.Visible = True
+            ComboBox4.Visible = True
+            txtPower24.Visible = True
+            btnBitTest.Visible = False
+            nalu.Visible = False
+        Else
+            ComboBox3.Visible = False
+            txtFreq24.Visible = False
+            ComboBox4.Visible = False
+            txtPower24.Visible = False
+            btnBitTest.Visible = True
+            nalu.Visible = True
+        End If
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
@@ -1623,7 +1637,6 @@ err1:
         btn40MHz.Visible = False
         chkYAML.Checked = True
         btnBitTest.Visible = True
-        nalu.Visible = True
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
         Alink.Visible = True
@@ -1664,8 +1677,6 @@ err1:
         btnRestartMajestic.Visible = True
         btnBoxRess.Visible = True
         btnWideRess.Visible = True
-        ComboBox3.Visible = True
-        ComboBox4.Visible = True
         ComboBox5.Visible = True
         ComboBox6.Visible = True
         ComboBox7.Visible = True
@@ -1678,8 +1689,22 @@ err1:
         txtFECN.Visible = True
         txtOSD.Visible = True
         txtFormat.Visible = True
-        txtFreq24.Visible = True
-        txtPower24.Visible = True
+        chkYAML.Visible = True
+        If chkYAML.Checked = False Then
+            ComboBox3.Visible = True
+            txtFreq24.Visible = True
+            ComboBox4.Visible = True
+            txtPower24.Visible = True
+            btnBitTest.Visible = False
+            nalu.Visible = False
+        Else
+            ComboBox3.Visible = False
+            txtFreq24.Visible = False
+            ComboBox4.Visible = False
+            txtPower24.Visible = False
+            btnBitTest.Visible = True
+            nalu.Visible = True
+        End If
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = False
@@ -1790,7 +1815,6 @@ err1:
         btn40MHz.Visible = False
         chkYAML.Checked = False
         btnBitTest.Visible = False
-        nalu.Visible = False
         Alink.Visible = False
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
@@ -1845,7 +1869,18 @@ err1:
         txtOSD.Visible = False
         txtFormat.Visible = False
         txtFreq24.Visible = False
-        txtPower24.Visible = False
+        chkYAML.Visible = False
+        If chkYAML.Checked = False Then
+            ComboBox4.Visible = True
+            txtPower24.Visible = True
+            btnBitTest.Visible = False
+            nalu.Visible = False
+        Else
+            ComboBox4.Visible = False
+            txtPower24.Visible = False
+            btnBitTest.Visible = True
+            nalu.Visible = True
+        End If
         txtPortVRX.Visible = False
         txtMavlinkVRX.Visible = False
         txtExtras.Visible = False
@@ -2804,6 +2839,9 @@ err1:
                         If lines(y).StartsWith("  width: ") Then
                             lines(y) = txtBandwidth.Text
                         End If
+                        If lines(y).StartsWith("  mlink: ") Then
+                            lines(y) = "  mlink: " + nalu.Text
+                        End If
                         If lines(y).StartsWith("  stbc: ") Then
                             lines(y) = txtSTBC.Text
                         End If
@@ -3575,9 +3613,27 @@ err1:
         End If
     End Sub
 
+    Private Sub chkYAML_CheckedChanged(sender As Object, e As EventArgs) Handles chkYAML.CheckedChanged
+        If chkYAML.Checked = False Then
+            ComboBox3.Visible = True
+            txtFreq24.Visible = True
+            ComboBox4.Visible = True
+            txtPower24.Visible = True
+            btnBitTest.Visible = False
+            nalu.Visible = False
+        Else
+            ComboBox3.Visible = False
+            txtFreq24.Visible = False
+            ComboBox4.Visible = False
+            txtPower24.Visible = False
+            btnBitTest.Visible = True
+            nalu.Visible = True
+        End If
+    End Sub
+
     Private Sub btnBitTest_Click(sender As Object, e As EventArgs) Handles btnBitTest.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If

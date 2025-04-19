@@ -46,6 +46,8 @@ Partial Class Configurator
         txtPower24 = New TextBox()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        nalu = New TextBox()
+        btnBitTest = New Button()
         cmbBandwidth = New ComboBox()
         txtBandwidth = New TextBox()
         btnRestartWFB = New Button()
@@ -85,8 +87,6 @@ Partial Class Configurator
         cmbFPS = New ComboBox()
         cmbResolution = New ComboBox()
         TabPage3 = New TabPage()
-        nalu = New TextBox()
-        btnBitTest = New Button()
         btnMSPGSExtra = New Button()
         btnMSPExtraRemove = New Button()
         btn40MHz = New Button()
@@ -466,6 +466,7 @@ Partial Class Configurator
         txtPower24.ReadOnly = True
         txtPower24.Size = New Size(325, 20)
         txtPower24.TabIndex = 21
+        txtPower24.Visible = False
         ' 
         ' TabControl1
         ' 
@@ -489,6 +490,8 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage1.Controls.Add(nalu)
+        TabPage1.Controls.Add(btnBitTest)
         TabPage1.Controls.Add(cmbBandwidth)
         TabPage1.Controls.Add(txtBandwidth)
         TabPage1.Controls.Add(btnRestartWFB)
@@ -516,6 +519,32 @@ Partial Class Configurator
         TabPage1.Size = New Size(670, 395)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
+        ' 
+        ' nalu
+        ' 
+        nalu.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        nalu.BorderStyle = BorderStyle.FixedSingle
+        nalu.Font = New Font("Arial", 9F, FontStyle.Bold)
+        nalu.ForeColor = Color.White
+        nalu.Location = New Point(248, 107)
+        nalu.Name = "nalu"
+        nalu.Size = New Size(64, 21)
+        nalu.TabIndex = 73
+        nalu.Text = "3994"
+        btnToolTip.SetToolTip(nalu, "Enter the NALU size here")
+        ' 
+        ' btnBitTest
+        ' 
+        btnBitTest.BackColor = Color.Gold
+        btnBitTest.FlatStyle = FlatStyle.Popup
+        btnBitTest.Font = New Font("Arial", 8.4F, FontStyle.Bold)
+        btnBitTest.Location = New Point(19, 106)
+        btnBitTest.Name = "btnBitTest"
+        btnBitTest.Size = New Size(214, 22)
+        btnBitTest.TabIndex = 72
+        btnBitTest.Text = "High Bitrate Test (Update MTU)"
+        btnToolTip.SetToolTip(btnBitTest, "Select 1080p90, MCS6, 40MHz bandwidth, " & vbCrLf & "40Mbps bitrate, FEC 10/15,STBC 1, LDPC 1" & vbCrLf & "tx power 45" & vbCrLf & vbCrLf & "Tested on ASUS AC56(rtl8812au) air unit " & vbCrLf & "and EMAX VRX(rtl8812au)")
+        btnBitTest.UseVisualStyleBackColor = False
         ' 
         ' cmbBandwidth
         ' 
@@ -617,6 +646,7 @@ Partial Class Configurator
         ComboBox4.Name = "ComboBox4"
         ComboBox4.Size = New Size(214, 22)
         ComboBox4.TabIndex = 29
+        ComboBox4.Visible = False
         ' 
         ' ComboBox3
         ' 
@@ -982,8 +1012,6 @@ Partial Class Configurator
         ' TabPage3
         ' 
         TabPage3.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        TabPage3.Controls.Add(nalu)
-        TabPage3.Controls.Add(btnBitTest)
         TabPage3.Controls.Add(btnMSPGSExtra)
         TabPage3.Controls.Add(btnMSPExtraRemove)
         TabPage3.Controls.Add(btn40MHz)
@@ -1015,32 +1043,6 @@ Partial Class Configurator
         TabPage3.Size = New Size(670, 395)
         TabPage3.TabIndex = 2
         TabPage3.Text = "Telemetry"
-        ' 
-        ' nalu
-        ' 
-        nalu.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
-        nalu.BorderStyle = BorderStyle.FixedSingle
-        nalu.Font = New Font("Arial", 9F, FontStyle.Bold)
-        nalu.ForeColor = Color.White
-        nalu.Location = New Point(579, 228)
-        nalu.Name = "nalu"
-        nalu.Size = New Size(65, 21)
-        nalu.TabIndex = 71
-        nalu.Text = "3800"
-        btnToolTip.SetToolTip(nalu, "Enter the NALU size here")
-        ' 
-        ' btnBitTest
-        ' 
-        btnBitTest.BackColor = Color.Gold
-        btnBitTest.FlatStyle = FlatStyle.Popup
-        btnBitTest.Font = New Font("Arial", 7.4F, FontStyle.Bold)
-        btnBitTest.Location = New Point(454, 227)
-        btnBitTest.Name = "btnBitTest"
-        btnBitTest.Size = New Size(116, 22)
-        btnBitTest.TabIndex = 70
-        btnBitTest.Text = "High Bitrate Test"
-        btnToolTip.SetToolTip(btnBitTest, "Select 1080p90, MCS6, 40MHz bandwidth, " & vbCrLf & "40Mbps bitrate, FEC 10/15,STBC 1, LDPC 1" & vbCrLf & "tx power 45" & vbCrLf & vbCrLf & "Tested on ASUS AC56(rtl8812au) air unit " & vbCrLf & "and EMAX VRX(rtl8812au)")
-        btnBitTest.UseVisualStyleBackColor = False
         ' 
         ' btnMSPGSExtra
         ' 
@@ -2823,7 +2825,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "17/04/2025"
+        Label12.Text = "19/04/2025"
         ' 
         ' Label13
         ' 
@@ -3097,7 +3099,7 @@ Partial Class Configurator
     Friend WithEvents rBTNAudioOFF As RadioButton
     Friend WithEvents rBTNAudioON As RadioButton
     Friend WithEvents btnAudio As Button
-    Friend WithEvents btnBitTest As Button
     Friend WithEvents nalu As TextBox
+    Friend WithEvents btnBitTest As Button
 
 End Class
