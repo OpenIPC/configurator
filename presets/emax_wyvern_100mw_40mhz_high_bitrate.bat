@@ -14,7 +14,7 @@ if "%1" == "preset" (
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.stbc 1
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.ldpc 1
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.router msposd
-	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.serial ttyS2
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.serial ttyS0
 	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100/#console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
 	plink -ssh root@%2 -pw %3 cli -s .isp.sensorConfig /etc/sensors/imx415_milos15.bin
 	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
