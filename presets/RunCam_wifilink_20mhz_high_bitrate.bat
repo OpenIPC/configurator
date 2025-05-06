@@ -6,9 +6,9 @@ if "%1" == "preset" (
 	plink -ssh root@%2 -pw %3 cli -s .video0.size 1920x1080
 	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate 24576
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.txpower 30 
-	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.width 40
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.width 20
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.mlink 3994
-	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.mcs_index 3
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.mcs_index 5
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_k 12
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_n 15
 	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.stbc 1

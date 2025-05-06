@@ -3493,32 +3493,35 @@ err1:
                 If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate ") And Not cmbBitrate.Text.StartsWith("Select") Then
                     lines(x) = "	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate " + cmbBitrate.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=") And Not ComboBox2.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=" + ComboBox2.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.txpower") And Not ComboBox2.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.txpower " + ComboBox2.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=") And Not ComboBox6.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=" + ComboBox6.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.width") And Not cmbBandwidth.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.width " + cmbBandwidth.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/ldpc=/c\ldpc=") And Not ComboBox7.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=" + ComboBox7.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.mlink") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.mlink " + nalu.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=") And Not ComboBox5.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=" + ComboBox5.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.stbc") And Not ComboBox6.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.stbc " + ComboBox6.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=") And Not cmbBandwidth.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=" + cmbBandwidth.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.ldpc") And Not ComboBox7.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.ldpc " + ComboBox7.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=") And Not ComboBox8.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=" + ComboBox8.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.mcs_index") And Not ComboBox5.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.mcs_index " + ComboBox5.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=") And Not ComboBox9.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=" + ComboBox9.Text + "' /etc/wfb.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_k") And Not ComboBox8.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_k " + ComboBox8.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=") And Not cmbSerial.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=" + cmbSerial.Text + "' /etc/telemetry.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_n") And Not ComboBox9.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_n " + ComboBox9.Text
                 End If
-                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=") And Not cmbRouter.Text.StartsWith("Select") Then
-                    lines(x) = "	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=" + cmbRouter.Text + "' /etc/telemetry.conf"
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.serial") And Not cmbSerial.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.serial " + cmbSerial.Text
+                End If
+                If lines(x).StartsWith("	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.router") And Not cmbRouter.Text.StartsWith("Select") Then
+                    lines(x) = "	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.router " + cmbRouter.Text
                 End If
             Next
             IO.File.WriteAllLines(PresetfilePath, lines)
@@ -3621,6 +3624,11 @@ err1:
             txtPower24.Visible = True
             btnBitTest.Visible = False
             nalu.Visible = False
+            btnPreset.Visible = False
+            createPreset.Visible = False
+            cmbPresets.Visible = False
+            lblPreset.Visible = False
+            namePreset.Visible = False
         Else
             ComboBox3.Visible = False
             txtFreq24.Visible = False
@@ -3628,6 +3636,11 @@ err1:
             txtPower24.Visible = False
             btnBitTest.Visible = True
             nalu.Visible = True
+            btnPreset.Visible = True
+            createPreset.Visible = True
+            cmbPresets.Visible = True
+            lblPreset.Visible = True
+            namePreset.Visible = True
         End If
     End Sub
 

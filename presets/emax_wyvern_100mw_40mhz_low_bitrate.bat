@@ -1,19 +1,20 @@
 @echo off
 
 if "%1" == "preset" (
-	plink -ssh root@%2 -pw %3 cli -s .video0.fps 120
-	plink -ssh root@%2 -pw %3 cli -s .isp.exposure 8
-	plink -ssh root@%2 -pw %3 cli -s .video0.size 1280x720
-	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate 6144
-	plink -ssh root@%2 -pw %3 sed -i '/driver_txpower_override=/c\driver_txpower_override=40' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/stbc=/c\stbc=1' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/ldpc=/c\ldpc=1' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/mcs_index=/c\mcs_index=0' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/bandwidth=/c\bandwidth=40' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/fec_k=/c\fec_k=8' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/fec_n=/c\fec_n=12' /etc/wfb.conf
-	plink -ssh root@%2 -pw %3 sed -i '/serial=/c\serial=/dev/ttyS0' /etc/telemetry.conf
-	plink -ssh root@%2 -pw %3 sed -i '/router=/c\router=2' /etc/telemetry.conf
+	plink -ssh root@%2 -pw %3 cli -s .video0.fps 60
+	plink -ssh root@%2 -pw %3 cli -s .isp.exposure 16
+	plink -ssh root@%2 -pw %3 cli -s .video0.size 1920x1080
+	plink -ssh root@%2 -pw %3 cli -s .video0.bitrate 8192
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.txpower 30 
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.width 40
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .wireless.mlink 3994
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.mcs_index 1
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_k 12
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.fec_n 15
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.stbc 1
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .broadcast.ldpc 1
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.router msposd
+	plink -ssh root@%2 -pw %3 wifibroadcast cli -s .telemetry.serial ttyS2
 	plink -ssh root@%2 -pw %3 sed -i 's/console::respawn:\/sbin\/getty -L console 0 vt100/#console::respawn:\/sbin\/getty -L console 0 vt100/' /etc/inittab
 	plink -ssh root@%2 -pw %3 cli -s .isp.sensorConfig /etc/sensors/imx415_milos15.bin
 	plink -ssh root@%2 -pw %3 cli -s .fpv.enabled true
