@@ -972,6 +972,7 @@ err1:
         cmbVersion.Items.Add("ssc338q_fpv_openipc-thinker-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-urllc-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_runcam-wifilink-nor")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv")
         cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
         cmbVersion.Items.Add("ssc338q_rubyfpv_generic-nor")
         cmbVersion.Items.Add("ssc338q_rubyfpv_thinker_internal_wifi-nor")
