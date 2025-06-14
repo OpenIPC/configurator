@@ -15,10 +15,10 @@ jobs:
       - name: Build
         run: |
           dotnet build --configuration Release
-          Compress-Archive bin\Release\*\*,*.bat,*.conf,vtxmenu.ini,reset\,presets\,sensors\,txprofiles\ OpenIPC-Configurator.zip
+          Compress-Archive bin\Release\*\*,*.bat,*.conf,vtxmenu.ini,alink.conf,wlan_adapters.yaml,alink_drone,yaml-cli,reset\,presets\,sensors\,txprofiles\ OpenIPC-Configurator.zip
 
       - name: Upload
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: 04.06.2025
+          tag_name: 14.06.2025
           files: OpenIPC-Configurator.zip

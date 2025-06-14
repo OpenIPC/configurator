@@ -240,6 +240,8 @@ err1:
         txtFreq24.Text = ""
         txtPower24.Text = ""
         txtBandwidth.Text = ""
+        txtLinkControl.Text = ""
+        txtWLANAdapter.Text = ""
         txtMCS.Text = ""
         txtSTBC.Text = ""
         txtLDPC.Text = ""
@@ -319,13 +321,15 @@ err1:
             txtBandwidth.Text = ReadLine(4, WFBallLines)
             Dim s As String = ReadLine(5, WFBallLines)
             nalu.Text = s.Substring(s.Length - 4)
-            txtMCS.Text = ReadLine(7, WFBallLines)
-            txtSTBC.Text = ReadLine(11, WFBallLines)
-            txtLDPC.Text = ReadLine(12, WFBallLines)
-            txtFECK.Text = ReadLine(9, WFBallLines)
-            txtFECN.Text = ReadLine(10, WFBallLines)
-            txtRouter.Text = ReadLine(15, WFBallLines)
-            txtSerial.Text = ReadLine(16, WFBallLines)
+            txtLinkControl.Text = ReadLine(6, WFBallLines)
+            txtWLANAdapter.Text = ReadLine(7, WFBallLines)
+            txtMCS.Text = ReadLine(9, WFBallLines)
+            txtFECK.Text = ReadLine(11, WFBallLines)
+            txtFECN.Text = ReadLine(12, WFBallLines)
+            txtSTBC.Text = ReadLine(13, WFBallLines)
+            txtLDPC.Text = ReadLine(14, WFBallLines)
+            txtRouter.Text = ReadLine(17, WFBallLines)
+            txtSerial.Text = ReadLine(18, WFBallLines)
         End If
 
 
@@ -621,6 +625,17 @@ err1:
         cmbBandwidth.Items.Add("40")
         cmbBandwidth.Text = "Select Channel Bandwidth"
 
+        cmbLinkControl.Items.Clear()
+        cmbLinkControl.Items.Add("alink")
+        cmbLinkControl.Text = "Select Link Control"
+
+        cmbWLANAdapter.Items.Clear()
+        cmbWLANAdapter.Items.Add("bl-r8812af1")
+        cmbWLANAdapter.Items.Add("bl-m8812eu2")
+        cmbWLANAdapter.Items.Add("bl-m8731bu4")
+        cmbWLANAdapter.Items.Add("default")
+        cmbWLANAdapter.Text = "Select Wifi Adapter"
+
         ComboBox5.Items.Clear()
         ComboBox5.Items.Add("0")
         ComboBox5.Items.Add("1")
@@ -765,46 +780,46 @@ err1:
         cmbCodecVRX.Text = "Select Codec"
 
         cmbBitrate.Items.Clear()
-        cmbBitrate.Items.Add("1024")
-        cmbBitrate.Items.Add("2048")
-        cmbBitrate.Items.Add("3072")
-        cmbBitrate.Items.Add("4096")
-        cmbBitrate.Items.Add("5120")
-        cmbBitrate.Items.Add("6144")
-        cmbBitrate.Items.Add("7168")
-        cmbBitrate.Items.Add("8192")
-        cmbBitrate.Items.Add("9216")
-        cmbBitrate.Items.Add("10240")
-        cmbBitrate.Items.Add("11264")
-        cmbBitrate.Items.Add("12288")
-        cmbBitrate.Items.Add("13312")
-        cmbBitrate.Items.Add("14336")
-        cmbBitrate.Items.Add("15360")
-        cmbBitrate.Items.Add("16384")
-        cmbBitrate.Items.Add("17408")
-        cmbBitrate.Items.Add("18432")
-        cmbBitrate.Items.Add("19456")
-        cmbBitrate.Items.Add("20480")
-        cmbBitrate.Items.Add("21504")
-        cmbBitrate.Items.Add("22528")
-        cmbBitrate.Items.Add("23552")
-        cmbBitrate.Items.Add("24576")
-        cmbBitrate.Items.Add("25600")
-        cmbBitrate.Items.Add("26624")
-        cmbBitrate.Items.Add("27648")
-        cmbBitrate.Items.Add("28672")
-        cmbBitrate.Items.Add("29692")
-        cmbBitrate.Items.Add("30720")
-        cmbBitrate.Items.Add("31744")
-        cmbBitrate.Items.Add("32768")
-        cmbBitrate.Items.Add("33792")
-        cmbBitrate.Items.Add("34816")
-        cmbBitrate.Items.Add("35840")
-        cmbBitrate.Items.Add("36864")
-        cmbBitrate.Items.Add("37888")
-        cmbBitrate.Items.Add("38912")
-        cmbBitrate.Items.Add("39936")
-        cmbBitrate.Items.Add("40960")
+        cmbBitrate.Items.Add("1000")
+        cmbBitrate.Items.Add("2000")
+        cmbBitrate.Items.Add("3000")
+        cmbBitrate.Items.Add("4000")
+        cmbBitrate.Items.Add("5000")
+        cmbBitrate.Items.Add("6000")
+        cmbBitrate.Items.Add("7000")
+        cmbBitrate.Items.Add("8000")
+        cmbBitrate.Items.Add("9000")
+        cmbBitrate.Items.Add("10000")
+        cmbBitrate.Items.Add("11000")
+        cmbBitrate.Items.Add("12000")
+        cmbBitrate.Items.Add("13000")
+        cmbBitrate.Items.Add("14000")
+        cmbBitrate.Items.Add("15000")
+        cmbBitrate.Items.Add("16000")
+        cmbBitrate.Items.Add("17000")
+        cmbBitrate.Items.Add("18000")
+        cmbBitrate.Items.Add("19000")
+        cmbBitrate.Items.Add("20000")
+        cmbBitrate.Items.Add("21000")
+        cmbBitrate.Items.Add("22000")
+        cmbBitrate.Items.Add("23000")
+        cmbBitrate.Items.Add("24000")
+        cmbBitrate.Items.Add("25000")
+        cmbBitrate.Items.Add("26000")
+        cmbBitrate.Items.Add("27000")
+        cmbBitrate.Items.Add("28000")
+        cmbBitrate.Items.Add("29000")
+        cmbBitrate.Items.Add("30000")
+        cmbBitrate.Items.Add("31000")
+        cmbBitrate.Items.Add("32000")
+        cmbBitrate.Items.Add("33000")
+        cmbBitrate.Items.Add("34000")
+        cmbBitrate.Items.Add("35000")
+        cmbBitrate.Items.Add("36000")
+        cmbBitrate.Items.Add("37000")
+        cmbBitrate.Items.Add("38000")
+        cmbBitrate.Items.Add("39000")
+        cmbBitrate.Items.Add("40000")
         cmbBitrate.Text = "Select Bitrate"
 
         cmbExposure.Items.Clear()
@@ -1458,7 +1473,6 @@ err1:
         btnResetCam.Text = "Reset NVR"
         btnSaveReboot.Enabled = False
         btnReboot.Enabled = False
-        btn40MHz.Visible = False
         chkYAML.Checked = False
         btnBitTest.Visible = False
         Alink.Visible = False
@@ -1512,6 +1526,10 @@ err1:
         txtOSD.Visible = True
         txtFormat.Visible = True
         chkYAML.Visible = False
+        cmbLinkControl.Visible = False
+        cmbWLANAdapter.Visible = False
+        txtLinkControl.Visible = False
+        txtWLANAdapter.Visible = False
         If chkYAML.Checked = False Then
             ComboBox3.Visible = True
             txtFreq24.Visible = True
@@ -1531,7 +1549,6 @@ err1:
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
         btnMSP.Visible = False
-        btnFontsINAV.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
@@ -1635,7 +1652,6 @@ err1:
         txtExtras.Text = ""
         btnResetCam.Visible = True
         btnResetCam.Text = "Reset Camera"
-        btn40MHz.Visible = False
         chkYAML.Checked = True
         btnBitTest.Visible = True
         btnSaveReboot.Enabled = False
@@ -1692,6 +1708,10 @@ err1:
         txtFormat.Visible = True
         chkYAML.Visible = True
         If chkYAML.Checked = False Then
+            cmbLinkControl.Visible = False
+            cmbWLANAdapter.Visible = False
+            txtLinkControl.Visible = False
+            txtWLANAdapter.Visible = False
             ComboBox3.Visible = True
             txtFreq24.Visible = True
             ComboBox4.Visible = True
@@ -1699,6 +1719,10 @@ err1:
             btnBitTest.Visible = False
             nalu.Visible = False
         Else
+            cmbLinkControl.Visible = True
+            cmbWLANAdapter.Visible = True
+            txtLinkControl.Visible = True
+            txtWLANAdapter.Visible = True
             ComboBox3.Visible = False
             txtFreq24.Visible = False
             ComboBox4.Visible = False
@@ -1710,7 +1734,6 @@ err1:
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = False
         btnMSP.Visible = True
-        btnFontsINAV.Visible = False
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
@@ -1813,7 +1836,6 @@ err1:
         txtMavlinkVRX.Text = ""
         txtExtras.Text = ""
         btnResetCam.Visible = False
-        btn40MHz.Visible = False
         chkYAML.Checked = False
         btnBitTest.Visible = False
         Alink.Visible = False
@@ -1871,6 +1893,10 @@ err1:
         txtFormat.Visible = False
         txtFreq24.Visible = False
         chkYAML.Visible = False
+        cmbLinkControl.Visible = False
+        cmbWLANAdapter.Visible = False
+        txtLinkControl.Visible = False
+        txtWLANAdapter.Visible = False
         If chkYAML.Checked = False Then
             ComboBox4.Visible = True
             txtPower24.Visible = True
@@ -1886,7 +1912,6 @@ err1:
         txtMavlinkVRX.Visible = False
         txtExtras.Visible = False
         btnMSP.Visible = False
-        btnFontsINAV.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
@@ -2849,6 +2874,12 @@ err1:
                         If lines(y).StartsWith("  ldpc: ") Then
                             lines(y) = txtLDPC.Text
                         End If
+                        If lines(y).StartsWith("  link_control: ") Then
+                            lines(y) = txtLinkControl.Text
+                        End If
+                        If lines(y).StartsWith("  wlan_adapter: ") Then
+                            lines(y) = txtWLANAdapter.Text
+                        End If
                         If lines(y).StartsWith("  mcs_index: ") Then
                             lines(y) = txtMCS.Text
                         End If
@@ -3167,36 +3198,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnFontsINAV_Click_1(sender As Object, e As EventArgs) Handles btnFontsINAV.Click
-        Dim extern = "extern.bat"
-        Dim font_file1 = "inav/font.png"
-        Dim font_file2 = "inav/font_hd.png"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file1) Then
-            MsgBox("File " + font_file1 + " not found!")
-            Return
-        End If
-        If Not File.Exists(font_file2) Then
-            MsgBox("File " + font_file2 + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "fontsINAV " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub btnOnboardREC_Click_1(sender As Object, e As EventArgs) Handles btnOnboardREC.Click
         Dim extern = "extern.bat"
         If Not File.Exists(extern) Then
@@ -3281,31 +3282,6 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "mspextra " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
-    Private Sub btn40MHz_Click(sender As Object, e As EventArgs) Handles btn40MHz.Click
-        Dim extern = "extern.bat"
-        Dim wifi_file = "reset/wifibroadcast"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-        If Not File.Exists(wifi_file) Then
-            MsgBox("File " + wifi_file + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "40mhz " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With
@@ -3415,7 +3391,7 @@ err1:
         End If
         IO.File.WriteAllLines(alink_info_filePath, alink_info_lines)
         If cmbTXProfile.Text <> "Select TXProfile" Then
-            Dim result As DialogResult = MessageBox.Show("The Adaptive Link is in ""Alpha State Of Development"" and will probably not work correctly. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
+            Dim result As DialogResult = MessageBox.Show("The Adaptive Link is in ""Test Phase"" and might have glitches. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
                 MessageBox.Show("No changes have been done.")
             ElseIf result = DialogResult.Yes Then
@@ -3619,6 +3595,18 @@ err1:
 
     Private Sub chkYAML_CheckedChanged(sender As Object, e As EventArgs) Handles chkYAML.CheckedChanged
         If chkYAML.Checked = False Then
+            cmbBaud.Visible = True
+            txtBaud.Visible = True
+            cmbMCSTLM.Visible = True
+            txtMCSTLM.Visible = True
+            cmbAggregate.Visible = True
+            txtAggregate.Visible = True
+            cmbRC_Channel.Visible = True
+            txtRC_CHANNEL.Visible = True
+            cmbLinkControl.Visible = False
+            cmbWLANAdapter.Visible = False
+            txtLinkControl.Visible = False
+            txtWLANAdapter.Visible = False
             ComboBox3.Visible = True
             txtFreq24.Visible = True
             ComboBox4.Visible = True
@@ -3631,6 +3619,18 @@ err1:
             lblPreset.Visible = False
             namePreset.Visible = False
         Else
+            cmbBaud.Visible = False
+            txtBaud.Visible = False
+            cmbMCSTLM.Visible = False
+            txtMCSTLM.Visible = False
+            cmbAggregate.Visible = False
+            txtAggregate.Visible = False
+            cmbRC_Channel.Visible = False
+            txtRC_CHANNEL.Visible = False
+            cmbLinkControl.Visible = True
+            cmbWLANAdapter.Visible = True
+            txtLinkControl.Visible = True
+            txtWLANAdapter.Visible = True
             ComboBox3.Visible = False
             txtFreq24.Visible = False
             ComboBox4.Visible = False
@@ -3663,6 +3663,10 @@ err1:
         Else
             MsgBox("Please enter a valid IP address")
         End If
+    End Sub
+
+    Private Sub cmbWLANAdapter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWLANAdapter.SelectedIndexChanged
+        txtWLANAdapter.Text = "  wlan_adapter: " & cmbWLANAdapter.SelectedItem.ToString
     End Sub
 
 #End Region
