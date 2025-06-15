@@ -3222,26 +3222,6 @@ err1:
         End If
     End Sub
 
-    Private Sub btnDualOSD_Click(sender As Object, e As EventArgs) Handles btnDualOSD.Click
-        Dim extern = "extern.bat"
-        If Not File.Exists(extern) Then
-            MsgBox("File " + extern + " not found!")
-            Return
-        End If
-
-        If IsValidIP(txtIP.Text) Then
-            With New Process()
-                .StartInfo.UseShellExecute = False
-                .StartInfo.FileName = extern
-                .StartInfo.Arguments = "dualosd " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
-                .StartInfo.RedirectStandardOutput = False
-                .Start()
-            End With
-        Else
-            MsgBox("Please enter a valid IP address")
-        End If
-    End Sub
-
     Private Sub cmbVersion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbVersion.SelectedIndexChanged
         If cmbVersion.SelectedItem.ToString.Contains("ssc338q") Then
             txtSOC.Text = "ssc338q"
@@ -3407,6 +3387,8 @@ err1:
                     MsgBox("Please enter a valid IP address")
                 End If
             End If
+        Else
+            MessageBox.Show("First select a TXProfile.")
         End If
     End Sub
 

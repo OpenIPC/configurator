@@ -97,7 +97,6 @@ Partial Class Configurator
         rBtnRECOFF = New RadioButton()
         rBtnRECON = New RadioButton()
         btnOnboardREC = New Button()
-        btnDualOSD = New Button()
         btnMSP = New Button()
         cmbRC_Channel = New ComboBox()
         txtRC_CHANNEL = New TextBox()
@@ -1069,7 +1068,6 @@ Partial Class Configurator
         TabPage3.Controls.Add(rBtnRECOFF)
         TabPage3.Controls.Add(rBtnRECON)
         TabPage3.Controls.Add(btnOnboardREC)
-        TabPage3.Controls.Add(btnDualOSD)
         TabPage3.Controls.Add(btnMSP)
         TabPage3.Controls.Add(cmbRC_Channel)
         TabPage3.Controls.Add(txtRC_CHANNEL)
@@ -1170,20 +1168,6 @@ Partial Class Configurator
         btnOnboardREC.Text = "Onboard REC"
         btnToolTip.SetToolTip(btnOnboardREC, "Turns ON or OFF the Onboard Recording" & vbCrLf & "Select ON or OFF option first")
         btnOnboardREC.UseVisualStyleBackColor = False
-        ' 
-        ' btnDualOSD
-        ' 
-        btnDualOSD.BackColor = Color.Gold
-        btnDualOSD.FlatStyle = FlatStyle.Popup
-        btnDualOSD.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDualOSD.Location = New Point(454, 308)
-        btnDualOSD.Name = "btnDualOSD"
-        btnDualOSD.Size = New Size(116, 30)
-        btnDualOSD.TabIndex = 62
-        btnDualOSD.Text = "Dual OSD"
-        btnToolTip.SetToolTip(btnDualOSD, "Enables the Mavlink telemetry" & vbCrLf & "while keeping the MSPOSD" & vbCrLf & "on the OpenIPC camera for Dual OSD" & vbCrLf & vbCrLf & "MUST first enable the MSPOSD")
-        btnDualOSD.UseVisualStyleBackColor = False
-        btnDualOSD.Visible = False
         ' 
         ' btnMSP
         ' 
@@ -3081,7 +3065,6 @@ Partial Class Configurator
     Friend WithEvents rBtnRECOFF As RadioButton
     Friend WithEvents rBtnRECON As RadioButton
     Friend WithEvents btnOnboardREC As Button
-    Friend WithEvents btnDualOSD As Button
     Friend WithEvents btnMSP As Button
     Friend WithEvents cmbSensor As ComboBox
     Friend WithEvents ProgressBar1 As ProgressBar

@@ -107,12 +107,14 @@ if "%1" == "UART0off" (
 
 if "%1" == "mspextra" (
 	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast "&&" reboot
+        echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast /etc/vtxmenu.ini "&&" wifibroadcast reset "&&" reboot
 )
 
 if "%1" == "mspgsextra" (
 	echo y | pscp -scp -pw %3 reset/wifibroadcast_gs root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_gs "&&" mv /usr/bin/wifibroadcast_gs /usr/bin/wifibroadcast "&&" chmod +x /usr/bin/wifibroadcast "&&" reboot
+        echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
+	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_gs /etc/vtxmenu.ini "&&" mv /usr/bin/wifibroadcast_gs /usr/bin/wifibroadcast "&&" chmod +x /usr/bin/wifibroadcast "&&" wifibroadcast reset "&&" reboot
 )
 
 if "%1" == "remmspextra" (
@@ -194,23 +196,9 @@ if "%1" == "offlinefwf" (
         plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n -f
 )
 
-if "%1" == "msp" (
-        echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
-	plink -ssh root@%2 -pw %3 dos2unix /etc/vtxmenu.ini "&&" reboot
-)
-
-if "%1" == "40mhz" (
-        echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/usr/bin/
-	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast "&&" reboot
-)
-
 if "%1" == "mspgs" (
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE --dvr-framerate $REC_FPS --dvr-fmp4 --dvr record_${current_date}.mp4 "&"' /config/scripts/stream.sh
 	plink -ssh root@%2 -pw %3 sed -i '/pixelpilot --osd --screen-mode $SCREEN_MODE/c\pixelpilot --osd --osd-elements video,wfbng --screen-mode $SCREEN_MODE "&"' /config/scripts/stream.sh "&&" reboot
-)
-
-if "%1" == "dualosd" (
-        plink -ssh root@%2 -pw %3 sed -i '/telemetry=false/c\telemetry=true' /etc/datalink.conf "&&" reboot
 )
 
 if "%1" == "onboardrecon" (
