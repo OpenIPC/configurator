@@ -158,7 +158,7 @@ sensor=$(ipcinfo -s)
 cli -s .isp.sensorConfig /etc/sensors/"$sensor"_fpv.bin
 cli -s .isp.exposure 16
 cli -s .video0.fps 60
-cli -s .video0.bitrate 8192
+cli -s .video0.bitrate 8000
 cli -s .video0.codec h265
 cli -s .video0.rcMode cbr
 cli -s .outgoing.enabled true
