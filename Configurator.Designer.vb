@@ -889,7 +889,7 @@ Partial Class Configurator
         Alink.Name = "Alink"
         Alink.Size = New Size(159, 23)
         Alink.TabIndex = 64
-        Alink.Text = "Install Adaptive Link 6.3"
+        Alink.Text = "Install Adaptive Link 6.4"
         btnToolTip.SetToolTip(Alink, "Installs the OpenIPC Adaptive Link" & vbCrLf)
         Alink.UseVisualStyleBackColor = False
         ' 
@@ -2830,7 +2830,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "14/06/2025"
+        Label12.Text = "26/06/2025"
         ' 
         ' Label13
         ' 
