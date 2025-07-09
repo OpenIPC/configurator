@@ -97,7 +97,6 @@ Partial Class Configurator
         rBtnRECOFF = New RadioButton()
         rBtnRECON = New RadioButton()
         btnOnboardREC = New Button()
-        btnMSP = New Button()
         cmbRC_Channel = New ComboBox()
         txtRC_CHANNEL = New TextBox()
         cmbAggregate = New ComboBox()
@@ -1068,7 +1067,6 @@ Partial Class Configurator
         TabPage3.Controls.Add(rBtnRECOFF)
         TabPage3.Controls.Add(rBtnRECON)
         TabPage3.Controls.Add(btnOnboardREC)
-        TabPage3.Controls.Add(btnMSP)
         TabPage3.Controls.Add(cmbRC_Channel)
         TabPage3.Controls.Add(txtRC_CHANNEL)
         TabPage3.Controls.Add(cmbAggregate)
@@ -1135,7 +1133,7 @@ Partial Class Configurator
         rBtnRECOFF.AutoSize = True
         rBtnRECOFF.Checked = True
         rBtnRECOFF.ForeColor = Color.White
-        rBtnRECOFF.Location = New Point(547, 203)
+        rBtnRECOFF.Location = New Point(547, 176)
         rBtnRECOFF.Name = "rBtnRECOFF"
         rBtnRECOFF.Size = New Size(45, 18)
         rBtnRECOFF.TabIndex = 65
@@ -1148,7 +1146,7 @@ Partial Class Configurator
         ' 
         rBtnRECON.AutoSize = True
         rBtnRECON.ForeColor = Color.White
-        rBtnRECON.Location = New Point(547, 188)
+        rBtnRECON.Location = New Point(547, 161)
         rBtnRECON.Name = "rBtnRECON"
         rBtnRECON.Size = New Size(40, 18)
         rBtnRECON.TabIndex = 64
@@ -1161,26 +1159,13 @@ Partial Class Configurator
         btnOnboardREC.BackColor = Color.Gold
         btnOnboardREC.FlatStyle = FlatStyle.Popup
         btnOnboardREC.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnOnboardREC.Location = New Point(454, 190)
+        btnOnboardREC.Location = New Point(454, 163)
         btnOnboardREC.Name = "btnOnboardREC"
         btnOnboardREC.Size = New Size(87, 30)
         btnOnboardREC.TabIndex = 63
         btnOnboardREC.Text = "Onboard REC"
         btnToolTip.SetToolTip(btnOnboardREC, "Turns ON or OFF the Onboard Recording" & vbCrLf & "Select ON or OFF option first")
         btnOnboardREC.UseVisualStyleBackColor = False
-        ' 
-        ' btnMSP
-        ' 
-        btnMSP.BackColor = Color.Gold
-        btnMSP.FlatStyle = FlatStyle.Popup
-        btnMSP.Font = New Font("Arial", 7.4F, FontStyle.Bold)
-        btnMSP.Location = New Point(454, 162)
-        btnMSP.Name = "btnMSP"
-        btnMSP.Size = New Size(116, 22)
-        btnMSP.TabIndex = 56
-        btnMSP.Text = "Latest VTXMENU"
-        btnToolTip.SetToolTip(btnMSP, "Upload the latest vtxmenu for the MSPOSD of OpenIPC" & vbCrLf & vbCrLf & "To enter the VTX menu move: " & vbCrLf & "LEFT stick to bottom right and" & vbCrLf & "RIGHT stick to bottom left")
-        btnMSP.UseVisualStyleBackColor = False
         ' 
         ' cmbRC_Channel
         ' 
@@ -2830,7 +2815,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "28/06/2025"
+        Label12.Text = "09/07/2025"
         ' 
         ' Label13
         ' 
@@ -3065,7 +3050,6 @@ Partial Class Configurator
     Friend WithEvents rBtnRECOFF As RadioButton
     Friend WithEvents rBtnRECON As RadioButton
     Friend WithEvents btnOnboardREC As Button
-    Friend WithEvents btnMSP As Button
     Friend WithEvents cmbSensor As ComboBox
     Friend WithEvents ProgressBar1 As ProgressBar
     Friend WithEvents cmbVersion As ComboBox
