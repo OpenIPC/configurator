@@ -1548,7 +1548,6 @@ err1:
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = True
-        btnMSP.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
@@ -1733,7 +1732,6 @@ err1:
         txtPortVRX.Visible = True
         txtMavlinkVRX.Visible = True
         txtExtras.Visible = False
-        btnMSP.Visible = True
         btnOnboardREC.Visible = True
         rBtnRECON.Visible = True
         rBtnRECOFF.Visible = True
@@ -1911,7 +1909,6 @@ err1:
         txtPortVRX.Visible = False
         txtMavlinkVRX.Visible = False
         txtExtras.Visible = False
-        btnMSP.Visible = False
         btnOnboardREC.Visible = False
         rBtnRECON.Visible = False
         rBtnRECOFF.Visible = False
