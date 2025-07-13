@@ -240,6 +240,11 @@ if "%1" == "resetcam" (
 	plink -ssh root@%2 -pw %3 firstboot
 )
 
+if "%1" == "airman" (
+	echo y | pscp -scp -pw %3 OpenIPC-air_manager.tar root@%2:/
+	plink -ssh root@%2 -pw %3 tar -xvf /OpenIPC-air_manager.tar "&&" cd /root/OpenIPC-air_manager/ "&&" chmod +x install.sh "&&" ./install.sh 10.5.0.10
+)
+
 if "%1" == "alink" (
         plink -ssh root@%2 -pw %3 killall alink_drone
 	echo y | pscp -scp -pw %3 alink_drone root@%2:/usr/bin/

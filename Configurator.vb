@@ -1498,6 +1498,7 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
+        btnAirManager.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = False
@@ -1678,6 +1679,7 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
+        btnAirManager.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = False
@@ -1860,6 +1862,7 @@ err1:
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
+        btnAirManager.Visible = True
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = True
@@ -3350,7 +3353,7 @@ err1:
         If cmbTXProfile.Text <> "Select TXProfile" Then
             Dim result As DialogResult = MessageBox.Show("The Adaptive Link is in ""Test Phase"" and might have glitches. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
             If result = DialogResult.No Then
-                MessageBox.Show("No changes have been done.")
+                MessageBox.Show("No changes are made in the system.")
             ElseIf result = DialogResult.Yes Then
                 If IsValidIP(txtIP.Text) Then
                     With New Process()
@@ -3626,6 +3629,30 @@ err1:
 
     Private Sub cmbWLANAdapter_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbWLANAdapter.SelectedIndexChanged
         txtWLANAdapter.Text = "  wlan_adapter: " & cmbWLANAdapter.SelectedItem.ToString
+    End Sub
+
+    Private Sub btnAirManager_Click(sender As Object, e As EventArgs) Handles btnAirManager.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        Dim result As DialogResult = MessageBox.Show("The Air Manager is in ""Development Phase"" and has alot of glitches. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+            MessageBox.Show("No changes are made in the system.")
+        ElseIf result = DialogResult.Yes Then
+            If IsValidIP(txtIP.Text) Then
+                With New Process()
+                    .StartInfo.UseShellExecute = False
+                    .StartInfo.FileName = extern
+                    .StartInfo.Arguments = "airman " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    .StartInfo.RedirectStandardOutput = False
+                    .Start()
+                End With
+            Else
+                MsgBox("Please enter a valid IP address")
+            End If
+        End If
     End Sub
 
 #End Region

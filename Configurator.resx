@@ -120,6 +120,16 @@
   <metadata name="btnToolTip.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
   </metadata>
+  <data name="btnAirManager.ToolTip" xml:space="preserve">
+    <value>Install the OpenIPC FPV PnP 2.0 to the drone side.
+The configurator must be connected to the VRX AP
+running SBC Groundstation 2.0.0 beta 2 or later 
+and the drone connected to the VRX with the latest 
+OpenIPC FPV PnP firmware.
+Once you install the Air Manager DO NOT use the
+configurator to change any settings.
+Instead, use the GSMENU on the VRX directly.</value>
+  </data>
   <data name="Label4.Text" xml:space="preserve">
     <value>Step 1: Select which VRX to use
 Step 2: Enter the VRX IP

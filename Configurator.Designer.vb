@@ -119,6 +119,7 @@ Partial Class Configurator
         cmbPresets = New ComboBox()
         btnPreset = New Button()
         TabPage4 = New TabPage()
+        btnAirManager = New Button()
         btnGSMSPOSD = New Button()
         btnAIRMSPOSD = New Button()
         btnAddButtons = New Button()
@@ -1414,6 +1415,7 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnAirManager)
         TabPage4.Controls.Add(btnGSMSPOSD)
         TabPage4.Controls.Add(btnAIRMSPOSD)
         TabPage4.Controls.Add(btnAddButtons)
@@ -1445,6 +1447,20 @@ Partial Class Configurator
         TabPage4.Size = New Size(670, 395)
         TabPage4.TabIndex = 3
         TabPage4.Text = "VRX"
+        ' 
+        ' btnAirManager
+        ' 
+        btnAirManager.BackColor = Color.Gold
+        btnAirManager.FlatStyle = FlatStyle.Popup
+        btnAirManager.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnAirManager.Location = New Point(248, 133)
+        btnAirManager.Name = "btnAirManager"
+        btnAirManager.Size = New Size(292, 30)
+        btnAirManager.TabIndex = 70
+        btnAirManager.Text = "Install OpenIPC FPV PnP 2.0 (only for SBC 2.0.0)"
+        btnToolTip.SetToolTip(btnAirManager, resources.GetString("btnAirManager.ToolTip"))
+        btnAirManager.UseVisualStyleBackColor = False
+        btnAirManager.Visible = False
         ' 
         ' btnGSMSPOSD
         ' 
@@ -2815,7 +2831,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "09/07/2025"
+        Label12.Text = "13/07/2025"
         ' 
         ' Label13
         ' 
@@ -3091,5 +3107,6 @@ Partial Class Configurator
     Friend WithEvents txtLinkControl As TextBox
     Friend WithEvents cmbWLANAdapter As ComboBox
     Friend WithEvents cmbLinkControl As ComboBox
+    Friend WithEvents btnAirManager As Button
 
 End Class
