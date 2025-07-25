@@ -1499,6 +1499,7 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         btnAirManager.Visible = False
+        btnPP.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = False
@@ -1680,6 +1681,7 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         btnAirManager.Visible = False
+        btnPP.Visible = False
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = False
@@ -1863,6 +1865,7 @@ err1:
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
         btnAirManager.Visible = True
+        btnPP.Visible = True
         rBtnMode1.Visible = False
         rBtnMode2.Visible = False
         btnAIRMSPOSD.Visible = True
@@ -3646,6 +3649,30 @@ err1:
                     .StartInfo.UseShellExecute = False
                     .StartInfo.FileName = extern
                     .StartInfo.Arguments = "airman " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                    .StartInfo.RedirectStandardOutput = False
+                    .Start()
+                End With
+            Else
+                MsgBox("Please enter a valid IP address")
+            End If
+        End If
+    End Sub
+
+    Private Sub btnPP_Click(sender As Object, e As EventArgs) Handles btnPP.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+        Dim result As DialogResult = MessageBox.Show("The Air Manager PixelPilot is in ""Development Phase"" and has alot of glitches. Are you sure you want to proceed with the installation?", "Warning!!! Warning!!! Warning!!! Warning!!! Warning!!!", MessageBoxButtons.YesNo)
+        If result = DialogResult.No Then
+            MessageBox.Show("No changes are made in the system.")
+        ElseIf result = DialogResult.Yes Then
+            If IsValidIP(txtIP.Text) Then
+                With New Process()
+                    .StartInfo.UseShellExecute = False
+                    .StartInfo.FileName = extern
+                    .StartInfo.Arguments = "pixelpilot " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                     .StartInfo.RedirectStandardOutput = False
                     .Start()
                 End With

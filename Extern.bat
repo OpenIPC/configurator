@@ -245,6 +245,14 @@ if "%1" == "airman" (
 	plink -ssh root@%2 -pw %3 tar -xvf /OpenIPC-air_manager.tar "&&" cd /root/OpenIPC-air_manager/ "&&" chmod +x install.sh "&&" ./install.sh 10.5.0.10
 )
 
+if "%1" == "pixelpilot" (
+        plink -ssh root@%2 -pw %3 systemctl stop openipc
+	echo y | pscp -scp -pw %3 pixelpilot gsmenu.sh root@%2:/usr/local/bin
+	echo y | pscp -scp -pw %3 pixelpilot root@%2:/usr/local/etc/pixelpilot
+	echo y | pscp -scp -pw %3 config_osd.json root@%2:/usr/local/etc/pixelpilot
+	plink -ssh root@%2 -pw %3 reboot 
+)
+
 if "%1" == "alink" (
         plink -ssh root@%2 -pw %3 killall alink_drone
 	echo y | pscp -scp -pw %3 alink_drone root@%2:/usr/bin/

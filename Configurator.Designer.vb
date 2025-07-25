@@ -231,6 +231,7 @@ Partial Class Configurator
         Timer1 = New Timer(components)
         Label12 = New Label()
         Label13 = New Label()
+        btnPP = New Button()
         TabControl1.SuspendLayout()
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
@@ -1415,6 +1416,7 @@ Partial Class Configurator
         ' TabPage4
         ' 
         TabPage4.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage4.Controls.Add(btnPP)
         TabPage4.Controls.Add(btnAirManager)
         TabPage4.Controls.Add(btnGSMSPOSD)
         TabPage4.Controls.Add(btnAIRMSPOSD)
@@ -2831,7 +2833,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "13/07/2025"
+        Label12.Text = "25/07/2025"
         ' 
         ' Label13
         ' 
@@ -2843,6 +2845,20 @@ Partial Class Configurator
         Label13.Size = New Size(45, 10)
         Label13.TabIndex = 52
         Label13.Text = "SBC v1.9.9"
+        ' 
+        ' btnPP
+        ' 
+        btnPP.BackColor = Color.Gold
+        btnPP.FlatStyle = FlatStyle.Popup
+        btnPP.Font = New Font("Arial", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
+        btnPP.Location = New Point(248, 169)
+        btnPP.Name = "btnPP"
+        btnPP.Size = New Size(292, 30)
+        btnPP.TabIndex = 71
+        btnPP.Text = "Install latest PixelPilot (only for SBC 2.0.0)"
+        btnToolTip.SetToolTip(btnPP, resources.GetString("btnPP.ToolTip"))
+        btnPP.UseVisualStyleBackColor = False
+        btnPP.Visible = False
         ' 
         ' Configurator
         ' 
@@ -3108,5 +3124,6 @@ Partial Class Configurator
     Friend WithEvents cmbWLANAdapter As ComboBox
     Friend WithEvents cmbLinkControl As ComboBox
     Friend WithEvents btnAirManager As Button
+    Friend WithEvents btnPP As Button
 
 End Class
