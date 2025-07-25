@@ -15,7 +15,7 @@ jobs:
       - name: Build
         run: |
           dotnet build --configuration Release
-          Compress-Archive bin\Release\*\*,*.bat,*.conf,*.tar,config_osd.json,pixelpilot,gsmenu.sh,vtxmenu.ini,wlan_adapters.yaml,alink_drone,yaml-cli-multi,reset\,presets\,sensors\,txprofiles\ OpenIPC-Configurator.zip
+          Compress-Archive bin\Release\*\*,*.bat,*.conf,*.tar,artifact.zip,vtxmenu.ini,wlan_adapters.yaml,alink_drone,yaml-cli-multi,reset\,presets\,sensors\,txprofiles\ OpenIPC-Configurator.zip
 
       - name: Upload
         uses: softprops/action-gh-release@v2
