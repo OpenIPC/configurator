@@ -246,6 +246,7 @@ if "%1" == "airman" (
 )
 
 if "%1" == "pixelpilot" (
+        tar -xf artifact.zip
         plink -ssh root@%2 -pw %3 systemctl stop openipc
 	echo y | pscp -scp -pw %3 pixelpilot gsmenu.sh root@%2:/usr/local/bin
 	echo y | pscp -scp -pw %3 pixelpilot root@%2:/usr/local/etc/pixelpilot
