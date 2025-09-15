@@ -247,7 +247,7 @@ if "%1" == "airman" (
 
 if "%1" == "pixelpilot" (
         tar -xf artifact.zip
-        plink -ssh root@%2 -pw %3 systemctl stop openipc
+        plink -ssh root@%2 -pw %3 "systemctl stop openipc && awk 'NR==2 {$0=\"sed -i \047s/\\r//\047 /config/setup.txt "&"\"} { print }' /config/scripts/stream.sh > /config/scripts/stream2.sh && rm /config/scripts/stream.sh && mv /config/scripts/stream2.sh /config/scripts/stream.sh"
 	echo y | pscp -scp -pw %3 pixelpilot gsmenu.sh root@%2:/usr/local/bin
 	echo y | pscp -scp -pw %3 pixelpilot root@%2:/usr/local/etc/pixelpilot
 	echo y | pscp -scp -pw %3 config_osd.json root@%2:/usr/local/etc/pixelpilot
