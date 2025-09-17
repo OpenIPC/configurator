@@ -1145,7 +1145,6 @@ internal static class Program
         return 0;
     }
 
-    }
 
     private static int RunAlink(string[] args)
     {
