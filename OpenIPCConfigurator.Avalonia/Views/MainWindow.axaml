@@ -1,0 +1,401 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:OpenIPCConfigurator.Avalonia.ViewModels"
+        xmlns:converters="using:OpenIPCConfigurator.Avalonia.Converters"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+        x:Class="OpenIPCConfigurator.Avalonia.Views.MainWindow"
+        x:DataType="vm:MainWindowViewModel"
+        Icon="/Assets/openipc.ico"
+        Title="OpenIPC Configurator"
+        Width="800" Height="600">
+
+    <Window.Resources>
+        <converters:DeviceTypeToYamlEnabledConverter x:Key="DeviceTypeToYamlEnabledConverter"/>
+    </Window.Resources>
+
+    <Design.DataContext>
+        <!-- This only sets the DataContext for the previewer in an IDE,
+             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+        <vm:MainWindowViewModel/>
+    </Design.DataContext>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Connection Panel -->
+        <Border Grid.Row="0" 
+                Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+                CornerRadius="8" 
+                Padding="20" 
+                Margin="0,0,0,20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="10"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="IP Address:" Margin="0,0,10,0"/>
+                <TextBox Grid.Row="2" Grid.Column="0" 
+                         Text="{Binding IpAddress}" 
+                         Watermark="192.168.0.10"
+                         Margin="0,0,10,0"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="Password:" Margin="0,0,10,0"/>
+                <TextBox Grid.Row="2" Grid.Column="1" 
+                         Text="{Binding Password}" 
+                         PasswordChar="*"
+                         Watermark="Enter password"
+                         Margin="0,0,10,0"/>
+
+                <TextBlock Grid.Row="0" Grid.Column="2" Text="Device Type:" Margin="0,0,0,0"/>
+                <ComboBox Grid.Row="2" Grid.Column="2"
+                          ItemsSource="{Binding DeviceTypes}"
+                          SelectedItem="{Binding SelectedDevice}"
+                          Width="120"/>
+
+                <StackPanel Grid.Row="4" Grid.ColumnSpan="3" 
+                           Orientation="Horizontal" 
+                           HorizontalAlignment="Center"
+                           Spacing="10"
+                           Margin="0,10,0,0">
+                    <CheckBox Content="Use YAML format (OpenIPC)"
+                              IsChecked="{Binding UseYamlFormat}"
+                              IsEnabled="{Binding SelectedDevice, Converter={StaticResource DeviceTypeToYamlEnabledConverter}}"
+                              VerticalAlignment="Center"/>
+                    <Button Content="Connect"
+                            Command="{Binding ConnectCommand}"
+                            IsEnabled="{Binding !IsConnecting}"
+                            Classes="accent"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Status -->
+        <TextBlock Grid.Row="1" 
+                   Text="{Binding ConnectionStatus}" 
+                   HorizontalAlignment="Center"
+                   FontWeight="Bold"
+                   Margin="0,0,0,20"/>
+
+        <!-- Main Content Area -->
+        <TabControl Grid.Row="2" Margin="0,0,0,20">
+            <TabItem Header="Configuration">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="Device Configuration" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Frequency:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" 
+                                      ItemsSource="{Binding FrequencyOptions}"
+                                      SelectedItem="{Binding Frequency, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Resolution:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" 
+                                      ItemsSource="{Binding ResolutionOptions}"
+                                      SelectedItem="{Binding Resolution, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Bitrate:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="4" Grid.Column="1" 
+                                      ItemsSource="{Binding BitrateOptions}"
+                                      SelectedItem="{Binding Bitrate, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="3" Text="Power:" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="0" Grid.Column="4" Value="{Binding PowerValue}" Minimum="1" Maximum="100" Increment="1"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="3" Text="FPS:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="4" 
+                                      ItemsSource="{Binding FPSOptions}"
+                                      SelectedItem="{Binding FPS, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="3" Text="MCS:" VerticalAlignment="Center"/>
+                            <NumericUpDown Grid.Row="4" Grid.Column="4" Value="{Binding MCSValue}" Minimum="0" Maximum="11" Increment="1"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Bandwidth:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="6" Grid.Column="1" 
+                                      ItemsSource="{Binding BandwidthOptions}"
+                                      SelectedItem="{Binding Bandwidth, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="3" Text="STBC:" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="6" Grid.Column="4" IsChecked="{Binding STBCEnabled}" Content="Enabled"/>
+
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="LDPC:" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="8" Grid.Column="1" IsChecked="{Binding LDPCEnabled}" Content="Enabled"/>
+
+                            <TextBlock Grid.Row="8" Grid.Column="3" Text="MLink:" VerticalAlignment="Center"/>
+                            <TextBox Grid.Row="8" Grid.Column="4" Text="{Binding MLink}" Watermark="e.g., 3994"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <!-- Video/Camera Settings Tab -->
+            <TabItem Header="Video &amp; Camera">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="Video &amp; Camera Settings" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="150"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="10"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Codec:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="1" 
+                                      ItemsSource="{Binding CodecOptions}"
+                                      SelectedItem="{Binding Codec, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="Exposure:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="1" 
+                                      ItemsSource="{Binding ExposureOptions}"
+                                      SelectedItem="{Binding Exposure, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Contrast:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="4" Grid.Column="1" 
+                                      ItemsSource="{Binding ContrastOptions}"
+                                      SelectedItem="{Binding Contrast, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="0" Grid.Column="3" Text="Saturation:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="0" Grid.Column="4" 
+                                      ItemsSource="{Binding SaturationOptions}"
+                                      SelectedItem="{Binding Saturation, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="2" Grid.Column="3" Text="Hue:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="2" Grid.Column="4" 
+                                      ItemsSource="{Binding HueOptions}"
+                                      SelectedItem="{Binding Hue, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="4" Grid.Column="3" Text="Luminance:" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Row="4" Grid.Column="4" 
+                                      ItemsSource="{Binding LuminanceOptions}"
+                                      SelectedItem="{Binding Luminance, Mode=TwoWay}"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Flip:" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="6" Grid.Column="1" IsChecked="{Binding FlipEnabled}" Content="Enabled"/>
+
+                            <TextBlock Grid.Row="6" Grid.Column="3" Text="Mirror:" VerticalAlignment="Center"/>
+                            <CheckBox Grid.Row="6" Grid.Column="4" IsChecked="{Binding MirrorEnabled}" Content="Enabled"/>
+
+                            <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" 
+                                    Content="Restart Majestic" 
+                                    Background="Gold" 
+                                    Foreground="Black"
+                                    Command="{Binding RestartMajesticCommand}"/>
+                        </Grid>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="Keys &amp; Security">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="Encryption Keys Management" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <StackPanel Spacing="10">
+                            <Button Content="Generate New Keys" Classes="accent" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Download Camera Keys" HorizontalAlignment="Left"/>
+                                <Button Content="Upload Camera Keys" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Download Ground Station Keys" HorizontalAlignment="Left"/>
+                                <Button Content="Upload Ground Station Keys" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="MSP/OSD">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="MSP/OSD Management" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <StackPanel Spacing="10">
+                            <Button Content="Install MSP Air Components" HorizontalAlignment="Left"/>
+                            <Button Content="Install MSP Ground Components" HorizontalAlignment="Left"/>
+                            <Button Content="Remove MSP Extras" HorizontalAlignment="Left"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Configure Ground Station" HorizontalAlignment="Left"/>
+                                <ComboBox PlaceholderText="OSD Mode" Width="120">
+                                    <ComboBoxItem Content="Air"/>
+                                    <ComboBoxItem Content="Ground"/>
+                                </ComboBox>
+                                <Button Content="Set OSD Mode" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="System">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="System Management" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="UART Console:" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Enable UART" HorizontalAlignment="Left"/>
+                                <Button Content="Disable UART" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Services:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Restart WiFiBroadcast" HorizontalAlignment="Left"/>
+                                <Button Content="Restart Majestic" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Features:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Enable Recording" HorizontalAlignment="Left"/>
+                                <Button Content="Disable Recording" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Enable Audio" HorizontalAlignment="Left"/>
+                                <Button Content="Disable Audio" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Reset Options:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Factory Reset Camera" Classes="danger" HorizontalAlignment="Left"/>
+                                <Button Content="Reset Radxa Controller" Classes="danger" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            
+            <TabItem Header="Advanced">
+                <ScrollViewer>
+                    <StackPanel Spacing="15" Margin="20">
+                        <TextBlock Text="Advanced Operations" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"/>
+                        
+                        <StackPanel Spacing="10">
+                            <TextBlock Text="File Management:" FontWeight="Bold"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Upload Scripts" HorizontalAlignment="Left"/>
+                                <Button Content="Download Scripts" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBox Watermark="Sensor filename" Width="150"/>
+                                <Button Content="Upload Sensor" HorizontalAlignment="Left"/>
+                                <Button Content="Download Sensor" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Special Modes:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Install Air Manager" HorizontalAlignment="Left"/>
+                                <Button Content="Install PixelPilot" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBox Watermark="Profile name" Width="150"/>
+                                <Button Content="Deploy Alink" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Video Utilities:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Button Content="Fix Video Resolution" HorizontalAlignment="Left"/>
+                                <ComboBox PlaceholderText="Crop Mode" Width="120">
+                                    <ComboBoxItem Content="Mode 1"/>
+                                    <ComboBoxItem Content="Mode 2"/>
+                                    <ComboBoxItem Content="Mode 3"/>
+                                    <ComboBoxItem Content="Mode 4"/>
+                                    <ComboBoxItem Content="Mode 5"/>
+                                </ComboBox>
+                                <Button Content="Set Crop Mode" HorizontalAlignment="Left"/>
+                                <Button Content="Disable Crop" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                            
+                            <TextBlock Text="Firmware:" FontWeight="Bold" Margin="0,10,0,0"/>
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <TextBox Watermark="Archive path" Width="150"/>
+                                <TextBox Watermark="Profile" Width="100"/>
+                                <CheckBox Content="Force" VerticalAlignment="Center"/>
+                                <Button Content="Offline Upgrade" Classes="danger" HorizontalAlignment="Left"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <!-- Action Buttons -->
+        <StackPanel Grid.Row="3" 
+                    Orientation="Horizontal" 
+                    HorizontalAlignment="Center" 
+                    Spacing="10">
+            <Button Content="Download Configuration" 
+                    Command="{Binding DownloadCommand}"
+                    Classes="accent"/>
+            <Button Content="Upload Configuration" 
+                    Command="{Binding UploadCommand}"/>
+            <Button Content="Reboot Device" 
+                    Command="{Binding RebootCommand}"
+                    Classes="danger"/>
+        </StackPanel>
+    </Grid>
+</Window>

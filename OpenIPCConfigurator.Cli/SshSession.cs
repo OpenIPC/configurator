@@ -2,7 +2,7 @@ using Renci.SshNet;
 
 namespace OpenIPCConfigurator.Cli;
 
-internal sealed class SshSession : IDisposable
+public sealed class SshSession : IDisposable
 {
     private readonly SshClient _sshClient;
     private readonly ScpClient _scpClient;

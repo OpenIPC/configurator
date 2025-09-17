@@ -5,4 +5,4 @@ namespace OpenIPCConfigurator.Cli;
 /// </summary>
 /// <param name="RemotePath">Absolute path of the file on the remote device.</param>
 /// <param name="LocalName">File name to use on the local filesystem.</param>
-internal sealed record FileTransfer(string RemotePath, string LocalName);
+public sealed record FileTransfer(string RemotePath, string LocalName);

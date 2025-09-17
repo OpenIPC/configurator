@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace OpenIPCConfigurator.Cli;
 
-internal sealed class SettingsStore
+public sealed class SettingsStore
 {
     private static readonly string[] DefaultKeys = { "openipc", "nvr", "radxa" };
 

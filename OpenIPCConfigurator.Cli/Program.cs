@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace OpenIPCConfigurator.Cli;
 
-internal static class Program
+public static class Program
 {
     private sealed record CommandHandler(string Name, string Description, Func<string[], int> Execute, string Usage);
 

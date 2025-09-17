@@ -27,15 +27,48 @@ Check the IP and network connection.
 
 ---
 
-## Linux command line support
+## Linux support
 
-The repository now ships a cross-platform CLI (`OpenIPCConfigurator.Cli`) that mirrors the common download/upload workflows
-without relying on Windows-only PuTTY tooling.
+The repository now ships both a cross-platform CLI (`OpenIPCConfigurator.Cli`) and GUI (`OpenIPCConfigurator.Avalonia`) 
+that mirror the complete configurator workflows without relying on Windows-only PuTTY tooling.
+
+## Cross-platform GUI Application
+
+The GUI version provides the same tabbed interface and functionality as the Windows Forms version but runs natively on Linux.
+
+### Building the GUI
+
+From the repository root, you can build a self-contained GUI application:
+
+```bash
+./publish-gui.sh
+```
+
+The script creates a standalone executable at `publish/gui/OpenIPCConfigurator.Avalonia` that includes the .NET runtime 
+and doesn't require any additional dependencies on the target system.
+
+For development, you can run the GUI directly:
+
+```bash
+dotnet run --project OpenIPCConfigurator.Avalonia
+```
+
+### GUI Features
+
+- **Cross-platform**: Runs natively on Linux, Windows, and macOS
+- **Modern UI**: Built with Avalonia UI for consistent appearance across platforms  
+- **Device management**: Support for OpenIPC cameras, NVR receivers, and Radxa controllers
+- **Configuration tabs**: Organized interface for basic settings, video, and WiFi configuration
+- **Real-time status**: Connection status and operation progress feedback
+- **Settings persistence**: Remembers last-used IP addresses and device types
+
+## Command Line Interface
 
 ### Prerequisites
 
-- .NET 8 SDK or runtime (`dotnet` executable) installed on your Linux host.
-- Network access to the OpenIPC device (default credentials remain `root` / device password).
+- .NET 8 SDK or runtime (`dotnet` executable) installed on your Linux host
+- Network access to the OpenIPC device (default credentials remain `root` / device password)
+- For GUI: X11/Wayland display server (standard on most Linux desktop environments)
 
 ### Building the CLI
 

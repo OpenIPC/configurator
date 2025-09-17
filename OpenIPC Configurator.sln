@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIPCConfigurator.Cli", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIPCConfigurator.Cli.Tests", "OpenIPCConfigurator.Cli.Tests/OpenIPCConfigurator.Cli.Tests.csproj", "{A4DF49A3-3169-4918-98EE-BF3E94CC2B24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIPCConfigurator.Shared", "OpenIPCConfigurator.Shared/OpenIPCConfigurator.Shared.csproj", "{B5C2A712-4F8E-4D9A-8F3C-1E2D3A4B5C6D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenIPCConfigurator.Avalonia", "OpenIPCConfigurator.Avalonia/OpenIPCConfigurator.Avalonia.csproj", "{C7D3B823-5F9E-4E0B-9F4D-2F3E4B5C6D7E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ GlobalSection(ProjectConfigurationPlatforms) = postSolution
 {A4DF49A3-3169-4918-98EE-BF3E94CC2B24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 {A4DF49A3-3169-4918-98EE-BF3E94CC2B24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 {A4DF49A3-3169-4918-98EE-BF3E94CC2B24}.Release|Any CPU.Build.0 = Release|Any CPU
+{B5C2A712-4F8E-4D9A-8F3C-1E2D3A4B5C6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{B5C2A712-4F8E-4D9A-8F3C-1E2D3A4B5C6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{B5C2A712-4F8E-4D9A-8F3C-1E2D3A4B5C6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{B5C2A712-4F8E-4D9A-8F3C-1E2D3A4B5C6D}.Release|Any CPU.Build.0 = Release|Any CPU
+{C7D3B823-5F9E-4E0B-9F4D-2F3E4B5C6D7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+{C7D3B823-5F9E-4E0B-9F4D-2F3E4B5C6D7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+{C7D3B823-5F9E-4E0B-9F4D-2F3E4B5C6D7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+{C7D3B823-5F9E-4E0B-9F4D-2F3E4B5C6D7E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
