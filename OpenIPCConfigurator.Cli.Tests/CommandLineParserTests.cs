@@ -12,15 +12,15 @@ public class CommandLineParserTests
     {
         var args = new[] { "--ip", "192.168.0.2", "--password", "secret" };
 
-        var result = CommandLineParser.TryParse(args, out var options, out var error);
+        var result = CommandLineParser.TryParse(args, out var parseResult, out var error);
 
         Assert.True(result);
         Assert.Null(error);
-        Assert.NotNull(options);
-        Assert.Equal("openipc", options!.DeviceKey);
-        Assert.Equal("192.168.0.2", options.IpAddress);
-        Assert.Equal("secret", options.Password);
-        Assert.Equal(22, options.Port);
+        Assert.NotNull(parseResult);
+        Assert.Equal("openipc", parseResult!.Options.DeviceKey);
+        Assert.Equal("192.168.0.2", parseResult.Options.IpAddress);
+        Assert.Equal("secret", parseResult.Options.Password);
+        Assert.Equal(22, parseResult.Options.Port);
     }
 
     [Fact]
@@ -41,13 +41,13 @@ public class CommandLineParserTests
             "--workdir", temp.Path
         };
 
-        var result = CommandLineParser.TryParse(args, out var options, out var error);
+        var result = CommandLineParser.TryParse(args, out var parseResult, out var error);
 
         Assert.True(result);
         Assert.Null(error);
-        Assert.NotNull(options);
-        Assert.Equal("10.0.0.5", options!.IpAddress);
-        Assert.Equal(Path.Combine(temp.Path, "settings.conf"), options.SettingsPath);
+        Assert.NotNull(parseResult);
+        Assert.Equal("10.0.0.5", parseResult!.Options.IpAddress);
+        Assert.Equal(Path.Combine(temp.Path, "settings.conf"), parseResult.Options.SettingsPath);
     }
 
     [Fact]
@@ -55,10 +55,10 @@ public class CommandLineParserTests
     {
         var args = new[] { "--ip", "192.168.0.2", "--password", "secret", "--port", "invalid" };
 
-        var result = CommandLineParser.TryParse(args, out var options, out var error);
+        var result = CommandLineParser.TryParse(args, out var parseResult, out var error);
 
         Assert.False(result);
-        Assert.Null(options);
+        Assert.Null(parseResult);
         Assert.Equal("Invalid SSH port 'invalid'.", error);
     }
 
