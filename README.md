@@ -76,4 +76,19 @@ Key flags:
 - `--yaml` – switch the OpenIPC profile to the YAML-based wireless stack (`wfb.yaml`).
 - `--no-remember` – skip updating `settings.conf` with the last-used IP address.
 
+### Additional commands
+
+The CLI mirrors the legacy `Extern.bat` workflow, exposing commands for maintenance tasks beyond configuration sync. Highlights:
+
+- `keys download|upload|generate` – manage drone key material for the camera or ground station.
+- `uart enable|disable` – toggle console login over UART0.
+- `msp` – install MSP extras, adjust OSD profiles, or configure ground-station telemetry presets.
+- `services restart` – restart `wifibroadcast` or `majestic` without a full reboot.
+- `sensors`, `kernel`, `scripts` – transfer binary blobs and helper scripts with automatic backup support.
+- `firmware offline-upgrade` – push a `.tgz` firmware package and trigger `sysupgrade` (with optional `--force`).
+- `recording`, `audio`, `mavlink`, `bittest`, `video` – tweak runtime features such as DVR recording, audio, telemetry level, or video sizing.
+- `radxa reset`, `camera factory-reset`, `air-manager install`, `pixelpilot install`, `alink deploy` – perform higher-level platform maintenance, including Radxa resets and PixelPilot provisioning.
+
+Run `dotnet run --project OpenIPCConfigurator.Cli -- help <command>` for the full option set on any subcommand.
+
 For full option details run `dotnet run --project OpenIPCConfigurator.Cli -- help`.
