@@ -31,7 +31,14 @@ The legacy `Extern.bat` script orchestrates PuTTY utilities for a wide range of 
 | `dlvrx`, `ulvrx(r)`    | Ground-station config sync                           | ✅ `--device nvr` profile      | Same transfers and `dos2unix` calls. |
 | `dlwfbng`, `ulwfbng(r)`| Radxa controller config sync                         | ✅ `--device radxa` profile    | Upload ensures required files exist. |
 | `rb`                   | Remote reboot                                        | ✅ dedicated `reboot` command  | Aligns with GUI reboot button flow. |
-| Remaining verbs (keys, UART, firmware, extras, etc.) | Maintenance & advanced tweaks | ⏳ Future iterations | Documented under "Future enhancements" backlog. |
+| `keysdl*`, `keysul*`, `keysgen` | Drone key management | ✅ `keys` command family | Supports ground station and camera targets with settings persistence. |
+| `UART0on`, `UART0off` | UART console toggle | ✅ `uart enable/disable` | Issues reboot automatically to apply changes. |
+| `mspextra`, `mspgsextra`, `remmspextra`, `msposd*`, `mspgs`, `mavgs*` | MSP extras and OSD presets | ✅ `msp` subcommands | Installs helpers, adjusts telemetry level, and reboots when required. |
+| `rswfb`, `rsmaj` | Service restarts | ✅ `services restart` | Provides fast restart without reboot. |
+| `binup`, `bindl`, `koup`, `kodl`, `shup`, `shdl` | Sensor, kernel, and script transfer | ✅ `sensors`, `kernel`, `scripts` commands | Uploads/downloads with backup handling. |
+| `offlinefw`, `offlinefwf` | Firmware upgrades | ✅ `firmware offline-upgrade` | Adds `--force` flag parity. |
+| `onboardrecon*`, `audio*`, `bittest`, `resfix` | Runtime toggles | ✅ `recording`, `audio`, `bittest`, `video` commands | Uses yaml-cli to apply settings. |
+| `resetradxa`, `resetcam`, `airman`, `pixelpilot`, `alink`, `box`, `wide` | Platform maintenance | ✅ dedicated commands (`radxa`, `camera`, `air-manager`, `pixelpilot`, `alink`, `crop`) | Leverages repository assets under `reset/` and `txprofiles/`. |
 
 ### Implementation plan (phase 1 – executed now)
 1. **Create documentation** (this file) to capture the current architecture and Linux-support strategy.
@@ -46,7 +53,6 @@ The legacy `Extern.bat` script orchestrates PuTTY utilities for a wide range of 
 
 ### Future enhancements (phase 2 – deferred)
 - Refactor the Windows Forms application to consume the new SSH helper instead of `extern.bat`, enabling a single cross-platform implementation.
-- Extend the CLI to cover advanced maintenance commands (keys management, presets, telemetry toggles) that are currently mirrored in `extern.bat`.
 - Package the CLI as a standalone binary or container image for easier distribution on Linux distributions.
 
 ## Validation Strategy

@@ -57,6 +57,19 @@ internal sealed class SshSession : IDisposable
         }
     }
 
+    public void UploadFile(string localPath, string remotePath)
+    {
+        Connect();
+
+        if (!File.Exists(localPath))
+        {
+            throw new FileNotFoundException($"Required file '{localPath}' not found.", localPath);
+        }
+
+        using var localStream = File.OpenRead(localPath);
+        _scpClient.Upload(localStream, remotePath);
+    }
+
     public void ExecuteCommands(IEnumerable<string> commands)
     {
         Connect();

@@ -1,22 +1,15 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 
 namespace OpenIPCConfigurator.Cli;
 
 internal static class CommandLineParser
 {
-    private static readonly HashSet<string> BooleanTrueValues = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "true", "1", "yes", "y", "on"
-    };
-
-    private static readonly HashSet<string> BooleanFalseValues = new(StringComparer.OrdinalIgnoreCase)
-    {
-        "false", "0", "no", "n", "off"
-    };
-
     private const string DefaultSettingsFileName = "settings.conf";
 
-    public static bool TryParse(string[] args, out CommandOptions? options, out string? errorMessage)
+    public static bool TryParse(string[] args, out CommandLineParseResult? result, out string? errorMessage)
     {
         var values = new Dictionary<string, string?>(StringComparer.OrdinalIgnoreCase);
         for (var i = 0; i < args.Length; i++)
@@ -31,7 +24,7 @@ internal static class CommandLineParser
             if (!token.StartsWith('-'))
             {
                 errorMessage = $"Unexpected argument '{token}'.";
-                options = null;
+                result = null;
                 return false;
             }
 
@@ -70,7 +63,7 @@ internal static class CommandLineParser
             else if (expectsValue)
             {
                 errorMessage = $"Option '{token}' requires a value.";
-                options = null;
+                result = null;
                 return false;
             }
             else if (value is null)
@@ -81,11 +74,13 @@ internal static class CommandLineParser
             values[key] = value;
         }
 
-        var deviceKey = values.TryGetValue("device", out var deviceRaw) && !string.IsNullOrWhiteSpace(deviceRaw)
+        var arguments = new CommandArguments(values);
+
+        var deviceKey = arguments.TryGetValue("device", out var deviceRaw) && !string.IsNullOrWhiteSpace(deviceRaw)
             ? deviceRaw!
             : "openipc";
 
-        var useYaml = GetBoolean(values, "yaml") ?? false;
+        var useYaml = arguments.GetBoolean("yaml") ?? false;
         DeviceProfile profile;
         try
         {
@@ -95,15 +90,15 @@ internal static class CommandLineParser
         catch (ArgumentException ex)
         {
             errorMessage = ex.Message;
-            options = null;
+            result = null;
             return false;
         }
 
-        var workDirectory = values.TryGetValue("workdir", out var workRaw) && !string.IsNullOrWhiteSpace(workRaw)
+        var workDirectory = arguments.TryGetValue("workdir", out var workRaw) && !string.IsNullOrWhiteSpace(workRaw)
             ? Path.GetFullPath(workRaw!)
             : Directory.GetCurrentDirectory();
 
-        var settingsPath = values.TryGetValue("settings", out var settingsRaw) && !string.IsNullOrWhiteSpace(settingsRaw)
+        var settingsPath = arguments.TryGetValue("settings", out var settingsRaw) && !string.IsNullOrWhiteSpace(settingsRaw)
             ? settingsRaw!
             : Path.Combine(workDirectory, DefaultSettingsFileName);
         if (!Path.IsPathRooted(settingsPath))
@@ -112,60 +107,60 @@ internal static class CommandLineParser
         }
 
         SettingsStore? settings = null;
-        if (File.Exists(settingsPath) || !values.ContainsKey("ip"))
+        if (File.Exists(settingsPath) || !arguments.ContainsKey("ip"))
         {
             settings = SettingsStore.Load(settingsPath);
         }
 
-        var ipAddress = values.TryGetValue("ip", out var ipRaw) && !string.IsNullOrWhiteSpace(ipRaw)
+        var ipAddress = arguments.TryGetValue("ip", out var ipRaw) && !string.IsNullOrWhiteSpace(ipRaw)
             ? ipRaw!
             : settings?.TryGetAddress(deviceKey);
         if (string.IsNullOrWhiteSpace(ipAddress))
         {
             errorMessage = "An IP address must be provided via --ip or stored in settings.conf.";
-            options = null;
+            result = null;
             return false;
         }
 
-        var username = values.TryGetValue("username", out var userRaw) && !string.IsNullOrWhiteSpace(userRaw)
+        var username = arguments.TryGetValue("username", out var userRaw) && !string.IsNullOrWhiteSpace(userRaw)
             ? userRaw!
             : "root";
 
-        if (!values.TryGetValue("password", out var password) || string.IsNullOrWhiteSpace(password))
+        if (!arguments.TryGetValue("password", out var password) || string.IsNullOrWhiteSpace(password))
         {
             errorMessage = "A password must be provided with --password.";
-            options = null;
+            result = null;
             return false;
         }
 
         var port = 22;
-        if (values.TryGetValue("port", out var portRaw))
+        if (arguments.TryGetValue("port", out var portRaw))
         {
             if (!int.TryParse(portRaw, NumberStyles.Integer, CultureInfo.InvariantCulture, out port))
             {
                 errorMessage = $"Invalid SSH port '{portRaw}'.";
-                options = null;
+                result = null;
                 return false;
             }
         }
 
-        var rememberSettings = GetBoolean(values, "remember") ?? true;
-        if (GetBoolean(values, "no-remember") == true)
+        var rememberSettings = arguments.GetBoolean("remember") ?? true;
+        if (arguments.GetBoolean("no-remember") == true)
         {
             rememberSettings = false;
         }
 
-        var triggerReboot = GetBoolean(values, "reboot") ?? false;
+        var triggerReboot = arguments.GetBoolean("reboot") ?? false;
 
-        var downloadDirectory = values.TryGetValue("output", out var outputRaw) && !string.IsNullOrWhiteSpace(outputRaw)
+        var downloadDirectory = arguments.TryGetValue("output", out var outputRaw) && !string.IsNullOrWhiteSpace(outputRaw)
             ? Path.GetFullPath(Path.Combine(workDirectory, outputRaw!))
             : workDirectory;
 
-        var uploadDirectory = values.TryGetValue("input", out var inputRaw) && !string.IsNullOrWhiteSpace(inputRaw)
+        var uploadDirectory = arguments.TryGetValue("input", out var inputRaw) && !string.IsNullOrWhiteSpace(inputRaw)
             ? Path.GetFullPath(Path.Combine(workDirectory, inputRaw!))
             : workDirectory;
 
-        options = new CommandOptions(
+        var options = new CommandOptions(
             deviceKey.ToLowerInvariant(),
             ipAddress!,
             username,
@@ -178,6 +173,7 @@ internal static class CommandLineParser
             rememberSettings,
             useYaml,
             triggerReboot);
+        result = new CommandLineParseResult(options, arguments);
         errorMessage = null;
         return true;
     }
@@ -190,24 +186,4 @@ internal static class CommandLineParser
         "reboot" => true,
         _ => false
     };
-
-    private static bool? GetBoolean(IReadOnlyDictionary<string, string?> values, string key)
-    {
-        if (!values.TryGetValue(key, out var raw) || raw is null)
-        {
-            return null;
-        }
-
-        if (BooleanTrueValues.Contains(raw))
-        {
-            return true;
-        }
-
-        if (BooleanFalseValues.Contains(raw))
-        {
-            return false;
-        }
-
-        return null;
-    }
 }
