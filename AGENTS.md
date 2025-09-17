@@ -1,6 +1,6 @@
 # Agent Guidelines
 
-This repository maintains an incremental plan for delivering Linux support for the OpenIPC Configurator. Follow these instructions when making changes anywhere in this repo.
+This repository maintains Linux support for the OpenIPC Configurator. Follow these instructions when making changes anywhere in this repo.
 
 ## Planning & Documentation
 - Before implementing new functionality, review the living plan in `docs/linux-support-plan.md`.
