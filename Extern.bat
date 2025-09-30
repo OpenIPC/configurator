@@ -188,12 +188,12 @@ if "%1" == "shdl" (
 
 if "%1" == "offlinefw" (
 	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
-        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n
+        plink -ssh root@%2 -pw %3 sysupgrade --archive=/tmp/%4.tgz -n
 )
 
 if "%1" == "offlinefwf" (
 	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
-        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n -f
+        plink -ssh root@%2 -pw %3 --archive=/tmp/%4.tgz -f -n
 )
 
 if "%1" == "mspgs" (
