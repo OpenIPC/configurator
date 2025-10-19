@@ -24,10 +24,12 @@ Public Class Configurator
 
     Public Sub DownloadStart()
         downloader = New WebClient
-        If txtSOC.Text = "apfpv-greg07" Then
+        If cmbVersion.SelectedItem.ToString.Contains("apfpv-greg07") Then
             downloader.DownloadFileAsync(New Uri("https://github.com/sickgreg/OpenIPC_sickgregFPV_apfpv/raw/main/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
-        ElseIf txtSOC.Text = "ssc338q-nor-apfpv1.1" Or txtSOC.Text = "ssc30kq-nor-apfpv1.1" Then
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("apfpv1.1") Then
             downloader.DownloadFileAsync(New Uri("https://github.com/carabidulebabat/AP-ALINK-FPV/releases/download/1.1/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
+        ElseIf cmbVersion.SelectedItem.ToString.Contains("apfpv1.2") Then
+            downloader.DownloadFileAsync(New Uri("https://github.com/carabidulebabat/AP-ALINK-FPV/releases/download/1.2/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         Else
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         End If
@@ -996,6 +998,7 @@ err1:
         cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv")
         cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg07")
         cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.1")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.2")
         cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
         cmbVersion.Items.Add("ssc338q_rubyfpv_generic-nor")
         cmbVersion.Items.Add("ssc338q_rubyfpv_thinker_internal_wifi-nor")
@@ -3215,16 +3218,7 @@ err1:
     End Sub
 
     Private Sub cmbVersion_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbVersion.SelectedIndexChanged
-        If cmbVersion.SelectedItem.ToString.Contains("apfpv-greg07") Then
-            txtSOC.Text = "apfpv-greg07"
-            btnOfflinefw.Text = "Update Camera"
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("ssc338q-nor-apfpv1.1") Then
-            txtSOC.Text = "ssc338q-nor-apfpv1.1"
-            btnOfflinefw.Text = "Update Camera"
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("ssc30kq-nor-apfpv1.1") Then
-            txtSOC.Text = "ssc30kq-nor-apfpv1.1"
-            btnOfflinefw.Text = "Update Camera"
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("ssc338q") Then
+        If cmbVersion.SelectedItem.ToString.Contains("ssc338q") Then
             txtSOC.Text = "ssc338q"
             btnOfflinefw.Text = "Update Camera"
         ElseIf cmbVersion.SelectedItem.ToString.Contains("ssc30kq") Then

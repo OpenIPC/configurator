@@ -2693,7 +2693,7 @@ Partial Class Configurator
         btnSaveReboot.Size = New Size(116, 30)
         btnSaveReboot.TabIndex = 46
         btnSaveReboot.Text = "Save and Reboot"
-        btnToolTip.SetToolTip(btnSaveReboot, "Save all settings, upload them and reboot")
+        btnToolTip.SetToolTip(btnSaveReboot, "This is not for APFPV or PnP versions." & vbCrLf & "It is ONLY for old versions of OpenIPC FPV." & vbCrLf & "Save all settings, upload them and reboot")
         btnSaveReboot.UseVisualStyleBackColor = False
         ' 
         ' btnRead
@@ -2707,7 +2707,7 @@ Partial Class Configurator
         btnRead.Size = New Size(74, 30)
         btnRead.TabIndex = 23
         btnRead.Text = "Connect"
-        btnToolTip.SetToolTip(btnRead, "Connect to OpenIPC/NVR/Radxa Zero 3w(WFB-ng)." & vbCrLf & "If you have an error check that you have" & vbCrLf & "the LATEST version of Putty installed.")
+        btnToolTip.SetToolTip(btnRead, resources.GetString("btnRead.ToolTip"))
         btnRead.UseVisualStyleBackColor = False
         ' 
         ' Label1
@@ -2847,7 +2847,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "30/09/2025"
+        Label12.Text = "19/10/2025"
         ' 
         ' Label13
         ' 
