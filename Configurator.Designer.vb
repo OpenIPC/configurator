@@ -167,6 +167,7 @@ Partial Class Configurator
         btnSendKeys = New Button()
         btnReceiveKeys = New Button()
         GroupBox1 = New GroupBox()
+        chkRCversions = New CheckBox()
         chkForce = New CheckBox()
         txtSOC = New TextBox()
         btnResetCam = New Button()
@@ -2034,6 +2035,7 @@ Partial Class Configurator
         ' 
         ' GroupBox1
         ' 
+        GroupBox1.Controls.Add(chkRCversions)
         GroupBox1.Controls.Add(chkForce)
         GroupBox1.Controls.Add(txtSOC)
         GroupBox1.Controls.Add(btnResetCam)
@@ -2045,6 +2047,17 @@ Partial Class Configurator
         GroupBox1.TabIndex = 60
         GroupBox1.TabStop = False
         GroupBox1.Text = "Installation Menu"
+        ' 
+        ' chkRCversions
+        ' 
+        chkRCversions.AutoSize = True
+        chkRCversions.Location = New Point(418, 10)
+        chkRCversions.Name = "chkRCversions"
+        chkRCversions.Size = New Size(128, 18)
+        chkRCversions.TabIndex = 60
+        chkRCversions.Text = "Show RC Versions"
+        btnToolTip.SetToolTip(chkRCversions, "Show/Hide the RC firmware releases")
+        chkRCversions.UseVisualStyleBackColor = True
         ' 
         ' chkForce
         ' 
@@ -2847,7 +2860,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "19/10/2025"
+        Label12.Text = "21/10/2025"
         ' 
         ' Label13
         ' 
@@ -3125,5 +3138,6 @@ Partial Class Configurator
     Friend WithEvents cmbLinkControl As ComboBox
     Friend WithEvents btnAirManager As Button
     Friend WithEvents btnPP As Button
+    Friend WithEvents chkRCversions As CheckBox
 
 End Class
