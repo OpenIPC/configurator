@@ -113,7 +113,7 @@ if "%1" == "mspextra" (
 
 if "%1" == "mspgsextra" (
 	echo y | pscp -scp -pw %3 reset/wifibroadcast_gs root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
+    echo y | pscp -scp -pw %3 vtxmenu.ini root@%2:/etc/
 	plink -ssh root@%2 -pw %3 dos2unix /usr/bin/wifibroadcast_gs /etc/vtxmenu.ini "&&" mv /usr/bin/wifibroadcast_gs /usr/bin/wifibroadcast "&&" chmod +x /usr/bin/wifibroadcast "&&" wifibroadcast reset "&&" reboot
 )
 
@@ -188,12 +188,12 @@ if "%1" == "shdl" (
 
 if "%1" == "offlinefw" (
 	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
-        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n
+    plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n
 )
 
 if "%1" == "offlinefwf" (
 	echo y | pscp -scp -pw %3 %4.tgz root@%2:/tmp
-        plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n -f
+    plink -ssh root@%2 -pw %3 gzip -d /tmp/%4.tgz "&&" tar -xvf /tmp/%4.tar -C /tmp "&&" sysupgrade --kernel=/tmp/uImage.%5 --rootfs=/tmp/rootfs.squashfs.%5 -n -f
 )
 
 if "%1" == "mspgs" (
@@ -228,7 +228,7 @@ if "%1" == "mavgs2" (
 )
 
 if "%1" == "resetradxa" (
-        echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
+    echo y | pscp -scp -pw %3 reset/wifibroadcast.cfg root@%2:/etc
 	echo y | pscp -scp -pw %3 reset/wfb.conf root@%2:/etc/modprobe.d/
 	echo y | pscp -scp -pw %3 reset/wifibroadcast root@%2:/etc/default/
 	echo y | pscp -scp -pw %3 reset/stream.sh reset/osd reset/osd.json reset/rec-fps reset/screen-mode root@%2:/config/scripts/
@@ -246,9 +246,10 @@ if "%1" == "airman" (
 )
 
 if "%1" == "tipoman" (
-	echo y | pscp -scp -pw %3 wfb_tx root@%2:/usr/bin/
-        echo y | pscp -scp -pw %3 txprofiles/TipoMan.conf root@%2:/etc/
-        plink -ssh root@%2 -pw %3 mv /etc/TipoMan.conf /etc/txprofiles.conf "&&" dos2unix /etc/txprofiles.conf "&&" wifibroadcast cli -s .wireless.mlink 2500 "&&" reboot
+    plink -ssh root@%2 -pw %3 wifibroadcast stop
+    echo y | pscp -scp -pw %3 wfb_tx root@%2:/usr/bin/
+    echo y | pscp -scp -pw %3 txprofiles/TipoMan.conf root@%2:/etc/
+    plink -ssh root@%2 -pw %3 mv /etc/TipoMan.conf /etc/txprofiles.conf "&&" dos2unix /etc/txprofiles.conf "&&" wifibroadcast cli -s .wireless.mlink 2500 "&&" reboot
 )
 
 if "%1" == "pixelpilot" (
