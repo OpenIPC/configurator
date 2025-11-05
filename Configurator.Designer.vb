@@ -46,6 +46,7 @@ Partial Class Configurator
         txtPower24 = New TextBox()
         TabControl1 = New TabControl()
         TabPage1 = New TabPage()
+        btnTipoMan = New Button()
         txtWLANAdapter = New TextBox()
         txtLinkControl = New TextBox()
         cmbWLANAdapter = New ComboBox()
@@ -493,6 +494,7 @@ Partial Class Configurator
         ' TabPage1
         ' 
         TabPage1.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage1.Controls.Add(btnTipoMan)
         TabPage1.Controls.Add(txtWLANAdapter)
         TabPage1.Controls.Add(txtLinkControl)
         TabPage1.Controls.Add(cmbWLANAdapter)
@@ -526,6 +528,19 @@ Partial Class Configurator
         TabPage1.Size = New Size(670, 395)
         TabPage1.TabIndex = 0
         TabPage1.Text = "WFB Settings"
+        ' 
+        ' btnTipoMan
+        ' 
+        btnTipoMan.BackColor = Color.Gold
+        btnTipoMan.FlatStyle = FlatStyle.Popup
+        btnTipoMan.Font = New Font("Arial", 8.25F, FontStyle.Bold)
+        btnTipoMan.Location = New Point(318, 365)
+        btnTipoMan.Name = "btnTipoMan"
+        btnTipoMan.Size = New Size(120, 23)
+        btnTipoMan.TabIndex = 78
+        btnTipoMan.Text = "Tipo Man WFB Mod"
+        btnToolTip.SetToolTip(btnTipoMan, "Install the Tipo Man WFB mod" & vbCrLf & "on the OpenIPC camera." & vbCrLf & "Works for EU, AU and BU WiFi adapters." & vbCrLf & "Eliminates the stutter bug." & vbCrLf)
+        btnTipoMan.UseVisualStyleBackColor = False
         ' 
         ' txtWLANAdapter
         ' 
@@ -2860,7 +2875,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "21/10/2025"
+        Label12.Text = "05/11/2025"
         ' 
         ' Label13
         ' 
@@ -3139,5 +3154,6 @@ Partial Class Configurator
     Friend WithEvents btnAirManager As Button
     Friend WithEvents btnPP As Button
     Friend WithEvents chkRCversions As CheckBox
+    Friend WithEvents btnTipoMan As Button
 
 End Class

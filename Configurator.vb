@@ -1400,7 +1400,7 @@ err1:
 
     Private Sub btnRestartWFB_Click(sender As Object, e As EventArgs) Handles btnRestartWFB.Click
         Dim extern = "extern.bat"
-        If Not IO.File.Exists(extern) Then
+        If Not File.Exists(extern) Then
             MsgBox("File " + extern + " not found!")
             Return
         End If
@@ -1527,6 +1527,7 @@ err1:
         btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = True
+        btnTipoMan.Visible = False
         btnRestartMajestic.Visible = False
         btnBoxRess.Visible = False
         btnWideRess.Visible = False
@@ -1709,6 +1710,7 @@ err1:
         btnMSPGSExtra.Visible = True
         btnMSPExtraRemove.Visible = True
         btnRestartWFB.Visible = True
+        btnTipoMan.Visible = True
         btnRestartMajestic.Visible = True
         btnBoxRess.Visible = True
         btnWideRess.Visible = True
@@ -1893,6 +1895,7 @@ err1:
         btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
         btnRestartWFB.Visible = False
+        btnTipoMan.Visible = False
         btnRestartMajestic.Visible = False
         btnBoxRess.Visible = False
         btnWideRess.Visible = False
@@ -3731,6 +3734,26 @@ err1:
         cmbVersion.Items.Add("openipc.hi3516ev300-nor-fpv")
         cmbVersion.Items.Add("openipc.hi3516ev200-nor-fpv")
         cmbVersion.Text = "Select OpenIPC Version"
+    End Sub
+
+    Private Sub btnTipoMan_Click(sender As Object, e As EventArgs) Handles btnTipoMan.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "tipoman " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
     End Sub
 
 #End Region
