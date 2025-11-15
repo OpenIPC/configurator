@@ -263,10 +263,8 @@ if "%1" == "pixelpilot" (
 )
 
 if "%1" == "alink" (
-	echo y | pscp -scp -pw %3 wlan_adapters.yaml root@%2:/etc/
-	echo y | pscp -scp -pw %3 alink.conf root@%2:/etc/
 	echo y | pscp -scp -pw %3 txprofiles/%4.conf root@%2:/etc/
-        plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf "&&" dos2unix /etc/alink.conf /etc/wlan_adapters.yaml /etc/txprofiles.conf "&&" reboot
+        plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf "&&" dos2unix /etc/txprofiles.conf "&&" reboot
 )
 
 if "%1" == "box" (
