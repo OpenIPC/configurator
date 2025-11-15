@@ -263,13 +263,10 @@ if "%1" == "pixelpilot" (
 )
 
 if "%1" == "alink" (
-        plink -ssh root@%2 -pw %3 killall alink_drone
-	echo y | pscp -scp -pw %3 alink_drone root@%2:/usr/bin/
-	echo y | pscp -scp -pw %3 yaml-cli-multi root@%2:/usr/bin/
 	echo y | pscp -scp -pw %3 wlan_adapters.yaml root@%2:/etc/
 	echo y | pscp -scp -pw %3 alink.conf root@%2:/etc/
 	echo y | pscp -scp -pw %3 txprofiles/%4.conf root@%2:/etc/
-        plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf "&&" dos2unix /etc/alink.conf /etc/wlan_adapters.yaml /etc/txprofiles.conf "&&" chmod +x /usr/bin/alink_drone "&&" chmod +x /usr/bin/yaml-cli-multi "&&" reboot
+        plink -ssh root@%2 -pw %3 mv /etc/%4.conf /etc/txprofiles.conf "&&" dos2unix /etc/alink.conf /etc/wlan_adapters.yaml /etc/txprofiles.conf "&&" reboot
 )
 
 if "%1" == "box" (

@@ -72,8 +72,6 @@ Partial Class Configurator
         btnWideRess = New Button()
         btnBoxRess = New Button()
         GroupBox2 = New GroupBox()
-        Label14 = New Label()
-        trackWeight = New TrackBar()
         cmbTXProfile = New ComboBox()
         Alink = New Button()
         cmbMirror = New ComboBox()
@@ -238,7 +236,6 @@ Partial Class Configurator
         TabPage1.SuspendLayout()
         TabPage2.SuspendLayout()
         GroupBox2.SuspendLayout()
-        CType(trackWeight, ComponentModel.ISupportInitialize).BeginInit()
         TabPage3.SuspendLayout()
         TabPage7.SuspendLayout()
         GroupBox3.SuspendLayout()
@@ -853,8 +850,6 @@ Partial Class Configurator
         ' 
         ' GroupBox2
         ' 
-        GroupBox2.Controls.Add(Label14)
-        GroupBox2.Controls.Add(trackWeight)
         GroupBox2.Controls.Add(cmbTXProfile)
         GroupBox2.Controls.Add(Alink)
         GroupBox2.ForeColor = Color.White
@@ -863,27 +858,7 @@ Partial Class Configurator
         GroupBox2.Size = New Size(183, 252)
         GroupBox2.TabIndex = 65
         GroupBox2.TabStop = False
-        GroupBox2.Text = "Adaptive Link Setup"
-        ' 
-        ' Label14
-        ' 
-        Label14.AutoSize = True
-        Label14.Font = New Font("Arial", 9F, FontStyle.Bold)
-        Label14.ForeColor = Color.White
-        Label14.Location = New Point(11, 133)
-        Label14.Name = "Label14"
-        Label14.Size = New Size(163, 15)
-        Label14.TabIndex = 67
-        Label14.Text = "RSSI                                   SNR"
-        ' 
-        ' trackWeight
-        ' 
-        trackWeight.Location = New Point(11, 162)
-        trackWeight.Name = "trackWeight"
-        trackWeight.Size = New Size(159, 45)
-        trackWeight.TabIndex = 66
-        btnToolTip.SetToolTip(trackWeight, "Sets how much consideration " & vbCrLf & "the Adaptive Link puts on" & vbCrLf & "Ground Station RSSI vs SNR")
-        trackWeight.Value = 5
+        GroupBox2.Text = "Adaptive Link TX Profiles"
         ' 
         ' cmbTXProfile
         ' 
@@ -906,8 +881,8 @@ Partial Class Configurator
         Alink.Name = "Alink"
         Alink.Size = New Size(159, 23)
         Alink.TabIndex = 64
-        Alink.Text = "Install Adaptive Link 6.4"
-        btnToolTip.SetToolTip(Alink, "Installs the OpenIPC Adaptive Link" & vbCrLf)
+        Alink.Text = "Install TX Profile"
+        btnToolTip.SetToolTip(Alink, "Install the selected TX Profile" & vbCrLf)
         Alink.UseVisualStyleBackColor = False
         ' 
         ' cmbMirror
@@ -2923,8 +2898,6 @@ Partial Class Configurator
         TabPage2.ResumeLayout(False)
         TabPage2.PerformLayout()
         GroupBox2.ResumeLayout(False)
-        GroupBox2.PerformLayout()
-        CType(trackWeight, ComponentModel.ISupportInitialize).EndInit()
         TabPage3.ResumeLayout(False)
         TabPage3.PerformLayout()
         TabPage7.ResumeLayout(False)
@@ -3129,8 +3102,6 @@ Partial Class Configurator
     Friend WithEvents Alink As Button
     Friend WithEvents GroupBox2 As GroupBox
     Friend WithEvents cmbTXProfile As ComboBox
-    Friend WithEvents Label14 As Label
-    Friend WithEvents trackWeight As TrackBar
     Friend WithEvents TabPage7 As TabPage
     Friend WithEvents GroupBox3 As GroupBox
     Friend WithEvents cmbPresets As ComboBox
