@@ -2875,7 +2875,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "05/11/2025"
+        Label12.Text = "15/11/2025"
         ' 
         ' Label13
         ' 
