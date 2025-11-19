@@ -299,6 +299,15 @@ if "%1" == "resfix" (
 	plink -ssh root@%2 -pw %3 yaml-cli -s .video0.size 1920x1080
 )
 
+if "%1" == "uboot" (
+	echo y | pscp -scp -pw %3 %4.bin root@%2:/tmp
+    	plink -ssh root@%2 -pw %3 flashcp -v /tmp/%4.bin /dev/mtd0 "&&" flash_eraseall /dev/mtd1 "&&" reboot
+)
+
+if "%1" == "wificreds" (
+    	plink -ssh root@%2 -pw %3 echo "#!/bin/sh" > /usr/share/openipc/wireless.sh "&&" echo "fw_setenv wlandev $(fw_printenv -n wlandev)" >> /usr/share/openipc/wireless.sh "&&" echo "fw_setenv wlanssid $(fw_printenv -n wlanssid)" >> /usr/share/openipc/wireless.sh "&&" echo "fw_setenv wlanpass $(fw_printenv -n wlanpass)" >> /usr/share/openipc/wireless.sh "&&" chmod 755 /usr/share/openipc/wireless.sh
+)
+
 :end
 echo.
 pause

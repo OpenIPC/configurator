@@ -36,6 +36,10 @@ Public Class Configurator
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         End If
     End Sub
+    Public Sub DownloadUBOOTStart()
+        downloader = New WebClient
+        downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/firmware/releases/download/latest/" + cmbUBOOT.Text + ".bin"), cmbUBOOT.Text + ".bin")
+    End Sub
 
     Private Sub downloader_DownloadProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs) Handles downloader.DownloadProgressChanged
         Dim extern = "extern.bat"
@@ -48,10 +52,14 @@ Public Class Configurator
             With New Process()
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
-                If chkForce.Checked = False Then
-                    .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
-                Else
-                    .StartInfo.Arguments = "offlinefwf " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                If cmbUBOOT.Text <> "Select U-BOOT" Then
+                    .StartInfo.Arguments = "uboot " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbUBOOT.Text + " " + socUBOOT.Text
+                ElseIf cmbVersion.Text <> "Select OpenIPC Version" Then
+                    If chkForce.Checked = False Then
+                        .StartInfo.Arguments = "offlinefw " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                    Else
+                        .StartInfo.Arguments = "offlinefwf " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text + " " + cmbVersion.Text + " " + txtSOC.Text
+                    End If
                 End If
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
@@ -991,6 +999,11 @@ err1:
         Next
         cmbPresets.Text = "Select Preset"
 
+        cmbUBOOT.Items.Clear()
+        cmbUBOOT.Items.Add("u-boot-ssc338q-nor")
+        cmbUBOOT.Items.Add("u-boot-ssc30kq-nor")
+        cmbUBOOT.Text = "Select U-BOOT"
+
         cmbVersion.Items.Clear()
         cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
@@ -1494,7 +1507,6 @@ err1:
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = False
-        cmbVersion.Visible = False
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1504,6 +1516,7 @@ err1:
         btnOfflinefw.Text = "Update NVR"
         txtSOC.Visible = True
         cmbVersion.Visible = True
+        ubootGroup.Visible = False
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
@@ -1677,7 +1690,6 @@ err1:
         Label8.Visible = True
         Label9.Visible = True
         Label10.Visible = True
-        cmbVersion.Visible = True
         txtResX.Visible = True
         txtResY.Visible = True
         checkCustomRes.Visible = True
@@ -1687,12 +1699,13 @@ err1:
         btnOfflinefw.Text = "Update Camera"
         txtSOC.Visible = True
         cmbVersion.Visible = True
-        Button2.Visible = True
-        Button3.Visible = True
-        btnSensor.Visible = True
+        ubootGroup.Visible = True
+        Button2.Visible = False
+        Button3.Visible = False
+        btnSensor.Visible = False
         btnDriver.Visible = False
         btnDriverBackup.Visible = False
-        cmbSensor.Visible = True
+        cmbSensor.Visible = False
         txtDriver.Visible = False
         btnMSPGS.Visible = False
         btnMAVGS.Visible = False
@@ -1863,7 +1876,6 @@ err1:
         Label8.Visible = False
         Label9.Visible = False
         Label10.Visible = False
-        cmbVersion.Visible = False
         txtResX.Visible = False
         txtResY.Visible = False
         checkCustomRes.Visible = False
@@ -1872,6 +1884,7 @@ err1:
         btnGenerateKeys.Visible = True
         btnOfflinefw.Visible = False
         cmbVersion.Visible = False
+        ubootGroup.Visible = False
         Button2.Visible = False
         Button3.Visible = False
         btnSensor.Visible = False
@@ -2739,6 +2752,7 @@ err1:
 
     Private Sub btnOfflinefw_Click(sender As Object, e As EventArgs) Handles btnOfflinefw.Click
         If IsValidIP(txtIP.Text) And cmbVersion.Text <> "Select OpenIPC Version" Then
+            cmbUBOOT.Text = "Select U-BOOT"
             DownloadStart()
         Else
             MsgBox("Please enter a valid IP address and select an OpenIPC version to flash")
@@ -3136,12 +3150,12 @@ err1:
     End Sub
 
     Private Sub btnResetCam_Click(sender As Object, e As EventArgs) Handles btnResetCam.Click
-        Dim result As DialogResult = MessageBox.Show("All OpenIPC camera settings will be restored to default.", "Warning!!!", MessageBoxButtons.YesNo)
+        Dim result = MessageBox.Show("All OpenIPC camera settings will be restored to default.", "Warning!!!", MessageBoxButtons.YesNo)
         If result = DialogResult.No Then
             MessageBox.Show("No changes have been done.")
         ElseIf result = DialogResult.Yes Then
             Dim extern = "extern.bat"
-            If Not System.IO.File.Exists(extern) Then
+            If Not File.Exists(extern) Then
                 MsgBox("File " + extern + " not found!")
                 Return
             End If
@@ -3729,6 +3743,43 @@ err1:
                 .StartInfo.UseShellExecute = False
                 .StartInfo.FileName = extern
                 .StartInfo.Arguments = "tipoman " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
+                .StartInfo.RedirectStandardOutput = False
+                .Start()
+            End With
+        Else
+            MsgBox("Please enter a valid IP address")
+        End If
+    End Sub
+
+    Private Sub btnUpdateUBOOT_Click(sender As Object, e As EventArgs) Handles btnUpdateUBOOT.Click
+        If IsValidIP(txtIP.Text) And cmbUBOOT.Text <> "Select U-BOOT" Then
+            cmbVersion.Text = "Select OpenIPC Version"
+            DownloadUBOOTStart()
+        Else
+            MsgBox("Please enter a valid IP address and select a U-BOOT to flash")
+        End If
+    End Sub
+
+    Private Sub cmbUBOOT_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmbUBOOT.SelectedIndexChanged
+        If cmbUBOOT.SelectedItem.ToString.Contains("ssc338q") Then
+            socUBOOT.Text = "ssc338q"
+        ElseIf cmbUBOOT.SelectedItem.ToString.Contains("ssc30kq") Then
+            socUBOOT.Text = "ssc30kq"
+        End If
+    End Sub
+
+    Private Sub btnSaveWIFIcreds_Click(sender As Object, e As EventArgs) Handles btnSaveWIFIcreds.Click
+        Dim extern = "extern.bat"
+        If Not File.Exists(extern) Then
+            MsgBox("File " + extern + " not found!")
+            Return
+        End If
+
+        If IsValidIP(txtIP.Text) Then
+            With New Process()
+                .StartInfo.UseShellExecute = False
+                .StartInfo.FileName = extern
+                .StartInfo.Arguments = "wificreds " + String.Format("{0}", txtIP.Text) + " " + txtPassword.Text
                 .StartInfo.RedirectStandardOutput = False
                 .Start()
             End With

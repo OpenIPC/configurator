@@ -146,6 +146,11 @@ Partial Class Configurator
         txtPortVRX = New TextBox()
         txtExtras = New TextBox()
         TabPage5 = New TabPage()
+        ubootGroup = New GroupBox()
+        btnSaveWIFIcreds = New Button()
+        cmbUBOOT = New ComboBox()
+        socUBOOT = New TextBox()
+        btnUpdateUBOOT = New Button()
         cmbVersion = New ComboBox()
         Label10 = New Label()
         cmbSensor = New ComboBox()
@@ -241,6 +246,7 @@ Partial Class Configurator
         GroupBox3.SuspendLayout()
         TabPage4.SuspendLayout()
         TabPage5.SuspendLayout()
+        ubootGroup.SuspendLayout()
         GroupBox1.SuspendLayout()
         TabPage6.SuspendLayout()
         CType(PictureBox1, ComponentModel.ISupportInitialize).BeginInit()
@@ -1766,6 +1772,7 @@ Partial Class Configurator
         ' TabPage5
         ' 
         TabPage5.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        TabPage5.Controls.Add(ubootGroup)
         TabPage5.Controls.Add(cmbVersion)
         TabPage5.Controls.Add(Label10)
         TabPage5.Controls.Add(cmbSensor)
@@ -1792,6 +1799,73 @@ Partial Class Configurator
         TabPage5.Size = New Size(670, 395)
         TabPage5.TabIndex = 4
         TabPage5.Text = "Setup"
+        ' 
+        ' ubootGroup
+        ' 
+        ubootGroup.Controls.Add(btnSaveWIFIcreds)
+        ubootGroup.Controls.Add(cmbUBOOT)
+        ubootGroup.Controls.Add(socUBOOT)
+        ubootGroup.Controls.Add(btnUpdateUBOOT)
+        ubootGroup.ForeColor = Color.White
+        ubootGroup.Location = New Point(6, 288)
+        ubootGroup.Name = "ubootGroup"
+        ubootGroup.Size = New Size(310, 43)
+        ubootGroup.TabIndex = 61
+        ubootGroup.TabStop = False
+        ubootGroup.Text = "Update Bootloader"
+        ' 
+        ' btnSaveWIFIcreds
+        ' 
+        btnSaveWIFIcreds.BackColor = Color.Gold
+        btnSaveWIFIcreds.FlatStyle = FlatStyle.Popup
+        btnSaveWIFIcreds.ForeColor = SystemColors.ControlText
+        btnSaveWIFIcreds.Location = New Point(6, 45)
+        btnSaveWIFIcreds.Name = "btnSaveWIFIcreds"
+        btnSaveWIFIcreds.Size = New Size(162, 20)
+        btnSaveWIFIcreds.TabIndex = 61
+        btnSaveWIFIcreds.Text = "Save Wireless Credentials"
+        btnToolTip.SetToolTip(btnSaveWIFIcreds, "Update the Bootloader " & vbCrLf & "also known as U-BOOT")
+        btnSaveWIFIcreds.UseVisualStyleBackColor = False
+        btnSaveWIFIcreds.Visible = False
+        ' 
+        ' cmbUBOOT
+        ' 
+        cmbUBOOT.BackColor = Color.FromArgb(CByte(45), CByte(45), CByte(45))
+        cmbUBOOT.FlatStyle = FlatStyle.Popup
+        cmbUBOOT.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
+        cmbUBOOT.FormattingEnabled = True
+        cmbUBOOT.Location = New Point(124, 17)
+        cmbUBOOT.Name = "cmbUBOOT"
+        cmbUBOOT.Size = New Size(180, 22)
+        cmbUBOOT.TabIndex = 60
+        btnToolTip.SetToolTip(cmbUBOOT, "Select a bootloader to flash from this menu." & vbCrLf & "Make sure you select the correct bootloader " & vbCrLf & "for your camera's SOC.")
+        ' 
+        ' socUBOOT
+        ' 
+        socUBOOT.BackColor = Color.FromArgb(CByte(64), CByte(64), CByte(64))
+        socUBOOT.BorderStyle = BorderStyle.FixedSingle
+        socUBOOT.Enabled = False
+        socUBOOT.Font = New Font("Arial", 5F, FontStyle.Bold)
+        socUBOOT.ForeColor = Color.White
+        socUBOOT.Location = New Point(180, 23)
+        socUBOOT.Name = "socUBOOT"
+        socUBOOT.Size = New Size(90, 15)
+        socUBOOT.TabIndex = 58
+        socUBOOT.Text = "ssc338q"
+        btnToolTip.SetToolTip(socUBOOT, "Type the OpenIPC Camera SOC here before you update")
+        ' 
+        ' btnUpdateUBOOT
+        ' 
+        btnUpdateUBOOT.BackColor = Color.Gold
+        btnUpdateUBOOT.FlatStyle = FlatStyle.Popup
+        btnUpdateUBOOT.ForeColor = SystemColors.ControlText
+        btnUpdateUBOOT.Location = New Point(6, 19)
+        btnUpdateUBOOT.Name = "btnUpdateUBOOT"
+        btnUpdateUBOOT.Size = New Size(112, 20)
+        btnUpdateUBOOT.TabIndex = 55
+        btnUpdateUBOOT.Text = "Update U-BOOT"
+        btnToolTip.SetToolTip(btnUpdateUBOOT, "Update the Bootloader " & vbCrLf & "also known as U-BOOT")
+        btnUpdateUBOOT.UseVisualStyleBackColor = False
         ' 
         ' cmbVersion
         ' 
@@ -1822,11 +1896,12 @@ Partial Class Configurator
         cmbSensor.FlatStyle = FlatStyle.Popup
         cmbSensor.ForeColor = Color.FromArgb(CByte(224), CByte(224), CByte(224))
         cmbSensor.FormattingEnabled = True
-        cmbSensor.Location = New Point(17, 106)
+        cmbSensor.Location = New Point(332, 295)
         cmbSensor.Name = "cmbSensor"
         cmbSensor.Size = New Size(125, 22)
         cmbSensor.TabIndex = 56
         btnToolTip.SetToolTip(cmbSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update" & vbCrLf & "3.Reboot" & vbCrLf)
+        cmbSensor.Visible = False
         ' 
         ' btnOfflinefw
         ' 
@@ -1845,42 +1920,45 @@ Partial Class Configurator
         Label7.AutoSize = True
         Label7.Font = New Font("Arial", 7F, FontStyle.Bold)
         Label7.ForeColor = Color.White
-        Label7.Location = New Point(310, 13)
+        Label7.Location = New Point(625, 202)
         Label7.Name = "Label7"
         Label7.Size = New Size(307, 12)
         Label7.TabIndex = 51
         Label7.Text = "<- This is for controlling resolution/bitrate with a TX Controller."
+        Label7.Visible = False
         ' 
         ' Button3
         ' 
         Button3.BackColor = Color.Gold
         Button3.FlatStyle = FlatStyle.Popup
-        Button3.Location = New Point(148, 3)
+        Button3.Location = New Point(463, 192)
         Button3.Name = "Button3"
         Button3.Size = New Size(161, 30)
         Button3.TabIndex = 50
         Button3.Text = "Script files Restore"
         btnToolTip.SetToolTip(Button3, "Transfer all the *.sh files" & vbCrLf & "from the location of the " & vbCrLf & "OpenIPC Configurator.exe to" & vbCrLf & "/root/ and /usr/sbin/channels.sh" & vbCrLf & "of the OpenIPC camera" & vbCrLf)
         Button3.UseVisualStyleBackColor = False
+        Button3.Visible = False
         ' 
         ' Button2
         ' 
         Button2.BackColor = Color.Gold
         Button2.FlatStyle = FlatStyle.Popup
-        Button2.Location = New Point(17, 3)
+        Button2.Location = New Point(332, 192)
         Button2.Name = "Button2"
         Button2.Size = New Size(125, 30)
         Button2.TabIndex = 49
         Button2.Text = "Script files Backup"
         btnToolTip.SetToolTip(Button2, "Transfer all the *.sh files from" & vbCrLf & "/root/ and /usr/sbin/channels.sh" & vbCrLf & "of the OpenIPC camera" & vbCrLf & "to the location of the " & vbCrLf & "OpenIPC Configurator.exe" & vbCrLf)
         Button2.UseVisualStyleBackColor = False
+        Button2.Visible = False
         ' 
         ' btnDriverBackup
         ' 
         btnDriverBackup.BackColor = Color.Gold
         btnDriverBackup.FlatStyle = FlatStyle.Popup
         btnDriverBackup.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDriverBackup.Location = New Point(148, 36)
+        btnDriverBackup.Location = New Point(463, 225)
         btnDriverBackup.Name = "btnDriverBackup"
         btnDriverBackup.Size = New Size(161, 30)
         btnDriverBackup.TabIndex = 48
@@ -1895,7 +1973,7 @@ Partial Class Configurator
         txtDriver.BorderStyle = BorderStyle.FixedSingle
         txtDriver.Font = New Font("Arial", 9F, FontStyle.Bold)
         txtDriver.ForeColor = Color.White
-        txtDriver.Location = New Point(148, 104)
+        txtDriver.Location = New Point(463, 293)
         txtDriver.Name = "txtDriver"
         txtDriver.Size = New Size(161, 21)
         txtDriver.TabIndex = 46
@@ -1908,7 +1986,7 @@ Partial Class Configurator
         btnDriver.BackColor = Color.Gold
         btnDriver.FlatStyle = FlatStyle.Popup
         btnDriver.Font = New Font("Arial Narrow", 8.25F, FontStyle.Bold, GraphicsUnit.Point, CByte(0))
-        btnDriver.Location = New Point(148, 69)
+        btnDriver.Location = New Point(463, 258)
         btnDriver.Name = "btnDriver"
         btnDriver.Size = New Size(161, 30)
         btnDriver.TabIndex = 44
@@ -1921,13 +1999,14 @@ Partial Class Configurator
         ' 
         btnSensor.BackColor = Color.Gold
         btnSensor.FlatStyle = FlatStyle.Popup
-        btnSensor.Location = New Point(17, 70)
+        btnSensor.Location = New Point(332, 259)
         btnSensor.Name = "btnSensor"
         btnSensor.Size = New Size(125, 30)
         btnSensor.TabIndex = 43
         btnSensor.Text = "Sensor Bin Update"
         btnToolTip.SetToolTip(btnSensor, "1.Select a sensor calibration file from the list" & vbCrLf & "2.Click Sensor Bin Update")
         btnSensor.UseVisualStyleBackColor = False
+        btnSensor.Visible = False
         ' 
         ' Label5
         ' 
@@ -1981,7 +2060,7 @@ Partial Class Configurator
         ' 
         Label4.AutoSize = True
         Label4.ForeColor = Color.White
-        Label4.Location = New Point(17, 200)
+        Label4.Location = New Point(17, 76)
         Label4.Name = "Label4"
         Label4.Size = New Size(244, 126)
         Label4.TabIndex = 38
@@ -1991,7 +2070,7 @@ Partial Class Configurator
         ' 
         btnGenerateKeys.BackColor = Color.Gold
         btnGenerateKeys.FlatStyle = FlatStyle.Popup
-        btnGenerateKeys.Location = New Point(148, 131)
+        btnGenerateKeys.Location = New Point(148, 7)
         btnGenerateKeys.Name = "btnGenerateKeys"
         btnGenerateKeys.Size = New Size(161, 30)
         btnGenerateKeys.TabIndex = 37
@@ -2003,7 +2082,7 @@ Partial Class Configurator
         ' 
         btnSendKeys.BackColor = Color.Gold
         btnSendKeys.FlatStyle = FlatStyle.Popup
-        btnSendKeys.Location = New Point(17, 167)
+        btnSendKeys.Location = New Point(17, 43)
         btnSendKeys.Name = "btnSendKeys"
         btnSendKeys.Size = New Size(125, 30)
         btnSendKeys.TabIndex = 36
@@ -2015,7 +2094,7 @@ Partial Class Configurator
         ' 
         btnReceiveKeys.BackColor = Color.Gold
         btnReceiveKeys.FlatStyle = FlatStyle.Popup
-        btnReceiveKeys.Location = New Point(148, 167)
+        btnReceiveKeys.Location = New Point(148, 43)
         btnReceiveKeys.Name = "btnReceiveKeys"
         btnReceiveKeys.Size = New Size(161, 30)
         btnReceiveKeys.TabIndex = 35
@@ -2036,7 +2115,7 @@ Partial Class Configurator
         GroupBox1.Size = New Size(658, 63)
         GroupBox1.TabIndex = 60
         GroupBox1.TabStop = False
-        GroupBox1.Text = "Installation Menu"
+        GroupBox1.Text = "Update Firmware"
         ' 
         ' chkRCversions
         ' 
@@ -2850,7 +2929,7 @@ Partial Class Configurator
         Label12.Name = "Label12"
         Label12.Size = New Size(41, 10)
         Label12.TabIndex = 51
-        Label12.Text = "15/11/2025"
+        Label12.Text = "19/11/2025"
         ' 
         ' Label13
         ' 
@@ -2907,6 +2986,8 @@ Partial Class Configurator
         TabPage4.PerformLayout()
         TabPage5.ResumeLayout(False)
         TabPage5.PerformLayout()
+        ubootGroup.ResumeLayout(False)
+        ubootGroup.PerformLayout()
         GroupBox1.ResumeLayout(False)
         GroupBox1.PerformLayout()
         TabPage6.ResumeLayout(False)
@@ -3126,5 +3207,10 @@ Partial Class Configurator
     Friend WithEvents btnPP As Button
     Friend WithEvents chkRCversions As CheckBox
     Friend WithEvents btnTipoMan As Button
+    Friend WithEvents ubootGroup As GroupBox
+    Friend WithEvents socUBOOT As TextBox
+    Friend WithEvents btnUpdateUBOOT As Button
+    Friend WithEvents cmbUBOOT As ComboBox
+    Friend WithEvents btnSaveWIFIcreds As Button
 
 End Class
