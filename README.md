@@ -1,11 +1,11 @@
-# OpenIPC Configurator
-OpenIPC Configurator for setting up FPV and URLLC devices
+# Configurator
+Configurator for setting up OpenIPC FPV and URLLC devices
 
 Please download and install the latest(very important) PuTTy before running the Configurator
 
 ---
 
-Run the "OpenIPC Configurator.exe" file.
+Run the "Configurator.exe" file.
 
 Enter the IP of the camera/NVR/Radxa Zero 3w.
 
