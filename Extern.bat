@@ -245,13 +245,6 @@ if "%1" == "airman" (
 	plink -ssh root@%2 -pw %3 tar -xvf /OpenIPC-air_manager.tar "&&" cd /root/OpenIPC-air_manager/ "&&" chmod +x install.sh "&&" ./install.sh 10.5.0.10
 )
 
-if "%1" == "tipoman" (
-    plink -ssh root@%2 -pw %3 wifibroadcast stop
-    echo y | pscp -scp -pw %3 wfb_tx root@%2:/usr/bin/
-    echo y | pscp -scp -pw %3 txprofiles/TipoMan.conf root@%2:/etc/
-    plink -ssh root@%2 -pw %3 mv /etc/TipoMan.conf /etc/txprofiles.conf "&&" dos2unix /etc/txprofiles.conf "&&" wifibroadcast cli -s .wireless.mlink 2500 "&&" reboot
-)
-
 if "%1" == "pixelpilot" (
         tar -xf artifact.zip
         plink -ssh root@%2 -pw %3 "systemctl stop openipc && awk 'NR==2 {$0=\"sed -i \047s/\\r//\047 /config/setup.txt "&"\"} { print }' /config/scripts/stream.sh > /config/scripts/stream2.sh && rm /config/scripts/stream.sh && mv /config/scripts/stream2.sh /config/scripts/stream.sh && sed -i 's/sudo systemctl is-active --quiet/#sudo systemctl is-active --quiet/' /config/scripts/stream.sh"
