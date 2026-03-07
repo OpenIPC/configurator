@@ -24,14 +24,8 @@ Public Class Configurator
 
     Public Sub DownloadStart()
         downloader = New WebClient
-        If cmbVersion.SelectedItem.ToString.Contains("apfpv-greg07") Then
+        If cmbVersion.SelectedItem.ToString.Contains("apfpv-greg10") Then
             downloader.DownloadFileAsync(New Uri("https://github.com/sickgreg/OpenIPC_sickgregFPV_apfpv/raw/main/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("apfpv-greg08RC2") Then
-            downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/configurator/raw/refs/heads/master/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("apfpv1.1") Then
-            downloader.DownloadFileAsync(New Uri("https://github.com/carabidulebabat/AP-ALINK-FPV/releases/download/1.1/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
-        ElseIf cmbVersion.SelectedItem.ToString.Contains("apfpv1.2") Then
-            downloader.DownloadFileAsync(New Uri("https://github.com/carabidulebabat/AP-ALINK-FPV/releases/download/1.2/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         Else
             downloader.DownloadFileAsync(New Uri("https://github.com/OpenIPC/builder/releases/download/latest/" + cmbVersion.Text + ".tgz"), cmbVersion.Text + ".tgz")
         End If
@@ -510,8 +504,8 @@ err1:
             sArray = streamOfText.Split("=")
             txtExtras.Text = sArray(1).Replace("""", "")
         End If
-        btnSaveReboot.Enabled = True
-        btnReboot.Enabled = True
+        btnSaveReboot.Enabled = False
+        btnReboot.Enabled = False
     End Sub
 
     Private Sub Form1_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -1005,23 +999,15 @@ err1:
         cmbUBOOT.Text = "Select U-BOOT"
 
         cmbVersion.Items.Clear()
-        cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
-        cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-thinker-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-urllc-aio-nor")
-        cmbVersion.Items.Add("ssc338q_fpv_runcam-wifilink-nor")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg07")
-        If chkRCversions.Checked = True Then cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg08RC2")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.1")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.2")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg10")
         cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
         cmbVersion.Items.Add("ssc338q_rubyfpv_generic-nor")
         cmbVersion.Items.Add("ssc338q_rubyfpv_thinker_internal_wifi-nor")
         cmbVersion.Items.Add("openipc.ssc338q-nand-fpv")
         cmbVersion.Items.Add("openipc.ssc338q-nand-rubyfpv")
         cmbVersion.Items.Add("openipc.ssc30kq-nor-fpv")
-        cmbVersion.Items.Add("openipc.ssc30kq-nor-apfpv1.1")
         cmbVersion.Items.Add("ssc30kq_rubyfpv_generic-nor")
         cmbVersion.Items.Add("openipc.hi3536dv100-nor-fpv")
         cmbVersion.Items.Add("openipc.gk7205v200-nor-fpv")
@@ -1539,7 +1525,7 @@ err1:
         btnMSPExtra.Visible = False
         btnMSPGSExtra.Visible = False
         btnMSPExtraRemove.Visible = False
-        btnRestartWFB.Visible = True
+        btnRestartWFB.Visible = False
         btnTipoMan.Visible = False
         btnRestartMajestic.Visible = False
         btnBoxRess.Visible = False
@@ -1717,14 +1703,14 @@ err1:
         btnGSMSPOSD.Visible = False
         btnReset.Visible = False
         btnAddButtons.Visible = False
-        btnUART0.Visible = True
-        btnUART0OFF.Visible = True
-        btnMSPExtra.Visible = True
-        btnMSPGSExtra.Visible = True
-        btnMSPExtraRemove.Visible = True
-        btnRestartWFB.Visible = True
-        btnTipoMan.Visible = True
-        btnRestartMajestic.Visible = True
+        btnUART0.Visible = False
+        btnUART0OFF.Visible = False
+        btnMSPExtra.Visible = False
+        btnMSPGSExtra.Visible = False
+        btnMSPExtraRemove.Visible = False
+        btnRestartWFB.Visible = False
+        btnTipoMan.Visible = False
+        btnRestartMajestic.Visible = False
         btnBoxRess.Visible = True
         btnWideRess.Visible = True
         ComboBox5.Visible = True
@@ -1739,7 +1725,7 @@ err1:
         txtFECN.Visible = True
         txtOSD.Visible = True
         txtFormat.Visible = True
-        chkYAML.Visible = True
+        chkYAML.Visible = False
         If chkYAML.Checked = False Then
             cmbLinkControl.Visible = False
             cmbWLANAdapter.Visible = False
@@ -3115,7 +3101,7 @@ err1:
         pingReply = ping.Send(txtIP.Text)
         If pingReply.Status = IPStatus.Success Then
             connected.BackColor = Color.FromArgb(30, 255, 30)
-            btnRead.Enabled = True
+            btnRead.Enabled = False
         Else
             connected.BackColor = Color.FromArgb(255, 30, 30)
             btnRead.Enabled = False
@@ -3697,27 +3683,15 @@ err1:
 
     Private Sub chkRCversions_CheckedChanged(sender As Object, e As EventArgs) Handles chkRCversions.CheckedChanged
         cmbVersion.Items.Clear()
-        cmbVersion.Items.Add("ssc338q_fpv_emax-wyvern-link-nor")
-        cmbVersion.Items.Add("ssc338q_fpv_openipc-mario-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-thinker-aio-nor")
         cmbVersion.Items.Add("ssc338q_fpv_openipc-urllc-aio-nor")
-        cmbVersion.Items.Add("ssc338q_fpv_runcam-wifilink-nor")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg07")
-        If chkRCversions.Checked = True Then
-            cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg08RC2")
-        Else
-            cmbVersion.Items.Remove("openipc.ssc338q-nor-apfpv-greg08RC2")
-        End If
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.1")
-        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv1.2")
+        cmbVersion.Items.Add("openipc.ssc338q-nor-apfpv-greg10")
         cmbVersion.Items.Add("openipc.ssc338q-nor-fpv")
         cmbVersion.Items.Add("ssc338q_rubyfpv_generic-nor")
         cmbVersion.Items.Add("ssc338q_rubyfpv_thinker_internal_wifi-nor")
         cmbVersion.Items.Add("openipc.ssc338q-nand-fpv")
         cmbVersion.Items.Add("openipc.ssc338q-nand-rubyfpv")
         cmbVersion.Items.Add("openipc.ssc30kq-nor-fpv")
-        cmbVersion.Items.Add("openipc.ssc30kq-nor-apfpv1.1")
         cmbVersion.Items.Add("ssc30kq_rubyfpv_generic-nor")
         cmbVersion.Items.Add("openipc.hi3536dv100-nor-fpv")
         cmbVersion.Items.Add("openipc.gk7205v200-nor-fpv")
