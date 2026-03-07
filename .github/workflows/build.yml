@@ -20,5 +20,5 @@ jobs:
       - name: Upload
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: 19.11.2025
+          tag_name: 07.03.2026
           files: Updater.zip
